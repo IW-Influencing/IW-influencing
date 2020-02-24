@@ -1,0 +1,58 @@
+.titulo {
+    display: flex;
+    justify-content: center;
+}
+
+.enlaces {
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 3em;
+}
+
+.contenido {
+    display: flex;
+}
+
+.seleccionada{
+    background-color: gray;
+}
+
+.decision {
+    padding: 2em 0 2em 0;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.propuesta{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:1em;
+}
+
+
+ul {
+    list-style-type: none;
+}
+
+.lista {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-right: 5em;
+
+}
+
+.chat {
+    display: flex;
+    flex-direction: column;
+    padding-right: 5em;
+}
+
+.recibido {
+    padding-right: 10em;
+}
+
+.enviado {
+    padding-left: 10em;
+}
