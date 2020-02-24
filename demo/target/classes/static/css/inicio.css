@@ -84,21 +84,51 @@ a:link, a:visited, a:active{
 .medium_block{
     padding: 10px;
     float: left;
-    height: 200px;
+    height: 280px;
     width: 550px;
     background-color: #F7F6F6;
     margin-top: 40px;
     margin-left: 30px;
+    justify-content: center;    
 }
 
-.proposal_block{
+.proposal_div{
     padding: 10px;
     float: right;
     background-color: #F7F6F6;
-    height: 450px;
+    height: 570px;
     width: 550px;
     margin-right: 30px;
     margin-top: 40px;
     margin-bottom: 40px;
 }
 
+.message_div{
+    padding: 10px;
+    float: left;
+    height: 480px;
+    width: 550px;
+    background-color: #F7F6F6;
+    margin-top: 40px;
+    margin-left: 30px;
+    justify-content: center;   
+}
+
+.message_block{
+    background-color: #D6D6D6;
+    height: 120px;
+    width: 550px;
+    margin-top: 20px;
+}
+
+.button_row_message{
+    display: flex;
+    justify-content: center ;
+}
+
+.proposal_block{
+    background-color: #D6D6D6;
+    height: 150px;
+    width: 550px;
+    margin-top: 20px;
+}
