@@ -41,6 +41,12 @@ public class RootController {
     		HttpSession session) {
         return "admin";
     }
+    
+    @GetMapping("/perfil")            
+    public String perfil(
+    		HttpSession session) {
+        return "perfil";
+    }
     @GetMapping("/search_perfil")            
     public String search_perfil(
     		HttpSession session) {
