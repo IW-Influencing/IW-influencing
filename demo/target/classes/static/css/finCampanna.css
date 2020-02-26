@@ -3,6 +3,11 @@
 }
 
 
+.valoracion{
+    width: 400px;
+    height: 200px;
+    text-align: center;
+}
 
 .main-content{
     background-color: #E6E6E6;
@@ -19,8 +24,10 @@
 }
 
 .info{
-margin-top:20px;
-margin-bottom: 20px;
+    padding: 5em 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 title{
