@@ -1,5 +1,64 @@
 package es.ucm.fdi.iw.model;
 
+import java.io.File;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Propuesta {
+	
+	private long idPropuesta;
+	private Usuario empresa;
+	private String nombre;
+	private String descripcion;
+	private double sueldo;
+	private File imagen;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public long getIdPropuesta() {
+		return idPropuesta;
+	}
+	public void setIdPropuesta(long idPropuesta) {
+		this.idPropuesta = idPropuesta;
+	}
+	
+	@ManyToOne(targetEntity=Usuario.class)
+	public Usuario getEmpresa() {
+		return empresa;
+	}
+	public void setEmpresa(Usuario empresa) {
+		this.empresa = empresa;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	public double getSueldo() {
+		return sueldo;
+	}
+	public void setSueldo(double sueldo) {
+		this.sueldo = sueldo;
+	}
+	public File getImagen() {
+		return imagen;
+	}
+	public void setImagen(File imagen) {
+		this.imagen = imagen;
+	}
+	
+	
 
 }
