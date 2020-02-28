@@ -17,11 +17,22 @@
     background-color: gray;
 }
 
-.decision {
-    padding: 2em 0 2em 0;
+.barraChat{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    padding: 2em 10em 3em 2em;
+
 }
+
+.informacionChat{
+    display: flex;
+    flex-direction: column;
+}
+
+input{
+    margin-top: 2em;
+}
+
 
 .propuesta{
     display: flex;
@@ -55,4 +66,16 @@ ul {
 
 .enviado {
     padding-left: 10em;
+}
+
+.boton{
+    font: bold 11px Arial;
+    text-decoration: none;
+    background-color: #EEEEEE;
+    color: #333333;
+    padding: 1em 2em 1em 2em;
+    border-top: 1px solid #CCCCCC;
+    border-right: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-left: 1px solid #CCCCCC;
 }
