@@ -14,6 +14,7 @@ public class Propuesta {
 	private long idPropuesta;
 	private Usuario empresa;
 	private String nombre;
+	private String[] tags;
 	private String descripcion;
 	private double sueldo;
 	private File imagen;
@@ -49,6 +50,14 @@ public class Propuesta {
 	public double getSueldo() {
 		return sueldo;
 	}
+	
+	public String[] getTags() {
+		return tags;
+	}
+	public void setTags(String[] tags) {
+		this.tags = tags;
+	}
+	
 	public void setSueldo(double sueldo) {
 		this.sueldo = sueldo;
 	}
