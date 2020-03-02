@@ -34,7 +34,7 @@ public class Mensaje {
 	public Usuario getEmisor() {
 		return emisor;
 	}
-	public void setIdEmisor(Usuario emisor) {
+	public void setEmisor(Usuario emisor) {
 		this.emisor = emisor;
 	}
 	
@@ -42,7 +42,7 @@ public class Mensaje {
 	public Usuario getReceptor() {
 		return receptor;
 	}
-	public void setIdReceptor(Usuario receptor) {
+	public void setReceptor(Usuario receptor) {
 		this.receptor = receptor;
 	}
 	

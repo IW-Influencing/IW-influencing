@@ -67,10 +67,6 @@ public class Denuncia {
         return this.tramitada;
     }
 
-    public boolean getTramitada() {
-        return this.tramitada;
-    }
-
     public void setTramitada(boolean tramitada) {
         this.tramitada = tramitada;
     }

@@ -15,10 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class RootController {
 
     private static Logger log = LogManager.getLogger(RootController.class);
-    private static final String OBJETIVO = "o";
-    private static final String INTENTOS = "i";
-    private static final String RESULTADO = "resultado";
-    private final Random random = new Random();
     
     
     @GetMapping("/inicio")            

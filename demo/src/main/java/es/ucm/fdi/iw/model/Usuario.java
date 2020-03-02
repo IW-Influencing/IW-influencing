@@ -9,7 +9,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Usuario {
-	private long idUsuario;			//Id unico para cada usuario
+	private long id;			//Id unico para cada usuario
 	private int rol;				//Aqui se almacena el rol que tiene el usuario en la aplicación mediante números
 	private String nombre;
 	private String apellidos;
@@ -19,8 +19,12 @@ public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public long getIdUsuario(){
-		return idUsuario;
+	public long getId(){
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public int getRol() {
