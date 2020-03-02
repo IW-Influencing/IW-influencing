@@ -9,19 +9,19 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Perfil_RRSS {
+public class Perfil {
 
-    private long idPerfil;
+    private long id;
 	private Usuario influencer;
 	private String nombre;
 	private String[] numSeguidores;
 	private File imagen;
 
-	public Perfil_RRSS() {
+	public Perfil() {
 	}
 
-	public Perfil_RRSS(long idPerfil, Usuario influencer, String nombre, String[] numSeguidores, File imagen) {
-		this.idPerfil = idPerfil;
+	public Perfil(long id, Usuario influencer, String nombre, String[] numSeguidores, File imagen) {
+		this.id = id;
 		this.influencer = influencer;
 		this.nombre = nombre;
 		this.numSeguidores = numSeguidores;
@@ -31,12 +31,12 @@ public class Perfil_RRSS {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public long getIdPerfil() {
-		return this.idPerfil;
+	public long getId() {
+		return this.id;
 	}
 
-	public void setIdPerfil(long idPerfil) {
-		this.idPerfil = idPerfil;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	@ManyToOne(targetEntity=Usuario.class)
@@ -75,7 +75,7 @@ public class Perfil_RRSS {
 	@Override
 	public String toString() {
 		return "{" +
-			" idPerfil='" + getIdPerfil() + "'" +
+			" idPerfil='" + getId() + "'" +
 			", influencer='" + getInfluencer() + "'" +
 			", nombre='" + getNombre() + "'" +
 			", numSeguidores='" + getNumSeguidores() + "'" +

@@ -1,9 +1,7 @@
 package es.ucm.fdi.iw.controller;
 
-import java.util.Random;
 
 import javax.servlet.http.HttpSession;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -29,10 +27,10 @@ public class RootController {
         return "negociacion";
     }
     
-    @GetMapping("/admin")            
-    public String admin(
+    @GetMapping("/administracion")            
+    public String administracion(
     		HttpSession session) {
-        return "admin";
+        return "administracion";
     }
     
     @GetMapping("/perfil")            
@@ -41,14 +39,14 @@ public class RootController {
         return "perfil";
     }
 
-    @GetMapping("/search_perfil")            
-    public String search_perfil(
+    @GetMapping("/busquedaPerfil")            
+    public String busquedaPerfil(
     		HttpSession session) {
-        return "profileSearch";
+        return "busquedaPerfil";
     }
 
-    @GetMapping("/search_propuesta")            
-    public String search_propuesta(
+    @GetMapping("/busquedaPropuesta")            
+    public String busquedaPropuesta(
     		HttpSession session) {
         return "busquedaPropuesta";
     }
@@ -63,5 +61,11 @@ public class RootController {
     public String notificaciones(
     		HttpSession session) {
         return "notificaciones";
+    }
+
+    @GetMapping("/contrataciones")            
+    public String contrataciones(
+    		HttpSession session) {
+        return "contrataciones";
     }
 }

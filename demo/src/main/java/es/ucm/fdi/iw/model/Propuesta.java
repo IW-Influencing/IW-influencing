@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Propuesta {
 	
-	private long idPropuesta;
+	private long id;
 	private Usuario empresa;
 	private String nombre;
 	private String[] tags;
@@ -21,11 +21,11 @@ public class Propuesta {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public long getIdPropuesta() {
-		return idPropuesta;
+	public long getId() {
+		return id;
 	}
-	public void setIdPropuesta(long idPropuesta) {
-		this.idPropuesta = idPropuesta;
+	public void setId(long id) {
+		this.id = id;
 	}
 	
 	@ManyToOne(targetEntity=Usuario.class)

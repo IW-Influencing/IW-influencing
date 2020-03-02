@@ -10,31 +10,31 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Denuncia {
 
-    private long idDenuncia;
+    private long id;
 	private Usuario denunciante;
 	private Usuario denunciado;
-	private String denuncia;
+	private String detalles;
 	private boolean tramitada;
 
     public Denuncia() {
     }
 
-    public Denuncia(long idDenuncia, Usuario denunciante, Usuario denunciado, String denuncia, boolean tramitada) {
-        this.idDenuncia = idDenuncia;
+    public Denuncia(long id, Usuario denunciante, Usuario denunciado, String detalles, boolean tramitada) {
+        this.id = id;
         this.denunciante = denunciante;
         this.denunciado = denunciado;
-        this.denuncia = denuncia;
+        this.detalles = detalles;
         this.tramitada = tramitada;
     }
 
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long getIdDenuncia() {
-        return this.idDenuncia;
+    public long getId() {
+        return this.id;
     }
 
-    public void setIdDenuncia(long idDenuncia) {
-        this.idDenuncia = idDenuncia;
+    public void setId(long id) {
+        this.id = id;
     }
 
     @ManyToOne(targetEntity=Usuario.class)
@@ -55,12 +55,12 @@ public class Denuncia {
         this.denunciado = denunciado;
     }
 
-    public String getDenuncia() {
-        return this.denuncia;
+    public String getDetalles() {
+        return this.detalles;
     }
 
-    public void setDenuncia(String denuncia) {
-        this.denuncia = denuncia;
+    public void setDetalles(String detalles) {
+        this.detalles = detalles;
     }
 
     public boolean isTramitada() {
@@ -69,11 +69,6 @@ public class Denuncia {
 
     public void setTramitada(boolean tramitada) {
         this.tramitada = tramitada;
-    }
-
-    public Denuncia idDenuncia(long idDenuncia) {
-        this.idDenuncia = idDenuncia;
-        return this;
     }
 
     public Denuncia denunciante(Usuario denunciante) {
@@ -86,8 +81,8 @@ public class Denuncia {
         return this;
     }
 
-    public Denuncia denuncia(String denuncia) {
-        this.denuncia = denuncia;
+    public Denuncia denuncia(String detalles) {
+        this.detalles = detalles;
         return this;
     }
 
@@ -99,10 +94,10 @@ public class Denuncia {
     @Override
     public String toString() {
         return "{" +
-            " idDenuncia='" + getIdDenuncia() + "'" +
+            " idDenuncia='" + getId() + "'" +
             ", denunciante='" + getDenunciante() + "'" +
             ", denunciado='" + getDenunciado() + "'" +
-            ", denuncia='" + getDenuncia() + "'" +
+            ", denuncia='" + getDetalles() + "'" +
             ", tramitada='" + isTramitada() + "'" +
             "}";
     }
