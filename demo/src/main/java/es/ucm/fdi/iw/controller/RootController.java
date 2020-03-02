@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class RootController {
 
-    private static Logger log = LogManager.getLogger(
-        RootController.class);
-
+    private static Logger log = LogManager.getLogger(RootController.class);
     private static final String OBJETIVO = "o";
     private static final String INTENTOS = "i";
     private static final String RESULTADO = "resultado";
@@ -28,7 +26,6 @@ public class RootController {
     		HttpSession session) {
         return "inicio";
     }
-    
     
     @GetMapping("/negociacion")            
     public String negociacion(
@@ -47,14 +44,28 @@ public class RootController {
     		HttpSession session) {
         return "perfil";
     }
+
     @GetMapping("/search_perfil")            
     public String search_perfil(
     		HttpSession session) {
         return "profileSearch";
     }
+
     @GetMapping("/search_propuesta")            
     public String search_propuesta(
     		HttpSession session) {
         return "busquedaPropuesta";
+    }
+
+    @GetMapping("/propuesta")            
+    public String propuesta(
+    		HttpSession session) {
+        return "propuesta";
+    }
+
+    @GetMapping("/notificaciones")            
+    public String notificaciones(
+    		HttpSession session) {
+        return "notificaciones";
     }
 }
