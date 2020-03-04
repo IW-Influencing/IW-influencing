@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Perfil {
 
-    private long id;
+	private long id;
 	private Usuario influencer;
 	private String nombre;
 	private String[] numSeguidores;
@@ -26,7 +26,7 @@ public class Perfil {
 		this.nombre = nombre;
 		this.numSeguidores = numSeguidores;
 		this.imagen = imagen;
-		
+
 	}
 
 	@Id
@@ -39,7 +39,7 @@ public class Perfil {
 		this.id = id;
 	}
 
-	@ManyToOne(targetEntity=Usuario.class)
+	@ManyToOne(targetEntity = Usuario.class)
 	public Usuario getInfluencer() {
 		return this.influencer;
 	}
@@ -74,13 +74,9 @@ public class Perfil {
 
 	@Override
 	public String toString() {
-		return "{" +
-			" idPerfil='" + getId() + "'" +
-			", influencer='" + getInfluencer() + "'" +
-			", nombre='" + getNombre() + "'" +
-			", numSeguidores='" + getNumSeguidores() + "'" +
-			", imagen='" + getImagen() + "'" +
-			"}";
+		return "{" + " idPerfil='" + getId() + "'" + ", influencer='" + getInfluencer() + "'" + ", nombre='"
+				+ getNombre() + "'" + ", numSeguidores='" + getNumSeguidores() + "'" + ", imagen='" + getImagen() + "'"
+				+ "}";
 	}
 
 }

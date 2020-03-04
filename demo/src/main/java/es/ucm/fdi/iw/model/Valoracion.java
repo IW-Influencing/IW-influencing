@@ -7,16 +7,16 @@ public class Valoracion {
 
 	private long id;
 	private Usuario emisor;
-	private Propuesta propuesta;
+	private Candidatura candidatura;
 	private String valoracion;
 	private int puntuacion;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public long getId() {
 		return id;
 	}
-	
+
 	public void setId(long id) {
 		this.id = id;
 	}
@@ -31,12 +31,12 @@ public class Valoracion {
 	}
 
 	@OneToOne(targetEntity = Propuesta.class)
-	public Propuesta getPropuesta() {
-		return propuesta;
+	public Candidatura getCandidatura() {
+		return candidatura;
 	}
 
-	public void setPropuesta(Propuesta propuesta) {
-		this.propuesta = propuesta;
+	public void setCandidatura(Candidatura candidatura) {
+		this.candidatura = candidatura;
 	}
 
 	public String getValoracion() {

@@ -6,52 +6,64 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="notificaciones.css" />
+
 <body style="width:100%">
 
-<!-- !PAGE CONTENT! -->
-<div>
+  <!-- !PAGE CONTENT! -->
+  <div>
 
-  <!-- Header -->
-  <header id="searh" style="padding-left: 1%;">
-    <div class="title" style="padding-left: 0!important;">
-    <div class = "w3-button" style="margin-left: 1%;"> <- VOLVER</b></div>
-    <div style="color: white;font-size: larger;margin: auto;text-align: center;"><b>NOTIFICACIONES</b></div>
-	</div>
-	<br><br>
-    <div class="w3-section w3-bottombar wFilter3-padding-16" style="padding:1%; display:flex;">
-	  <input type="text" style="color: white;font-size: larger;margin: auto;text-align: center;" placeholder="Search...">
+    <!-- Header -->
+    <header id="searh" style="padding-left: 1%;">
+      <div class="title" style="padding-left: 0!important;">
+        <div class="w3-button" style="margin-left: 1%;">
+          <- VOLVER</b>
+        </div>
+        <div style="color: white;font-size: larger;margin: auto;text-align: center;"><b>NOTIFICACIONES</b></div>
+      </div>
+      <br><br>
+      <div class="w3-section w3-bottombar wFilter3-padding-16" style="padding:1%; display:flex;">
+        <input type="text" style="color: white;font-size: larger;margin: auto;text-align: center;"
+          placeholder="Search...">
+      </div>
+    </header>
+
+    <!-- First Field Grid-->
+    <h1>Nombre de propuesta</h1>
+    <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac
+      neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique,
+      tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit
+      amet quis magna. Aenean velit odio, elementum in tempus ut, vehicula eu diam. Pellentesque rhoncus aliquam mattis.
+      Ut vulputate eros sed felis sodales nec vulputate justo hendrerit. Vivamus varius pretium ligula, a aliquam odio
+      euismod sit amet. Quisque laoreet sem sit amet orci ullamcorper at ultricies metus viverra. Pellentesque arcu
+      mauris, malesuada quis ornare accumsan, blandit sed diam.</h2>
+    <h1>Edad Objetivo</h1>
+    <h2>Edades comprendidas entre </h2>
+    <select id="edades" name="edades">
+      <option value="e1">1 - 10</option>
+      <option value="e2">10 - 15</option>
+      <option value="e3">15 - 20</option>
+      <option value="e4">20 - 30</option>
+    </select>
+    <h2> años</h2>
+    <h1>Periodo de la propuesta</h1>
+    <h2>De </h2><input type="date">
+    <h2> a </h2><input type="date">
+    <h1>Imagen Campaña</h1>
+    <input type="file" name="imagenPropuesta"><input type="submit" value="Subir">
+    <div>
+      <button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
+      <button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
+      <button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
     </div>
-  </header>
-  
-  <!-- First Field Grid-->
-<h1>Nombre de propuesta</h1>
-<h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna. Aenean velit odio, elementum in tempus ut, vehicula eu diam. Pellentesque rhoncus aliquam mattis. Ut vulputate eros sed felis sodales nec vulputate justo hendrerit. Vivamus varius pretium ligula, a aliquam odio euismod sit amet. Quisque laoreet sem sit amet orci ullamcorper at ultricies metus viverra. Pellentesque arcu mauris, malesuada quis ornare accumsan, blandit sed diam.</h2>
-<h1>Edad Objetivo</h1>
-<h2>Edades comprendidas entre </h2>
-<select id="edades" name="edades">
-    <option value="e1">1 - 10</option>
-    <option value="e2">10 - 15</option>
-    <option value="e3">15 - 20</option>
-    <option value="e4">20 - 30</option>
-</select>
-<h2> años</h2>
-<h1>Periodo de la propuesta</h1>
-<h2>De </h2><input type="date"><h2> a </h2><input type="date">
-<h1>Imagen Campaña</h1>
-<input type="file" name="imagenPropuesta"><input type="submit" value="Subir">
-<div>	
-    <button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>		
-    <button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
-    <button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
-</div>
-<input type="button" value="Publicar">
+    <input type="button" value="Publicar">
 
-<!-- End page content -->
-</div>
+    <!-- End page content -->
+  </div>
 
-<script>
+  <script>
 
-</script>
+  </script>
 
 </body>
+
 </html>

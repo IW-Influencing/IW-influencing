@@ -9,17 +9,19 @@ import javax.persistence.Id;
 
 @Entity
 public class Usuario {
-	private long id;			//Id unico para cada usuario
-	private int rol;				//Aqui se almacena el rol que tiene el usuario en la aplicación mediante números
+
+	private long id; // Id unico para cada usuario
+	public enum Rol {ADMIN, INFLUENCER, EMPRESA};
+	private Rol rol; // Aqui se almacena el rol que tiene el usuario en la aplicación mediante números
 	private String nombre;
 	private String apellidos;
 	private int edad;
-	private String[] tags;			//Se almacenan los tags
-	private File imagen;			//Se almacena la ruta en la que está almacenada la imagen
-	
+	private String[] tags; // Se almacenan los tags
+	private File imagen; // Se almacena la ruta en la que está almacenada la imagen
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public long getId(){
+	public long getId() {
 		return id;
 	}
 
@@ -27,11 +29,11 @@ public class Usuario {
 		this.id = id;
 	}
 
-	public int getRol() {
+	public Rol getRol() {
 		return rol;
 	}
 
-	public void setRol(int rol) {
+	public void setRol(Rol rol) {
 		this.rol = rol;
 	}
 
@@ -58,7 +60,7 @@ public class Usuario {
 	public void setEdad(int edad) {
 		this.edad = edad;
 	}
-	
+
 	public String[] getTags() {
 		return tags;
 	}
@@ -74,9 +76,5 @@ public class Usuario {
 	public void setImagen(File imagen) {
 		this.imagen = imagen;
 	}
-	
-	
-	
-	
-}
 
+}

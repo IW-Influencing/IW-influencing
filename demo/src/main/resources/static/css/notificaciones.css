@@ -13,6 +13,14 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
   height: 100%;
 }
 
+.w3-row-padding{
+  text-align: center;
+}
+.tocho{
+  display: flex;
+  flex-direction: column;
+}
+
 input[type=text] {
     margin: auto;
     padding: 6px;

@@ -8,25 +8,25 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Candidatura {
-	
+
 	private long idCandidatura;
 	private Propuesta propuesta;
 	private Usuario candidato;
 	private Boolean aceptada;
-	public enum Estado {enCurso, finalizada};
+	public enum Estado {EN_CURSO, FINALIZADA};
 	private Estado estado;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public long getId() {
 		return idCandidatura;
 	}
-	
+
 	public void setId(long id) {
 		this.idCandidatura = id;
 	}
-	
-	@ManyToOne(targetEntity=Propuesta.class)
+
+	@ManyToOne(targetEntity = Propuesta.class)
 	public Propuesta getPropuesta() {
 		return propuesta;
 	}
@@ -34,8 +34,8 @@ public class Candidatura {
 	public void setPropuesta(Propuesta propuesta) {
 		this.propuesta = propuesta;
 	}
-	
-	@ManyToOne(targetEntity=Usuario.class)
+
+	@ManyToOne(targetEntity = Usuario.class)
 	public Usuario getCandidato() {
 		return candidato;
 	}
@@ -64,5 +64,5 @@ public class Candidatura {
 	public String toString() {
 		return "Candidatura #" + idCandidatura;
 	}
-	
+
 }

@@ -1,20 +1,22 @@
 package es.ucm.fdi.iw.model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-
 @Entity
 public class Denuncia {
 
     private long id;
-	private Usuario denunciante;
-	private Usuario denunciado;
-	private String detalles;
-	private boolean tramitada;
+    private Usuario denunciante;
+    private Usuario denunciado;
+    private String detalles;
+    private boolean tramitada;
+    private LocalDateTime fecha;
 
     public Denuncia() {
     }
@@ -28,7 +30,7 @@ public class Denuncia {
     }
 
     @Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getId() {
         return this.id;
     }
@@ -37,7 +39,7 @@ public class Denuncia {
         this.id = id;
     }
 
-    @ManyToOne(targetEntity=Usuario.class)
+    @ManyToOne(targetEntity = Usuario.class)
     public Usuario getDenunciante() {
         return this.denunciante;
     }
@@ -46,7 +48,7 @@ public class Denuncia {
         this.denunciante = denunciante;
     }
 
-    @ManyToOne(targetEntity=Usuario.class)
+    @ManyToOne(targetEntity = Usuario.class)
     public Usuario getDenunciado() {
         return this.denunciado;
     }
@@ -93,12 +95,8 @@ public class Denuncia {
 
     @Override
     public String toString() {
-        return "{" +
-            " idDenuncia='" + getId() + "'" +
-            ", denunciante='" + getDenunciante() + "'" +
-            ", denunciado='" + getDenunciado() + "'" +
-            ", denuncia='" + getDetalles() + "'" +
-            ", tramitada='" + isTramitada() + "'" +
-            "}";
+        return "{" + " idDenuncia='" + getId() + "'" + ", denunciante='" + getDenunciante() + "'" + ", denunciado='"
+                + getDenunciado() + "'" + ", denuncia='" + getDetalles() + "'" + ", tramitada='" + isTramitada() + "'"
+                + "}";
     }
 }
