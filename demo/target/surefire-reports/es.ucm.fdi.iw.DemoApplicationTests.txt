@@ -1,9 +1,0 @@
--------------------------------------------------------------------------------
-Test set: es.ucm.fdi.iw.DemoApplicationTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 3.05 s <<< FAILURE! - in es.ucm.fdi.iw.DemoApplicationTests
-contextLoads  Time elapsed: 0.002 s  <<< ERROR!
-java.lang.IllegalStateException: Failed to load ApplicationContext
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Invocation of init method failed; nested exception is org.hibernate.boot.MappingException: HHH000474: Ambiguous persistent property methods detected on es.ucm.fdi.iw.model.Denuncia; mark one as @Transient : [public boolean es.ucm.fdi.iw.model.Denuncia.isTramitada()] and [public boolean es.ucm.fdi.iw.model.Denuncia.getTramitada()] : origin(es.ucm.fdi.iw.model.Denuncia)
-Caused by: org.hibernate.boot.MappingException: HHH000474: Ambiguous persistent property methods detected on es.ucm.fdi.iw.model.Denuncia; mark one as @Transient : [public boolean es.ucm.fdi.iw.model.Denuncia.isTramitada()] and [public boolean es.ucm.fdi.iw.model.Denuncia.getTramitada()] : origin(es.ucm.fdi.iw.model.Denuncia)
-
