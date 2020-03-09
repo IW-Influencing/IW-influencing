@@ -14,19 +14,8 @@
   <div>
 
     <!-- Header -->
-    <!--<header id="searh" style="padding-left: 1%;">-->
-    <header id="searh"></header>
-      <div class="title" style="padding-left: 0!important;">
-        <div class="w3-button">
-          <div class="w3-padding w3 w3-text-white"><i class="fa fa-arrow-left"></i> VOLVER</div>
-        </div>
-        <div style="color: white;font-size: larger;margin: auto;text-align: center;"><b>NOTIFICACIONES</b></div>
-      </div>
-      <br><br>
-      <div class="w3-section w3-bottombar wFilter3-padding-16" style="padding:1%; display:flex;">
-        <input type="text" style="color: white;font-size: larger;margin: auto;text-align: center;"
-          placeholder="Search...">
-      </div>
+    <header><th:block th:replace="fragments.html :: modalBar"/></header>
+      
     </header>
     <div class="tocho">
       <!-- First Notification Grid-->
