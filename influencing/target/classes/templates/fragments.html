@@ -24,14 +24,12 @@
             </ul>
         </div>
     </div> <!-- CAMBIAR, DEBE IR EN EL CSS-->
-    <div th:fragment="modalBar">
+    <div th:fragment="modalBar (nombrePagina)">
         <div class="title" style="padding-left: 0!important;">
             <div class="w3-button">
                 <div class="w3-padding w3 w3-text-white"><i class="fa fa-arrow-left"></i> VOLVER</div>
             </div>
-            <div style="color: white;font-size: larger;margin: auto;text-align: center;"><b>NOTIFICACIONES</b></div>
-        </div>
-        <div class="w3-section w3-bottombar wFilter3-padding-16" style="padding:1%; display:flex;">
+            <div style="color: white;font-size: larger;margin: auto;text-align: center;"><b><span th:text="${nombrePagina}">nombrePagina</span></b></div>
         </div>
     </div> <!-- CAMBIAR, DEBE IR EN EL CSS-->
     <div th:fragment="tagBar">

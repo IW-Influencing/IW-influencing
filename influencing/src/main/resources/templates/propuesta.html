@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"></html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="css/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="notificaciones.css" />
+<link href="css/notificaciones.css" rel="stylesheet" />
 <link rel="stylesheet" href="css/style.css">
 
 <body style="width:100%" class="general">
@@ -15,30 +15,29 @@
 
     <!-- Header -->
     <header>
-      <div th:replace="fragments.html :: modalBar"></div>
+      <div th:replace="fragments.html :: modalBar(nombrePagina='PROPUESTA')"></div>
     </header>
 
     <!-- First Field Grid-->
-    <h1>Nombre de propuesta</h1>
-    <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac
+    <h2>Nombre de propuesta</h2>
+    <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac
       neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique,
       tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit
       amet quis magna. Aenean velit odio, elementum in tempus ut, vehicula eu diam. Pellentesque rhoncus aliquam mattis.
       Ut vulputate eros sed felis sodales nec vulputate justo hendrerit. Vivamus varius pretium ligula, a aliquam odio
       euismod sit amet. Quisque laoreet sem sit amet orci ullamcorper at ultricies metus viverra. Pellentesque arcu
-      mauris, malesuada quis ornare accumsan, blandit sed diam.</h2>
-    <h1>Edad Objetivo</h1>
-    <h2>Edades comprendidas entre </h2>
+      mauris, malesuada quis ornare accumsan, blandit sed diam.</h5>
+    <h2>Edad Objetivo</h2>
+    <h5>Edades comprendidas entre </h5>
     <select id="edades" name="edades">
       <option value="e1">1 - 10</option>
       <option value="e2">10 - 15</option>
       <option value="e3">15 - 20</option>
       <option value="e4">20 - 30</option>
-    </select>
-    <h2> años</h2>
+    </select><h5> años</h5>
     <h1>Periodo de la propuesta</h1>
-    <h2>De </h2><input type="date">
-    <h2> a </h2><input type="date">
+    <h5>De </h5><input type="date">
+    <h5> a </h5><input type="date">
     <h1>Imagen Campaña</h1>
     <input type="file" name="imagenPropuesta"><input type="submit" value="Subir">
     <div>
