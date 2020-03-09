@@ -1,23 +1,44 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="css/w3.css">
 <link href="css/notificaciones.css" rel="stylesheet" />
 <link rel="stylesheet" href="css/style.css">
+
 <head>
-    <th:block th:fragment="navBar">
-        ... esto es lo que se va a insertar ...
-    </th:block>
-    <th:block th:fragment="modalBar">
-        <div class="w3-button">
-            <div class="w3-padding w3 w3-text-white"><i class="fa fa-arrow-left"></i> VOLVER</div>
+    <div th:fragment="navBar">
+        <div class="title" style="padding-left: 0!important;">
+            <div class="brand"><b style="margin-left: 1%;">INFLUENCING</b></div>
+            <div style="color: white;font-size: larger;margin: auto;text-align: center;"><b> NOMBRE PAGINA</b></div>
         </div>
-        <div style="color: white;font-size: larger;margin: auto;text-align: center;"><b>NOMBRE PAGINA MODAL</b>
-            <div class="w3-section w3-bottombar wFilter3-padding-16" style="padding:1%; display:flex;">
-                <input type="text" style="color: white;font-size: larger;margin: auto;text-align: center;"
-                    placeholder="Search...">
-            </div><!-- ESTAS COSAS VAN EN EL CSS-->
+        <br><br>
+        <div class="horizontalBar">
+            <ul>
+                <li><a class="active" href="busquedaPerfil"><i class="fa fa-search" aria-hidden="true"></i> Búsqueda de
+                        perfiles</a></li>
+                <li><a href="negociacion"><i class="fa fa-comment-o" aria-hidden="true"></i> Chat de Negociación</a></li>
+                <li><a href="busquedaPropuesta"><i class="fa fa-suitcase" aria-hidden="true"></i> Búsqueda de
+                        Propuestas</a></li>
+                <li><a href="contrataciones"><i class="fa fa-file-text" aria-hidden="true"></i> Contrataciones</a>
+                </li>
+            </ul>
         </div>
-    </th:block>
+        <div class="w3-section w3-bottombar wFilter3-padding-16" style="padding:1%; display:flex;">
+            <input type="text" placeholder="Search..">
+        </div>
+    </div>
+    <div th:fragment="modalBar">
+        <div class="title" style="padding-left: 0!important;">
+            <div class="w3-button">
+                <div class="w3-padding w3 w3-text-white"><i class="fa fa-arrow-left"></i> VOLVER</div>
+            </div>
+            <div style="color: white;font-size: larger;margin: auto;text-align: center;"><b>NOTIFICACIONES</b></div>
+        </div>
+        <br><br>
+        <div class="w3-section w3-bottombar wFilter3-padding-16" style="padding:1%; display:flex;">
+            <input type="text" style="color: white;font-size: larger;margin: auto;text-align: center;"
+                placeholder="Search...">
+        </div>
+    </div> <!-- CAMBIAR, DEBE IR EN EL CSS-->
 </head>
 
 <body>

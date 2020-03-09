@@ -14,18 +14,8 @@
   <div>
 
     <!-- Header -->
-    <header id="searh" style="padding-left: 1%;">
-      <div class="title" style="padding-left: 0!important;">
-        <div class="w3-button" style="margin-left: 1%;">
-          <- VOLVER</b>
-        </div>
-        <div style="color: white;font-size: larger;margin: auto;text-align: center;"><b>NOTIFICACIONES</b></div>
-      </div>
-      <br><br>
-      <div class="w3-section w3-bottombar wFilter3-padding-16" style="padding:1%; display:flex;">
-        <input type="text" style="color: white;font-size: larger;margin: auto;text-align: center;"
-          placeholder="Search...">
-      </div>
+    <header>
+      <div th:replace="fragments.html :: modalBar"></div>
     </header>
 
     <!-- First Field Grid-->
@@ -60,7 +50,7 @@
 
     <!-- End page content -->
   </div>
-  
+
 
 </body>
 
