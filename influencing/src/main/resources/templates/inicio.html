@@ -3,14 +3,15 @@
 <head>
     <link rel="stylesheet" href="css/inicio.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/w3.css">
     <!--<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">-->
 </head>
 
+<!-- Header -->
+<header>
+    <div th:replace="fragments.html :: navBar"></div>
+</header>
 <body class="general">
-    <header>
-        <div th:replace="fragments.html :: navBar"></div>
-    </header>
-
     <!--  -------------------------Cuerpo de la web----------------------------->
     <div id="global_div" class=>
         <div id="control_panel" class="medium_block">
