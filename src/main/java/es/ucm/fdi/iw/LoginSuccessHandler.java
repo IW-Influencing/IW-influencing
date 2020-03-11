@@ -50,7 +50,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 	    // add a 'u' session variable, accessible from thymeleaf via ${session.u}
 	    log.info("Storing user info for {} in session {}", username, session.getId());
 		Usuario u = entityManager.createNamedQuery("Usuario.byNombreUsuario", Usuario.class)
-		        .setParameter("username", username)
+		        .setParameter("nombre", username)
 		        .getSingleResult();		
 		session.setAttribute("u", u);
 		
