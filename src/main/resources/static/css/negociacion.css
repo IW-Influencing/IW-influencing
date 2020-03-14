@@ -17,6 +17,16 @@
     background-color: gray;
 }
 
+.chat{
+	border: 1px solid;
+	box-shadow: 0 1px 3px -2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	border-radius: 20px;
+	margin: 0.5em 0.5em 0.5em 2em;
+	padding: 0.5em !important;
+	background-color: #f9f9f9c4;
+	border: solid 1pt lightgrey;
+}
+
 .barraChat{
     display: flex;
     justify-content: space-between;
@@ -30,7 +40,9 @@
 }
 
 input{
-    margin-top: 2em;
+    margin-top:2em !important;
+	border-radius: 20px;
+	padding-left: 1em;
 }
 
 
@@ -38,7 +50,13 @@ input{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding:1em;
+	border: 1px solid;
+	box-shadow: 0 1px 3px -2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	border-radius: 20px;
+	margin: 0.5em 0.5em 0.5em 2em;
+	padding: 0.5em !important;
+	background-color: #f9f9f9c4;
+	border: solid 1pt lightgrey;
 }
 
 
@@ -50,14 +68,15 @@ ul {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-right: 5em;
 
 }
 
 .chat {
     display: flex;
     flex-direction: column;
-    padding-right: 5em;
+	justify-content: space-around;
+	padding: 0 2em 1em 2em !important;
+	margin-right: 2em;
 }
 
 .recibido {
@@ -68,14 +87,23 @@ ul {
     padding-left: 10em;
 }
 
+.perfil{
+	font-size: 1.5em;
+	margin-bottom: 1em;
+}
+
+.nombre{
+	font-size: 1.2em;
+}
+
 .boton{
-    font: bold 11px Arial;
-    text-decoration: none;
-    background-color: #EEEEEE;
-    color: #333333;
-    padding: 1em 2em 1em 2em;
-    border-top: 1px solid #CCCCCC;
-    border-right: 1px solid #333333;
-    border-bottom: 1px solid #333333;
-    border-left: 1px solid #CCCCCC;
+    text-align: center;
+	background-color: #77d4df;
+	font-size: large;
+	height: 35px;
+	width: 10%;
+	padding: 0.5em;
+	font-family: inherit;
+	border-radius: 10px;
+	margin: auto;
 }

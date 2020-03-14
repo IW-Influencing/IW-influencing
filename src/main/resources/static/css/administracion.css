@@ -97,26 +97,22 @@
     border-bottom: 1px solid #333333;
     border-left: 1px solid #CCCCCC;
     padding: 1% !important;
-    background-color: #f9f9f9c4;
+	border-radius:20px;
+	text-align: center;
+	margin-right: 1em;
+    background-color: #77d4df;
+
 }
 
 .boton{
     font: bold 11px Arial;
     text-decoration: none;
-    /* background-color: #EEEEEE; */
     color: #333333;
     background-color: #6ed1dd;
-    /* padding: 1em 2em 1em 2em; */
-    /* border-top: 1px solid #CCCCCC; */
-    /* border-right: 1px solid #333333; */
-    /* border-bottom: 1px solid #333333; */
-    /* border-left: 1px solid #CCCCCC; */
     width: 90%;
     box-shadow: 0 1px 3px -2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     border-radius: 20px;
     margin: 2%;
-    /* padding: 1% !important; */
-    /* background-color: #f9f9f9c4; */
     border: solid 1pt lightgrey;
     /* min-height: fit-content; */
     display: flex;
@@ -133,6 +129,16 @@ h3{
 .textoBusqueda{
     width: 20em;
     margin-left: 5em;
+}
+
+input{
+	border-radius: 20px;
+}
+
+.btnEnviar{
+	background-color: #6ed1dd;
+	padding: 0 1em 0 1em;
+	margin-left: 1em;
 }
 
 form{
