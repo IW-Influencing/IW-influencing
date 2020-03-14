@@ -24,13 +24,13 @@
 		<!-- First Photo Grid-->
 		<div class="w3-row-padding">
 
-			<div class="w3-third w3-container w3-margin-bottom box">
+			<div th:each="usuario: ${usuarios}" class="w3-third w3-container w3-margin-bottom box">
 				<div class="w3-container w3-white info">
 					<div class="imagen">
 						<img src="https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png"
 							style="width:80%" class="w3-hover-opacity">
 					</div>
-					<p><b>User Name</b></p>
+					<p><b th:text="${usuario.nombre}"></b></p>
 					<div class="score">
 						<i class="fa fa-star w3-margin-right"></i>
 						<i class="fa fa-star w3-margin-right"></i>
@@ -44,114 +44,7 @@
 					<p>Praesent tincidunt sed tellus ut rutrum.</p>
 				</div>
 			</div>
-
-			<div class="w3-third w3-container w3-margin-bottom box">
-				<div class="w3-container w3-white info">
-					<div class="imagen">
-						<img src="https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png"
-							style="width:80%" class="w3-hover-opacity">
-					</div>
-					<p><b>User Name</b></p>
-					<div class="score">
-						<i class="fa fa-star w3-margin-right"></i>
-						<i class="fa fa-star w3-margin-right"></i>
-					</div>
-					<div>
-						<button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
-						<button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
-					</div>
-					<p>Praesent tincidunt sed tellus ut rutrum.</p>
-				</div>
-			</div>
-			<div class="w3-third w3-container w3-margin-bottom box">
-				<div class="w3-container w3-white info">
-					<div class="imagen">
-						<img src="https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png"
-							style="width:80%" class="w3-hover-opacity">
-					</div>
-					<p><b>User Name</b></p>
-					<div class="score">
-						<i class="fa fa-star w3-margin-right"></i>
-						<i class="fa fa-star w3-margin-right"></i>
-						<i class="fa fa-star w3-margin-right"></i>
-					</div>
-					<div>
-						<button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
-						<button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
-						<button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
-						<button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
-					</div>
-					<p>Praesent tincidunt sed tellus ut rutrum.</p>
-				</div>
-			</div>
-
-
-			<!-- Second Photo Grid-->
-			<div class="w3-third w3-container w3-margin-bottom box">
-				<div class="w3-container w3-white info">
-					<div class="imagen">
-						<img src="https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png"
-							style="width:80%" class="w3-hover-opacity">
-					</div>
-					<p><b>User Name</b></p>
-					<div class="score">
-						<i class="fa fa-star w3-margin-right"></i>
-						<i class="fa fa-star w3-margin-right"></i>
-						<i class="fa fa-star w3-margin-right"></i>
-						<i class="fa fa-star w3-margin-right"></i>
-					</div>
-					<div>
-						<button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
-						<button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
-						<button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
-						<button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
-						<button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
-					</div>
-					<p>Praesent tincidunt sed tellus ut rutrum.</p>
-				</div>
-			</div>
-			<div class="w3-third w3-container w3-margin-bottom box">
-				<div class="w3-container w3-white info">
-					<div class="imagen">
-						<img src="https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png"
-							style="width:80%" class="w3-hover-opacity">
-					</div>
-					<p><b>User Name</b></p>
-					<div class="score">
-						<i class="fa fa-star w3-margin-right"></i>
-						<i class="fa fa-star w3-margin-right"></i>
-						<i class="fa fa-star w3-margin-right"></i>
-					</div>
-					<div>
-						<button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
-						<button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
-						<button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
-						<button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
-					</div>
-					<p>Praesent tincidunt sed tellus ut rutrum.</p>
-				</div>
-			</div>
-			<div class="w3-third w3-container w3-margin-bottom box">
-				<div class="w3-container w3-white info">
-					<div class="imagen">
-						<img src="https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png"
-							style="width:80%" class="w3-hover-opacity">
-					</div>
-					<p><b>User Name</b></p>
-					<div class="score">
-						<i class="fa fa-star w3-margin-right"></i>
-						<i class="fa fa-star w3-margin-right"></i>
-						<i class="fa fa-star w3-margin-right"></i>
-					</div>
-					<div>
-						<button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
-						<button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
-						<button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
-						<button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
-					</div>
-					<p>Praesent tincidunt sed tellus ut rutrum.</p>
-				</div>
-			</div>
+		</div>
 
 
 			<!-- Pagination -->

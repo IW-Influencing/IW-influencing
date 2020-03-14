@@ -1,14 +1,18 @@
 package es.ucm.fdi.iw.control;
 
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;	  
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import es.ucm.fdi.iw.model.Usuario;
+import es.ucm.fdi.iw.services.UsuariosService;					   
 /**
  * Landing-page controller
  * 
@@ -18,6 +22,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class RootController {
 
   private static final Logger log = LogManager.getLogger(RootController.class);
+  @Autowired
+  UsuariosService usuariosService;							  
 
   @GetMapping("/")
   public String index(Model model) {
@@ -78,4 +84,11 @@ public class RootController {
   public String error(Model model) {
     return "error";
   }
+  //Metodos nuevos
+  @GetMapping("/perfiles")
+  public String busquedaPerfil(HttpSession session,Model model) {
+	  List<Usuario> list = usuariosService.getAllUsuarios();
+	  model.addAttribute("usuarios", list);
+    return "busquedaPerfil";
+  }			  
 }
