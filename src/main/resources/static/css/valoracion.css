@@ -1,75 +1,78 @@
-*{
-    margin:0px;
-    padding:0px;
-}
+
 
 header{
-    background-color:#b9dfe0;
+    background-color:#6ed1dd;
     text-align: center;
     top:0;
     padding:10px;
 }
 
 .contenedor{
-    background-color: blueviolet;
+	background-color: #f9f9f9c4 !important;
     min-height: 100vh;
     display:flex;
-    flex-direction: column;
-    justify-content: space-around;
+	flex-direction: column;
     align-items: center;
     background-color: #D7DBDD 
 }
 
 section{
-    width: 70%;
-    display: flex;
-    flex-wrap: nowrap;
-    border: 1px solid black;
+	margin: 1% !important;
+	width: 70%;
 }
+
 
 .contenido-propuesta{
-    background-color: #839192;
-    overflow-y: scroll;
-    padding: 10px;
     display:flex;
-    height:250px;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0 1px 3px -2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	border-radius: 20px;
+	padding: 1% !important;
+	background-color: #f9f9f9c4;
+	border: solid 1pt lightgrey;
 }
 
-.contenido-propuesta div{
-    width: 70%;
-    padding: 15px;
-    padding-top: 0;
-    height: 50px;
-}
 
 .contenido-propuesta img{
-    width: 30%;
-}
-
-.valoracion{
-    background-color:#839192;
-    padding: 10px;
-    margin-bottom: 20px;
-    height:230px;
-    display:flex;
-    flex-direction:column;
-}
-
-#cabecera{
-    text-align: center;
-    margin-bottom: 10px;
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#cabecera img{
-   width:10%;
-   padding:2px;
+    width: auto;
 }
 
 .comentario{
-    overflow-y: scroll;
+	display:flex;
+	align-items:center;
+}
+.texto-propuesta{
+	display:flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 0 2em 02em;
+}
+
+.texto-propuesta h2{
+	padding-bottom: 1em;
+}
+
+.valoracion{
+    display:flex;
+	box-shadow: 0 1px 3px -2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	justify-content: space-between;
+	border-radius: 20px;
+	padding: 1% !important;
+	background-color: #f9f9f9c4;
+	border: solid 1pt lightgrey;
+}
+
+#cabecera{
+    display:flex;
+    flex-direction: column;
+	align-items: center;
+	margin: 0 2em 2em 2em;
+}
+
+#cabecera img{
+      width: 10em;
+	  margin: 1em 0  1em 0;
 }
 
 
@@ -104,6 +107,9 @@ footer{
 
 .ec-stars-wrapper > a:hover ~ a {
 	color: #F1C40F;
+}
+img{
+	border-radius: 20px;
 }
 
 

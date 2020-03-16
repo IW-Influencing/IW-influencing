@@ -24,12 +24,8 @@
 }
 .enlaces {
     display: flex;
-    /* padding-bottom: 3em; */
-    /* padding-left: 3em; */
     margin: auto;
     margin-top: 2%;
-    /* color: black; */
-    /* width: fit-content; */
     width: 60%;
 }
 

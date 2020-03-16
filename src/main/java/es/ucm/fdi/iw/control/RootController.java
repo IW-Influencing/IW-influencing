@@ -1,6 +1,8 @@
 package es.ucm.fdi.iw.control;
 
 import java.util.List;
+
+import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -23,7 +25,10 @@ public class RootController {
 
   private static final Logger log = LogManager.getLogger(RootController.class);
   @Autowired
-  UsuariosService usuariosService;							  
+  UsuariosService usuariosService;	
+  
+ @Autowired
+ private EntityManager entityManager;
 
   @GetMapping("/")
   public String index(Model model) {
@@ -33,6 +38,16 @@ public class RootController {
   @GetMapping("/inicio")
   public String inicio(HttpSession session) {
     return "inicio";
+  }
+  
+  @GetMapping("/valoracion")
+  public String valoracion(HttpSession session) {
+    return "valoracion";
+  }
+  
+  @GetMapping("/finCampanna")
+  public String finCampanna(HttpSession session) {
+    return "finCampanna";
   }
 
   @GetMapping("/negociacion")
@@ -84,11 +99,18 @@ public class RootController {
   public String error(Model model) {
     return "error";
   }
+  
+  @GetMapping("/edicion")
+  public String edicion(Model model) {
+    return "edicion";
+  }
+  
   //Metodos nuevos
   @GetMapping("/perfiles")
   public String busquedaPerfil(HttpSession session,Model model) {
+	  
 	  List<Usuario> list = usuariosService.getAllUsuarios();
 	  model.addAttribute("usuarios", list);
-    return "busquedaPerfil";
+	  return "busquedaPerfil";
   }			  
 }
