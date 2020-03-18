@@ -1,12 +1,17 @@
 package es.ucm.fdi.iw.model;
 
 import java.util.Arrays;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
@@ -32,6 +37,29 @@ public class Usuario {
 	private String apellidos;
 	private int edad;
 	private String tags; // Se almacenan los tags
+	
+	@OneToMany(targetEntity=Propuesta.class)
+	@JoinColumn(name="empresa_id")
+	public List<Propuesta> getPropuestasPropias() {
+		return propuestasPropias;
+	}
+
+	public void setPropuestasPropias(List<Propuesta> propuestasPropias) {
+		this.propuestasPropias = propuestasPropias;
+	}
+	
+	@OneToMany(targetEntity=Candidatura.class)
+	@JoinColumn(name="candidato_id")
+	public List<Candidatura> getCandidaturas() {
+		return candidaturas;
+	}
+
+	public void setCandidaturas(List<Candidatura> candidaturas) {
+		this.candidaturas = candidaturas;
+	}
+
+	private List<Propuesta> propuestasPropias;
+	private List<Candidatura> candidaturas;
 
 	
 

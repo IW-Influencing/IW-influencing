@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import es.ucm.fdi.iw.model.Propuesta;
 import es.ucm.fdi.iw.model.Usuario;
 import es.ucm.fdi.iw.services.UsuariosService;					   
 /**
@@ -51,8 +52,16 @@ public class RootController {
   }
 
   @GetMapping("/negociacion")
-  public String negociacion(HttpSession session) {
+  public String negociacion(Model model, HttpSession session) {
+	  
+	  /*Obtener la lista de propuestas
+	  int idUsuario = (int) session.getAttribute("idUsuario");
+	  List<Propuesta> listaPropuestas = (List<Propuesta>) entityManager.createNamedQuery("Candidatura.byCandidato").setParameter("idCandidato", idUsuario);
+	  model.addAttribute("propuestas", listaPropuestas);
+	   */
+	  
     return "negociacion";
+    
   }
 
   @GetMapping("/administracion")

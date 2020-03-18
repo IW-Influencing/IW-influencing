@@ -1,17 +1,21 @@
 package es.ucm.fdi.iw.model;
 
 import java.io.File;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Propuesta {
 
 	private long id;
+	private List<Candidatura> candidaturas;
 	private Usuario empresa;
 	private String nombre;
 	private String[] tags;
@@ -27,6 +31,16 @@ public class Propuesta {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+	
+	@OneToMany(targetEntity=Candidatura.class)
+	@JoinColumn(name="propuesta_id")
+	public List<Candidatura> getCandidaturas() {
+		return candidaturas;
+	}
+
+	public void setCandidaturas(List<Candidatura> candidaturas) {
+		this.candidaturas = candidaturas;
 	}
 
 	@ManyToOne(targetEntity = Usuario.class)
