@@ -15,12 +15,12 @@ public class Perfil {
 	private Usuario influencer;
 	private String nombre;
 	private String[] numSeguidores;
-	private File imagen;
+	private String imagen;
 
 	public Perfil() {
 	}
 
-	public Perfil(long id, Usuario influencer, String nombre, String[] numSeguidores, File imagen) {
+	public Perfil(long id, Usuario influencer, String nombre, String[] numSeguidores, String imagen) {
 		this.id = id;
 		this.influencer = influencer;
 		this.nombre = nombre;
@@ -64,11 +64,11 @@ public class Perfil {
 		this.numSeguidores = numSeguidores;
 	}
 
-	public File getImagen() {
+	public String getImagen() {
 		return this.imagen;
 	}
 
-	public void setImagen(File imagen) {
+	public void setImagen(String imagen) {
 		this.imagen = imagen;
 	}
 
