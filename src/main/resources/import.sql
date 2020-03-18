@@ -23,3 +23,21 @@ INSERT INTO usuario(id,activo,nombre,password,roles,apellidos,edad,tags) VALUES 
 	22,
 	'fiesta'
 );
+
+
+INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id) VALUES (
+	1,
+	'Realiza publicidad en metro',
+	'Metropubli',
+	100,
+	'Ciudad',
+	2
+);
+
+INSERT INTO candidatura(id,aceptada,estado,candidato_id,propuesta_id) VALUES (
+	1,
+	true,
+	'EN_CURSO',
+	1,
+	1
+);

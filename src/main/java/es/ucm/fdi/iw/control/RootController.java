@@ -54,11 +54,12 @@ public class RootController {
   @GetMapping("/negociacion")
   public String negociacion(Model model, HttpSession session) {
 	  
-	  /*Obtener la lista de propuestas
-	  int idUsuario = (int) session.getAttribute("idUsuario");
-	  List<Propuesta> listaPropuestas = (List<Propuesta>) entityManager.createNamedQuery("Candidatura.byCandidato").setParameter("idCandidato", idUsuario);
+	  //Obtener la lista de propuestas
+	  //long idUsuario = (int) session.getAttribute("idUsuario");
+	  long idUsuario = 1;
+	  List<Propuesta> listaPropuestas = entityManager.createNamedQuery("Candidatura.byCandidato").setParameter("idCandidato", idUsuario).getResultList();
 	  model.addAttribute("propuestas", listaPropuestas);
-	   */
+	   
 	  
     return "negociacion";
     

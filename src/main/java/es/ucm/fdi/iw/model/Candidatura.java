@@ -14,21 +14,21 @@ import javax.persistence.NamedQuery;
 })
 public class Candidatura {
 
-	private long idCandidatura;
+	private long id;
 	private Propuesta propuesta;
 	private Usuario candidato;
 	private Boolean aceptada;
 	public enum Estado {EN_CURSO, FINALIZADA};
-	private Estado estado;
+	private String estado;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public long getId() {
-		return idCandidatura;
+		return id;
 	}
 
 	public void setId(long id) {
-		this.idCandidatura = id;
+		this.id = id;
 	}
 
 	@ManyToOne(targetEntity = Propuesta.class)
@@ -57,17 +57,17 @@ public class Candidatura {
 		this.aceptada = aceptada;
 	}
 
-	public Estado getEstado() {
+	public String getEstado() {
 		return estado;
 	}
 
-	public void setEstado(Estado estado) {
+	public void setEstado(String estado) {
 		this.estado = estado;
 	}
 
 	@Override
 	public String toString() {
-		return "Candidatura #" + idCandidatura;
+		return "Candidatura #" + id;
 	}
 
 }

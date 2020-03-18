@@ -1,6 +1,7 @@
 package es.ucm.fdi.iw.model;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -18,10 +19,9 @@ public class Propuesta {
 	private List<Candidatura> candidaturas;
 	private Usuario empresa;
 	private String nombre;
-	private String[] tags;
+	private String tags;
 	private String descripcion;
 	private double sueldo;
-	private File imagen;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -72,24 +72,22 @@ public class Propuesta {
 		return sueldo;
 	}
 
-	public String[] getTags() {
+	public String getTags() {
 		return tags;
 	}
 
-	public void setTags(String[] tags) {
+	public void setTags(String tags) {
 		this.tags = tags;
 	}
 
 	public void setSueldo(double sueldo) {
 		this.sueldo = sueldo;
 	}
-
-	public File getImagen() {
-		return imagen;
+	
+	public boolean hasTag(String tag) {
+		return Arrays.stream(tags.split(","))
+				.anyMatch(r -> r.equals(tag));
 	}
 
-	public void setImagen(File imagen) {
-		this.imagen = imagen;
-	}
 
 }
