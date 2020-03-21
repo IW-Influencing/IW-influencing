@@ -7,8 +7,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="Denuncia.getLastThree", query="SELECT * FROM denuncia ORDER BY fecha LIMIT 3"),
+	@NamedQuery(name="Denuncia.getAll", query="SELECT * FROM denuncia")
+})
 public class Denuncia {
 
     private long id;
