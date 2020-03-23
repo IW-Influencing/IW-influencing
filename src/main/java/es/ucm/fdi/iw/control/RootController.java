@@ -75,13 +75,11 @@ public class RootController {
     return "perfil";
   }
 
-  @GetMapping("/busquedaPerfil")
-  public String busquedaPerfil(HttpSession session) {
-    return "busquedaPerfil";
-  }
-
   @GetMapping("/busquedaPropuesta")
-  public String busquedaPropuesta(HttpSession session) {
+  public String busquedaPropuesta(Model model, HttpSession session) {
+    List<Propuesta> propuestas = entityManager.createNamedQuery("Propuesta.getAllProposals", Propuesta.class).getResultList();
+    
+	  model.addAttribute("propuestas", propuestas);
     return "busquedaPropuesta";
   }
 
@@ -115,8 +113,9 @@ public class RootController {
   @GetMapping("/perfiles")
   public String busquedaPerfil(HttpSession session,Model model) {
 	  
-	  List<Usuario> list = usuariosService.getAllUsuarios();
-	  model.addAttribute("usuarios", list);
+    List<Usuario> users = entityManager.createNamedQuery("Usuario.getAllUsers", Usuario.class).getResultList();
+    
+	  model.addAttribute("usuarios", users);
 	  return "busquedaPerfil";
   }			  
 }

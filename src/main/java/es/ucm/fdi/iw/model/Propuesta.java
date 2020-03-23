@@ -1,6 +1,6 @@
 package es.ucm.fdi.iw.model;
 
-import java.io.File;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,9 +10,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 @Entity
+@NamedQueries({
+	
+	@NamedQuery(name="Propuesta.getAllProposals",
+	query="SELECT p FROM Propuesta p")
+	
+})
 public class Propuesta {
 
 	private long id;
@@ -21,7 +31,7 @@ public class Propuesta {
 	private String nombre;
 	private String tags;
 	private String descripcion;
-	private double sueldo;
+	private BigDecimal sueldo;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -68,8 +78,12 @@ public class Propuesta {
 		this.descripcion = descripcion;
 	}
 
-	public double getSueldo() {
+	public BigDecimal getSueldo() {
 		return sueldo;
+	}
+
+	public void setSueldo(BigDecimal sueldo) {
+		this.sueldo = sueldo;
 	}
 
 	public String getTags() {
@@ -78,10 +92,6 @@ public class Propuesta {
 
 	public void setTags(String tags) {
 		this.tags = tags;
-	}
-
-	public void setSueldo(double sueldo) {
-		this.sueldo = sueldo;
 	}
 	
 	public boolean hasTag(String tag) {

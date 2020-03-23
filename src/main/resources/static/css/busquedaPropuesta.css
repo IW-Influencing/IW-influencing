@@ -30,10 +30,6 @@ li a:hover:not(.active) {
   background-color: #1695a5;
 }
 
-.active {
-  background-color: #1695a5;
-}
-
 .tags {
     border: 1px solid deepskyblue;
     padding: 4px;
@@ -83,18 +79,5 @@ img{height: 120px;}
     text-align: center;
 }
 
-.title{
-	height: 100px;
-    background-color: #6ed1dd;
-	display: block;
-}
 
-.brand{
-    font-family: Aclonica;
-    height: 52px;
-    width: 100%;
-    margin-left: 3%;
-    text-align: left;
-    font-size: x-large;
-	margin:auto;
-}
+

@@ -12,8 +12,8 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name="Denuncia.getLastThree", query="SELECT * FROM denuncia ORDER BY fecha LIMIT 3"),
-	@NamedQuery(name="Denuncia.getAll", query="SELECT * FROM denuncia")
+	//@NamedQuery(name="Denuncia.getLastThree", query="SELECT * FROM denuncia ORDER BY fecha LIMIT 3"),
+	//@NamedQuery(name="Denuncia.getAll", query="SELECT * FROM denuncia")
 })
 public class Denuncia {
 

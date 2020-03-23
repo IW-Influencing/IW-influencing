@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Aclonica" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="css/busquedaPerfil.css" />
 <link rel="stylesheet" href="css/style.css">
-    <link href="css/fragments.css" rel="stylesheet">
-
+<link rel="stylesheet" type="text/css" href="css/busquedaPerfil.css" />
+</head>
 <body style="width:100%" class="general">
 
 	<!-- !PAGE CONTENT! -->
@@ -17,7 +17,7 @@
 
 		<!-- Header -->
 		<header>
-			<div th:replace="fragments.html :: navBar"></div>
+			<div th:replace="fragments.html :: navBar(nombrePagina='BÚSQUEDA DE PERFILES')"></div>
 			<div th:replace="fragments.html :: tagBar"></div>
 		</header>
 
@@ -30,18 +30,16 @@
 						<img src="https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png"
 							style="width:80%" class="w3-hover-opacity">
 					</div>
-					<p><b th:text="${usuario.nombre}"></b></p>
+					<p><b th:text="${usuario.nombre +' '+ usuario.apellidos}">Usuario</b></p>
 					<div class="score">
+						<th:block th:each="i: ${#numbers.sequence(1, usuario.score)}">					
 						<i class="fa fa-star w3-margin-right"></i>
-						<i class="fa fa-star w3-margin-right"></i>
-						<i class="fa fa-star w3-margin-right"></i>
+						</th:block>
 					</div>
-					<div>
-						<button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
-						<button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
-						<button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
+					<div th:each="tag: ${usuario.tags}">
+						<button class="w3-button w3-white tags" style="border-radius:12px;" th:text="${tag}">Tag</button>
 					</div>
-					<p>Praesent tincidunt sed tellus ut rutrum.</p>
+					<p th:text="${usuario.estado}">Praesent tincidunt sed tellus ut rutrum.</p>
 				</div>
 			</div>
 		</div>
