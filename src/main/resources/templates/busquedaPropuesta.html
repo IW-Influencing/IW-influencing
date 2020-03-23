@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
-<head><th:block th:replace="fragments/head :: header"/>
+<html lang="es">
+<head>
+	<th:block th:replace="fragments/head.html :: header"/>
 	<link rel="stylesheet" type="text/css" href="css/busquedaPropuesta.css" />
 </head>
 <body style="width:100%" class="general">
@@ -10,8 +11,8 @@
 
 		<!-- Header -->
 		<header>
-			<div th:replace="fragments.html :: navBar(nombrePagina='BÚSQUEDA DE PROPUESTAS')"></div>
-			<div th:replace="fragments.html :: tagBar"></div>
+			<div th:replace="fragments/navigation.html :: navBar(nombrePagina='BÚSQUEDA DE PROPUESTAS')"></div>
+			<div th:replace="fragments/navigation.html :: tagBar"></div>
 		</header>
 
 		<!-- First Photo Grid-->
@@ -101,7 +102,7 @@
 		</div>
 
 		<!-- Footer -->
-		<footer th:replace="fragments.html :: footer"></footer>
+		<footer th:replace="fragments/navigation.html :: footer"></footer>
 
 </body>
 

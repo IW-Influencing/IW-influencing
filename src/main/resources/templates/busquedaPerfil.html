@@ -1,14 +1,9 @@
 <!DOCTYPE html>
-<html>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Aclonica" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="css/busquedaPerfil.css" />
-<link rel="stylesheet" href="css/style.css">
-    <link href="css/fragments.css" rel="stylesheet">
+<html lang="es">
+<head>
+	<th:block th:replace="fragments/head.html :: header"/>
+	<link rel="stylesheet" type="text/css" href="css/busquedaPerfil.css" />
+</head>
 
 <body style="width:100%" class="general">
 
@@ -17,8 +12,8 @@
 
 		<!-- Header -->
 		<header>
-			<div th:replace="fragments.html :: navBar(nombrePagina='BÚSQUEDA DE PERFILES')"></div>
-			<div th:replace="fragments.html :: tagBar"></div>
+			<div th:replace="fragments/navigation.html :: navBar(nombrePagina='BÚSQUEDA DE PERFILES')"></div>
+			<div th:replace="fragments/navigation.html :: tagBar"></div>
 		</header>
 
 		<!-- First Photo Grid-->
@@ -64,7 +59,7 @@
 		</div>
 
 		<!-- Footer -->
-		<footer th:replace="fragments.html :: footer"></footer>
+		<footer th:replace="fragments/navigation.html :: footer"></footer>
 </body>
 
 </html>

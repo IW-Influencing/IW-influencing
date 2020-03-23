@@ -1,19 +1,14 @@
+
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="css/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Aclonica" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <th:block th:replace="fragments/head.html :: header"/>
     <link rel="stylesheet" href="css/inicio.css">
-
 </head>
 
 <!-- Header -->
 <header>
-    <div th:replace="fragments.html :: navBar(nombrePagina='INICIO')"></div>
+    <div th:replace="fragments/navigation.html :: navBar(nombrePagina='INICIO')"></div>
 </header>
 
 <body class="general">
@@ -104,7 +99,7 @@
     </div>
 
     <!------------------------------Footer area--------------------------------->
-    <footer th:replace="fragments.html :: footer"></footer>
+    <footer th:replace="fragments/navigation.html :: footer"></footer>
 
 </body>
 

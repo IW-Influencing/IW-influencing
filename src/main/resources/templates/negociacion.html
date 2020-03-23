@@ -3,21 +3,15 @@
 
 
 <head>
-    <meta charset="utf-8" />
-    <link href="css/negociacion.css" rel="stylesheet">    
-	<link href="css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Aclonica" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="css/fragments.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/w3.css">
+    <th:block th:replace="fragments/head.html :: header"/>
+    <link href="css/negociacion.css" rel="stylesheet">
 </head>
 
 <body class="general">
     
     <!-- Header -->
     <header>
-        <div th:replace="fragments.html :: navBar(nombrePagina='CHAT DE NEGOCIACIÓN')"></div>
+        <div th:replace="fragments/navigation.html :: navBar(nombrePagina='CHAT DE NEGOCIACIÓN')"></div>
     </header>
     <main>
         <div class="contenido">
@@ -68,8 +62,8 @@
 
             </div>
         </div>
-
     </main>
+    <div th:replace="fragments/navigation.html :: footer"></div>
 </body>
 
 </html>

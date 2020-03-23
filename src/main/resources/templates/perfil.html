@@ -2,21 +2,14 @@
 <html lang="es">
 
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <th:block th:replace="fragments/head.html :: header"/>
     <link rel="stylesheet" href="css/perfil.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Aclonica" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body class="general">
     <!-- Header -->
     <header>
-        <div th:replace="fragments.html :: modalBar(nombrePagina='PERFIL')"></div>
+        <div th:replace="fragments/navigation.html :: modalBar(nombrePagina='PERFIL')"></div>
     </header>
     <div class="profile-card">
         <div class="top-section">
@@ -79,9 +72,6 @@
 
         <dt>Propuesta 5</dt>
     </dl>
-
-    <!-- Footer -->
-    <footer th:replace="fragments.html :: footer"></footer>
     
 </body>
 
