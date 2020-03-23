@@ -2,21 +2,15 @@
 <html lang="es">
 <!--  SDF-->
 <head>
-    <meta charset="utf-8" />
+    <th:block th:replace="fragments/head.html :: header"/>
     <link href="css/administracion.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Aclonica" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="css/fragments.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/w3.css">
 </head>
 
 <body class="general">
 
     <!-- Header -->
     <header>
-        <div th:replace="fragments.html :: modalBar(nombrePagina='ADMINISTRACIÓN')"></div>
+        <div th:replace="fragments/navigation.html :: navBar(nombrePagina='ADMINISTRACIÓN')"></div>
     </header>
     <main>
 
@@ -151,7 +145,7 @@
 
     </main>
     <!-- Footer -->
-	<footer th:replace="fragments.html :: footer"></footer>
+	<footer th:replace="fragments/navigation.html :: footer"></footer>
 </body>
 
 </html>

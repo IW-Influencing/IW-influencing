@@ -2,21 +2,15 @@
 <html lang="es">
 
 <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Aclonica" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <th:block th:replace="fragments/head.html :: header"/>
     <link rel="stylesheet" href="css/valoracion.css">
-
-    <title>Valoración propuesta</title>
-    <!-- Header -->
-    
 </head>
+
+
 <header>
-        <div th:replace="fragments.html :: modalBar(nombrePagina='VALORACION')"></div>
-    </header>
+        <div th:replace="fragments/navigation.html :: modalBar(nombrePagina='VALORACIÓN')"></div>
+</header>
+
 <body class="general">
 
     <div class="contenedor">

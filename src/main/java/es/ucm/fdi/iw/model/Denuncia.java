@@ -5,15 +5,15 @@ import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.Id; 
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
-	//@NamedQuery(name="Denuncia.getLastThree", query="SELECT * FROM denuncia ORDER BY fecha LIMIT 3"),
-	//@NamedQuery(name="Denuncia.getAll", query="SELECT * FROM denuncia")
+	@NamedQuery(name="Denuncia.getLastThree", query="SELECT d FROM Denuncia d ORDER BY d.fecha"),
+	@NamedQuery(name="Denuncia.getAll", query="SELECT d FROM Denuncia d")
 })
 public class Denuncia {
 

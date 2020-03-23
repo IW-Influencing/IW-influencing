@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"></html>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="css/notificaciones.css" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css">
+<html lang="es">
+
+<head>
+  <th:block th:replace="fragments/head.html :: header"/>
+  <link href="css/notificaciones.css" rel="stylesheet" />
+</head>
 
 <body style="width:100%" class="general">
 
@@ -15,7 +13,7 @@
 
     <!-- Header -->
     <header>
-      <div th:replace="fragments.html :: modalBar(nombrePagina='NOTIFICACIONES')"></div>
+      <div th:replace="fragments/navigation.html :: modalBar(nombrePagina='NOTIFICACIONES')"></div>
     </header>
 
     </header>
