@@ -1,29 +1,34 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="css/w3.css">
-<link href="css/notificaciones.css" rel="stylesheet" />
 <link rel="stylesheet" href="css/style.css">
 
-<head>
-    <div th:fragment="navBar">
+<body>
+
+    <!-- NAVBAR -->
+    <div th:fragment="navBar (nombrePagina)">
         <div class="title" style="padding-left: 0!important;">
             <div class="brand"><b style="margin-left: 1%;">INFLUENCING</b></div>
-            <div style="color: white;font-size: larger;margin: auto;text-align: center;"><b> NOMBRE PAGINA</b></div>
+            <div style="color: white;font-size: larger;margin: auto;text-align: center;"><b><span th:text="${nombrePagina}">nombrePagina</span></b></div>
         </div>
         <br>
+        <center><!-- CAMBIAR, DEBE IR EN EL CSS -->
         <div class="horizontalBar">
             <ul class="ulFragment">
                 <li><a class="active" th:href="@{/perfiles}"><i class="fa fa-search" aria-hidden="true"></i> Búsqueda de
-                        perfiles</a></li>
+                        Perfiles</a></li>
+                <li><a href="busquedaPropuesta"><i class="fa fa-suitcase" aria-hidden="true"></i> Búsqueda de
+                    Propuestas</a></li>
                 <li><a href="negociacion"><i class="fa fa-comment-o" aria-hidden="true"></i> Chat de Negociación</a>
                 </li>
-                <li><a href="busquedaPropuesta"><i class="fa fa-suitcase" aria-hidden="true"></i> Búsqueda de
-                        Propuestas</a></li>
                 <li><a href="contrataciones"><i class="fa fa-file-text" aria-hidden="true"></i> Contrataciones</a>
                 </li>
             </ul>
         </div>
-    </div> <!-- CAMBIAR, DEBE IR EN EL CSS-->
+        </center>
+    </div> <!-- CAMBIAR, DEBE IR EN EL CSS -->
+
+    <!-- MODALBAR -->
     <div th:fragment="modalBar (nombrePagina)">
         <div class="title" style="padding-left: 0!important;">
             <div class="w3-button">
@@ -31,8 +36,9 @@
             </div>
             <div style="color: white;font-size: larger;margin: auto;text-align: center;"><b><span th:text="${nombrePagina}">nombrePagina</span></b></div>
         </div>
-    </div> <!-- CAMBIAR, DEBE IR EN EL CSS-->
+    </div> <!-- CAMBIAR, DEBE IR EN EL CSS -->
     
+    <!-- TAGBAR -->
     <div th:fragment="tagBar">
         <div class="w3-section w3-bottombar wFilter3-padding-16" style="padding:1%; display:flex;">
             <span class="w3-margin-right">Trending topics:</span>
@@ -50,10 +56,9 @@
                     class="fa fa-music w3-margin-right"></i>Música</button>
             <input type="text" placeholder="Search..">
         </div>
-    </div> <!-- CAMBIAR, DEBE IR EN EL CSS-->
-</head>
+    </div> <!-- CAMBIAR, DEBE IR EN EL CSS -->
 
-<body>
+    <!-- FOOTER -->
     <footer class="w3-container w3-padding-32 w3-dark-grey" th:fragment="footer">
         <div class="links" style="text-align:center;">
             <a href="#" title="home" target="_blank" class="w3-hover-opacity">Influencing</a> -
