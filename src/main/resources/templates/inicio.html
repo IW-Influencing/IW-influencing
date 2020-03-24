@@ -4,6 +4,7 @@
 <head>
     <th:block th:replace="fragments/head.html :: header"/>
     <link rel="stylesheet" href="css/inicio.css">
+
 </head>
 
 <!-- Header -->
@@ -13,93 +14,120 @@
 
 <body class="general">
     <!--  -------------------------Cuerpo de la web----------------------------->
-    <div id="global_div" class=>
-        <div id="control_panel" class="medium_block">
-            <h2>Panel de control</h2>
-            <h3>Contactar con usuario</h3>
-            <a><input type="text" id="username"> <button>Buscar usuario</button></a>
-            <h3>Buscar una propuesta</h3>
-            <h3><input type="text" id="username"><button>Crear propuesta</button></h3>
-        </div>
-
-
-        <div id="proposal_block" class="proposal_div">
-            <h2>Propuestas activas<button style="float: right;">Ver todas las propuestas</button></h2>
-            <div id="proposal1" class="proposal_block">
-                <br>
-                <p style="font-weight: bold;">Marca1: <a style="font-weight: 100;">Campaña en la que aquellos que
-                        participéis debéis beber una Coca-Cola en alguno de
-                        vuestros vídeos y hablar sobre el nuevo sabor que hemos lanzado</a></p>
-                <div id="button_row_message" class="button_row_message">
-                    <button>Ir a la propuesta</button>
-                    <button style="margin-left: 20px; margin-right: 20px;">Abandonar propuesta</button>
-                    <button>Contactar</button>
-                </div>
-            </div>
-            <div id="proposal2" class="proposal_block">
-                <br>
-                <p style="font-weight: bold;">Marca2: <a style="font-weight: 100;">Lorem ipsum dolor sit amet,
-                        consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrud </a></p>
-                <div id="button_row_message" class="button_row_message">
-                    <button>Ir a la propuesta</button>
-                    <button style="margin-left: 20px; margin-right: 20px;">Abandonar propuesta</button>
-                    <button>Contactar</button>
-                </div>
-            </div>
-            <div id="proposal3" class="proposal_block">
-                <br>
-                <p style="font-weight: bold;">Marca3: <a style="font-weight: 100;">Lorem ipsum dolor sit amet,
-                        consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrud</a></p>
-                <div id="button_row_message" class="button_row_message">
-                    <button>Ir a la propuesta</button>
-                    <button style="margin-left: 20px; margin-right: 20px;">Abandonar propuesta</button>
-                    <button>Contactar</button>
-                </div>
-            </div>
-        </div>
-
-
-        <div id="messages_block" class="message_div">
-            <h2>últimos mensajes <button style="float: right;">Ver todos los mensajes</button></h2>
-            <div id="message" class="message_block">
-                <br>
-                <p style="font-weight: bold;">Harold Propper: <a style="font-weight: 100;">Saludos, estoy interesado en
-                        la propuesta</a></p>
-                <div id="button_row_message" class="button_row_message">
-                    <button>Marcar como leído</button>
-                    <button style="margin-left: 20px; margin-right: 20px;">Eliminar mensaje</button>
-                    <button>Ir a la conversación</button>
-                </div>
-            </div>
-            <div id="message" class="message_block">
-                <br>
-                <p style="font-weight: bold;">Firulai: <a style="font-weight: 100;">Hola, ¿me podrías explicar mejor en
-                        que consiste la propuesta?</a></p>
-                <div id="button_row_message" class="button_row_message">
-                    <button>Marcar como leído</button>
-                    <button style="margin-left: 20px; margin-right: 20px;">Eliminar mensaje</button>
-                    <button>Ir a la conversación</button>
-                </div>
-            </div>
-            <div id="message" class="message_block">
-                <br>
-                <p style="font-weight: bold;">roblox_player777: <a style="font-weight: 100;">Hola, ¿quieres ser mi
-                        amigo?</a></p>
-                <div id="button_row_message" class="button_row_message">
-                    <button>Marcar como leído</button>
-                    <button style="margin-left: 20px; margin-right: 20px;">Eliminar mensaje</button>
-                    <button>Ir a la conversación</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
+	<div id="page_block" class="w3-row-padding">
+		<div id= "left_panel" class="left_panel column w3-third w3-container">
+			<div id="control_panel" class="control_panel">
+				<div id="content" class="content">
+				<h2>Panel de control</h2>
+				<h3>Buscar usuario</h3>
+				<input type="text" style="border-radius: 10px;" size="40">
+				<input type="submit" style="border-radius: 10px;" value="Buscar">
+				</br>
+				<h3>Buscar propuesta</h3>
+				<input type="text" style="border-radius: 10px;" size="40">
+				<input type="submit" class="button" value="Buscar">
+				</div>
+			</div>
+		</div>
+		
+		<div id="messages" class="messages_panel column w3-third w3-container">
+				<div class="content">
+					<h2> Mensajes recientes</h2>
+					<button class="button">Ver todos los mensajes</button>
+					<div id="message1" class="dark_block">
+						<div class="content">
+							<p style="font-weight: bold;">Harold Propper: <a style="font-weight: 100;">Saludos, estoy interesado en
+                        	la propuesta.</a></p>
+							</br>
+							</br>
+							<div class="button_row">
+								<button class="button">Marcar como leído</button>
+                    			<button style="margin-left: 20px; margin-right: 20px;" class="button">Eliminar mensaje</button>
+                    			<button class="button">Ir a la conversación</button>
+							</div>
+						</div>	
+					</div>
+					<div id="message2" class="dark_block">
+						<div class="content">
+							<p style="font-weight: bold;">roblox_player777: <a style="font-weight: 100;">Hola, ¿quieres ser mi
+                       		amigo?</a></p>
+							</br>
+							</br>
+							<div class="button_row">
+								<button class="button">Marcar como leído</button>
+                    			<button style="margin-left: 20px; margin-right: 20px;" class="button">Eliminar mensaje</button>
+                    			<button class="button">Ir a la conversación</button>
+							</div>
+						</div>	
+					</div>
+					<div id="message3" class="dark_block">
+						<div class="content">
+							<p style="font-weight: bold;">Firulai: <a style="font-weight: 100;">Hola, ¿me podrías explicar mejor en
+                        	que consiste la propuesta?</a></p>
+							</br>
+							</br>
+							<div class="button_row">
+								<button class="button">Marcar como leído</button>
+                    			<button style="margin-left: 20px; margin-right: 20px;" class="button">Eliminar mensaje</button>
+                    			<button class="button">Ir a la conversación</button>
+							</div>
+						</div>	
+					</div>
+				</div>
+			</div>
+		
+		<div id="proposal" class="column w3-third w3-container">
+			<div id="proposal_block" class="proposal_block">
+				<div class="content">
+					<h1>Propuestas recientes</h1>
+					<button class="button">Ver todas las propuestas</button>
+						<div id="proposal1" class="dark_block">
+						<div class="content">
+							<p style="font-weight: bold;">Marca1: <a style="font-weight: 100;">Campaña en la que aquellos que
+                        	participéis debéis beber una Coca-Cola en alguno de
+                        	vuestros vídeos y hablar sobre el nuevo sabor que hemos lanzado</a></p>
+                			<div id="button_row_message" class="button_row_message">
+                    			<button class="button">Ir a la propuesta</button>
+                    			<button style="margin-left: 20px; margin-right: 20px;" class="button">Abandonar propuesta</button>
+                    			<button class="button">Contactar</button>
+                			</div>
+						</div>	
+					</div>
+					<div id="proposal2" class="dark_block">
+						<div class="content">
+							<p style="font-weight: bold;">Marca2: <a style="font-weight: 100;">Lorem ipsum dolor sit amet,
+                        	consectetur adipiscing elit,
+                        	sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                        	nostrud </a></p>
+                			<div id="button_row_message" class="button_row_message">
+                    			<button class="button">Ir a la propuesta</button>
+                    			<button class="button" style="margin-left: 20px; margin-right: 20px;">Abandonar propuesta</button>
+                    			<button class="button">Contactar</button>
+                			</div>
+						</div>	
+					</div>
+					<div id="proposal3" class="dark_block">
+						<div class="content">
+							<p style="font-weight: bold;">Marca3: <a style="font-weight: 100;">Lorem ipsum dolor sit amet,
+                        	consectetur adipiscing elit,
+                        	sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                        	nostrud</a></p>
+                			<div id="button_row_message" class="button_row_message">
+                    			<button class="button">Ir a la propuesta</button>
+                    			<button class="button" style="margin-left: 20px; margin-right: 20px;">Abandonar propuesta</button>
+                    			<button class="button">Contactar</button>
+                			</div>
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ 
     <!------------------------------Footer area--------------------------------->
-    <footer th:replace="fragments/navigation.html :: footer"></footer>
+	<div>
+	<footer th:replace="fragments/navigation.html :: footer"></footer>
+	</div>
 
 </body>
 
