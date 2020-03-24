@@ -36,10 +36,7 @@ a:link, a:visited, a:active{
 }
 
 .global_div{
-    padding: 10px;
-	display:flex;
-	justify-content: center;
-	align-items: center;
+	padding-bottom: 69px;
 }
 
 .right_panel{
