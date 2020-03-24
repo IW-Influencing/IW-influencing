@@ -118,5 +118,8 @@ public class RootController {
 	  List<Usuario> list = usuariosService.getAllUsuarios();
 	  model.addAttribute("usuarios", list);
 	  return "busquedaPerfil";
-  }			  
+  }			
+  /*
+  @PostMapping("/devuelveChatNegociacion")
+  public String postChat()*/
 }
