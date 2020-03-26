@@ -1,7 +1,6 @@
 .title{
 	height: 100px;
     background-color: #6ed1dd;
-	display: block;
 }
 
 .brand{
@@ -48,4 +47,13 @@ li a:hover:not(.active) {
 
 .active {
   background-color: #1695a5;
+}
+
+#modalBar{
+	display:flex;
+	align-items:center;
+}
+
+#volver{
+	margin-right:35%;
 }
