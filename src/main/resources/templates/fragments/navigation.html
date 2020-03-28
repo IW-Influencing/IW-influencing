@@ -3,6 +3,7 @@
 <head>
     <link rel="stylesheet" href="css/w3.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/fragments.css">
 </head>
 
 <body>
@@ -29,13 +30,14 @@
         </div>
     </div> 
 
-    <div th:fragment="modalBar (nombrePagina)">
-        <div class="title" style="padding-left: 0!important;">
-            <div class="w3-button">
-                <div class="w3-padding w3 w3-text-white"><i class="fa fa-arrow-left"></i> VOLVER</div>
-            </div>
-            <div style="color: white;font-size: larger;margin: auto;text-align: center;"><b><span th:text="${nombrePagina}">nombrePagina</span></b></div>
+    <!-- MODALBAR -->
+    <div th:fragment="modalBar (nombrePagina)"  id="modalBar" class="title" style="padding-left: 0!important;">
+        <div id="volver" class="w3-button">
+             <div class="w3-padding w3 w3-text-white"><i class="fa fa-arrow-left"></i> VOLVER</div>
         </div>
+        <div id="nombrePagina" style="color: white;font-size: larger;text-align: center;">
+        	 <b><span th:text="${nombrePagina}">nombrePagina</span></b>
+        </div>    
     </div> <!-- CAMBIAR, DEBE IR EN EL CSS -->
     
     <!-- TAGBAR -->

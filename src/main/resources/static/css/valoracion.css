@@ -5,6 +5,7 @@ header{
     text-align: center;
     top:0;
     padding:10px;
+    margin-bottom:30px;
 }
 
 .contenedor{
@@ -110,6 +111,17 @@ footer{
 }
 img{
 	border-radius: 20px;
+}
+
+#boton-editar{
+	border-radius:5px;
+	transition:0.5s;
+	padding:5px;
+}
+
+#boton-editar:hover{
+	background-color:#6ed1dd;
+	transform: scale(1.2);
 }
 
 

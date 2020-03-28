@@ -117,5 +117,8 @@ public class RootController {
     
 	  model.addAttribute("usuarios", users);
 	  return "busquedaPerfil";
-  }			  
+  }			
+  /*
+  @PostMapping("/devuelveChatNegociacion")
+  public String postChat()*/
 }
