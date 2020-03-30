@@ -22,7 +22,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 	@NamedQuery(name="Usuario.hasNombre",
 	query="SELECT COUNT(u) "
 			+ "FROM Usuario u "
-			+ "WHERE u.nombre = :nombre")
+			+ "WHERE u.nombre = :nombre"),
+	@NamedQuery(name="Usuario.getAllUsers",
+	query="SELECT u FROM Usuario u"),
+	
 })
 public class Usuario {
 
@@ -37,6 +40,8 @@ public class Usuario {
 	private String apellidos;
 	private int edad;
 	private String tags; // Se almacenan los tags
+	private String estado;
+	private Integer score;
 	
 	@OneToMany(targetEntity=Propuesta.class)
 	@JoinColumn(name="empresa_id")
@@ -135,6 +140,22 @@ public class Usuario {
 
 	public void setTags(String tags) {
 		this.tags = tags;
+	}
+
+	public Integer getScore(){
+		return score;
+	}
+
+	public void setScore(Integer score){
+		this.score = score;
+	}
+
+	public String getEstado(){
+		return estado;
+	}
+
+	public void setEstado(String estado){
+		this.estado = estado;
 	}
 
 	public String getPassword() {

@@ -45,8 +45,31 @@ li a:hover:not(.active) {
   background-color: #1695a5;
 }
 
+.pageName{
+  color: white !important;
+  font-size: larger;
+  margin: auto;
+  text-align: center;
+}
+
 .active {
   background-color: #1695a5;
+}
+
+.tagsList{
+  padding:1%; 
+  display:flex;
+}
+
+.tagFilterSelected{
+  border-radius:12px;
+  background-color: #6ed1dd!important;
+  min-width: fit-content;
+}
+
+.tagFilter{
+  border-radius:12px;
+  min-width: fit-content;
 }
 
 #modalBar{

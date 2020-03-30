@@ -18,18 +18,17 @@
         <center><!-- CAMBIAR, DEBE IR EN EL CSS -->
         <div class="horizontalBar">
             <ul class="ulFragment">
-                <li><a class="active" th:href="@{/perfiles}"><i class="fa fa-search" aria-hidden="true"></i> Búsqueda de
-                        Perfiles</a></li>
-                <li><a href="busquedaPropuesta"><i class="fa fa-suitcase" aria-hidden="true"></i> Búsqueda de
-                    Propuestas</a></li>
-                <li><a href="negociacion"><i class="fa fa-comment-o" aria-hidden="true"></i> Chat de Negociación</a>
+                <li><a th:href="@{/perfiles}"><i class="fa fa-search" aria-hidden="true"></i> Búsqueda de
+                        perfiles</a></li>
+                <li><a th:href="@{/negociacion}"><i class="fa fa-comment-o" aria-hidden="true"></i> Chat de Negociación</a>
                 </li>
-                <li><a href="contrataciones"><i class="fa fa-file-text" aria-hidden="true"></i> Contrataciones</a>
+                <li><a class="${nombrePagina}=='BUSQUEDA DE PROPUESTAS'?'active':''" th:href="@{/busquedaPropuesta}"><i class="fa fa-suitcase" aria-hidden="true"></i> Búsqueda de
+                        Propuestas</a></li>
+                <li><a th:href="@{/contrataciones}"><i class="fa fa-file-text" aria-hidden="true"></i> Contrataciones</a>
                 </li>
             </ul>
         </div>
-        </center>
-    </div> <!-- CAMBIAR, DEBE IR EN EL CSS -->
+    </div> 
 
     <!-- MODALBAR -->
     <div th:fragment="modalBar (nombrePagina)"  id="modalBar" class="title" style="padding-left: 0!important;">
@@ -43,23 +42,18 @@
     
     <!-- TAGBAR -->
     <div th:fragment="tagBar">
-        <div class="w3-section w3-bottombar wFilter3-padding-16" style="padding:1%; display:flex;">
+        <div class="w3-section w3-bottombar wFilter3-padding-16 tagsList">
             <span class="w3-margin-right">Trending topics:</span>
-            <button class="w3-button w3-blue"
-                style="border-radius:12px;background-color: #6ed1dd!important;min-width: fit-content;">ALL</button>
-            <button class="w3-button w3-white" style="border-radius:12px;min-width: fit-content;"><i
-                    class="fa fa-diamond w3-margin-right"></i>Moda</button>
-            <button class="w3-button w3-white w3-hide-small" style="border-radius:12px;min-width: fit-content;"><i
-                    class="fa fa-gamepad w3-margin-right"></i>Videojuegos</button>
-            <button class="w3-button w3-white w3-hide-small" style="border-radius:12px;min-width: fit-content;"><i
-                    class="fa fa-globe w3-margin-right"></i>Viajes</button>
-            <button class="w3-button w3-white w3-hide-small" style="border-radius:12px;min-width: fit-content;"><i
-                    class="fa fa-leaf w3-margin-right"></i>Naturaleza</button>
-            <button class="w3-button w3-white w3-hide-small" style="border-radius:12px;min-width: fit-content;"><i
-                    class="fa fa-music w3-margin-right"></i>Música</button>
+            <button class="w3-button w3-blue tagFilterSelected">ALL</button>
+            <button class="w3-button w3-white tagFilter"><i class="fa fa-diamond w3-margin-right"></i>Moda</button>
+            <button class="w3-button w3-white w3-hide-small tagFilter"><i class="fa fa-gamepad w3-margin-right"></i>Videojuegos</button>
+            <button class="w3-button w3-white w3-hide-small tagFilter"><i class="fa fa-globe w3-margin-right"></i>Viajes</button>
+            <button class="w3-button w3-white w3-hide-small tagFilter"><i class="fa fa-leaf w3-margin-right"></i>Naturaleza</button>
+            <button class="w3-button w3-white w3-hide-small tagFilter"><i class="fa fa-music w3-margin-right"></i>Música</button>
             <input type="text" placeholder="Search..">
         </div>
-    </div> <!-- CAMBIAR, DEBE IR EN EL CSS -->
+    </div> 
+</head>
 
     <!-- FOOTER -->
     <footer class="w3-container w3-padding-32 w3-dark-grey" th:fragment="footer">
