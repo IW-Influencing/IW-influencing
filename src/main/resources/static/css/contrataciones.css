@@ -118,10 +118,10 @@ input[type=text] {
 
 .btn{
 	text-align: center;
-    background-color: #77d4df;
+    background-color: #6ed1dd;
     font-size: large;
     height: 35px;
-    width: 10%;
+    width: 12%;
     font-family: inherit;
     border-radius: 10px;
     margin: auto;
@@ -130,33 +130,4 @@ input[type=text] {
 .imagen {
 	width: 100%;
 	margin-bottom:1%
-}
-
-.header{
-	height: 100px;
-    background-color: #77d4df;
-	display: flex;
-}
-
-.title{
-	color: white;
-    font-size: larger;
-    width: 100%;
-    text-align: center;
-    position: absolute;
-    height: 100px;
-    font-weight: bolder;
-    font-size: x-large;
-    margin-top: 35px;
-}
-
-.brand{
-    
-    font-family: Aclonica;
-    width: 20%;
-    margin-left: 2%;
-    text-align: left;
-    font-size: 30px;
-    margin-top: auto;
-    margin-bottom: auto;
 }

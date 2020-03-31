@@ -114,7 +114,6 @@ public class RootController {
   public String busquedaPerfil(HttpSession session,Model model) {
 	  
     List<Usuario> users = entityManager.createNamedQuery("Usuario.getAllUsers", Usuario.class).getResultList();
-    
 	  model.addAttribute("usuarios", users);
 	  return "busquedaPerfil";
   }			

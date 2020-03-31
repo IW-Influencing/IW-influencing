@@ -27,7 +27,7 @@ INSERT INTO usuario(id,activo,nombre,password,roles,apellidos,edad,tags,estado,s
 	22,
 	'fiesta',
 	'Estado del usuario',
-	3
+	4
 );
 
 INSERT INTO usuario(id,activo,nombre,password,roles,apellidos,edad,tags,estado,score) VALUES (
@@ -59,6 +59,23 @@ INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id) VALUES (
 	100,
 	'Ciudad',
 	2
+);
+
+INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id) VALUES (
+	2,
+	'Realizar publicidad en metro 2',
+	'Metropubli',
+	200,
+	'Ciudad',
+	2
+);
+INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id) VALUES (
+	3,
+	'Publicitar festival',
+	'Festipubli',
+	500,
+	'Musica',
+	4
 );
 
 
