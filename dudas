@@ -1,0 +1,3 @@
+Crear otra tabla para mensajes externos al chat/añadir atributo boolean chat para diferenciar cuales son chat y cuales son privados.
+Crear tabla para almacenar ultimas busquedas de usuario?
+Crear tabla Eventos para almacenar cuando se crea/modifica usuario/propuesta al administrador
