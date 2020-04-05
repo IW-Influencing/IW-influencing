@@ -86,3 +86,19 @@ INSERT INTO candidatura(id,aceptada,estado,candidato_id,propuesta_id) VALUES (
 	1,
 	1
 );
+
+INSERT INTO candidatura(id,aceptada,estado,candidato_id,propuesta_id) VALUES (
+	2,
+	false,
+	'EN_CURSO',
+	2,
+	3
+);
+
+INSERT INTO candidatura(id,aceptada,estado,candidato_id,propuesta_id) VALUES (
+	3,
+	true,
+	'FINALIZADA',
+	1,
+	3
+);

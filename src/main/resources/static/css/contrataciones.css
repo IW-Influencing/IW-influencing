@@ -63,24 +63,13 @@ p {
 }
 
 .fecha{
-	width: 100%;
+	width: fit-content;
 	box-shadow: 0 1px 3px -2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     border-radius: 20px;  
     background-color: #f9f9f9c4;
     border: solid 1pt lightgrey;
 	margin-bottom: 6%;
 	min-width: max-content;
-}
-
-.info{
-    padding: 2%;
-    width: 30%;
-    text-align: center;
-    height: fit-content;
-    margin-bottom: auto;
-    margin-top: auto;
-	min-width: fit-content;
-
 }
 
 w3-padding-32 {
@@ -91,16 +80,34 @@ w3-padding-32 {
 }
 
 .firstCol{
-	width: 30%;
-	margin: auto;
+  width: 25%;
+  max-width: 25%;
 }
 
-.description{
-	margin: 2%;
+.info{ 
+  padding: 2%;
+  width: 30%;
+  max-width: 30%;
+  text-align: center;
+  height: fit-content;
+  margin-bottom: auto;
+  margin-top: auto;
+  min-width: fit-content;
 }
 
 .thirdCol{
-	margin: auto;
+    padding: 2%;
+    width: 45%;
+}
+
+.description{
+  margin: 2%;
+  min-height: 65%;
+}
+
+.descripText{
+  line-height:25px;
+  text-align: justify;
 }
 
 input[type=text] {
@@ -121,10 +128,15 @@ input[type=text] {
     background-color: #6ed1dd;
     font-size: large;
     height: 35px;
-    width: 12%;
+    width: fit-content;
     font-family: inherit;
     border-radius: 10px;
     margin: auto;
+}
+
+.subtitle{
+    font-family: 'ABeeZee';
+    margin: 2%;
 }
 
 .imagen {
