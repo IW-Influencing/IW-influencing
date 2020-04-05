@@ -8,11 +8,12 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;	  
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import es.ucm.fdi.iw.model.Candidatura;
 import es.ucm.fdi.iw.model.Propuesta;
 import es.ucm.fdi.iw.model.Usuario;
 import es.ucm.fdi.iw.services.UsuariosService;					   
@@ -57,8 +58,8 @@ public class RootController {
 	  //Obtener la lista de propuestas
 	  //long idUsuario = (int) session.getAttribute("idUsuario");
 	  long idUsuario = 1;
-	  List<Propuesta> listaPropuestas = entityManager.createNamedQuery("Candidatura.byCandidato").setParameter("idCandidato", idUsuario).getResultList();
-	  model.addAttribute("propuestas", listaPropuestas);
+	  //List<Propuesta> listaPropuestas = entityManager.createNamedQuery("Candidatura.byCandidato").setParameter("idCandidato", idUsuario).getResultList();
+	  //model.addAttribute("propuestas", listaPropuestas);
 	   
 	  
     return "negociacion";
@@ -94,8 +95,13 @@ public class RootController {
   }
 
   @GetMapping("/contrataciones")
-  public String contrataciones(HttpSession session) {
+  public String contrataciones(Model model, HttpSession session) {
+    List<Candidatura> candidaturasEnVigor = entityManager.createNamedQuery("Candidatura.getAllActive", Candidatura.class).getResultList();
+    List<Candidatura> candidaturasPendientes = entityManager.createNamedQuery("Candidatura.getPendingCandidatures", Candidatura.class).getResultList();
+    model.addAttribute("candidaturasEnVigor", candidaturasEnVigor);
+    model.addAttribute("candidaturasPendientes", candidaturasPendientes);
     return "contrataciones";
+    
   }
 
 
@@ -114,7 +120,6 @@ public class RootController {
   public String busquedaPerfil(HttpSession session,Model model) {
 	  
     List<Usuario> users = entityManager.createNamedQuery("Usuario.getAllUsers", Usuario.class).getResultList();
-    
 	  model.addAttribute("usuarios", users);
 	  return "busquedaPerfil";
   }			

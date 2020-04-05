@@ -63,24 +63,13 @@ p {
 }
 
 .fecha{
-	width: 100%;
+	width: fit-content;
 	box-shadow: 0 1px 3px -2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     border-radius: 20px;  
     background-color: #f9f9f9c4;
     border: solid 1pt lightgrey;
 	margin-bottom: 6%;
 	min-width: max-content;
-}
-
-.info{
-    padding: 2%;
-    width: 30%;
-    text-align: center;
-    height: fit-content;
-    margin-bottom: auto;
-    margin-top: auto;
-	min-width: fit-content;
-
 }
 
 w3-padding-32 {
@@ -91,16 +80,34 @@ w3-padding-32 {
 }
 
 .firstCol{
-	width: 30%;
-	margin: auto;
+  width: 25%;
+  max-width: 25%;
 }
 
-.description{
-	margin: 2%;
+.info{ 
+  padding: 2%;
+  width: 30%;
+  max-width: 30%;
+  text-align: center;
+  height: fit-content;
+  margin-bottom: auto;
+  margin-top: auto;
+  min-width: fit-content;
 }
 
 .thirdCol{
-	margin: auto;
+    padding: 2%;
+    width: 45%;
+}
+
+.description{
+  margin: 2%;
+  min-height: 65%;
+}
+
+.descripText{
+  line-height:25px;
+  text-align: justify;
 }
 
 input[type=text] {
@@ -118,45 +125,21 @@ input[type=text] {
 
 .btn{
 	text-align: center;
-    background-color: #77d4df;
+    background-color: #6ed1dd;
     font-size: large;
     height: 35px;
-    width: 10%;
+    width: fit-content;
     font-family: inherit;
     border-radius: 10px;
     margin: auto;
 }
 
+.subtitle{
+    font-family: 'ABeeZee';
+    margin: 2%;
+}
+
 .imagen {
 	width: 100%;
 	margin-bottom:1%
-}
-
-.header{
-	height: 100px;
-    background-color: #77d4df;
-	display: flex;
-}
-
-.title{
-	color: white;
-    font-size: larger;
-    width: 100%;
-    text-align: center;
-    position: absolute;
-    height: 100px;
-    font-weight: bolder;
-    font-size: x-large;
-    margin-top: 35px;
-}
-
-.brand{
-    
-    font-family: Aclonica;
-    width: 20%;
-    margin-left: 2%;
-    text-align: left;
-    font-size: 30px;
-    margin-top: auto;
-    margin-bottom: auto;
 }
