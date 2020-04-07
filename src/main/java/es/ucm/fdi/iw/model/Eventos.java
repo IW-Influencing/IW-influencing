@@ -1,5 +1,7 @@
 package es.ucm.fdi.iw.model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,12 +9,17 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Mensaje {
+public class Eventos {
 
 	private long id;
-	private String mensaje;
+	private String descripcion;
 	private Usuario emisor;
 	private Usuario receptor;
+	public enum Tipo {CHAT, PRIVADO, ADMINISTRACION, BUSQUEDA};
+	private String tipo;
+	private LocalDateTime fecha;
+	private boolean leido;
+	
 
 
 	//Incluir fecha
@@ -30,12 +37,12 @@ public class Mensaje {
 		this.id = id;
 	}
 
-	public String getMensaje() {
-		return mensaje;
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setMensaje(String mensaje) {
-		this.mensaje = mensaje;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	@ManyToOne(targetEntity = Usuario.class)
@@ -55,5 +62,37 @@ public class Mensaje {
 	public void setReceptor(Usuario receptor) {
 		this.receptor = receptor;
 	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	
+	public void setTipo(Tipo tipo) {
+		this.tipo = tipo.toString();
+	}
+
+	public LocalDateTime getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(LocalDateTime fecha) {
+		this.fecha = fecha;
+	}
+
+	public boolean isLeido() {
+		return leido;
+	}
+
+	public void setLeido(boolean leido) {
+		this.leido = leido;
+	}
+	
+	
+	
+	
 
 }

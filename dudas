@@ -6,8 +6,8 @@ Crear otra tabla para mensajes externos al chat/añadir atributo boolean chat pa
 	query="SELECT u FROM User u "
 			+ "WHERE u.username = :username AND u.enabled = 'P'"
 
-            - búsqueda mismo receptor que emisor
-            - evento-admin
+            - búsqueda (mismo receptor que emisor)
+            - evento-admin: notificaciones para administrador (emisor quien la causa, receptor el admin)
             - chat
             - privado
 
