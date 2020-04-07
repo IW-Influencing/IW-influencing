@@ -1,23 +1,16 @@
-Crear otra tabla para mensajes externos al chat/añadir atributo boolean chat para diferenciar cuales son chat y cuales son privados.
-
+Tabla Eventos
     * recomiendo usar un enum "Tipo", que se puede incluir fćilmente en consultas preparadas
     @NamedQueries({
 	@NamedQuery(name="User.byUsername",
 	query="SELECT u FROM User u "
-			+ "WHERE u.username = :username AND u.enabled = 'P'"
+			+ "WHERE u.username = :username AND u.tipo = 'PRIVADO'"
 
             - búsqueda (mismo receptor que emisor)
             - evento-admin: notificaciones para administrador (emisor quien la causa, receptor el admin)
             - chat
             - privado
-
-Crear tabla para almacenar ultimas busquedas de usuario? Si
     
 
-Crear tabla Eventos para almacenar cuando se crea/modifica usuario/propuesta al administrador
-    * si tienes tipos de mensaje, notificaciones al admin de forma
-        "from" - quien la causa
-        "to" - admin
 
 
 Imágenes: mejor no tener campos "imagen" en la BD, porque si tienes una imagen para usuario 5, la buscas vía
