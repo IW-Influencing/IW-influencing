@@ -15,14 +15,13 @@
             <div style="color: white;font-size: larger;margin: auto;text-align: center;"><b><span th:text="${nombrePagina}">nombrePagina</span></b></div>
         </div>
         <br>
-        <center><!-- CAMBIAR, DEBE IR EN EL CSS -->
         <div class="horizontalBar">
             <ul class="ulFragment">
                 <li><a th:href="@{/perfiles}"><i class="fa fa-search" aria-hidden="true"></i> Búsqueda de
                         perfiles</a></li>
                 <li><a th:href="@{/negociacion}"><i class="fa fa-comment-o" aria-hidden="true"></i> Chat de Negociación</a>
                 </li>
-                <li><a class="${nombrePagina}=='BUSQUEDA DE PROPUESTAS'?'active':''" th:href="@{/busquedaPropuesta}"><i class="fa fa-suitcase" aria-hidden="true"></i> Búsqueda de
+                <li><a th:class="${nombrePagina}=='BUSQUEDA DE PROPUESTAS'?'active':''" th:href="@{/busquedaPropuesta}"><i class="fa fa-suitcase" aria-hidden="true"></i> Búsqueda de
                         Propuestas</a></li>
                 <li><a th:href="@{/contrataciones}"><i class="fa fa-file-text" aria-hidden="true"></i> Contrataciones</a>
                 </li>

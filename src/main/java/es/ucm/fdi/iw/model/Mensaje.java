@@ -17,7 +17,8 @@ public class Mensaje {
 
 	//Incluir fecha
 
-
+	// puede ser interesante ver cómo funcionan en la plantilla 
+	// https://github.com/manuel-freire/iw1920/blob/master/plantilla/src/main/java/es/ucm/fdi/iw/model/Message.java
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

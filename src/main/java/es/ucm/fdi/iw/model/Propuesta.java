@@ -1,6 +1,7 @@
 package es.ucm.fdi.iw.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -33,8 +34,8 @@ public class Propuesta {
 	private String tags;
 	private String descripcion;
 	private BigDecimal sueldo;
-	private String fechaInicio;
-	private String fechaFin;
+	private LocalDateTime fechaInicio;
+	private LocalDateTime fechaFin;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
