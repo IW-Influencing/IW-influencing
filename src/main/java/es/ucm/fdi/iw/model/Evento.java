@@ -7,9 +7,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+
+@NamedQueries({
+	@NamedQuery(name="Eventos.adminEventsByDate", 
+			query="SELECT e FROM Evento e WHERE e.receptor.id = :idUsuario AND e.tipo = 'ADMINISTRACION' ORDER BY e.fecha"),
+
+	@NamedQuery(name="Eventos.searchesByDate",
+		query="SELECT e FROM Evento e WHERE e.receptor.id = :idUsuario AND e.tipo = 'BUSQUEDA' ORDER BY e.fecha"),
+})
 
 @Entity
-public class Eventos {
+public class Evento {
 
 	private long id;
 	private String descripcion;

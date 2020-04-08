@@ -13,6 +13,11 @@ import javax.persistence.NamedQuery;
 	@NamedQuery(name="Candidatura.byCandidato", 
 	query="SELECT c.propuesta FROM Candidatura c WHERE c.candidato.id = :idCandidato"),
 
+	
+	@NamedQuery(name="Candidatura.activeByCandidato", 
+	query="SELECT c.propuesta FROM Candidatura c WHERE c.candidato.id = :idCandidato AND c.estado = 'EN_CURSO'"),
+
+	
 	@NamedQuery(name="Candidatura.getAllActive",
 	query="SELECT c FROM Candidatura c WHERE c.aceptada = true AND c.estado = 'EN_CURSO'"),
 

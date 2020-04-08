@@ -25,7 +25,7 @@
                 </div>
                 <div class="busqueda">
                     <form>
-                        <input type="text" class="textoBusqueda" placeholder="    Nombre de usuario/email">
+                        <input type="text" class="textoBusqueda" placeholder="  Nombre de usuario">
                         <input type="submit" value="Buscar" class="btnEnviar">
                     </form>
                 </div>
@@ -34,13 +34,8 @@
 					<div class="dropdown-content">
 						<div class="dropdown-element">							  
 							<p>Ultimas notificaciones</p>
-							<div class="dropdown-notificaciones">
-							<p>Notificacion</p>
-							<p>Notificacion</p>
-							<p>Notificacion</p>
-							<p>Notificacion</p>
-							<p>Notificacion</p>
-
+							<div class="dropdown-notificaciones" th:each="notificacion: ${notificaciones}">
+								<p th:text="${notificacion.descripcion}">Notificacion</p>
 							</div>
 							<a href="" class="dropdown-boton"> Ver todas</a>
 						</div>
@@ -54,86 +49,18 @@
                 
                 <div class="recientes">
                     <h3>Búsquedas recientes</h3>
-                    <ul class="profilesList">
+                    <ul class="profilesList" th:each="perfil:${busquedas}">
                         <li>
                             <div class="usuario">
                                 <div class="imagenPerfil">
                                     <img width="50" height="50" src="img/perfilIcon.svg">
                                 </div>
                                 <div class="opcionesPerfil">
-                                    <p> Nombre de perfil - Tipo perfil (no verificado)</p>
+                                    <p th:text="${perfil.nombre} - {$perfil.roles} ({$perfil.estado})"> Nombre de perfil - Tipo perfil (no verificado)</p>
                                     <div class="botonesAdmin">
                                         <a href="" class="boton">Editar usuario</a>
                                         <a href="" class="boton">Bloquear usuario</a>
                                         <a href="" class="boton">Verificar usuario</a>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="usuario">
-                                <div class="imagenPerfil">
-                                    <img width="50" height="50" src="img/perfilIcon.svg">
-                                </div>
-                                <div class="opcionesPerfil">
-                                    <p> Nombre de perfil - Tipo perfil (no verificado)</p>
-                                    <div class="botonesAdmin">
-                                        <a href="" class="boton">Editar usuario</a>
-                                        <a href="" class="boton">Bloquear usuario</a>
-                                        <a href="" class="boton">Verificar usuario</a>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="usuario">
-                                <div class="imagenPerfil">
-                                    <img width="50" height="50" src="img/perfilIcon.svg">
-
-                                </div>
-                                <div class="opcionesPerfil">
-                                    <p> Nombre de perfil - Tipo perfil (no verificado)</p>
-                                    <div class="botonesAdmin">
-                                        <a href="" class="boton">Editar usuario</a>
-                                        <a href="" class="boton">Bloquear usuario</a>
-                                        <a href="" class="boton">Verificar usuario</a>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="usuario">
-                                <div class="imagenPerfil">
-                                    <img width="50" height="50" src="img/perfilIcon.svg">
-
-                                </div>
-                                <div class="opcionesPerfil">
-                                    <p> Nombre de perfil - Tipo perfil (no verificado)</p>
-                                    <div class="botonesAdmin">
-                                        <a href="" class="boton">Editar usuario</a>
-                                        <a href="" class="boton">Bloquear usuario</a>
-                                        <a href="" class="boton">Verificar usuario</a>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="usuario">
-                                <div class="imagenPerfil">
-                                    <img width="50" height="50" src="img/perfilIcon.svg">
-
-                                </div>
-                                <div class="opcionesPerfil">
-                                    <p> Nombre de perfil - Tipo perfil (no verificado)</p>
-                                    <div class="botonesAdmin">
-                                        <a href="" class="boton">Editar usuario</a>
-                                        <a href="" class="boton">Bloquear usuario</a>
-                                        <a href="" class="boton">Verificar usuario</a>
-
                                     </div>
                                 </div>
                             </div>

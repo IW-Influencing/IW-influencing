@@ -1,5 +1,6 @@
 package es.ucm.fdi.iw.control;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import es.ucm.fdi.iw.model.Candidatura;
+import es.ucm.fdi.iw.model.Evento;
 import es.ucm.fdi.iw.model.Propuesta;
 import es.ucm.fdi.iw.model.Usuario;
 import es.ucm.fdi.iw.services.UsuariosService;					   
@@ -25,6 +27,8 @@ import es.ucm.fdi.iw.services.UsuariosService;
 @Controller
 public class RootController {
 
+  private final int LIMITE_NOTIFICACIONES = 5;
+	
   private static final Logger log = LogManager.getLogger(RootController.class);
   @Autowired
   UsuariosService usuariosService;	
@@ -56,19 +60,28 @@ public class RootController {
   public String negociacion(Model model, HttpSession session) {
 	  
 	  //Obtener la lista de propuestas
-	  //long idUsuario = (int) session.getAttribute("idUsuario");
-	  long idUsuario = 1;
-	  //List<Propuesta> listaPropuestas = entityManager.createNamedQuery("Candidatura.byCandidato").setParameter("idCandidato", idUsuario).getResultList();
-	  //model.addAttribute("propuestas", listaPropuestas);
-	   
+	  long idUsuario = ((Usuario)session.getAttribute("u")).getId();
+	  List<Propuesta> listaPropuestas = entityManager.createNamedQuery("Candidatura.activeByCandidato").setParameter("idCandidato", idUsuario).getResultList();
+	  model.addAttribute("propuestas", listaPropuestas);
 	  
     return "negociacion";
     
   }
 
   @GetMapping("/administracion")
-  public String administracion(HttpSession session) {
-    return "administracion";
+  public String administracion(Model model, HttpSession session) {
+	  long idUsuario = ((Usuario)session.getAttribute("u")).getId();
+	  List<Evento> listaNotificaciones = entityManager.createNamedQuery("Evento.adminEventsByDate").setParameter("idUsuario", idUsuario).setMaxResults(LIMITE_NOTIFICACIONES).getResultList();
+	  model.addAttribute("notificaciones", listaNotificaciones);
+	  List<Evento> ultimasBusquedas = entityManager.createNamedQuery("Evento.searchesByDate").setParameter("idUsuario", idUsuario).setMaxResults(LIMITE_NOTIFICACIONES).getResultList();
+	  List<Usuario> usuariosBuscados = new ArrayList<>();
+	  for (Evento e : ultimasBusquedas) {
+		  for (Usuario u : ((List<Usuario>)entityManager.createNamedQuery("Usuario.byNombreUsuario").setParameter("nombre", e.getDescripcion()).getResultList())) {
+			  usuariosBuscados.add(u);
+		  }
+	  }
+	  model.addAttribute("busquedas", usuariosBuscados);
+	  return "administracion";
   }
 
   @GetMapping("/perfil")
