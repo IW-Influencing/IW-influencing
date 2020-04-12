@@ -11,10 +11,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 @NamedQueries({
-	@NamedQuery(name="Eventos.adminEventsByDate", 
+	@NamedQuery(name="Evento.adminEventsByDate", 
 			query="SELECT e FROM Evento e WHERE e.receptor.id = :idUsuario AND e.tipo = 'ADMINISTRACION' ORDER BY e.fecha"),
 
-	@NamedQuery(name="Eventos.searchesByDate",
+	@NamedQuery(name="Evento.searchesByDate",
 		query="SELECT e FROM Evento e WHERE e.receptor.id = :idUsuario AND e.tipo = 'BUSQUEDA' ORDER BY e.fecha"),
 })
 
