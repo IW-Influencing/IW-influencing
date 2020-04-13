@@ -24,6 +24,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 	@NamedQuery(name="Usuario.byNombreCuenta",
 	query="SELECT u FROM Usuario u "
 			+ "WHERE u.nombreCuenta = :nombreCuenta AND u.activo = 1"),
+	
+	
+	
 	@NamedQuery(name="Usuario.hasNombre",
 	query="SELECT COUNT(u) "
 			+ "FROM Usuario u "

@@ -5,8 +5,8 @@
 
 -- Usuario de ejemplo con nombre = a y contraseña = aa  
 
-INSERT INTO usuario(id,activo,nombre,password,roles,apellidos,edad,tags,estado,score) VALUES (
-	1, 1, 'a', 
+INSERT INTO usuario(id,activo,nombre_cuenta,nombre,password,roles,apellidos,edad,tags,estado,score) VALUES (
+	1, 1, 'a','a',
 	'{bcrypt}$2a$10$xLFtBIXGtYvAbRqM95JhcOaG23fHRpDoZIJrsF2cCff9xEHTTdK1u',
 	'ADMIN',
 	'Abundio Ejemplez',
@@ -19,8 +19,8 @@ INSERT INTO usuario(id,activo,nombre,password,roles,apellidos,edad,tags,estado,s
 -- Otro usuario de ejemplo con username = b y contraseña = aa  
 
 
-INSERT INTO usuario(id,activo,nombre,password,roles,apellidos,edad,tags,estado,score) VALUES (
-	2, 1, 'b', 
+INSERT INTO usuario(id,activo,nombre_cuenta,nombre,password,roles,apellidos,edad,tags,estado,score) VALUES (
+	2, 1, 'b','b',
 	'{bcrypt}$2a$10$xLFtBIXGtYvAbRqM95JhcOaG23fHRpDoZIJrsF2cCff9xEHTTdK1u',
 	'INFLUENCER',
 	'Berta Muestrez',
@@ -30,8 +30,8 @@ INSERT INTO usuario(id,activo,nombre,password,roles,apellidos,edad,tags,estado,s
 	4
 );
 
-INSERT INTO usuario(id,activo,nombre,password,roles,apellidos,edad,tags,estado,score) VALUES (
-	3, 1, 'c', 
+INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad,tags,estado,score) VALUES (
+	3, 1, 'c', 'c', 
 	'{bcrypt}$2a$10$xLFtBIXGtYvAbRqM95JhcOaG23fHRpDoZIJrsF2cCff9xEHTTdK1u',
 	'INFLUENCER',
 	'Sanchez Garcia',
@@ -41,8 +41,8 @@ INSERT INTO usuario(id,activo,nombre,password,roles,apellidos,edad,tags,estado,s
 	4
 );
 
-INSERT INTO usuario(id,activo,nombre,password,roles,apellidos,edad,tags,estado,score) VALUES (
-	4, 1, 'd', 
+INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad,tags,estado,score) VALUES (
+	4, 1, 'd', 'd',
 	'{bcrypt}$2a$10$xLFtBIXGtYvAbRqM95JhcOaG23fHRpDoZIJrsF2cCff9xEHTTdK1u',
 	'EMPRESA',
 	'Martin Gimeno',
