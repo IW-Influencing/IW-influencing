@@ -1,3 +1,11 @@
+Meter propuesta en clase Evento para enlazar los chat con la propuesta, sino como se saca.
+
+
+
+
+
+
+*****************************************************************************************************************************************************************************
 Tabla Eventos
     * recomiendo usar un enum "Tipo", que se puede incluir fćilmente en consultas preparadas
     @NamedQueries({

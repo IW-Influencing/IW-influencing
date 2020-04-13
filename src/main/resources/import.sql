@@ -102,3 +102,11 @@ INSERT INTO candidatura(id,aceptada,estado,candidato_id,propuesta_id) VALUES (
 	1,
 	3
 );
+
+INSERT INTO candidatura(id,aceptada,estado,candidato_id,propuesta_id) VALUES (
+	4,
+	false,
+	'EN_CURSO',
+	2,
+	2
+);

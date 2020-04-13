@@ -16,8 +16,8 @@
     <main>
         <div class="contenido">
 
-            <div class="lista" th:each="propuesta: ${propuestas}">
-                <div class="propuesta">
+            <div class="lista" >
+                <div class="propuesta" id="th:text="${propuesta.id}"" th:each="propuesta: ${propuestas}" onclick="cargaChat()">
                     <a href="">
                         <img width="50" height="50" src="img/perfilIcon.svg">
                     </a>
@@ -25,7 +25,7 @@
                 </div>
             </div>
 
-            <div class="chat">
+            <div class="chat" id="chat">
                 <div class="barraChat">
                     <div class="informacionChat">
                         <a href="" class="perfil">Perfil de la empresa/influencer</a>
@@ -35,7 +35,7 @@
                         <a href="" class="boton">Enviar Ultimatum</a>
                     </div>
                 </div>
-				<tableclass="datatable" id="datatable">
+				<table class="datatable" id="datatable">
 				</table>
                 <p class="mensaje recibido">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit,
                     vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt

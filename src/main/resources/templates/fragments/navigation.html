@@ -31,8 +31,8 @@
 
     <!-- MODALBAR -->
     <div th:fragment="modalBar (nombrePagina)"  id="modalBar" class="title" style="padding-left: 0!important;">
-        <div id="volver" class="w3-button">
-             <div class="w3-padding w3 w3-text-white"><i class="fa fa-arrow-left"></i> VOLVER</div>
+        <div id="volver" class="w3-button" onclick="document.getElementById('id01').style.display='none'">
+             <div class="w3-padding w3  w3-text-white"><i class="fa fa-arrow-left"  ></i> VOLVER</div>
         </div>
         <div id="nombrePagina" style="color: white;font-size: larger;text-align: center;">
         	 <b><span th:text="${nombrePagina}">nombrePagina</span></b>

@@ -25,7 +25,8 @@ public class Evento {
 	private String descripcion;
 	private Usuario emisor;
 	private Usuario receptor;
-	public enum Tipo {CHAT, PRIVADO, ADMINISTRACION, BUSQUEDA};
+	//private Propuesta propuesta;
+	public enum Tipo {CHAT, PRIVADO, ADMINISTRACION, BUSQUEDA, NOTIFICACION};
 	private String tipo;
 	private LocalDateTime fecha;
 	private boolean leido;
