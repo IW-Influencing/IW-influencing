@@ -4,7 +4,6 @@
 <head>
     <th:block th:replace="fragments/head.html :: header"/>
     <link href="css/administracion.css" rel="stylesheet"/>
-
 </head>
 
 <body class="general">
@@ -28,6 +27,7 @@
                     <form>
                         <input type="text" class="textoBusqueda" placeholder="  Nombre de usuario">
                         <input type="submit" value="Buscar" class="btnEnviar">
+                        <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Open Modal</button>
                     </form>
                 </div>
 				<div class="dropdown">
@@ -38,7 +38,7 @@
 							<div class="dropdown-notificaciones" th:each="notificacion: ${notificaciones}">
 								<p th:text="${notificacion.descripcion}">Notificacion</p>
 							</div>
-							<a href="" class="dropdown-boton"> Ver todas</a>
+							<a href="" onclick="document.getElementById('id01').style.display='block'" class="dropdown-boton"> Ver todas</a>
 						</div>
 						<div class="dropdown-element">
 							<a href="" class="dropdown-boton"> Cerrar sesion</a>
@@ -71,6 +71,22 @@
             </div>
         </div>
 
+        <div id="id01" class="w3-modal">
+            <div class="w3-modal-content">
+              <header class="w3-container w3-teal"> 
+                <span onclick="document.getElementById('id01').style.display='none'" 
+                class="w3-button w3-display-topright">&times;</span>
+                <h2>Modal Header</h2>
+              </header>
+              <div class="w3-container">
+                <p>Some text..</p>
+                <p>Some text..</p>
+              </div>
+              <footer class="w3-container w3-teal">
+                <p>Modal Footer</p>
+              </footer>
+            </div>
+        </div>
     </main>
     <!-- Footer -->
 	<footer th:replace="fragments/navigation.html :: footer"></footer>
