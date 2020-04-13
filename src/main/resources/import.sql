@@ -110,3 +110,15 @@ INSERT INTO candidatura(id,aceptada,estado,candidato_id,propuesta_id) VALUES (
 	2,
 	2
 );
+
+INSERT INTO evento(id, descripcion, tipo, fecha, leido, emisor_id, receptor_id) VALUES(
+	1, 'se ha registrado un usuario', 'ADMINISTRACION','2017-07-23', false,
+	1,
+	2
+);
+
+INSERT INTO evento(id, descripcion, tipo, fecha, leido, emisor_id, receptor_id) VALUES(
+	2, 'se ha registrado otro usuario', 'ADMINISTRACION','2017-07-23', false,
+	1,
+	2
+);
