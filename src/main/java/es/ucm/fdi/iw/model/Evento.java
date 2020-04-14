@@ -25,8 +25,8 @@ public class Evento {
 	private String descripcion;
 	private Usuario emisor;
 	private Usuario receptor;
-	//private Propuesta propuesta;
 	public enum Tipo {CHAT, PRIVADO, ADMINISTRACION, BUSQUEDA, NOTIFICACION};
+	private Propuesta propuesta;
 	private String tipo;
 	private LocalDateTime fecha;
 	private boolean leido;
@@ -100,6 +100,15 @@ public class Evento {
 
 	public void setLeido(boolean leido) {
 		this.leido = leido;
+	}
+
+	@ManyToOne(targetEntity = Propuesta.class)
+	public Propuesta getPropuesta() {
+		return propuesta;
+	}
+
+	public void setPropuesta(Propuesta propuesta) {
+		this.propuesta = propuesta;
 	}
 	
 	
