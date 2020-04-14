@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import es.ucm.fdi.iw.model.Candidatura;
 import es.ucm.fdi.iw.model.Evento;
+import es.ucm.fdi.iw.model.Message;
 import es.ucm.fdi.iw.model.Propuesta;
 import es.ucm.fdi.iw.model.Usuario;
 import es.ucm.fdi.iw.services.UsuariosService;					   
@@ -28,6 +29,7 @@ import es.ucm.fdi.iw.services.UsuariosService;
 public class RootController {
 
   private final int LIMITE_NOTIFICACIONES = 5;
+  private final int LIMITE_MENSAJES_INICIO = 3;
 	
   private static final Logger log = LogManager.getLogger(RootController.class);
   @Autowired
@@ -42,7 +44,12 @@ public class RootController {
   }
 
   @GetMapping("/inicio")
-  public String inicio(HttpSession session) {
+  public String inicio(HttpSession session,Model model) {
+	long idUsuario = ((Usuario)session.getAttribute("u")).getId();
+	List<Message> messages = entityManager.createNamedQuery("Message.getAll").setParameter("idUsuario", idUsuario ).setMaxResults(LIMITE_MENSAJES_INICIO).getResultList();
+	if(messages == null) System.out.println("YES");
+
+	model.addAttribute("mensajes", messages);
     return "inicio";
   }
   
