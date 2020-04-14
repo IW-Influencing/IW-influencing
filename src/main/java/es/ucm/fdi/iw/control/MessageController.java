@@ -20,13 +20,6 @@ import es.ucm.fdi.iw.model.Usuario;
 
 /**
  * Usuario-administration controller
-=======
-
-import es.ucm.fdi.iw.model.Usuario;
-
-/**
- * User-administration controller
->>>>>>> master
  * 
  * @author mfreire
  */
