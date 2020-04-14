@@ -122,3 +122,25 @@ INSERT INTO evento(id, descripcion, tipo, fecha, leido, emisor_id, receptor_id) 
 	1,
 	2
 );
+
+
+INSERT INTO message(id, sender_id, recipient_id, text) VALUES (
+	1,
+	2,
+	1,
+	'hola, como te encuentras'
+);
+
+INSERT INTO message(id, sender_id, recipient_id, text) VALUES (
+	2,
+	2,
+	1,
+	'Perdona por mandarme un mensaje a mi mismo'
+);
+
+INSERT INTO message(id, sender_id, recipient_id, text) VALUES (
+	3,
+	2,
+	1,
+	'hola, como va esto'
+);

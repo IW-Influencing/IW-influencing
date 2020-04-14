@@ -27,18 +27,18 @@ import org.apache.logging.log4j.Logger;
 @NamedQueries({
 	@NamedQuery(name="Message.countUnread",
 	query="SELECT COUNT(m) FROM Message m "
-			+ "WHERE m.recipient.id = :UsuarioId AND m.dateRead = null")
+			+ "WHERE m.recipient.id = :idUsuario AND m.dateRead = null"),
+
+	@NamedQuery(name="Message.getAll",
+			query="SELECT m FROM Message m WHERE m.recipient.id = :idUsuario")
 })
+	
+
 public class Message {
 	
 	private static Logger log = LogManager.getLogger(Message.class);	
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@ManyToOne(targetEntity = Usuario.class)
 	private Usuario sender;
-	@ManyToOne(targetEntity = Usuario.class)
 	private Usuario recipient;
 	private String text;
 	
@@ -110,6 +110,9 @@ public class Message {
 		public void setText(String text) {
 			this.text = text;
 		}
+		
+		@Id
+		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		public long getId() {
 			return id;
 		}
@@ -118,6 +121,8 @@ public class Message {
 		}		
 	}
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public long getId() {
 		return id;
 	}
@@ -126,6 +131,7 @@ public class Message {
 		this.id = id;
 	}
 
+	@ManyToOne(targetEntity = Usuario.class)
 	public Usuario getSender() {
 		return sender;
 	}
@@ -134,6 +140,7 @@ public class Message {
 		this.sender = sender;
 	}
 
+	@ManyToOne(targetEntity = Usuario.class)
 	public Usuario getRecipient() {
 		return recipient;
 	}

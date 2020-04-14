@@ -34,36 +34,9 @@
 				<div class="content">
 					<h2> Mensajes recientes</h2>
 					<button class="button">Ver todos los mensajes</button>
-					<div id="message1" class="dark_block">
-						<div class="content">
-							<p style="font-weight: bold;">Harold Propper: <a style="font-weight: 100;">Saludos, estoy interesado en
-                        	la propuesta.</a></p>
-							</br>
-							</br>
-							<div class="button_row">
-								<button class="button">Marcar como leído</button>
-                    			<button style="margin-left: 20px; margin-right: 20px;" class="button">Eliminar mensaje</button>
-                    			<button class="button">Ir a la conversación</button>
-							</div>
-						</div>	
-					</div>
-					<div id="message2" class="dark_block">
-						<div class="content">
-							<p style="font-weight: bold;">roblox_player777: <a style="font-weight: 100;">Hola, ¿quieres ser mi
-                       		amigo?</a></p>
-							</br>
-							</br>
-							<div class="button_row">
-								<button class="button">Marcar como leído</button>
-                    			<button style="margin-left: 20px; margin-right: 20px;" class="button">Eliminar mensaje</button>
-                    			<button class="button">Ir a la conversación</button>
-							</div>
-						</div>	
-					</div>
-					<div id="message3" class="dark_block">
-						<div class="content">
-							<p style="font-weight: bold;">Firulai: <a style="font-weight: 100;">Hola, ¿me podrías explicar mejor en
-                        	que consiste la propuesta?</a></p>
+					<div th:each="mensaje : ${mensajes}" id="message1" class="dark_block">
+						<div class="content">	
+							<p th:text="${mensaje.getSender().getNombre() +': '+ mensaje.getText()}" style="font-weight: bold;">Emisor <a th:text="${mensaje.getText()}" style="font-weight: 100;">Mensaje</a></p>
 							</br>
 							</br>
 							<div class="button_row">
