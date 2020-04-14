@@ -3,15 +3,17 @@
 
 
 <head>
+<meta charset="UTF-8">
     <th:block th:replace="fragments/head.html :: header"/>
     <link href="css/negociacion.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
 </head>
 
 <body class="general">
     
     <!-- Header -->
     <header>
-        <div th:replace="fragments/navigation.html :: navBar(nombrePagina='CHAT DE NEGOCIACIÓN')"></div>
+        <div th:replace="fragments/navigation.html :: navBar(nombrePagina='CHAT DE NEGOCIACIÃ“N')"></div>
     </header>
     <main>
         <div class="contenido">
@@ -35,39 +37,21 @@
                         <a href="" class="boton">Enviar Ultimatum</a>
                     </div>
                 </div>
-				<tableclass="datatable" id="datatable">
-				</table>
-                <p class="mensaje recibido">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit,
-                    vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt
-                    id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam
-                    nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna.
 
-                </p>
-                <p class="mensaje enviado">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit,
-                    vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt
-                    id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam
-                    nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna.
-                </p>
-				<p class="mensaje recibido">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit,
-                    vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt
-                    id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam
-                    nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna.
+				<table class="datatable" id="datatable"></table>
 
-                </p>
-                <p class="mensaje enviado">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit,
-                    vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt
-                    id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam
-                    nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna.
-                </p>
-
-                <input type="text" placeholder="Introduzca su mensaje...">
+                <form th:action="@{/Usuario/1/msg(id=1)}" method="POST">
+                	<textarea id="message" placeholder="escribe a este usuario" rows="4" cols="20"></textarea>
+                	<button id="sendmsg">Enviar</button>
+                </form>
 
             </div>
         </div>
     </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
+    <script src="js/chatNegociacion.js" type="text/javascript"></script>
     <div th:replace="fragments/navigation.html :: footer"></div>
 </body>
-
-
 
 </html>

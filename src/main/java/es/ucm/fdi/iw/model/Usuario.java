@@ -1,5 +1,6 @@
 package es.ucm.fdi.iw.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,6 +14,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @NamedQueries({
@@ -42,7 +45,11 @@ public class Usuario {
 	private String tags; // Se almacenan los tags
 	private String estado;
 	private Integer score;
-	
+
+	private List<Message> sent;
+
+	private List<Message> received;
+
 	@OneToMany(targetEntity=Propuesta.class)
 	@JoinColumn(name="empresa_id")
 	public List<Propuesta> getPropuestasPropias() {
@@ -173,7 +180,29 @@ public class Usuario {
 	public void setActivo(byte activo) {
 		this.activo = activo;
 	}
-	
+
+	@OneToMany(targetEntity = Message.class)
+	@JoinColumn(name = "sender_id")
+	@JsonIgnore
+	public List<Message> getSent() {
+		return sent;
+	}
+
+	public void setSent(List<Message> sent) {
+		this.sent = sent;
+	}
+
+	@OneToMany(targetEntity = Message.class)
+	@JoinColumn(name = "recipient_id")	
+	@JsonIgnore
+	public List<Message> getReceived() {
+		return received;
+	}
+
+	public void setReceived(List<Message> received) {
+		this.received = received;
+	}
+
 	/**
 	 * Checks whether this user has a given role.
 	 * @param role to check

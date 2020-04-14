@@ -1,20 +1,22 @@
 /**
  * WebSocket API, which only works once initialized
  */
-const ws = {		
+const ws = {
 
 	/**
 	 * Number of retries if connection fails
 	 */
-	retries: 5,
-		
+	retries: 3,
+
 	/**
 	 * Default action when message is received. 
 	 */
 	receive: (text) => {
 		console.log(text);
 	},
-	
+
+	headers: {'X-CSRF-TOKEN' : config.csrf.value},
+
 	/**
 	 * Attempts to establish communication with the specified
 	 * web-socket endpoint. If successfull, will call 
@@ -26,7 +28,7 @@ const ws = {
 				ws.stompClient.reconnect_delay = 2000;		// reconexión automática tras 2s		
 			}
 			const headers = {'X-CSRF-TOKEN' : config.csrf.value}
-			ws.stompClient.connect(headers, () => {
+			ws.stompClient.connect(ws.headers, () => {
 		        ws.connected = true;
 		        console.log('Connected to ', endpoint, ' - subscribing...');		        
 		        while (subs.length != 0) {
