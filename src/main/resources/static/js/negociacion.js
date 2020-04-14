@@ -1,11 +1,8 @@
-function update(a) {
-
-	
-	let c = document.getElementById("c");
-	a.innerHTML = "<i>hola mundo </i>";
-	a.style = "color: " + c.value + ";"
-
-}
+// function update(a) {
+// 	let c = document.getElementById("c");
+// 	a.innerHTML = "<i>hola mundo </i>";
+// 	a.style = "color: " + c.value + ";"
+// }
 
 
 function insertaEnDiv(json, contenido, usuario, nombrePropuesta){

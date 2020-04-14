@@ -6,6 +6,7 @@
     <th:block th:replace="fragments/head.html :: header"/>
     <link href="css/negociacion.css" rel="stylesheet">
     <script src="js/negociacion.js" type="text/javascript"></script>
+    <script src="js/cargaPropuesta.js" type="text/javascript"></script>
 </head>
 
 <body class="general">
@@ -33,7 +34,7 @@
                         <a href="" class="nombre">Zapatillas</a>
                     </div>
                     <div class="ultimatum">
-                        <a href="" class="boton">Enviar Ultimatum</a>
+                        <a class="boton" onclick="cargaModal()">Enviar Ultimatum</a>
                     </div>
                 </div>
 				<div id="contenidoChat"></div>
@@ -65,6 +66,12 @@
 
                 <input id="botonEnviar" type="text" placeholder="Introduzca su mensaje...">
 
+            </div>
+        </div>
+
+        <div id="id01" class="w3-modal">
+            <div class="w3-modal-content">
+				<div id="modalPropuesta"></div>
             </div>
         </div>
     </main>
