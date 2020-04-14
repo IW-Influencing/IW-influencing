@@ -18,11 +18,11 @@
         <div class="contenido">
 
             <div class="lista" >
-                <div class="propuesta" id="th:text="${propuesta.id}"" th:each="propuesta: ${propuestas}" onclick="cargaChat()">
+                <div class="propuesta" id="th:text="${candidatura.id}"" th:each="candidatura: ${candidaturas}" onclick="cargaChat()">
                     <a href="">
                         <img width="50" height="50" src="img/perfilIcon.svg">
                     </a>
-                    <span th:text="${propuesta.nombre}"> Nombre de la propuesta</span>
+                    <span th:text="${candidatura.propuesta.nombre}"> Nombre de la propuesta</span>
                 </div>
             </div>
 
@@ -39,6 +39,7 @@
 				<div id="contenidoChat"></div>
 				<table class="datatable" id="datatable">
 				</table>
+				<!--
                 <p class="mensaje recibido">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit,
                     vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt
                     id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam
@@ -60,7 +61,7 @@
                     vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt
                     id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam
                     nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna.
-                </p>
+                </p>-->
 
                 <input id="botonEnviar" type="text" placeholder="Introduzca su mensaje...">
 

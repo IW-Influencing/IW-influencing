@@ -58,7 +58,7 @@ INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id) VALUES (
 	'Metropubli',
 	100,
 	'Ciudad',
-	2
+	4
 );
 
 INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id) VALUES (
@@ -67,7 +67,7 @@ INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id) VALUES (
 	'Metropubli',
 	200,
 	'Ciudad',
-	2
+	4
 );
 INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id) VALUES (
 	3,
@@ -83,7 +83,7 @@ INSERT INTO candidatura(id,aceptada,estado,candidato_id,propuesta_id) VALUES (
 	1,
 	true,
 	'EN_CURSO',
-	1,
+	2,
 	1
 );
 
@@ -99,7 +99,7 @@ INSERT INTO candidatura(id,aceptada,estado,candidato_id,propuesta_id) VALUES (
 	3,
 	true,
 	'FINALIZADA',
-	1,
+	3,
 	3
 );
 
@@ -107,19 +107,36 @@ INSERT INTO candidatura(id,aceptada,estado,candidato_id,propuesta_id) VALUES (
 	4,
 	false,
 	'EN_CURSO',
+	3,
+	2
+);
+
+INSERT INTO evento(id, descripcion, tipo, fecha_enviado,fecha_recibido, leido, candidatura_id, emisor_id, receptor_id) VALUES(
+	1, 'se ha registrado un usuario', 'ADMINISTRACION','2017-07-23','2017-07-23', false,
+	NULL,
+	1,
+	2
+);
+
+INSERT INTO evento(id, descripcion, tipo, fecha_enviado,fecha_recibido,leido, candidatura_id, emisor_id, receptor_id) VALUES(
+	2, 'se ha registrado otro usuario', 'ADMINISTRACION','2017-07-23','2017-07-23', false,
+	NULL,
+	1,
+	2
+);
+
+
+INSERT INTO evento(id, descripcion, tipo, fecha_enviado,fecha_recibido,leido, candidatura_id, emisor_id, receptor_id) VALUES(
+	3, 'se ha registrado un usuario', 'CHAT','2017-07-23','2017-07-23', false,
+	1,
 	2,
-	2
+	4
 );
 
-INSERT INTO evento(id, descripcion, tipo, fecha, leido, emisor_id, receptor_id) VALUES(
-	1, 'se ha registrado un usuario', 'ADMINISTRACION','2017-07-23', false,
+INSERT INTO evento(id, descripcion, tipo, fecha_enviado,fecha_recibido, leido, candidatura_id, emisor_id, receptor_id) VALUES(
+	4, 'se ha registrado otro usuario', 'CHAT','2017-07-23','2017-07-23', false,
 	1,
-	2
-);
-
-INSERT INTO evento(id, descripcion, tipo, fecha, leido, emisor_id, receptor_id) VALUES(
-	2, 'se ha registrado otro usuario', 'ADMINISTRACION','2017-07-23', false,
-	1,
+	4,
 	2
 );
 

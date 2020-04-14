@@ -15,14 +15,14 @@ import javax.persistence.NamedQuery;
 
 	
 	@NamedQuery(name="Candidatura.activeByCandidato", 
-	query="SELECT c.propuesta FROM Candidatura c WHERE c.candidato.id = :idCandidato AND c.estado = 'EN_CURSO'"),
+	query="SELECT c FROM Candidatura c WHERE c.candidato.id = :idCandidato AND (c.estado = 'EN_CURSO' OR c.estado = 'NEGOCIANDO')"),
 
 	
 	@NamedQuery(name="Candidatura.getAllActive",
-	query="SELECT c FROM Candidatura c WHERE c.aceptada = true AND c.estado = 'EN_CURSO'"),
+	query="SELECT c FROM Candidatura c WHERE c.aceptada = true AND (c.estado = 'EN_CURSO' OR c.estado = 'NEGOCIANDO')"),
 
 	@NamedQuery(name="Candidatura.getPendingCandidatures",
-	query="SELECT c FROM Candidatura c WHERE c.aceptada = false AND c.estado = 'EN_CURSO'")
+	query="SELECT c FROM Candidatura c WHERE c.aceptada = false AND (c.estado = 'EN_CURSO' OR c.estado = 'NEGOCIANDO')")
 	
 })
 
@@ -32,7 +32,7 @@ public class Candidatura {
 	private Propuesta propuesta;
 	private Usuario candidato;
 	private Boolean aceptada;
-	public enum Estado {EN_CURSO, FINALIZADA};
+	public enum Estado {NEGOCIANDO, EN_CURSO, FINALIZADA};
 	private String estado;
 
 	@Id

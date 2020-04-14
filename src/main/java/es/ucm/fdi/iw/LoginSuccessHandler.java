@@ -55,7 +55,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		session.setAttribute("u", u);
 		
 		long unread = entityManager.createNamedQuery("Message.countUnread", Long.class)
-		        .setParameter("userId", u.getId())
+		        .setParameter("idUsuario", u.getId())
 		        .getSingleResult();	
 		session.setAttribute("unread", unread);
 		
@@ -70,7 +70,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		if (u.hasRole(Usuario.Rol.ADMIN)) {
 			redirect = "/administracion";
 		} else if (u.hasRole(Rol.EMPRESA) || u.hasRole(Rol.INFLUENCER)) {
-			redirect = "/profile/"+ u.getId();
+			redirect = "/inicio";
 		} else {
 			redirect = "/error";
 		}		

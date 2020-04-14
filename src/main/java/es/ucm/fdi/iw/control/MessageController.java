@@ -13,8 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import es.ucm.fdi.iw.model.Candidatura;
+import es.ucm.fdi.iw.model.Evento;
 import es.ucm.fdi.iw.model.Message;
 import es.ucm.fdi.iw.model.Usuario;
 
@@ -47,6 +50,23 @@ public class MessageController {
 				u.getNombre(), u.getReceived().size());
 		return Message.asTransferObjects(u.getReceived());
 	}
+	
+	@GetMapping(path = "/getChat", produces = "application/json")
+	@Transactional // para no recibir resultados inconsistentes
+	@ResponseBody // para indicar que no devuelve vista, sino un objeto (jsonizado)
+	
+	public List<Evento.TransferChat> devuelveChat(HttpSession session, @RequestParam long idCandidatura) {
+		
+		
+		long userId = ((Usuario)session.getAttribute("u")).getId();
+		List<Evento> mensajes = entityManager.createNamedQuery("Evento.getChat").setParameter("idCandidatura", idCandidatura).getResultList();
+		Usuario u = entityManager.find(Usuario.class, userId);
+		log.info("Generating message list for user {} ({} messages)", 
+				u.getNombre(), u.getReceived().size());
+		return Evento.asTransferObjects(mensajes, u);
+		
+		
+	}	
 
 	@GetMapping(path = "/unread", produces = "application/json")
 	@ResponseBody
