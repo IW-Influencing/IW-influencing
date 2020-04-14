@@ -27,8 +27,7 @@ function formatDate(d) {
 	return new Date(d).toLocaleString("es-ES").split(" ").join("@")
 }
 
-function refrescarTabla() {
-	new simpleDatatables.DataTable(
+new simpleDatatables.DataTable(
 			'#datatable', { 
 			    ajax: {
 			        url: config.rootUrl + "message/received", // empieza siempre por config.rootUrl
@@ -43,8 +42,6 @@ function refrescarTabla() {
 			        	}
 
 			        	return JSON.stringify(data);
-			        }
-			    }
-			}
-		);
-}
+			       }
+			   }
+});
