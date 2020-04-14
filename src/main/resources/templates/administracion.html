@@ -3,8 +3,7 @@
 <!--  SDF-->
 <head>
     <th:block th:replace="fragments/head.html :: header"/>
-    <link href="css/administracion.css" rel="stylesheet">
-
+    <link href="css/administracion.css" rel="stylesheet"/>
 </head>
 
 <body class="general">
@@ -38,7 +37,7 @@
 							<div class="dropdown-notificaciones" th:each="notificacion: ${notificaciones}">
 								<p th:text="${notificacion.descripcion}">Notificacion</p>
 							</div>
-							<a href="" class="dropdown-boton"> Ver todas</a>
+							<span onclick="document.getElementById('id01').style.display='block'" class="dropdown-boton"> Ver todas</span>
 						</div>
 						<div class="dropdown-element">
 							<a href="" class="dropdown-boton"> Cerrar sesion</a>
@@ -71,6 +70,12 @@
             </div>
         </div>
 
+        <div id="id01" class="w3-modal">
+            <div class="w3-modal-content">
+
+				<div th:replace="notificaciones.html :: notificaciones(notificaciones=${notificaciones})"></div>
+            </div>
+        </div>
     </main>
     <!-- Footer -->
 	<footer th:replace="fragments/navigation.html :: footer"></footer>

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,16 +13,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name="Usuario.byNombreUsuario",
+	@NamedQuery(name="Usuario.byNombreCuenta",
 	query="SELECT u FROM Usuario u "
-			+ "WHERE u.nombre = :nombre AND u.activo = 1"),
+			+ "WHERE u.nombreCuenta = :nombreCuenta AND u.activo = 1"),
+	
+	
+	
 	@NamedQuery(name="Usuario.hasNombre",
 	query="SELECT COUNT(u) "
 			+ "FROM Usuario u "
@@ -30,16 +38,22 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 	query="SELECT u FROM Usuario u"),
 	
 })
+
+@Table(uniqueConstraints={@UniqueConstraint(columnNames={"nombreCuenta"})})
 public class Usuario {
 
+	
+	private static Logger log = LogManager.getLogger(Usuario.class);	
 	private static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	
 	private long id; // Id unico para cada usuario
 	private byte activo;
-	private String nombre;
+	@Column(name = "nombreCuenta")
+	private String nombreCuenta;
 	private String password;
 	public enum Rol {ADMIN, INFLUENCER, EMPRESA, USER};
 	private String roles; // Aqui se almacena el rol que tiene el usuario en la aplicación mediante números
+	private String nombre;
 	private String apellidos;
 	private int edad;
 	private String tags; // Se almacenan los tags
@@ -147,6 +161,15 @@ public class Usuario {
 
 	public void setTags(String tags) {
 		this.tags = tags;
+	}
+
+	
+	public String getNombreCuenta() {
+		return nombreCuenta;
+	}
+
+	public void setNombreCuenta(String nombreCuenta) {
+		this.nombreCuenta = nombreCuenta;
 	}
 
 	public Integer getScore(){

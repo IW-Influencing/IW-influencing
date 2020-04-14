@@ -20,13 +20,20 @@ import es.ucm.fdi.iw.model.Usuario;
 
 /**
  * Usuario-administration controller
+=======
+
+import es.ucm.fdi.iw.model.Usuario;
+
+/**
+ * User-administration controller
+>>>>>>> master
  * 
  * @author mfreire
  */
 @Controller()
 @RequestMapping("message")
 public class MessageController {
-	
+
 	private static final Logger log = LogManager.getLogger(MessageController.class);
 	
 	@Autowired 

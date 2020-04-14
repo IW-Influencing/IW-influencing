@@ -1,72 +1,45 @@
 <!DOCTYPE html>
 <html lang="es">
+<div th:fragment="notificaciones (notificaciones)">
 
-<head>
-  <th:block th:replace="fragments/head.html :: header" />
-  <link href="css/notificaciones.css" rel="stylesheet" />
-</head>
+  <head>
+    <th:block th:replace="fragments/head.html :: header" />
+    <link href="css/notificaciones.css" rel="stylesheet" />
+  </head>
 
-<body style="width:100%" class="general">
+  <body style="width:100%" class="general">
 
-  <!-- !PAGE CONTENT! -->
-  <div>
+    <!-- !PAGE CONTENT! -->
+    <div>
 
-    <!-- Header -->
-    <header>
-      <div th:replace="fragments/navigation.html :: modalBar(nombrePagina='NOTIFICACIONES')"></div>
-    </header>
+      <!-- Header -->
+      <header>
+        <div th:replace="fragments/navigation.html :: modalBar(nombrePagina='NOTIFICACIONES')"></div>
+      </header>
 
-    </header>
-    <div class="w3-container">
-      <!-- First Notification Grid-->
-      <div class="w3-card-4 w3-round w3-margin-top w3-margin-bottom">
-        <div class="w3-container w3-pale-blue w3-button w3-large w3-right" onclick="this.parentElement.style.display='none'">X</div>
-        <div class="w3-container w3-pale-blue w3-row w3-center">
-          <h1>Header</h1>
+      </header>
+      <div class="w3-container" th:each="notificacion: ${notificaciones}">
+        <!-- First Notification Grid-->
+
+
+        <div class="w3-card-4 w3-round w3-margin-top w3-margin-bottom">
+          <div class="w3-container w3-pale-blue w3-button w3-large w3-right"
+            onclick="this.parentElement.style.display='none'">X</div>
+          <div class="w3-container w3-pale-blue w3-row w3-center">
+            <h1 th:text="${notificacion.descripcion}">Header</h1>
+          </div>
+
+          <div class="w3-container w3-pale-blue w3-center">
+            <p th:text="${notificacion.fecha}">Lorem ipsum...</p>
+          </div>
         </div>
 
-        <div class="w3-container w3-pale-blue w3-center">
-          <p>Lorem ipsum...</p>
-        </div>
+
+        <!-- End page content -->
       </div>
 
-      <div class="w3-card-4 w3-round w3-margin-top w3-margin-bottom">
-        <div class="w3-container w3-pale-blue w3-button w3-large w3-right" onclick="this.parentElement.style.display='none'">X</div>
-        <div class="w3-container w3-pale-blue w3-row w3-center">
-          <h1>Header</h1>
-        </div>
-
-        <div class="w3-container w3-pale-blue w3-center">
-          <p>Lorem ipsum...</p>
-        </div>
-      </div>
-
-      <div class="w3-card-4 w3-round w3-margin-top w3-margin-bottom">
-        <div class="w3-container w3-pale-blue w3-button w3-large w3-right" onclick="this.parentElement.style.display='none'">X</div>
-        <div class="w3-container w3-pale-blue w3-row w3-center">
-          <h1>Header</h1>
-        </div>
-
-        <div class="w3-container w3-pale-blue w3-center">
-          <p>Lorem ipsum...</p>
-        </div>
-      </div>
-
-      <div class="w3-card-4 w3-round w3-margin-top w3-margin-bottom">
-        <div class="w3-container w3-pale-blue w3-button w3-large w3-right" onclick="this.parentElement.style.display='none'">X</div>
-        <div class="w3-container w3-pale-blue w3-row w3-center">
-          <h1>Header</h1>
-        </div>
-
-        <div class="w3-container w3-pale-blue w3-center">
-          <p>Lorem ipsum...</p>
-        </div>
-      </div>
-
-      <!-- End page content -->
-    </div>
-
-</body>
+  </body>
+</div>
 
 </html>
 
