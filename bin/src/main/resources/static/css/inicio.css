@@ -50,25 +50,27 @@ a:link, a:visited, a:active{
 .control_panel{
 	background-color:  #F7F6F6;
 	height: 280px;
+    width: 550px;
 	border-radius: 20px;
-	margin: 0px;
 }
 
 .messages_panel{
 	background-color:  #F7F6F6;
 	height: 530px;
+    width: 550px;
 	border-radius: 20px;
-	margin-top:10px;
+	margin-top: 10px;
 }
 
 .dark_block{
     background-color: #D6D6D6;
     height: 120px;
+    width: 510px;
     margin-top: 20px;
 	border-radius: 10px;
 }
 
-.button_row{
+.button_row_message{
     display: flex;
     justify-content: center;
 }
@@ -81,15 +83,7 @@ a:link, a:visited, a:active{
 .proposal_block{
     background-color: #F7F6F6;
     height: 530px;
+    width: 550px;
     margin-top: 10px;
 	border-radius: 20px;
-}
-
-.rounded_corner{
-	border-radius:10px;
-}
-
-.middle_button{
-	margin-left: 20px; 
-	margin-right: 20px;
 }
