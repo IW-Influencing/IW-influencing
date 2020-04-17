@@ -6,47 +6,47 @@
 
 
 function insertaEnDiv(json, contenido, usuario, nombrePropuesta){
-	let html = ""
+	let html = []
 	
 	json.forEach(msg => {
-		let htmlAux
-		if (msg.propio){			
-			htmlAux = "<p class='mensaje enviado'> " + msg.descripcion + "</p> "			
-		}
-		
-		else{
-			htmlAux = "<p class='mensaje recibido'> " + msg.descripcion + "</p> "
-		}
-		html += htmlAux 
+		let clase = msg.propio ? 'mensaje enviado' : 'mensaje recibido';
+		html.push("<p class='" + clase + "'> " + msg.text + "</p>");
 	})
 	
-	contenido.innerHTML = html;
+	contenido.innerHTML = html.join("\n");
 	usuario.innerHTML = json[0].nombreUsuario;
 	nombrePropuesta.innerHTML = json[0].nombrePropuesta;	
 }
 
-function cargaChat(idCandidatura){
-	let usuario = document.getElementsByClassName("perfil")
-	let nombrePropuesta = document.getElementsByClasName("nombre")
-	let contenido = document.getElementById("contenidoChat")
+function cargaChat(idCandidatura) {
+	let usuario = document.getElementsByClassName("perfil")[0];
+	let nombrePropuesta = document.getElementsByClassName("nombre")[0];
 	
-	return go(serverApiUrl + "messages/getChat", 'GET', idCandidatura)
-	.then(response => response.json())
-	.then(json => insertaEnDiv(json, contenido, usuario, nombrePropuesta))
-
+	let contenido = document.getElementById("contenidoChat");
 	
+	return go(config.rootUrl + "message/getChat?idCandidatura=" + idCandidatura, 'GET')
+		.then(json => insertaEnDiv(json, contenido, usuario, nombrePropuesta));
 }
 
-window.onload = () => {
-	let botonEnviar = document.getElementById("b");
+document.addEventListener("DOMContentLoaded", () => {
+/*
+				<div class="propuesta" th:attr="data-id=${candidatura.id}" th:each="candidatura: ${candidaturas}"">
+                    <a href="">
+                        <img width="50" height="50" src="img/perfilIcon.svg">
+                    </a>
+                    <span th:text="${candidatura.propuesta.nombre}"> Nombre de la propuesta</span>
+				</div>
+				
+	https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes
 	
-	
-	let divChat = document.getElementById("a");
-	b.onclick = e => update(a);
-	
-	let propuestas = document.getElementsByClassName("propuesta");
-	propuestas.forEach(p.onclick = c => cargaChat(p));
-}
+	<div data-loquesea="123">
+
+	d.dataset.loquesea // 123
+*/
+	for (let p of document.getElementsByClassName("propuesta")) {
+		p.onclick = c => cargaChat(p.dataset.id)
+	}
+})
 
 
 // envía json, espera json de vuelta; lanza error si status != 200
