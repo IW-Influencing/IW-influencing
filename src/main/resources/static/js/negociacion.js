@@ -5,7 +5,7 @@
 // }
 
 
-function insertaEnDiv(json, contenido, usuario, nombrePropuesta){
+function insertaEnDiv(json, contenido, usuario, nombrePropuesta, idPropuesta){
 	let html = []
 	
 	json.forEach(msg => {
@@ -16,6 +16,14 @@ function insertaEnDiv(json, contenido, usuario, nombrePropuesta){
 	contenido.innerHTML = html.join("\n");
 	usuario.innerHTML = json[0].nombreUsuario;
 	nombrePropuesta.innerHTML = json[0].nombrePropuesta;	
+
+	document.getElementById("botonUltimatum").onclick = b => cargaModal(idPropuesta);
+}
+
+function cargaModal(idPropuesta){
+
+	return go(config.rootUrl + "propuesta/" + idPropuesta, 'GET')
+		.then(json => console.log(json));
 }
 
 function cargaChat(idCandidatura) {
@@ -24,25 +32,13 @@ function cargaChat(idCandidatura) {
 	
 	let contenido = document.getElementById("contenidoChat");
 	
+	let idPropuesta = 1; // <--- mejorar
+
 	return go(config.rootUrl + "message/getChat?idCandidatura=" + idCandidatura, 'GET')
-		.then(json => insertaEnDiv(json, contenido, usuario, nombrePropuesta));
+		.then(json => insertaEnDiv(json, contenido, usuario, nombrePropuesta, idPropuesta));
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-/*
-				<div class="propuesta" th:attr="data-id=${candidatura.id}" th:each="candidatura: ${candidaturas}"">
-                    <a href="">
-                        <img width="50" height="50" src="img/perfilIcon.svg">
-                    </a>
-                    <span th:text="${candidatura.propuesta.nombre}"> Nombre de la propuesta</span>
-				</div>
-				
-	https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes
-	
-	<div data-loquesea="123">
-
-	d.dataset.loquesea // 123
-*/
 	for (let p of document.getElementsByClassName("propuesta")) {
 		p.onclick = c => cargaChat(p.dataset.id)
 	}

@@ -20,15 +20,23 @@
         <div class="contenido">
 
             <div class="lista" >
-                <div class="propuesta" 
-                    th:each="c: ${candidaturas}"
-                    th:attr="data-id=${c.id},data-nombre=${c.propuesta.nombre},data-otro=${session.u.hasRole('EMPRESA')?c.candidato.nombre:c.propuesta.empresa.nombre}" 
-                    >
-                    <a href="">
-                        <img width="50" height="50" src="img/perfilIcon.svg">
-                    </a>
-                    <span th:text="${c.propuesta.nombre}"> Nombre de la propuesta</span>
-				</div>
+                <div class="propuesta"
+                        th:each="c: ${candidaturas}"
+                        th:attr="data-id=${c.id},data-prop-id=${c.propuesta.id},data-otro=${session.u.hasRole('EMPRESA')?c.candidato.nombre:c.propuesta.empresa.nombre}" 
+                        >
+                        <a href="">
+                            <img width="50" height="50" src="img/perfilIcon.svg">
+                        </a>
+                        <span th:text="${c.propuesta.nombre}"> Nombre de la propuesta</span>
+                    <div style="display: none" class="prop">
+                        <!-- 
+                            Rellenar el modal propuesta con thymeleaf
+                            Acceder en js con innerHTML y lanzar el modal
+                        -->
+                        <b>soy minero</b>
+                        <b>barrenero en sierra morena</b>
+                    </div>
+                </div>
             </div>
 
             <div class="chat" id="chat">
@@ -38,7 +46,7 @@
                         <a href="" class="nombre">Zapatillas</a>
                     </div>
                     <div class="ultimatum">
-                        <a class="boton" onclick="cargaModal()">Enviar Ultimatum</a>
+                        <a class="boton" id="botonUltimatum">Enviar Ultimatum</a>
                     </div>
                 </div>
 				<div id="contenidoChat"></div>
@@ -52,7 +60,7 @@
         </div>
 
         <div id="id01" class="w3-modal">
-            <div class="w3-modal-content">
+            <div class="w3-modal-content"> 
 				<div id="modalPropuesta"></div>
             </div>
         </div>
