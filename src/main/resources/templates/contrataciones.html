@@ -4,7 +4,7 @@
 <head>
 	<th:block th:replace="fragments/head.html :: header" />
 	<link rel="stylesheet" type="text/css" href="css/contrataciones.css">
-	<title>Influencing: Contrtaciones</title>
+	<title>Influencing: Contrataciones</title>
 </head>
 
 <body style="width:100%" class="general">
@@ -19,7 +19,7 @@
 
 		<!-- !PAGE CONTENT! -->
 		<div>
-			<h1 class="subtitle">Contrataciones en vigor</h1>
+			<h1 style="margin: 2%;">Contrataciones en vigor</h1>
 			<div th:each="c: ${candidaturasEnVigor}" class="w3-row-padding">
 				<div style="display:block;">
 					<div class="w3-third w3-container w3-margin-bottom box">
@@ -34,7 +34,7 @@
 							</div>
 						</div>
 						<div class="info">
-							<h3><b th:text="${c.propuesta.nombre}">Propuesta</b></h3>
+							<h2><b th:text="${c.propuesta.nombre}">Propuesta</b></h2>
 							<p><b>Empresa: </b></p>
 							<a th:text="${c.propuesta.empresa.nombre}">Company Name</a>
 							<p><b>Influencer: </b></p>
@@ -67,7 +67,7 @@
 
 			</div>
 
-			<h1 style="font-family: 'ABeeZee';margin: 2%;">Contrataciones pendientes de valorar</h1>
+			<h1 style="margin: 2%;">Contrataciones pendientes de valorar</h1>
 
 			<div th:each="c: ${candidaturasPendientes}" class="w3-row-padding">
 				<div style="display:block;">
@@ -83,7 +83,7 @@
 							</div>
 						</div>
 						<div class="info">
-							<h3><b th:text="${c.propuesta.nombre}">Propuesta</b></h3>
+							<h2><b th:text="${c.propuesta.nombre}">Propuesta</b></h2>
 							<p><b>Empresa: </b></p>
 							<a th:text="${c.propuesta.empresa.nombre}">Company Name</a>
 							<p><b>Influencer: </b></p>

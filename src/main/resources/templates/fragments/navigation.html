@@ -11,9 +11,9 @@
 
     <!-- NAVBAR -->
     <div th:fragment="navBar (nombrePagina)">
-        <div class="title" style="padding-left: 0!important;">
-            <a class="brand" href="/inicio"><b style="margin-left: 1%; font-size: xxx-large;">INFLUENCING</b></a>
-            <div style="color: white;font-size: larger;margin: auto;text-align: center;"><b><span
+        <div class="title w3-display-container" style="padding-left: 0!important;">
+            <a class="brand w3-display-topleft" href="/inicio"><b style="margin-left: 1%; font-size: xxx-large;">INFLUENCING</b></a>
+            <div class="w3-display-bottommiddle" style="color: white;font-size: larger;margin: auto;text-align: center;"><b><span
                         th:text="${nombrePagina}">nombrePagina</span></b></div>
         </div>
         <br>
@@ -33,11 +33,11 @@
     </div>
 
     <!-- MODALBAR -->
-    <div th:fragment="modalBar (nombrePagina)" id="modalBar" class="title" style="padding-left: 0!important;">
-        <div id="volver" class="w3-button" onclick="document.getElementById('id01').style.display='none'">
-            <div class="w3-padding w3  w3-text-white"><i class="fa fa-arrow-left"></i> VOLVER</div>
+    <div th:fragment="modalBar (nombrePagina)" id="modalBar" class="title w3-display-container" style="padding-left: 0!important;">
+        <div id="volver" class="w3-button w3-display-topleft" onclick="document.getElementById('id01').style.display='none'">
+            <div class="w3-padding w3 w3-text-white"><i class="fa fa-arrow-left w3-large"></i> VOLVER</div>
         </div>
-        <div id="nombrePagina" style="color: white;font-size: larger;text-align: center;">
+        <div id="nombrePagina" class="w3-display-middle" style="color: white; font-size: larger;text-align: center;">
             <b><span th:text="${nombrePagina}">nombrePagina</span></b>
         </div>
     </div> <!-- CAMBIAR, DEBE IR EN EL CSS -->

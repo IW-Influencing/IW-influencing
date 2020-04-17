@@ -2,7 +2,7 @@
 <html lang="es">
 
 <head>
-    <th:block th:replace="fragments/head.html :: header"/>
+    <th:block th:replace="fragments/head.html :: header" />
     <link href="css/negociacion.css" rel="stylesheet">
     <script src="js/negociacion.js" type="text/javascript"></script>
     <script src="js/cargaPropuesta.js" type="text/javascript"></script>
@@ -10,7 +10,7 @@
 </head>
 
 <body class="general">
-    
+
     <!-- Header -->
     <header>
         <div th:replace="fragments/navigation.html :: navBar(nombrePagina='CHAT DE NEGOCIACIÓN')"></div>
@@ -18,15 +18,13 @@
     <main>
         <div class="contenido">
 
-            <div class="lista" >
-                <div class="propuesta"
-                        th:each="c: ${candidaturas}"
-                        th:attr="data-id=${c.id},data-prop-id=${c.propuesta.id},data-otro=${session.u.hasRole('EMPRESA')?c.candidato.nombre:c.propuesta.empresa.nombre}" 
-                        >
-                        <a href="">
-                            <img width="50" height="50" src="img/perfilIcon.svg">
-                        </a>
-                        <span th:text="${c.propuesta.nombre}"> Nombre de la propuesta</span>
+            <div class="lista">
+                <div class="propuesta" th:each="c: ${candidaturas}"
+                    th:attr="data-id=${c.id},data-prop-id=${c.propuesta.id},data-otro=${session.u.hasRole('EMPRESA')?c.candidato.nombre:c.propuesta.empresa.nombre}">
+                    <a href="">
+                        <img width="50" height="50" src="img/perfilIcon.svg">
+                    </a>
+                    <span th:text="${c.propuesta.nombre}"> Nombre de la propuesta</span>
                     <div style="display: none" class="prop">
                         <!-- 
                             Rellenar el modal propuesta con thymeleaf
@@ -48,9 +46,9 @@
                         <a class="boton" id="botonUltimatum">Enviar Ultimatum</a>
                     </div>
                 </div>
-				<div id="contenidoChat"></div>
-				<table class="datatable" id="datatable">
-				</table>
+                <div id="contenidoChat"></div>
+                <table class="datatable" id="datatable">
+                </table>
 
 
                 <input id="botonEnviar" type="text" placeholder="Introduzca su mensaje...">
@@ -59,8 +57,8 @@
         </div>
 
         <div id="id01" class="w3-modal">
-            <div class="w3-modal-content"> 
-				<div id="modalPropuesta"></div>
+            <div class="w3-modal-content">
+                <div id="modalPropuesta"></div>
             </div>
         </div>
     </main>
