@@ -12,7 +12,7 @@
     <!-- NAVBAR -->
     <div th:fragment="navBar (nombrePagina)">
         <div class="title" style="padding-left: 0!important;">
-            <div class="brand"><b style="margin-left: 1%;">INFLUENCING</b></div>
+            <a class="brand" href="/inicio"><b style="margin-left: 1%; font-size: xxx-large;">INFLUENCING</b></a>
             <div style="color: white;font-size: larger;margin: auto;text-align: center;"><b><span
                         th:text="${nombrePagina}">nombrePagina</span></b></div>
         </div>
@@ -20,16 +20,14 @@
         <div class="horizontalBar" style="text-align: left;">
             <ul class="ulFragment">
                 <li><a th:href="@{/perfiles}"><i class="fa fa-search" aria-hidden="true"></i> Búsqueda de
-                        perfiles</a></li>
-                <li><a th:href="@{/negociacion}"><i class="fa fa-comment" aria-hidden="true"></i> Chat de
-                        Negociación</a>
-                </li>
+                    Perfiles</a></li>
                 <li><a th:class="${nombrePagina}=='BUSQUEDA DE PROPUESTAS'?'active':''"
-                        th:href="@{/busquedaPropuesta}"><i class="fa fa-suitcase" aria-hidden="true"></i> Búsqueda de
-                        Propuestas</a></li>
+                    th:href="@{/busquedaPropuesta}"><i class="fa fa-suitcase" aria-hidden="true"></i> Búsqueda de
+                    Propuestas</a></li>
+                <li><a th:href="@{/negociacion}"><i class="fa fa-comment" aria-hidden="true"></i> Chat de
+                    Negociación</a></li>
                 <li><a th:href="@{/contrataciones}"><i class="fa fa-file-contract" aria-hidden="true"></i>
-                        Contrataciones</a>
-                </li>
+                    Contrataciones</a></li>
             </ul>
         </div>
     </div>
