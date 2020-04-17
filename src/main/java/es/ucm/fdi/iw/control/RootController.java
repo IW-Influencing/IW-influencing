@@ -139,7 +139,7 @@ public class RootController {
   }
   
   //Metodos nuevos
-  @GetMapping("/perfiles")
+  @GetMapping("/busquedaPerfil")
   public String busquedaPerfil(HttpSession session,Model model) {
 	  
     List<Usuario> users = entityManager.createNamedQuery("Usuario.getAllUsers", Usuario.class).getResultList();

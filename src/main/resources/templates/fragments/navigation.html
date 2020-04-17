@@ -23,8 +23,9 @@
                     <h4>Usuario</h4>
                 </button>
                 <div class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0">
-                    <a onclick="document.getElementById('modalNoti').style.display='block'" class="w3-bar-item w3-button">Notificaciones</a>
-                    <a href="#" class="w3-bar-item w3-button">Cerrar sesión</a>
+                    <a onclick="document.getElementById('modalNoti').style.display='block'"
+                        class="w3-bar-item w3-button">Notificaciones</a>
+                    <a href="logout" class="w3-bar-item w3-button">Cerrar sesión</a>
                 </div>
             </div>
         </div>
@@ -51,8 +52,8 @@
         </div>
     </div>
 
-    <!-- MODALBAR 
-    <div th:fragment="modalBar (nombrePagina)" id="modalBar" class="title w3-display-container"
+    <!-- MODALBAR -->
+    <div th:fragment="modalBar(nombrePagina)" id="modalBar" class="title w3-display-container"
         style="padding-left: 0!important;">
         <div id="volver" class="w3-button w3-display-topleft"
             onclick="document.getElementById('modalNoti').style.display='none'">
@@ -63,7 +64,7 @@
         </div>
     </div> <!-- CAMBIAR, DEBE IR EN EL CSS -->
 
-    <!-- MODALBAR intento-->
+    <!-- MODALBAR GENERICO ->
     <div th:fragment="modalBar (nombrePagina, tipoModal)" id="modalBar" class="title w3-display-container"
         style="padding-left: 0!important;">
         <div id="volver" class="w3-button w3-display-topleft"
@@ -73,7 +74,7 @@
         <div id="nombrePagina" class="w3-display-middle" style="color: white; font-size: larger;text-align: center;">
             <b><span th:text="${nombrePagina}">nombrePagina</span></b>
         </div>
-    </div> CAMBIAR, DEBE IR EN EL CSS -->
+    </div> <!-- CAMBIAR, DEBE IR EN EL CSS -->
 
     <!-- TAGBAR -->
     <div th:fragment="tagBar">

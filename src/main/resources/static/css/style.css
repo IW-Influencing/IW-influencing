@@ -9,9 +9,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     color: #FFFFFF; 
 }
 
-a:link, a:visited, a:active{
-    text-decoration:none;
-    /*color:white;*/
+a:hover{
+    color: white;
 }
 
 .horizontalBar {
