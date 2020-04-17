@@ -5,48 +5,44 @@
 // }
 
 
-function insertaEnDiv(json, contenido, usuario, nombrePropuesta){
-	let html = ""
+function insertaEnDiv(json, contenido, usuario, nombrePropuesta, idPropuesta){
+	let html = []
 	
 	json.forEach(msg => {
-		let htmlAux
-		if (msg.propio){			
-			htmlAux = "<p class='mensaje enviado'> " + msg.descripcion + "</p> "			
-		}
-		
-		else{
-			htmlAux = "<p class='mensaje recibido'> " + msg.descripcion + "</p> "
-		}
-		html += htmlAux 
+		let clase = msg.propio ? 'mensaje enviado' : 'mensaje recibido';
+		html.push("<p class='" + clase + "'> " + msg.text + "</p>");
 	})
 	
-	contenido.innerHTML = html;
+	contenido.innerHTML = html.join("\n");
 	usuario.innerHTML = json[0].nombreUsuario;
 	nombrePropuesta.innerHTML = json[0].nombrePropuesta;	
+
+	document.getElementById("botonUltimatum").onclick = b => cargaModal(idPropuesta);
 }
 
-function cargaChat(idCandidatura){
-	let usuario = document.getElementsByClassName("perfil")
-	let nombrePropuesta = document.getElementsByClasName("nombre")
-	let contenido = document.getElementById("contenidoChat")
-	
-	return go(serverApiUrl + "messages/getChat", 'GET', idCandidatura)
-	.then(response => response.json())
-	.then(json => insertaEnDiv(json, contenido, usuario, nombrePropuesta))
+function cargaModal(idPropuesta){
 
-	
+	return go(config.rootUrl + "propuesta/" + idPropuesta, 'GET')
+		.then(json => console.log(json));
 }
 
-window.onload = () => {
-	let botonEnviar = document.getElementById("b");
+function cargaChat(idCandidatura) {
+	let usuario = document.getElementsByClassName("perfil")[0];
+	let nombrePropuesta = document.getElementsByClassName("nombre")[0];
 	
+	let contenido = document.getElementById("contenidoChat");
 	
-	let divChat = document.getElementById("a");
-	b.onclick = e => update(a);
-	
-	let propuestas = document.getElementsByClassName("propuesta");
-	propuestas.forEach(p.onclick = c => cargaChat(p));
+	let idPropuesta = 1; // <--- mejorar
+
+	return go(config.rootUrl + "message/getChat?idCandidatura=" + idCandidatura, 'GET')
+		.then(json => insertaEnDiv(json, contenido, usuario, nombrePropuesta, idPropuesta));
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+	for (let p of document.getElementsByClassName("propuesta")) {
+		p.onclick = c => cargaChat(p.dataset.id)
+	}
+})
 
 
 // envía json, espera json de vuelta; lanza error si status != 200

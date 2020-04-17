@@ -41,4 +41,8 @@ a:link, a:visited, a:active{
     /*color:white;*/
 }
 
+.horizontalBar {
+    margin: 0 auto;
+    width: max-content;
+}
 
