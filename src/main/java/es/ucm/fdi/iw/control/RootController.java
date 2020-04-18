@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import es.ucm.fdi.iw.model.Candidatura;
 import es.ucm.fdi.iw.model.Evento;
@@ -90,6 +91,7 @@ public class RootController {
 			  usuariosBuscados.add(u);
 		  }
 	  }
+	  model.addAttribute("nombreUsuario", ((Usuario)session.getAttribute("u")).getNombre());
 	  model.addAttribute("busquedas", usuariosBuscados);
 	  return "administracion";
   }
@@ -108,9 +110,23 @@ public class RootController {
   }
 
   @GetMapping("/propuesta")
-  public String propuesta(HttpSession session) {
-    return "propuesta";
+  public String propuesta(Model model, HttpSession session, @RequestParam long idPropuesta) {
+	  Propuesta p = entityManager.find(Propuesta.class, idPropuesta);
+	  model.addAttribute("propuesta", p);
+	  return "modals/propuesta";
   }
+  
+  
+  
+  
+  @GetMapping("/ultimatum")
+  public String ultimatum(Model model, HttpSession session, @RequestParam long idPropuesta) {
+	  Propuesta p = entityManager.find(Propuesta.class, idPropuesta);
+	  p.setModo(Propuesta.Modo.ULTIMATUM.toString());
+	  model.addAttribute("propuesta", p);
+	  return "modals/propuesta";
+  }
+  
 
   @GetMapping("/notificaciones")
   public String notificaciones(HttpSession session) {

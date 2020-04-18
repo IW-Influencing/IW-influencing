@@ -44,19 +44,20 @@
             </ul>
         </div>
 
-        <!-- MODAL DE NOTIFICIACIONES-->
+        <!-- MODAL DE NOTIFICIACIONES
         <div id="modalNoti" class="w3-modal">
             <div class="w3-modal-content">
                 <div th:replace="modals/notificaciones.html :: notificaciones(notificaciones=${notificaciones})"></div>
             </div>
         </div>
+ -->
     </div>
 
     <!-- MODALBAR -->
     <div th:fragment="modalBar(nombrePagina)" id="modalBar" class="title w3-display-container"
         style="padding-left: 0!important;">
         <div id="volver" class="w3-button w3-display-topleft"
-            onclick="document.getElementById('modalNoti').style.display='none'">
+            onclick="document.getElementById('modal').style.display='none'">
             <div class="w3-padding w3 w3-text-white"><i class="fa fa-arrow-left w3-large"></i> VOLVER</div>
         </div>
         <div id="nombrePagina" class="w3-display-middle" style="color: white; font-size: larger;text-align: center;">

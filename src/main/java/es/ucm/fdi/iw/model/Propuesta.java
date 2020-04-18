@@ -36,6 +36,8 @@ public class Propuesta {
 	private BigDecimal sueldo;
 	private LocalDateTime fechaInicio;
 	private LocalDateTime fechaFin;
+	public enum Modo {VISTA, CREACION, ULTIMATUM};
+	private String modo;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,6 +49,31 @@ public class Propuesta {
 		this.id = id;
 	}
 	
+
+	public LocalDateTime getFechaInicio() {
+		return fechaInicio;
+	}
+
+	public void setFechaInicio(LocalDateTime fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+	public LocalDateTime getFechaFin() {
+		return fechaFin;
+	}
+
+	public void setFechaFin(LocalDateTime fechaFin) {
+		this.fechaFin = fechaFin;
+	}
+
+	public String getModo() {
+		return modo;
+	}
+
+	public void setModo(String modo) {
+		this.modo = modo;
+	}
+
 	@OneToMany(targetEntity=Candidatura.class)
 	@JoinColumn(name="propuesta_id")
 	public List<Candidatura> getCandidaturas() {

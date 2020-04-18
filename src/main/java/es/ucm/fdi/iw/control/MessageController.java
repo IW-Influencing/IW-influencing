@@ -57,7 +57,6 @@ public class MessageController {
 	
 	public List<Evento.TransferChat> devuelveChat(HttpSession session, @RequestParam long idCandidatura) {
 		
-		
 		long userId = ((Usuario)session.getAttribute("u")).getId();
 		List<Evento> mensajes = entityManager.createNamedQuery("Evento.getChat").setParameter("idCandidatura", idCandidatura).getResultList();
 		Usuario u = entityManager.find(Usuario.class, userId);

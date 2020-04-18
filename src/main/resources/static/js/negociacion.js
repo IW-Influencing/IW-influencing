@@ -22,8 +22,8 @@ function insertaEnDiv(json, contenido, usuario, nombrePropuesta, idPropuesta){
 
 function cargaModal(idPropuesta){
 
-	return go(config.rootUrl + "propuesta/" + idPropuesta, 'GET')
-		.then(json => console.log(json));
+	return go2(config.rootUrl + "ultimatum?idPropuesta=" + idPropuesta, 'GET')
+		.then(json => document.getElementById("propuesta-ultimatum").innerHTML=json);
 }
 
 function cargaChat(idCandidatura) {
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // envía json, espera json de vuelta; lanza error si status != 200
-function go(url, method, data = {}) {
+function go2(url, method, data = {}) {
 	let params = {
 		method: method, // POST, GET, POST, PUT, DELETE, etc.
 		headers: {
@@ -61,7 +61,7 @@ function go(url, method, data = {}) {
 	console.log("sending", url, params)
 	return fetch(url, params).then(response => {
 		if (response.ok) {
-			return data = response.json();
+			return data = response.text();
 		} else {
 			response.text().then(t => { throw new Error(t + ", at " + url) });
 		}

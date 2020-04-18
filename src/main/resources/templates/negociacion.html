@@ -5,7 +5,6 @@
     <th:block th:replace="fragments/head.html :: header" />
     <link href="css/negociacion.css" rel="stylesheet">
     <script src="js/negociacion.js" type="text/javascript"></script>
-    <script src="js/cargaPropuesta.js" type="text/javascript"></script>
     <title>Influencing: Chat de Negociación</title>
 </head>
 
@@ -16,7 +15,7 @@
         <div th:replace="fragments/navigation.html :: navBar(nombrePagina='CHAT DE NEGOCIACIÓN')"></div>
     </header>
     <main>
-        <div class="contenido">
+        <div class="contenido-negociacion">
 
             <div class="lista">
                 <div class="propuesta" th:each="c: ${candidaturas}"
@@ -25,14 +24,6 @@
                         <img width="50" height="50" src="img/perfilIcon.svg">
                     </a>
                     <span th:text="${c.propuesta.nombre}"> Nombre de la propuesta</span>
-                    <div style="display: none" class="prop">
-                        <!-- 
-                            Rellenar el modal propuesta con thymeleaf
-                            Acceder en js con innerHTML y lanzar el modal
-                        -->
-                        <b>soy minero</b>
-                        <b>barrenero en sierra morena</b>
-                    </div>
                 </div>
             </div>
 
@@ -43,16 +34,12 @@
                         <a href="" class="nombre">Zapatillas</a>
                     </div>
                     <div class="ultimatum">
-                        <a class="boton" id="botonUltimatum">Enviar Ultimatum</a>
+                        <span class="boton" id="botonUltimatum" onclick="document.getElementById('modal').style.display='block'">Enviar Ultimatum</span>
                     </div>
                 </div>
                 <div id="contenidoChat"></div>
-                <table class="datatable" id="datatable">
-                </table>
-
-
+				<div id="propuesta-ultimatum"></div>
                 <input id="botonEnviar" type="text" placeholder="Introduzca su mensaje...">
-
             </div>
         </div>
 

@@ -31,6 +31,21 @@
                         <input type="submit" value="Buscar" class="btnEnviar">
                     </form>
                 </div>
+				<div class="dropdown">
+					<span class="nombre-dropdown" th:text=${nombreUsuario}>Nombre administrador</span>
+					<div class="dropdown-content">
+						<div class="dropdown-element">							  
+							<p>Ultimas notificaciones</p>
+							<div class="dropdown-notificaciones" th:each="notificacion: ${notificaciones}">
+								<p th:text="${notificacion.descripcion}">Notificacion</p>
+							</div>
+							<span onclick="document.getElementById('modal').style.display='block'" class="dropdown-boton"> Ver todas</span>
+						</div>
+						<div class="dropdown-element">
+							<a href="" class="dropdown-boton"> Cerrar sesion</a>
+						</div>
+					</div>
+				</div>
             </div>
             <div class="contenido">
 
@@ -57,6 +72,14 @@
                 </div>
             </div>
         </div>
+
+	 <div id="modal" class="w3-modal">
+            <div class="w3-modal-content">
+				<div th:replace="modals/notificaciones.html :: notificaciones(notificaciones=${notificaciones})"></div>
+            </div>
+      </div>
+
+
     </main>
     <!-- Footer -->
     <footer th:replace="fragments/navigation.html :: footer"></footer>
