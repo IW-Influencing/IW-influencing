@@ -19,7 +19,7 @@
 
             <div class="lista">
                 <div class="propuesta" th:each="c: ${candidaturas}"
-                    th:attr="data-id=${c.id},data-prop-id=${c.propuesta.id},data-otro=${session.u.hasRole('EMPRESA')?c.candidato.nombre:c.propuesta.empresa.nombre}">
+                    th:attr="data-id=${c.id},data-prop-id=${c.propuesta.id}, data-prop-nombre=${c.propuesta.nombre}, data-otro=${session.u.hasRole('EMPRESA')?c.candidato.nombre:c.propuesta.empresa.nombre}">
                     <a href="">
                         <img width="50" height="50" src="img/perfilIcon.svg">
                     </a>

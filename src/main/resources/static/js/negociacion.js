@@ -5,7 +5,7 @@
 // }
 
 
-function insertaEnDiv(json, contenido, usuario, nombrePropuesta, idPropuesta){
+function insertaEnDiv(json, contenido, idPropuesta){
 	let html = []
 	
 	json.forEach(msg => {
@@ -14,8 +14,6 @@ function insertaEnDiv(json, contenido, usuario, nombrePropuesta, idPropuesta){
 	})
 	
 	contenido.innerHTML = html.join("\n");
-	usuario.innerHTML = json[0].nombreUsuario;
-	nombrePropuesta.innerHTML = json[0].nombrePropuesta;	
 
 	document.getElementById("botonUltimatum").onclick = b => cargaModal(idPropuesta);
 }
@@ -26,20 +24,19 @@ function cargaModal(idPropuesta){
 		.then(json => document.getElementById("propuesta-ultimatum").innerHTML=json);
 }
 
-function cargaChat(idCandidatura) {
-	let usuario = document.getElementsByClassName("perfil")[0];
-	let nombrePropuesta = document.getElementsByClassName("nombre")[0];
+function cargaChat(idCandidatura, idPropuesta, nombreUsuario, nombrePropuesta) {
+	document.getElementsByClassName("perfil")[0].innerHTML = nombreUsuario;
+	document.getElementsByClassName("nombre")[0].innerHTML = nombrePropuesta;
 	let contenido = document.getElementById("contenidoChat");
-	
-	let idPropuesta = 1; // <--- mejorar
+	console.log(idPropuesta);
 
 	return go(config.rootUrl + "message/getChat?idCandidatura=" + idCandidatura, 'GET')
-		.then(json => insertaEnDiv(json, contenido, usuario, nombrePropuesta, idPropuesta));
+		.then(json => insertaEnDiv(json, contenido, idPropuesta));
 }
 
 document.addEventListener("DOMContentLoaded", () => {
 	for (let p of document.getElementsByClassName("propuesta")) {
-		p.onclick = c => cargaChat(p.dataset.id)
+		p.onclick = c => cargaChat(p.dataset.id, p.dataset.propId, p.dataset.otro, p.dataset.propNombre)
 	}
 })
 
