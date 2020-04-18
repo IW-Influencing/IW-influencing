@@ -34,20 +34,26 @@
                         <a href="" class="nombre">Zapatillas</a>
                     </div>
                     <div class="ultimatum">
-                        <span class="boton" id="botonUltimatum" onclick="document.getElementById('modal').style.display='block'">Enviar Ultimatum</span>
+                        <span class="boton" id="botonUltimatum">Enviar Ultimatum</span>
                     </div>
                 </div>
-                <div id="contenidoChat"></div>
-				<div id="propuesta-ultimatum"></div>
+                <div id="contenidoChat">
+                </div>
                 <input id="botonEnviar" type="text" placeholder="Introduzca su mensaje...">
+
             </div>
         </div>
 
-        <div id="id01" class="w3-modal">
+
+        <div id="modal" class="w3-modal">
             <div class="w3-modal-content">
-                <div id="modalPropuesta"></div>
+				<div id="propuesta-ultimatum">
+                </div>
             </div>
         </div>
+        
+
+
     </main>
     <div th:replace="fragments/navigation.html :: footer"></div>
 </body>

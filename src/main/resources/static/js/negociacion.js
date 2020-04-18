@@ -21,7 +21,7 @@ function insertaEnDiv(json, contenido, usuario, nombrePropuesta, idPropuesta){
 }
 
 function cargaModal(idPropuesta){
-
+	document.getElementById('modal').style.display='block';
 	return go2(config.rootUrl + "ultimatum?idPropuesta=" + idPropuesta, 'GET')
 		.then(json => document.getElementById("propuesta-ultimatum").innerHTML=json);
 }
@@ -29,7 +29,6 @@ function cargaModal(idPropuesta){
 function cargaChat(idCandidatura) {
 	let usuario = document.getElementsByClassName("perfil")[0];
 	let nombrePropuesta = document.getElementsByClassName("nombre")[0];
-	
 	let contenido = document.getElementById("contenidoChat");
 	
 	let idPropuesta = 1; // <--- mejorar
