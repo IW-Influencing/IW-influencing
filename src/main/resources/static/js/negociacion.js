@@ -1,32 +1,46 @@
-// function update(a) {
-// 	let c = document.getElementById("c");
-// 	a.innerHTML = "<i>hola mundo </i>";
-// 	a.style = "color: " + c.value + ";"
-// }
-
+document.addEventListener("DOMContentLoaded", () => {
+	for (let p of document.getElementsByClassName("propuesta")) {
+		p.onclick = c => cargaChat(p.dataset.id, p.dataset.propId, p.dataset.otroNombre, p.dataset.otroId, p.dataset.propNombre)
+	}
+})
 
 function insertaEnDiv(json, contenido, idPropuesta){
 	let html = []
 	
 	json.forEach(msg => {
 		let clase = msg.propio ? 'mensaje enviado' : 'mensaje recibido';
-		html.push("<p class='" + clase + "'> " + msg.text + "</p>");
+		html.push("<p class='" + clase + "'> " + msg.sent + " - " + msg.text + "</p>");
 	})
 	
 	contenido.innerHTML = html.join("\n");
 
-	document.getElementById("botonUltimatum").onclick = b => cargaModal(idPropuesta);
+	document.getElementById("botonUltimatum").onclick = b => cargaUltimatumModal(idPropuesta);
 }
 
-function cargaModal(idPropuesta){
+function cargaUltimatumModal(idPropuesta){
 	document.getElementById('modal').style.display='block';
 	return go2(config.rootUrl + "ultimatum?idPropuesta=" + idPropuesta, 'GET')
 		.then(json => document.getElementById("propuesta-ultimatum").innerHTML=json);
 }
 
-function cargaChat(idCandidatura, idPropuesta, nombreUsuario, nombrePropuesta) {
+function cargaPerfilModal(idUsuario){
+	document.getElementById('modal').style.display='block';
+	return go2(config.rootUrl + "perfil?idUsuario=" + idUsuario, 'GET')
+		.then(json => document.getElementById("propuesta-ultimatum").innerHTML=json);
+}
+
+
+function cargaPropuestaModal(idPropuesta){
+	document.getElementById('modal').style.display='block';
+	return go2(config.rootUrl + "ultimatum?idPropuesta=" + idPropuesta, 'GET')
+		.then(json => document.getElementById("propuesta-ultimatum").innerHTML=json);
+}
+
+function cargaChat(idCandidatura, idPropuesta, nombreUsuario, idUsuario, nombrePropuesta) {
 	document.getElementsByClassName("perfil")[0].innerHTML = nombreUsuario;
+	document.getElementsByClassName("perfil")[0].onclick = b => cargaPerfilModal(idUsuario);
 	document.getElementsByClassName("nombre")[0].innerHTML = nombrePropuesta;
+	document.getElementsByClassName("nombre")[0].onclick = b => cargaPropuestaModal(idPropuesta);
 	let contenido = document.getElementById("contenidoChat");
 	console.log(idPropuesta);
 
@@ -34,32 +48,5 @@ function cargaChat(idCandidatura, idPropuesta, nombreUsuario, nombrePropuesta) {
 		.then(json => insertaEnDiv(json, contenido, idPropuesta));
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-	for (let p of document.getElementsByClassName("propuesta")) {
-		p.onclick = c => cargaChat(p.dataset.id, p.dataset.propId, p.dataset.otro, p.dataset.propNombre)
-	}
-})
 
 
-// envía json, espera json de vuelta; lanza error si status != 200
-function go2(url, method, data = {}) {
-	let params = {
-		method: method, // POST, GET, POST, PUT, DELETE, etc.
-		headers: {
-			"Content-Type": "application/json; charset=utf-8",
-		},
-		body: JSON.stringify(data)
-	};
-	if (method === "GET") {
-		// GET requests cannot have body
-		delete params.body;
-	}
-	console.log("sending", url, params)
-	return fetch(url, params).then(response => {
-		if (response.ok) {
-			return data = response.text();
-		} else {
-			response.text().then(t => { throw new Error(t + ", at " + url) });
-		}
-	})
-}

@@ -19,7 +19,7 @@
                 <h4><b><span th:text="${nombrePagina}">nombrePagina</span></b></h4>
             </div>
             <div class="w3-dropdown-hover w3-right w3-margin-right w3-display-right">
-                <button class="w3-button" style="color: white;">
+                <button class="w3-button" style="color: white; "th:text="${session.u.nombre}">
                     <h4>Usuario</h4>
                 </button>
                 <div class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0">

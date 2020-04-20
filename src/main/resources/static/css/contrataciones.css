@@ -17,6 +17,8 @@ li:last-child {
   border-right: none;
 }
 
+
+
 li a {
   display: block;
   color: white;
@@ -110,10 +112,7 @@ w3-padding-32 {
 }
 
 input[type=text] {
-    margin: auto;
-    padding: 6px;
-    margin-top: 8px;
-    margin-right: 3%;
+	padding-left:1em;
     border: none;
     font-size: 17px;
     height: 25px;
@@ -141,4 +140,10 @@ input[type=text] {
 .imagen {
 	width: 100%;
 	margin-bottom:1%
+}
+
+#divBusquedaContrataciones{
+	display:flex;
+	justify-content: center;
+	align-items:center;
 }

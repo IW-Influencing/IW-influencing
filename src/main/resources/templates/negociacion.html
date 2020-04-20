@@ -19,8 +19,10 @@
 
             <div class="lista">
                 <div class="propuesta" th:each="c: ${candidaturas}"
-                    th:attr="data-id=${c.id},data-prop-id=${c.propuesta.id}, data-prop-nombre=${c.propuesta.nombre}, data-otro=${session.u.hasRole('EMPRESA')?c.candidato.nombre:c.propuesta.empresa.nombre}">
-                    <a href="">
+                    th:attr="data-id=${c.id},data-prop-id=${c.propuesta.id}, data-prop-nombre=${c.propuesta.nombre}, 
+					data-otro-nombre=${session.u.hasRole('EMPRESA')?c.candidato.nombre:c.propuesta.empresa.nombre},
+					data-otro-id=${session.u.hasRole('EMPRESA')?c.candidato.id:c.propuesta.empresa.id}">
+                    <a>
                         <img width="50" height="50" src="img/perfilIcon.svg">
                     </a>
                     <span th:text="${c.propuesta.nombre}"> Nombre de la propuesta</span>
@@ -30,8 +32,8 @@
             <div class="chat" id="chat">
                 <div class="barraChat">
                     <div class="informacionChat">
-                        <a href="" class="perfil"></a>
-                        <a href="" class="nombre"></a>
+                        <a class="perfil"></a>
+                        <a class="nombre"></a>
                     </div>
                     <div class="ultimatum">
                         <span class="boton" id="botonUltimatum">Enviar Ultimatum</span>

@@ -97,14 +97,24 @@ public class RootController {
   }
 
   @GetMapping("/perfil")
-  public String perfil(HttpSession session) {
-    return "perfil";
+  public String perfil(HttpSession session, @RequestParam long idUsuario) {
+	Usuario u = entityManager.find(Usuario.class, idUsuario);
+    return "modals/perfil";
   }
   
   @GetMapping("/ultimatum")
   public String ultimatum(Model model, HttpSession session, @RequestParam long idPropuesta) {
 	  Propuesta p = entityManager.find(Propuesta.class, idPropuesta);
 	  p.setModo(Propuesta.Modo.ULTIMATUM.toString());
+	  model.addAttribute("propuesta", p);
+	  return "modals/propuesta";
+  }
+  
+  
+  @GetMapping("/perfil")
+  public String perfil(Model model, HttpSession session, @RequestParam long idPropuesta) {
+	  Propuesta p = entityManager.find(Propuesta.class, idPropuesta);
+	  p.setModo(Propuesta.Modo.VISTA.toString());
 	  model.addAttribute("propuesta", p);
 	  return "modals/propuesta";
   }
