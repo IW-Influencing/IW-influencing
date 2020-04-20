@@ -19,7 +19,7 @@
 
 		<!-- !PAGE CONTENT! -->
 		<div>
-			<h2 style="margin: 2%;">Contrataciones en vigor</h2>
+			<h2 style="margin: 2%;" th:if="${not #lists.isEmpty(candidaturasEnVigor)}">Contrataciones en vigor</h2>
 			<div th:each="c: ${candidaturasEnVigor}" class="w3-row-padding">
 				<div style="display:block;">
 					<div class="w3-third w3-container w3-margin-bottom box" style="width: 97%">
@@ -67,7 +67,7 @@
 
 			</div>
 
-			<h2 style="margin: 2%;">Contrataciones pendientes de valorar</h2>
+			<h2 style="margin: 2%;" th:if="${not #lists.isEmpty(candidaturasPendientes)}">Contrataciones pendientes de valorar</h2>
 
 			<div th:each="c: ${candidaturasPendientes}" class="w3-row-padding">
 				<div style="display:block;">

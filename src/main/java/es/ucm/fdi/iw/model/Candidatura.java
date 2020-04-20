@@ -17,12 +17,14 @@ import javax.persistence.NamedQuery;
 	@NamedQuery(name="Candidatura.activeByCandidato", 
 	query="SELECT c FROM Candidatura c WHERE c.candidato.id = :idCandidato AND (c.estado = 'EN_CURSO' OR c.estado = 'NEGOCIANDO')"),
 
+	@NamedQuery(name="Candidatura.getSearch",
+	query="SELECT c FROM Candidatura c WHERE c.aceptada = true AND c.propuesta.nombre LIKE '%:patron%' AND (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario)"),
 	
 	@NamedQuery(name="Candidatura.getAllActive",
-	query="SELECT c FROM Candidatura c WHERE c.aceptada = true AND (c.estado = 'EN_CURSO' OR c.estado = 'NEGOCIANDO')"),
+	query="SELECT c FROM Candidatura c WHERE c.aceptada = true AND (c.estado = 'EN_CURSO' OR c.estado = 'NEGOCIANDO') AND (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario)"),
 
 	@NamedQuery(name="Candidatura.getPendingCandidatures",
-	query="SELECT c FROM Candidatura c WHERE c.aceptada = false AND (c.estado = 'EN_CURSO' OR c.estado = 'NEGOCIANDO')")
+	query="SELECT c FROM Candidatura c WHERE c.aceptada = false AND (c.estado = 'EN_CURSO' OR c.estado = 'NEGOCIANDO') AND (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario)")
 	
 })
 

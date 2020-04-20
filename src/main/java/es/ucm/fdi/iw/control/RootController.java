@@ -133,16 +133,6 @@ public class RootController {
     return "notificaciones";
   }
 
-  @GetMapping("/contrataciones")
-  public String contrataciones(Model model, HttpSession session) {
-    List<Candidatura> candidaturasEnVigor = entityManager.createNamedQuery("Candidatura.getAllActive", Candidatura.class).getResultList();
-    List<Candidatura> candidaturasPendientes = entityManager.createNamedQuery("Candidatura.getPendingCandidatures", Candidatura.class).getResultList();
-    model.addAttribute("candidaturasEnVigor", candidaturasEnVigor);
-    model.addAttribute("candidaturasPendientes", candidaturasPendientes);
-    return "contrataciones";
-    
-  }
-
 
   @GetMapping("/error")
   public String error(Model model) {
