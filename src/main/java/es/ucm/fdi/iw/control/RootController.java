@@ -100,24 +100,6 @@ public class RootController {
   public String perfil(HttpSession session) {
     return "perfil";
   }
-
-  @GetMapping("/busquedaPropuesta")
-  public String busquedaPropuesta(Model model, HttpSession session) {
-    List<Propuesta> propuestas = entityManager.createNamedQuery("Propuesta.getAllProposals", Propuesta.class).getResultList();
-    
-	  model.addAttribute("propuestas", propuestas);
-    return "busquedaPropuesta";
-  }
-
-  @GetMapping("/propuesta")
-  public String propuesta(Model model, HttpSession session, @RequestParam long idPropuesta) {
-	  Propuesta p = entityManager.find(Propuesta.class, idPropuesta);
-	  model.addAttribute("propuesta", p);
-	  return "modals/propuesta";
-  }
-  
-  
-  
   
   @GetMapping("/ultimatum")
   public String ultimatum(Model model, HttpSession session, @RequestParam long idPropuesta) {

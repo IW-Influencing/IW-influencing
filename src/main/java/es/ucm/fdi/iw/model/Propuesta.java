@@ -22,7 +22,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @NamedQueries({
 	
 	@NamedQuery(name="Propuesta.getAllProposals",
-	query="SELECT p FROM Propuesta p")
+	query="SELECT p FROM Propuesta p AND p.activa = true")
 	
 })
 public class Propuesta {
@@ -38,6 +38,15 @@ public class Propuesta {
 	private LocalDateTime fechaFin;
 	public enum Modo {VISTA, CREACION, ULTIMATUM};
 	private String modo;
+	private Boolean activa;
+
+	public Boolean isActiva() {
+		return this.activa;
+	}
+
+	public void setActiva(Boolean activa) {
+		this.activa = activa;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

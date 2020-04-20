@@ -28,12 +28,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 	query="SELECT u FROM Usuario u "
 			+ "WHERE u.nombreCuenta = :nombreCuenta AND u.activo = 1"),
 	
-	
-	
 	@NamedQuery(name="Usuario.hasNombre",
 	query="SELECT COUNT(u) "
 			+ "FROM Usuario u "
 			+ "WHERE u.nombre = :nombre"),
+			
 	@NamedQuery(name="Usuario.getAllUsers",
 	query="SELECT u FROM Usuario u"),
 	
