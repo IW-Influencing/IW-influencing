@@ -53,41 +53,4 @@ public class ContratacionesController {
 		return "contrataciones";
 	}
 
-	@GetMapping(path = "/received", produces = "application/json")
-	@Transactional // para no recibir resultados inconsistentes
-	@ResponseBody // para indicar que no devuelve vista, sino un objeto (jsonizado)
-	public List<Message.Transfer> retrieveMessages(HttpSession session) {
-		long UsuarioId = ((Usuario)session.getAttribute("u")).getId();
-		Usuario u = entityManager.find(Usuario.class, UsuarioId);
-		log.info("Generating message list for Usuario {} ({} messages)", 
-				u.getNombre(), u.getReceived().size());
-		return Message.asTransferObjects(u.getReceived());
-	}
-	
-	@GetMapping(path = "/getChat", produces = "application/json")
-	@Transactional // para no recibir resultados inconsistentes
-	@ResponseBody // para indicar que no devuelve vista, sino un objeto (jsonizado)
-	
-	public List<Evento.TransferChat> devuelveChat(HttpSession session, @RequestParam long idCandidatura) {
-		
-		long userId = ((Usuario)session.getAttribute("u")).getId();
-		List<Evento> mensajes = entityManager.createNamedQuery("Evento.getChat").setParameter("idCandidatura", idCandidatura).getResultList();
-		Usuario u = entityManager.find(Usuario.class, userId);
-		log.info("Generating message list for user {} ({} messages)", 
-				u.getNombre(), u.getReceived().size());
-		return Evento.asTransferObjects(mensajes, u);
-		
-		
-	}	
-
-	@GetMapping(path = "/unread", produces = "application/json")
-	@ResponseBody
-	public String checkUnread(HttpSession session) {
-		long UsuarioId = ((Usuario)session.getAttribute("u")).getId();		
-		long unread = entityManager.createNamedQuery("Message.countUnread", Long.class)
-			.setParameter("UsuarioId", UsuarioId)
-			.getSingleResult();
-		session.setAttribute("unread", unread);
-		return "{\"unread\": " + unread + "}";
-	}
 }

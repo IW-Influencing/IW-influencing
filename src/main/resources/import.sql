@@ -52,30 +52,31 @@ INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad
 	3
 );
 
-INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id) VALUES (
+INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id,activa)  VALUES (
 	1,
 	'Realizar publicidad en metro',
 	'Metropubli',
 	100,
 	'Ciudad',
-	4
+	4,true
 );
 
-INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id) VALUES (
+INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id,activa) VALUES (
 	2,
 	'Realizar publicidad en metro 2',
 	'Metropubli',
 	200,
 	'Ciudad',
-	4
+	4,true
 );
-INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id) VALUES (
+INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id, activa) VALUES (
 	3,
 	'Publicitar festival',
 	'Festipubli',
 	500,
 	'Musica',
-	4
+	4,
+true
 );
 
 

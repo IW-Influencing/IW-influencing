@@ -32,7 +32,7 @@ function cargaPerfilModal(idUsuario){
 
 function cargaPropuestaModal(idPropuesta){
 	document.getElementById('modal').style.display='block';
-	return go2(config.rootUrl + "ultimatum?idPropuesta=" + idPropuesta, 'GET')
+	return go2(config.rootUrl + "propuesta?idPropuesta=" + idPropuesta, 'GET')
 		.then(json => document.getElementById("propuesta-ultimatum").innerHTML=json);
 }
 
