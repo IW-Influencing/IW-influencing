@@ -13,7 +13,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 function cargaBusquedas(patron){
-	return go(config.rootUrl + "contrataciones/busca", 'POST', {patron:patron})
-	.then(d => {serverToken = d.token; updateState(d);return d;})
+	return go2(config.rootUrl + "contrataciones/busca?patron=" + patron, 'GET')
+	.then(html => { 
+var  div = document.getElementById("divBusquedaContrataciones");
+div.innerHTML = html;
+})
 		.catch(e => console.log(e))
+
 }
