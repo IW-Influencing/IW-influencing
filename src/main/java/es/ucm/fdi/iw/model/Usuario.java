@@ -32,7 +32,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 	query="SELECT COUNT(u) "
 			+ "FROM Usuario u "
 			+ "WHERE u.nombre = :nombre"),
-			
+		
+	@NamedQuery(name="Usuario.searchByNombre",
+	query="SELECT u FROM Usuario u "
+			+ "WHERE u.nombre LIKE :nombre"),
+	
 	@NamedQuery(name="Usuario.getAllUsers",
 	query="SELECT u FROM Usuario u"),
 	

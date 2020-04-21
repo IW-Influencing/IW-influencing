@@ -22,8 +22,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @NamedQueries({
 	
 	@NamedQuery(name="Propuesta.getAllProposals",
-	query="SELECT p FROM Propuesta p WHERE p.activa = true")
+	query="SELECT p FROM Propuesta p WHERE p.activa = true"),
 	
+@NamedQuery(name="Propuesta.searchByNombre",
+query="SELECT p FROM Propuesta p "
+		+ "WHERE p.nombre LIKE :nombre"),
 })
 public class Propuesta {
 

@@ -1,29 +1,6 @@
-<!DOCTYPE html>
-<html lang="es">
+<div class="w3-row-padding">
 
-<head>
-	<th:block th:replace="fragments/head.html :: header" />
-	<link rel="stylesheet" type="text/css" href="css/busquedaPropuesta.css" />
-		    <script src="js/busquedaPropuesta.js" type="text/javascript"></script>
-
-	<title>Influencing: Búsqueda de Propuestas</title>
-</head>
-
-<body style="width:100%" class="general">
-
-	<!-- !PAGE CONTENT! -->
-	<div>
-
-		<!-- Header -->
-		<header>
-			<div th:replace="fragments/navigation.html :: navBar(nombrePagina='BÚSQUEDA DE PROPUESTAS')"></div>
-			<div th:replace="fragments/navigation.html :: tagBar"></div>
-		</header>
-		<div id ="divPropuestas">
-		<!-- First Photo Grid-->
-		<div class="w3-row-padding">
-
-			<div th:each="prop: ${propuestas}" class="w3-third w3-container w3-margin-bottom box">
+			<div th:each="prop: ${resultadoBusqueda}" class="w3-third w3-container w3-margin-bottom box">
 
 				<div class="w3-container w3-white info">
 					<div class="imagen">
@@ -58,11 +35,3 @@
 			<a href="#" class="w3-bar-item w3-button w3-hover-blue">»</a>
 		</div>
 	</div>
-</div>
-	<!-- Footer -->
-	<footer th:replace="fragments/navigation.html :: footer"></footer>
-
-</div>
-
-</body>
-</html>

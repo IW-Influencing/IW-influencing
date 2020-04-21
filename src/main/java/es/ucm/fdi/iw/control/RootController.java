@@ -136,16 +136,6 @@ public class RootController {
   public String edicion(Model model) {
     return "edicion";
   }
-  
-  //Metodos nuevos
-  @GetMapping("/busquedaPerfil")
-  public String busquedaPerfil(HttpSession session,Model model) {
-	  
-    List<Usuario> users = entityManager.createNamedQuery("Usuario.getAllUsers", Usuario.class).getResultList();
-	  model.addAttribute("usuarios", users);
-	  return "busquedaPerfil";
-  }			
-  /*
-  @PostMapping("/devuelveChatNegociacion")
-  public String postChat()*/
+  	
+
 }

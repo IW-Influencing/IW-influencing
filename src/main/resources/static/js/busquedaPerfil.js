@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-	let inputBusqueda =  document.getElementById("inputBusquedaContrataciones")
+	let inputBusqueda =  document.getElementById("cuadroBusquedaTagBar")
 	inputBusqueda.addEventListener("keyup", function(event) {
 		if (event.keyCode === 13) {
 		    // Cancel the default action, if needed
@@ -13,9 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 function cargaBusquedas(patron){
-	return go2(config.rootUrl + "contrataciones/busca?patron=" + patron, 'GET')
+	return go2(config.rootUrl + "busquedaPerfil/busca?patron=" + patron, 'GET')
 	.then(html => { 
-var  div = document.getElementById("divContrataciones");
+var  div = document.getElementById("divPerfiles");
 div.innerHTML = html;
 })
 		.catch(e => console.log(e))

@@ -21,7 +21,7 @@
 		<div id="divBusquedaContrataciones">
 			<input type="text" placeholder="Search.." id="inputBusquedaContrataciones">
 		</div>
-		<div>
+		<div id = "divContrataciones">
 			<h2 style="margin: 2%;" th:if="${not #lists.isEmpty(candidaturasEnVigor)}">Contrataciones en vigor</h2>
 			<div th:each="c: ${candidaturasEnVigor}" class="w3-row-padding">
 				<div style="display:block;">

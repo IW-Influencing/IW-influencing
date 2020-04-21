@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import es.ucm.fdi.iw.model.Propuesta;
+import es.ucm.fdi.iw.model.Usuario;
 
 import java.util.List;
 
@@ -34,6 +35,20 @@ public class PropuestasController {
         
         return "busquedaPropuesta";
     }
+    
+    
+    @GetMapping("/busca")
+	public String postSearch(Model model, HttpSession session, @RequestParam String patron) {
+		patron = "%"+patron+"%";
+		List<Propuesta> propuestas = entityManager.createNamedQuery("Propuesta.searchByNombre", Propuesta.class)
+				.setParameter("nombre", patron).getResultList();
+		
+		
+		model.addAttribute("resultadoBusqueda", propuestas);
+		return "fragments/resultadoBusquedaPropuestas";
+	}
+    
+    
   
     @GetMapping("/propuesta")
     public String propuesta(Model model, HttpSession session, @RequestParam long idPropuesta) {

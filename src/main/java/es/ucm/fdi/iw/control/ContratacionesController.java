@@ -47,11 +47,11 @@ public class ContratacionesController {
 	@GetMapping("/busca")
 	public String postSearch(Model model, HttpSession session, @RequestParam String patron) {
 		patron = "%"+patron+"%";
-		List<Candidatura> candidaturas = entityManager.createNamedQuery("Candidatura.getSearch", Candidatura.class)
+		List<Candidatura> candidaturas = entityManager.createNamedQuery("Candidatura.searchByName", Candidatura.class)
 				.setParameter("patron", patron).setParameter("idUsuario",((Usuario)session.getAttribute("u")).getId())
 				.getResultList();
-		model.addAttribute("candidaturasEnVigor", candidaturas);
-		return "contrataciones";
+		model.addAttribute("resultadoBusqueda", candidaturas);
+		return "fragments/resultadoBusquedaContrataciones";
 	}
 
 }
