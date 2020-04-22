@@ -20,20 +20,20 @@ function insertaEnDiv(json, contenido, idPropuesta){
 function cargaUltimatumModal(idPropuesta){
 	document.getElementById('modal').style.display='block';
 	return go2(config.rootUrl + "ultimatum?idPropuesta=" + idPropuesta, 'GET')
-		.then(json => document.getElementById("propuesta-ultimatum").innerHTML=json);
+		.then(html => document.getElementById("propuesta-ultimatum").innerHTML=html);
 }
 
 function cargaPerfilModal(idUsuario){
 	document.getElementById('modal').style.display='block';
 	return go2(config.rootUrl + "perfil?idUsuario=" + idUsuario, 'GET')
-		.then(json => document.getElementById("propuesta-ultimatum").innerHTML=json);
+		.then(html => document.getElementById("propuesta-ultimatum").innerHTML=html);
 }
 
 
 function cargaPropuestaModal(idPropuesta){
 	document.getElementById('modal').style.display='block';
 	return go2(config.rootUrl + "propuesta?idPropuesta=" + idPropuesta, 'GET')
-		.then(json => document.getElementById("propuesta-ultimatum").innerHTML=json);
+		.then(html => document.getElementById("propuesta-ultimatum").innerHTML=html);
 }
 
 function cargaChat(idCandidatura, idPropuesta, nombreUsuario, idUsuario, nombrePropuesta) {

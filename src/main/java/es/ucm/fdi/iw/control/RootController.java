@@ -56,7 +56,7 @@ public class RootController {
   
   @GetMapping("/valoracion")
   public String valoracion(HttpSession session) {
-    return "valoracion";
+    return "modals/valoracion";
   }
   
   @GetMapping("/finCampanna")

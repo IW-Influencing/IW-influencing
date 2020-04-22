@@ -25,6 +25,7 @@ public class PerfilController {
 	private static final Logger log = LogManager.getLogger(ContratacionesController.class);
 	@Autowired 
 	private EntityManager entityManager;
+	private final int NUM_ELEMENTOS_PAGINA=2;
 	
 	  
 	  //Metodos nuevos
@@ -32,18 +33,27 @@ public class PerfilController {
 	  public String busquedaPerfil(HttpSession session,Model model) {
 		  
 	    List<Usuario> users = entityManager.createNamedQuery("Usuario.getAllUsers", Usuario.class).getResultList();
+		 model.addAttribute("numeroPaginas", Math.ceil((double)users.size()/NUM_ELEMENTOS_PAGINA));
+	     users=users.subList(0,NUM_ELEMENTOS_PAGINA);
 		  model.addAttribute("usuarios", users);
 		  return "busquedaPerfil";
 	  }
 	  
 	  @GetMapping("/busca")
-		public String postSearch(Model model, HttpSession session, @RequestParam String patron) {
+		public String postSearch(Model model, HttpSession session, @RequestParam(required = true, defaultValue = "1") int indicePagina, @RequestParam String patron ) {
 			patron = "%"+patron+"%";
 			List<Usuario> usuarios = entityManager.createNamedQuery("Usuario.searchByNombre", Usuario.class)
 					.setParameter("nombre", patron).getResultList();
-			
-			
+			model.addAttribute("numeroPaginas", Math.ceil((double)usuarios.size()/NUM_ELEMENTOS_PAGINA));
+			usuarios=usuarios.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, indicePagina*NUM_ELEMENTOS_PAGINA);
+
 			model.addAttribute("resultadoBusqueda", usuarios);
+			model.addAttribute("patron", patron);
+
 			return "fragments/resultadoBusquedaPerfiles";
 		}
+	  
+	  
+
+
 }

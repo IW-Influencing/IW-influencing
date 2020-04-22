@@ -24,7 +24,7 @@ import es.ucm.fdi.iw.model.Usuario.Rol;
 		query="SELECT e FROM Evento e WHERE e.receptor.id = :idUsuario AND e.tipo = 'BUSQUEDA' ORDER BY e.fechaEnviado"),
 	
 	@NamedQuery(name="Evento.getChat",
-		query="SELECT e FROM Evento e WHERE e.tipo = 'CHAT' AND e.candidatura.id = :idCandidatura"),
+		query="SELECT e FROM Evento e WHERE e.tipo = 'CHAT' AND e.candidatura.id = :idCandidatura ORDER BY e.fechaEnviado"),
 })
 
 @Entity

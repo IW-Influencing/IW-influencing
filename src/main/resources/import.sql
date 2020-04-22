@@ -31,7 +31,7 @@ INSERT INTO usuario(id,activo,nombre_cuenta,nombre,password,roles,apellidos,edad
 );
 
 INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad,tags,estado,score) VALUES (
-	3, 1, 'c', 'c', 
+	3, 1, 'ca', 'c', 
 	'{bcrypt}$2a$10$xLFtBIXGtYvAbRqM95JhcOaG23fHRpDoZIJrsF2cCff9xEHTTdK1u',
 	'INFLUENCER',
 	'Sanchez Garcia',
@@ -42,7 +42,7 @@ INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad
 );
 
 INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad,tags,estado,score) VALUES (
-	4, 1, 'd', 'd',
+	4, 1, 'da', 'd',
 	'{bcrypt}$2a$10$xLFtBIXGtYvAbRqM95JhcOaG23fHRpDoZIJrsF2cCff9xEHTTdK1u',
 	'EMPRESA',
 	'Martin Gimeno',

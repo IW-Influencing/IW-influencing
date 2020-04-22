@@ -5,18 +5,18 @@ document.addEventListener("DOMContentLoaded", () => {
 		    // Cancel the default action, if needed
 		    event.preventDefault();
 		    // Trigger the button element with a click
-		    cargaBusquedas(inputBusqueda.value);
+			if (inputBusqueda.value != "")
+			    cargaBusquedas(inputBusqueda.value);
 		 }
-	}); 
-	
+	});
+		
 })
 
 
 function cargaBusquedas(patron){
 	return go2(config.rootUrl + "contrataciones/busca?patron=" + patron, 'GET')
-	.then(html => { 
-var  div = document.getElementById("divContrataciones");
-div.innerHTML = html;
+	.then(html => { var  div = document.getElementById("divContrataciones");
+	div.innerHTML = html;
 })
 		.catch(e => console.log(e))
 
