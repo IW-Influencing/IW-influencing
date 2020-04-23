@@ -64,7 +64,25 @@
 
 .button{
 	border-radius: 10px;
+}
+
+.divBotonPublicar{
+margin:2em 0 0 1em;
 	
+}
+
+
+.boton{
+    text-align: center;
+	background-color: #77d4df;
+	font-size: large;
+	height: 35px;
+	width: 10%;
+	padding: 0.5em;
+	font-family: inherit;
+	border-radius: 10px;
+	margin: auto;
+
 }
 
 .proposal_block{
