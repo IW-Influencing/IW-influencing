@@ -116,7 +116,7 @@ public class RootController {
   @GetMapping("/ultimatum")
   public String ultimatum(Model model, HttpSession session, @RequestParam long idPropuesta) {
 	  Propuesta p = entityManager.find(Propuesta.class, idPropuesta);
-	  p.setModo(Propuesta.Modo.ULTIMATUM.toString());
+	  model.addAttribute("modo", "ULTIMATUM");
 	  model.addAttribute("propuesta", p);
 	  return "modals/propuesta";
   }
@@ -125,8 +125,8 @@ public class RootController {
   @GetMapping("/propuesta")
   public String propuesta(Model model, HttpSession session, @RequestParam long idPropuesta) {
 	  Propuesta p = entityManager.find(Propuesta.class, idPropuesta);
-	  p.setModo(Propuesta.Modo.VISTA.toString());
 	  model.addAttribute("propuesta", p);
+	  model.addAttribute("modo", "VISTA");
 	  return "modals/propuesta";
   }
   

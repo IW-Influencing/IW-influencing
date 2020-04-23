@@ -39,8 +39,6 @@ public class Propuesta {
 	private BigDecimal sueldo;
 	private LocalDateTime fechaInicio;
 	private LocalDateTime fechaFin;
-	public enum Modo {VISTA, CREACION, ULTIMATUM};
-	private String modo;
 	private Boolean activa;
 
 	public Boolean isActiva() {
@@ -78,13 +76,6 @@ public class Propuesta {
 		this.fechaFin = fechaFin;
 	}
 
-	public String getModo() {
-		return modo;
-	}
-
-	public void setModo(String modo) {
-		this.modo = modo;
-	}
 
 	@OneToMany(targetEntity=Candidatura.class)
 	@JoinColumn(name="propuesta_id")
