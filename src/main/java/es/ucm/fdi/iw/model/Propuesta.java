@@ -16,6 +16,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
@@ -40,7 +41,10 @@ public class Propuesta {
 	private LocalDateTime fechaInicio;
 	private LocalDateTime fechaFin;
 	private Boolean activa;
+	private int edadMinPublico;
+	private int edadMaxPublico;
 
+	
 	public Boolean isActiva() {
 		return this.activa;
 	}
@@ -59,11 +63,10 @@ public class Propuesta {
 		this.id = id;
 	}
 	
-
 	public LocalDateTime getFechaInicio() {
 		return fechaInicio;
 	}
-
+	
 	public void setFechaInicio(LocalDateTime fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
@@ -133,5 +136,23 @@ public class Propuesta {
 				.anyMatch(r -> r.equals(tag));
 	}
 
+	public int getEdadMinPublico() {
+		return edadMinPublico;
+	}
+
+	public void setEdadMinPublico(int edadMinPublico) {
+		this.edadMinPublico = edadMinPublico;
+	}
+
+	public int getEdadMaxPublico() {
+		return edadMaxPublico;
+	}
+
+	public void setEdadMaxPublico(int edadMaxPublico) {
+		this.edadMaxPublico = edadMaxPublico;
+	}
+
+
+	
 
 }

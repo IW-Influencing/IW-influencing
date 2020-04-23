@@ -10,14 +10,16 @@
 
   <!-- Header -->
   <header>
-    <div th:replace="fragments/navigation.html :: modalBar(nombrePagina='PROPUESTA')"></div>
+    <div th:replace="fragments/navigation.html :: modalBar(nombrePagina=${modo})"></div>
   </header>
 
   <!-- First Field Grid-->
-  <div class="contenido-propuesta">
+  <div class="contenido-propuesta" th:switch="${modo}">
     <div class="texto-propuesta">
-      <h2 th:text="${propuesta?.nombre}">Nombre de propuesta</h2>
-      <p th:text="${propuesta?.descripcion}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit,
+      <h2 th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA'" th:text="${propuesta.nombre}">Nombre de propuesta</h2>
+ 	  <div th:if="${modo} eq 'CREACION'"><h2>Nombre</h2><input type=text></div>
+	
+      <p th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA'" th:text="${propuesta?.descripcion}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit,
         vulputate eu pharetra nec,
         mattis ac
         neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend
@@ -31,27 +33,34 @@
         euismod sit amet. Quisque laoreet sem sit amet orci ullamcorper at ultricies metus viverra. Pellentesque
         arcu
         mauris, malesuada quis ornare accumsan, blandit sed diam.</p>
+ 	  <div th:if="${modo} eq 'CREACION'"><h2>Descripcion</h2><input type=text></div>
     </div>
 
     <div class="edad-propuesta">
 
       <h2>Edad Objetivo</h2>
       <p>Edades comprendidas entre
-        <select id="edades" name="edades">
+
+        <select id="edades" name="edades" th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'CREACION'">
           <option value="e1">1 - 10</option>
           <option value="e2">10 - 15</option>
           <option value="e3">15 - 20</option>
           <option value="e4">20 - 30</option>
-        </select>años</p>
+        </select>
+<span th:if="${modo} eq 'VISTA'" th:text="${propuesta?.edadMinPublico + ' - ' + propuesta?.edadMaxPublico}">  </span>
 
+años</p>
+	
     </div>
 
     <div class="periodo-propuesta">
 
       <h2>Periodo de la propuesta</h2>
-      <p>De <input type="date">
+      <p th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'CREACION'">De <input type="date">
         a <input type="date"></p>
 
+		<p th:if="${modo} eq 'VISTA'"  th:text="${#temporals.format(localDateTime, 'dd-MM-yyyy')}"> </p>
+	<!--'De ' + #dates.formatISO(propuesta?.fechaInicio) + ' a ' + #dates.formatISO(propuesta.fechaFin)-->
     </div>
     <div class="imagen-propuesta">
 
