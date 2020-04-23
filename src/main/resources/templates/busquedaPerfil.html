@@ -10,8 +10,6 @@
 
 <body style="width:100%" class="general">
 
-
-
 	<!-- !PAGE CONTENT! -->
 	<div>
 		<!-- Header -->
@@ -19,17 +17,18 @@
 			<div th:replace="fragments/navigation.html :: navBar(nombrePagina='BÚSQUEDA DE PERFILES')"></div>
 			<div th:replace="fragments/navigation.html :: tagBar"></div>
 		</header>
-			
+
 		<!-- First Photo Grid-->
 		<div id="divPerfiles">
-		<div th:replace="fragments/resultadoBusquedaPerfiles.html (resultadoBusqueda=${usuarios})"> </div>
+			<div th:replace="fragments/resultadoBusquedaPerfiles.html (resultadoBusqueda=${usuarios})"> </div>
 		</div>
-			<!-- End page content -->
+		<!-- End page content -->
 	</div>
-		<div th:replace="fragments/modal.html"></div>
 
-		<!-- Footer -->
-		<footer th:replace="fragments/navigation.html :: footer"></footer>
+	<!-- Footer -->
+	<footer th:replace="fragments/navigation.html :: footer"></footer>
+
+	<div th:replace="fragments/modal.html"></div>
 </body>
 
 </html>

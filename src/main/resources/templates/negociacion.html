@@ -18,8 +18,7 @@
         <div class="contenido-negociacion">
 
             <div class="lista">
-                <div class="propuesta" th:each="c: ${candidaturas}"
-                    th:attr="data-id=${c.id},data-prop-id=${c.propuesta.id}, data-prop-nombre=${c.propuesta.nombre}, 
+                <div class="propuesta" th:each="c: ${candidaturas}" th:attr="data-id=${c.id},data-prop-id=${c.propuesta.id}, data-prop-nombre=${c.propuesta.nombre}, 
 					data-otro-nombre=${session.u.hasRole('EMPRESA')?c.candidato.nombre:c.propuesta.empresa.nombre},
 					data-otro-id=${session.u.hasRole('EMPRESA')?c.candidato.id:c.propuesta.empresa.id}">
                     <a>
@@ -46,9 +45,13 @@
             </div>
         </div>
 
-		<div th:replace="fragments/modal.html"></div>
 
-        
+        <div id="modal" class="w3-modal">
+            <div class="w3-modal-content">
+                <div id="contenidoModal"></div>
+            </div>
+        </div>
+
 
 
     </main>

@@ -138,8 +138,10 @@ public class RootController {
   
 
   @GetMapping("/notificaciones")
-  public String notificaciones(HttpSession session) {
-    return "notificaciones";
+  public String notificaciones(HttpSession session, Model model) {
+    List<Evento> listaNotificaciones = entityManager.createNamedQuery("Evento.adminEventsByDate").setParameter("idUsuario", ((Usuario)session.getAttribute("u")).getId()).setMaxResults(LIMITE_NOTIFICACIONES).getResultList();
+	  model.addAttribute("notificaciones", listaNotificaciones);
+    return "modals/notificaciones";
   }
 
 
@@ -152,6 +154,5 @@ public class RootController {
   public String edicion(Model model) {
     return "edicion";
   }
-  	
 
 }
