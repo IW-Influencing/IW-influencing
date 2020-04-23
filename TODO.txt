@@ -1,13 +1,14 @@
-Inicio
-  - Boton para poder crear propuestas si eres empresa 
-
-Barra de arriba
-  - Añadir para poder editar perfil (lanzar modal de perfil en modo edicion)
-
+Propuesta
+  - Terminar adaptar vistas
+  - Añadir boton para apuntarse a la propuesta si eres influencer
+  - Boton denunciar para todos
+  
+  
 Perfil
   - CSS y modelo
   - Boton mandar mensaje privado
   - Boton denunciar
+  - Adaptar vistas para modos
 
 Negociacion
   - Ordenar por fecha en orden ascendente
@@ -28,9 +29,6 @@ Busqueda de propuestas
   - Al pinchar en nombre de la empresa tiene que lanzar el modal de perfil en modo vista
   - Boton para ver detalles
 
-Propuesta
-  - Añadir boton para apuntarse a la propuesta si eres influencer
-  - Boton denunciar para todos
   
 Contrataciones - Pendientes de valorar
   - Añadir boton de valorar que lance el modal de valoraciones
