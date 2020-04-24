@@ -3,8 +3,8 @@
 
 <div class="w3-row-padding">
 	<div th:each="usuario: ${resultadoBusqueda}" class="w3-third w3-container w3-margin-bottom box">
-		<div class="w3-container w3-white info">
-			<div class="imagen">
+		<div class="w3-container w3-white info divResultadoBusqueda">
+			<div class="imagen" th:attr="data-id=${usuario.id}">
 				<img src="https://www.pngkey.com/png/full/230-2301779_best-classified-apps-default-user-profile.png"
 					style="width:80%" class="w3-hover-opacity">
 			</div>
@@ -18,6 +18,9 @@
 				<button class="w3-button w3-white tags" style="border-radius:12px;" th:text="${tag}">Tag</button>
 			</div>
 				<p th:text="${usuario.estado}">Praesent tincidunt sed tellus ut rutrum.</p>
+				<button class="btn btnDetalles" th:attr="data-id=${usuario.id}">Detalles</button>
+
+		
 		</div>
 	</div>
 </div>

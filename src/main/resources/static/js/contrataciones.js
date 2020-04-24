@@ -9,9 +9,29 @@ document.addEventListener("DOMContentLoaded", () => {
 			    cargaBusquedas(inputBusqueda.value);
 		 }
 	});
+	
+	for (let p of document.getElementsByClassName("btnValorar")) {
+		p.onclick = c => cargaModalValorar(p.dataset.id)
+	}
+	
+		for (let p of document.getElementsByClassName("btnDetalles")) {
+		p.onclick = c => cargaModalPropuesta(p.dataset.id)
+	}
 		
 })
 
+
+function cargaModalValorar(idContratacion){
+	document.getElementById('modal').style.display='block';
+	return go2(config.rootUrl + "valoracion?idContratacion=" + idContratacion, 'GET')
+		.then(html => document.getElementById("contenidoModal").innerHTML=html);
+}
+
+function cargaModalPropuesta(idPropuesta){
+	document.getElementById('modal').style.display='block';
+	return go2(config.rootUrl + "propuesta?idPropuesta=" + idPropuesta, 'GET')
+		.then(html => document.getElementById("contenidoModal").innerHTML=html);
+}
 
 function cargaBusquedas(patron){
 	return go2(config.rootUrl + "contrataciones/busca?patron=" + patron, 'GET')

@@ -45,6 +45,9 @@ input[type=file] {
 	display: block;
 }
 
+
+
+
 .tags {
     border: 1px solid deepskyblue;
     padding: 4px;
@@ -57,7 +60,7 @@ input[type=file] {
 	display:flex;
 	flex-direction: column;
 	justify-content: space-evenly;
-	padding: 0 3em 0 3em;
+	padding: 0 3em 3em 3em;
 }
 
 .texto-propuesta{

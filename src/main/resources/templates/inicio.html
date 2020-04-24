@@ -14,7 +14,9 @@
 </header>
 
 <body class="general">
-    <!--  -------------------------Cuerpo de la web----------------------------->
+
+    <!--   Cuerpo de la web  -->
+
 	<div id="page_block" class="w3-row-padding global_div">
 		<div id= "left_panel" class="w3-third w3-container">
 			<div id="control_panel" class="control_panel">
@@ -29,7 +31,7 @@
 				<input class="rounded_corner" type="submit" value="Buscar">
 				</div>
 				<div class="divBotonPublicar">
-					<span class="boton" id="botonCrearPropuesta">Crear propuesta</span>
+					<button class="btn" id="botonCrearPropuesta">Crear propuesta</button>
 				</div>
 			</div>
 		</div>
@@ -37,16 +39,16 @@
 		<div id="messages" class="messages_panel w3-third w3-container">
 				<div class="content">
 					<h2> Mensajes recientes</h2>
-					<button class="button">Ver todos los mensajes</button>
+					<button class="btn">Ver todos los mensajes</button>
 					<div th:each="mensaje : ${mensajes}" id="message1" class="dark_block">
 						<div class="content">	
 							<p th:text="${mensaje.getSender().getNombre() +': '+ mensaje.getText()}">Emisor + Mensaje</p>
 							</br>
 							</br>
 							<div class="button_row">
-								<button class="button">Marcar como leído</button>
-                    			<button class="button middle_button">Eliminar mensaje</button>
-                    			<button class="button">Ir a la conversación</button>
+								<button class="btn">Marcar como leído</button>
+                    			<button class="btn middle_button">Eliminar mensaje</button>
+                    			<button class="btn">Ir a la conversación</button>
 							</div>
 						</div>	
 					</div>
@@ -57,7 +59,7 @@
 			<div id="proposal_block" class="proposal_block">
 				<div class="content">
 					<h1>Propuestas recientes</h1>
-					<button class="button">Ver todas las propuestas</button>
+					<button class="btn">Ver todas las propuestas</button>
 						<div id="proposal1" class="dark_block">
 						<div class="content">
 							<p style="font-weight: bold;">Marca1: <a style="font-weight: 100;">Lorem ipsum dolor sit amet,

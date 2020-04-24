@@ -9,7 +9,32 @@ document.addEventListener("DOMContentLoaded", () => {
 		 }
 	}); 
 	
+	for (let p of document.getElementsByClassName("imagen")) {
+		p.onclick = c => cargaModalPropuesta(p.dataset.id)
+	}
+	
+	for (let p of document.getElementsByClassName("bNombreEmpresa")) {
+		p.onclick = c => cargaModalPerfil(p.dataset.id)
+	}
+	
+	for (let p of document.getElementsByClassName("btnDetalles")) {
+		p.onclick = c => cargaModalPropuesta(p.dataset.id)
+	}
 })
+
+
+function cargaModalPropuesta(idPropuesta){
+	document.getElementById('modal').style.display='block';
+	return go2(config.rootUrl + "propuesta?idPropuesta=" + idPropuesta, 'GET')
+		.then(html => document.getElementById("contenidoModal").innerHTML=html);
+}
+
+
+function cargaModalPerfil(idPerfil){
+	document.getElementById('modal').style.display='block';
+	return go2(config.rootUrl + "perfil?idUsuario=" + idPerfil, 'GET')
+		.then(html => document.getElementById("contenidoModal").innerHTML=html);
+}
 
 
 function cargaBusquedas(patron){

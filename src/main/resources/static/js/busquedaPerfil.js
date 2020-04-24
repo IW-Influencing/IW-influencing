@@ -9,10 +9,18 @@ document.addEventListener("DOMContentLoaded", () => {
 		    	cargaBusquedas(inputBusqueda.value);
 		 }
 	}); 
-		for (let boton of document.getElementsByClassName("botonPaginacion")) {
+	
+	for (let boton of document.getElementsByClassName("botonPaginacion")) {
 			boton.onclick = p => botonLista(boton.dataset.propPatron,boton.dataset.propIndice);
 	}
-
+	
+	for (let p of document.getElementsByClassName("imagen")) {
+		p.onclick = c => cargaModalPerfil(p.dataset.id)
+	}
+	
+		for (let p of document.getElementsByClassName("btnDetalles")) {
+		p.onclick = c => cargaModalPerfil(p.dataset.id)
+	}
 	
 })
 
@@ -25,6 +33,13 @@ div.innerHTML = html;
 })
 		.catch(e => console.log(e))
 
+}
+
+
+function cargaModalPerfil(idPerfil){
+	document.getElementById('modal').style.display='block';
+	return go2(config.rootUrl + "perfil?idUsuario=" + idPerfil, 'GET')
+		.then(html => document.getElementById("contenidoModal").innerHTML=html);
 }
 
 

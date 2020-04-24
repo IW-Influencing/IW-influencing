@@ -36,16 +36,35 @@ function cargaPropuestaModal(idPropuesta){
 		.then(html => document.getElementById("contenidoModal").innerHTML=html);
 }
 
-function cargaChat(idCandidatura, idPropuesta, nombreUsuario, idUsuario, nombrePropuesta) {
+function cargaChat(idCandidatura, idPropuesta, nombreUsuario, idReceptor, nombrePropuesta) {
 	document.getElementsByClassName("perfil")[0].innerHTML = nombreUsuario;
-	document.getElementsByClassName("perfil")[0].onclick = b => cargaPerfilModal(idUsuario);
+	document.getElementsByClassName("perfil")[0].onclick = b => cargaPerfilModal(idReceptor);
 	document.getElementsByClassName("nombre")[0].innerHTML = nombrePropuesta;
 	document.getElementsByClassName("nombre")[0].onclick = b => cargaPropuestaModal(idPropuesta);
 	let contenido = document.getElementById("contenidoChat");
-	console.log(idPropuesta);
+	let inputMensaje =  document.getElementById("botonEnviar")
+		inputMensaje.addEventListener("keyup", function(event) {
+			if (event.keyCode === 13) {
+			    // Cancel the default action, if needed
+			    event.preventDefault();
+			    // Trigger the button element with a click
+		//Comprueba que el mensaje no esté vacío ni que solo contenga espacios en blanco
+		if (inputMensaje.value.length !== 0 && inputMensaje.value.trim())
+			    enviarMensajeChatNegociacion(inputMensaje.value, idCandidatura,idReceptor, contenido, idPropuesta);
+			 }
+		}); 
+
+
 
 	return go(config.rootUrl + "message/getChat?idCandidatura=" + idCandidatura, 'GET')
 		.then(json => insertaEnDiv(json, contenido, idPropuesta));
+}
+
+function enviarMensajeChatNegociacion(mensaje, idCandidatura,idReceptor, contenido, idPropuesta){
+	return go(config.rootUrl + "message/insertaMsg?idCandidatura=" + idCandidatura + "&msg=" + mensaje +"&idReceptor="+idReceptor, 'GET')
+		.then(json => insertaEnDiv(json, contenido, idPropuesta));
+	
+	
 }
 
 

@@ -55,7 +55,7 @@ public class RootController {
   }
   
   @GetMapping("/valoracion")
-  public String valoracion(HttpSession session) {
+  public String valoracion(HttpSession session, @RequestParam long idContratacion) {
     return "modals/valoracion";
   }
   

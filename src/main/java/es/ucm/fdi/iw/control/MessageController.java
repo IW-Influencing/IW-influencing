@@ -1,5 +1,6 @@
 package es.ucm.fdi.iw.control;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -20,6 +21,7 @@ import es.ucm.fdi.iw.model.Candidatura;
 import es.ucm.fdi.iw.model.Evento;
 import es.ucm.fdi.iw.model.Message;
 import es.ucm.fdi.iw.model.Usuario;
+import es.ucm.fdi.iw.model.Evento.Tipo;
 
 /**
  * Usuario-administration controller
@@ -51,6 +53,8 @@ public class MessageController {
 		return Message.asTransferObjects(u.getReceived());
 	}
 	
+	
+	
 	@GetMapping(path = "/getChat", produces = "application/json")
 	@Transactional // para no recibir resultados inconsistentes
 	@ResponseBody // para indicar que no devuelve vista, sino un objeto (jsonizado)
@@ -62,10 +66,29 @@ public class MessageController {
 		Usuario u = entityManager.find(Usuario.class, userId);
 		log.info("Generating message list for user {} ({} messages)", 
 				u.getNombre(), u.getReceived().size());
-		return Evento.asTransferObjects(mensajes, u);
-		
-		
+		return Evento.asTransferObjects(mensajes, u);	
 	}	
+	
+	
+	
+	@GetMapping(path = "/insertaMsg", produces = "application/json")
+	@Transactional // para no recibir resultados inconsistentes
+	@ResponseBody // para indicar que no devuelve vista, sino un objeto (jsonizado)
+	
+	public List<Evento.TransferChat> enviaMensaje(HttpSession session, @RequestParam long idCandidatura, @RequestParam String msg, @RequestParam long idReceptor) {
+		Evento e = new Evento();
+		e.setDescripcion(msg);
+		e.setCandidatura(entityManager.find(Candidatura.class, idCandidatura));
+		e.setEmisor(entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId()));
+		e.setFechaEnviado(LocalDateTime.now());
+		e.setLeido(false);
+		e.setTipo(Tipo.CHAT);
+		e.setReceptor(entityManager.find(Usuario.class, idReceptor));
+		entityManager.persist(e);
+
+		return devuelveChat(session, idCandidatura);	
+	}	
+	
 
 	@GetMapping(path = "/unread", produces = "application/json")
 	@ResponseBody

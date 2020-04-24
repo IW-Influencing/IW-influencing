@@ -19,3 +19,22 @@ a:hover{
     width: max-content;
 }
 
+
+.btn{
+	text-align: center;
+    background-color: #6ed1dd;
+    font-size: large;
+    height: 35px;
+    width: fit-content;
+    font-family: inherit;
+    border-radius: 10px;
+    margin: auto;
+}
+
+
+.divResultadoBusqueda{
+		display: flex;
+	flex-direction: column;
+	align-items:center;
+}
+
