@@ -26,6 +26,7 @@
 
 .global_div{
 	padding-bottom: 4%;
+	min-height:70%;
 }
 
 .right_panel{
@@ -75,7 +76,6 @@ margin:2em 0 0 1em;
 .boton{
     text-align: center;
 	background-color: #77d4df;
-	font-size: large;
 	height: 35px;
 	width: 10%;
 	padding: 0.5em;
@@ -99,4 +99,13 @@ margin:2em 0 0 1em;
 .middle_button{
 	margin-left: 20px; 
 	margin-right: 20px;
+}
+
+.btn-row{
+	white-space: nowrap;
+	
+	width:30%;
+	max-width:100%;
+    height:auto;
+	font-size: 100% ;
 }

@@ -8,16 +8,17 @@
 	<title>Influencing: Negociación</title>
 </head>
 
-<!-- Header -->
-<header>
-    <div th:replace="fragments/navigation.html :: navBar(nombrePagina='INICIO')"></div>
-</header>
 
-<body class="general">
 
+<body class="general body">
+	
+	<!-- Header -->
+	<header>
+    	<div th:replace="fragments/navigation.html :: navBar(nombrePagina='INICIO')"></div>
+	</header>
     <!--   Cuerpo de la web  -->
 
-	<div id="page_block" class="w3-row-padding global_div">
+	<div id="page_block" class="w3-row-padding global-div">
 		<div id= "left_panel" class="w3-third w3-container">
 			<div id="control_panel" class="control_panel">
 				<div id="content" class="content">
@@ -46,9 +47,9 @@
 							</br>
 							</br>
 							<div class="button_row">
-								<button class="btn">Marcar como leído</button>
-                    			<button class="btn middle_button">Eliminar mensaje</button>
-                    			<button class="btn">Ir a la conversación</button>
+								<button class="btn btn-row">Marcar como leído</button>
+                    			<button class="btn btn-row middle_button">Eliminar mensaje</button>
+                    			<button class="btn btn-row">Ir a la conversación</button>
 							</div>
 						</div>	
 					</div>
@@ -64,9 +65,9 @@
 						<div class="content">
 							<p th:text="${candidatura.getPropuesta().getEmpresa().getNombre() +': '+ candidatura.getPropuesta().getDescripcion()}">Creador de la propuesta + Descripcion</p>
                 			<div id="button_row_message" class="button_row">
-                    			<button class="button">Ir a la propuesta</button>
-                    			<button class="button middle_button">Abandonar propuesta</button>
-                    			<button class="button">Contactar</button>
+                    			<button class="button btn-row">Ir a la propuesta</button>
+                    			<button class="button btn-row middle_button">Abandonar propuesta</button>
+                    			<button class="button btn-row">Contactar</button>
                 			</div>
 						</div>	
 					</div>

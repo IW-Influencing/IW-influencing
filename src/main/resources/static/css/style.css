@@ -1,4 +1,4 @@
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif;}
 
 .header-config{
     background-color: #6ed1dd;                             /*Color que está en los moqups*/
@@ -29,6 +29,7 @@ a:hover{
     font-family: inherit;
     border-radius: 10px;
     margin: auto;
+	overflow:hidden;
 }
 
 
@@ -38,3 +39,4 @@ a:hover{
 	align-items:center;
 }
 
+	

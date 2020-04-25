@@ -80,3 +80,7 @@ li a:hover:not(.active) {
 #volver{
 	margin-right:35%;
 }
+
+.footer{
+	height: 94px;
+}
