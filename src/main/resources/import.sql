@@ -162,3 +162,5 @@ INSERT INTO message(id, sender_id, recipient_id, text) VALUES (
 	1,
 	'hola, como va esto'
 );
+
+

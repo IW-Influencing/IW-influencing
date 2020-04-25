@@ -12,7 +12,6 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
 	@NamedQuery(name="Candidatura.byCandidato", 
 	query="SELECT c.propuesta FROM Candidatura c WHERE c.candidato.id = :idCandidato"),
-
 	
 	@NamedQuery(name="Candidatura.activeByCandidato", 
 	query="SELECT c FROM Candidatura c WHERE c.candidato.id = :idCandidato AND (c.estado = 'EN_CURSO' OR c.estado = 'NEGOCIANDO')"),
@@ -24,8 +23,10 @@ import javax.persistence.NamedQuery;
 	query="SELECT c FROM Candidatura c WHERE c.aceptada = true AND (c.estado = 'EN_CURSO' OR c.estado = 'NEGOCIANDO') AND (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario)"),
 
 	@NamedQuery(name="Candidatura.getPendingCandidatures",
-	query="SELECT c FROM Candidatura c WHERE c.aceptada = false AND (c.estado = 'EN_CURSO' OR c.estado = 'NEGOCIANDO') AND (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario)")
+	query="SELECT c FROM Candidatura c WHERE c.aceptada = false AND (c.estado = 'EN_CURSO' OR c.estado = 'NEGOCIANDO') AND (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario)"),
 	
+	@NamedQuery(name="Candidatura.getByUser",
+		query="SELECT c FROM Candidatura c WHERE c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario")
 })
 
 public class Candidatura {

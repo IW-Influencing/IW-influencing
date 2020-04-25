@@ -60,32 +60,9 @@
 				<div class="content">
 					<h1>Propuestas recientes</h1>
 					<button class="btn">Ver todas las propuestas</button>
-						<div id="proposal1" class="dark_block">
+						<div th:each="candidatura : ${candidaturas}" id="proposal1" class="dark_block">
 						<div class="content">
-							<p style="font-weight: bold;">Marca1: <a style="font-weight: 100;">Lorem ipsum dolor sit amet,
-                        	consectetur adipiscing eli</a></p>
-                			<div id="button_row_message" class="button_row">
-                    			<button class="button">Ir a la propuesta</button>
-                    			<button class="button middle_button">Abandonar propuesta</button>
-                    			<button class="button">Contactar</button>
-                			</div>
-						</div>	
-					</div>
-					<div id="proposal2" class="dark_block">
-						<div class="content">
-							<p style="font-weight: bold;">Marca2: <a style="font-weight: 100;">Lorem ipsum dolor sit amet,
-                        	consectetur adipiscing elit</a></p>
-                			<div id="button_row_message" class="button_row">
-                    			<button class="button">Ir a la propuesta</button>
-                    			<button class="button middle_button">Abandonar propuesta</button>
-                    			<button class="button">Contactar</button>
-                			</div>
-						</div>	
-					</div>
-					<div id="proposal3" class="dark_block">
-						<div class="content">
-							<p style="font-weight: bold;">Marca3: <a style="font-weight: 100;">Lorem ipsum dolor sit amet,
-                        	consectetur adipiscing eli</a></p>
+							<p th:text="${candidatura.getPropuesta().getEmpresa().getNombre() +': '+ candidatura.getPropuesta().getDescripcion()}">Creador de la propuesta + Descripcion</p>
                 			<div id="button_row_message" class="button_row">
                     			<button class="button">Ir a la propuesta</button>
                     			<button class="button middle_button">Abandonar propuesta</button>

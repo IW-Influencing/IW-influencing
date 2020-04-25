@@ -31,6 +31,7 @@ public class RootController {
 
   private final int LIMITE_NOTIFICACIONES = 5;
   private final int LIMITE_MENSAJES_INICIO = 3;
+  private final int LIMITE_PROPUESTAS_INICIO = 3;
 	
   private static final Logger log = LogManager.getLogger(RootController.class);
   @Autowired
@@ -48,9 +49,10 @@ public class RootController {
   public String inicio(HttpSession session,Model model) {
 	long idUsuario = ((Usuario)session.getAttribute("u")).getId();
 	List<Message> messages = entityManager.createNamedQuery("Message.getAll").setParameter("idUsuario", idUsuario ).setMaxResults(LIMITE_MENSAJES_INICIO).getResultList();
+	List<Candidatura> candidaturas = entityManager.createNamedQuery("Candidatura.getByUser").setParameter("idUsuario", idUsuario ).setMaxResults(LIMITE_PROPUESTAS_INICIO).getResultList();;
 	if(messages == null) System.out.println("YES");
-
 	model.addAttribute("mensajes", messages);
+	model.addAttribute("candidaturas", candidaturas);
     return "inicio";
   }
   
