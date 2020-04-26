@@ -39,6 +39,7 @@ li a:hover:not(.active) {
     margin: 2px;
 	width: fit-content;
     min-width: 50px;
+	border-radius:12px;
 }
 
 .score {

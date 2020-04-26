@@ -20,13 +20,8 @@
 				</th:block>
 			</div>
     </div>
-    <div id="tags" th:text="${usuario.tags}">
-      <ul>
-        <li>Tag1</li>
-        <li>Tag2</li>
-        <li>Tag3</li>
-        <li>Tag4</li>
-      </ul>
+    <div id="tags">
+        <button th:each="i : ${usuario.tags}" class="w3-button w3-white tags" th:text="${i}" style="border-radius:12px;">Tag2</li>
     </div>
     <div id="propuestas">
       <h2>Historial de propuestas</h2>

@@ -132,12 +132,19 @@ public class RootController {
 	  return "modals/propuesta";
   }
   
+  @GetMapping("/registro")
+  public String registro(Model model, HttpSession session) {
+	  model.addAttribute("modo", "REGISTRO");
+	    return "modals/perfil";
+  }
+  
   @GetMapping("/creacionPropuesta")
   public String propuesta(Model model, HttpSession session) {
 	  model.addAttribute("modo","CREACION");
 	  return "modals/propuesta";
   }
   
+
 
   @GetMapping("/notificaciones")
   public String notificaciones(HttpSession session, Model model) {

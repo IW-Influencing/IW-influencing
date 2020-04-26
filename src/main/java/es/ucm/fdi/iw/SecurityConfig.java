@@ -40,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .anyRequest().authenticated()
             .and()
 		.formLogin()
+		//	.loginPage("/loginPropio")
         	.permitAll().successHandler(loginSuccessHandler);// <-- called when login Ok; can redirect
 		}
 	

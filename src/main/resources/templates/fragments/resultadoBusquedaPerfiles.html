@@ -15,7 +15,7 @@
 				</th:block>
 			</div>
 			<div th:each="tag: ${u.tags}">
-				<button class="w3-button w3-white tags" style="border-radius:12px;" th:text="${tag}">Tag</button>
+				<button class="w3-button w3-white tags" th:text="${tag}">Tag</button>
 			</div>
 				<p th:text="${u.estado}">Praesent tincidunt sed tellus ut rutrum.</p>
 				<button class="btn btnDetalles" th:attr="data-id=${u.id}">Detalles</button>
