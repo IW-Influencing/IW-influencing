@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import es.ucm.fdi.iw.model.Candidatura;
 import es.ucm.fdi.iw.model.Propuesta;
 import es.ucm.fdi.iw.model.Usuario;
+import es.ucm.fdi.iw.model.Usuario.Rol;
 import es.ucm.fdi.iw.services.UsuariosService;					   
 /**
  * Landing-page controller
@@ -96,8 +97,24 @@ public class RootController {
 
   @GetMapping("/contrataciones")
   public String contrataciones(Model model, HttpSession session) {
-    List<Candidatura> candidaturasEnVigor = entityManager.createNamedQuery("Candidatura.getAllActive", Candidatura.class).getResultList();
-    List<Candidatura> candidaturasPendientes = entityManager.createNamedQuery("Candidatura.getPendingCandidatures", Candidatura.class).getResultList();
+    List<Candidatura> candidaturasEnVigor;
+    List<Candidatura> candidaturasPendientes;
+
+    Usuario u = (Usuario)session.getAttribute("u");
+    if(u.hasRole(Rol.ADMIN)){
+      candidaturasEnVigor = entityManager.createNamedQuery("Candidatura.getAllActive", Candidatura.class).getResultList();
+      candidaturasPendientes = entityManager.createNamedQuery("Candidatura.getPendingCandidatures", Candidatura.class).getResultList();
+
+    }
+    else if(u.hasRole(Rol.INFLUENCER)){
+      candidaturasEnVigor = entityManager.createNamedQuery("Candidatura.getAllActiveByCandidate", Candidatura.class).setParameter("idCandidato", u.getId()).getResultList();
+      candidaturasPendientes = entityManager.createNamedQuery("Candidatura.getPendingCandidaturesByCandidate", Candidatura.class).setParameter("idCandidato", u.getId()).getResultList();
+    }
+    else{
+      candidaturasEnVigor = entityManager.createNamedQuery("Candidatura.getAllActiveByCompany", Candidatura.class).getResultList();
+      candidaturasPendientes = entityManager.createNamedQuery("Candidatura.getPendingCandidaturesByCompany", Candidatura.class).getResultList();
+    }
+    
     model.addAttribute("candidaturasEnVigor", candidaturasEnVigor);
     model.addAttribute("candidaturasPendientes", candidaturasPendientes);
     return "contrataciones";
