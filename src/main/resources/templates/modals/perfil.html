@@ -3,7 +3,7 @@
 
 <head>
   <th:block th:replace="fragments/head.html :: header" />
-  <!--<link rel="stylesheet" type="text/css" href="css/perfil.css" /> CAMBIAR CSS ENTERO-->
+  <link rel="stylesheet" type="text/css" href="css/perfil.css" />
 </head>
 
 <body>
@@ -11,34 +11,38 @@
     <div th:replace="fragments/navigation.html :: modalBar(nombrePagina='PERFIL')"></div>
   </header>
   <main>
-    <section id="principal">
+    <div id="principal">
       <img id="imagen-perfil" src="img/profile.png" width="200" />
       <h2 th:text="${usuario.nombre}">Pepito</h2>
-      <div id="valoracion">★★★✰✰</div>
-    </section>
-    <section id="tags" th:text="${usuario.tags}">
+      <div class="score">
+				<th:block th:each="i: ${#numbers.sequence(1, usuario.score)}">					
+					<i class="fa fa-star w3-margin-right"></i>
+				</th:block>
+			</div>
+    </div>
+    <div id="tags" th:text="${usuario.tags}">
       <ul>
         <li>Tag1</li>
         <li>Tag2</li>
         <li>Tag3</li>
         <li>Tag4</li>
       </ul>
-    </section>
-    <section id="propuestas">
-      <span>Historial de propuestas</span>
+    </div>
+    <div id="propuestas">
+      <h2>Historial de propuestas</h2>
       <ul>
         <li>Propuesta1</li>
         <li>Propuesta2</li>
         <li>Propuesta3</li>
         <li>Propuesta4</li>
       </ul>
-    </section>
-    <section id="edad">
-      <h3>Edad media de los seguidores</h3>
+    </div>
+    <div id="edad">
+      <h2>Edad media de los seguidores</h2>
       <div id="edad-media" th:text="${usuario.edad}">17 años</div>
-    </section>
-    <section id="seguidores">
-      <span>Seguidores en redes sociales</span>
+    </div>
+    <div id="seguidores">
+      <h2>Seguidores en redes sociales</h2>
       <ul>
         <li>
           <a href="twitter.com">@pepitoTwitter</a>
@@ -56,7 +60,7 @@
           <img src="img/instagram.png" width="20" />
         </li>
       </ul>
-    </section>
+    </div>
 	
   </main>
 </body>

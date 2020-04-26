@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="css/propuesta.css">
 </head>
 
-<body style="width:100%" class="general">
+<body style="width:100%" class="general"> <!-- general wtf¿?-->
 
   <!-- Header -->
   <header>
@@ -47,9 +47,8 @@
           <option value="e3">15 - 20</option>
           <option value="e4">20 - 30</option>
         </select>
-<span th:if="${modo} eq 'VISTA'" th:text="${propuesta?.edadMinPublico + ' - ' + propuesta?.edadMaxPublico}">  </span>
-
-años</p>
+        <span th:if="${modo} eq 'VISTA'" th:text="${propuesta?.edadMinPublico + ' - ' + propuesta?.edadMaxPublico}">  </span>
+      años</p>
 	
     </div>
 

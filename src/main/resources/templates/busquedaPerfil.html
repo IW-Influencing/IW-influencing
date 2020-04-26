@@ -8,26 +8,27 @@
 	<title>Influencing: Búsqueda de Perfiles</title>
 </head>
 
-<body style="width:100%" class="general">
+<body>
 
 	<!-- !PAGE CONTENT! -->
 	<div>
+
 		<!-- Header -->
 		<header>
 			<div th:replace="fragments/navigation.html :: navBar(nombrePagina='BÚSQUEDA DE PERFILES')"></div>
 			<div th:replace="fragments/navigation.html :: tagBar"></div>
 		</header>
 
-		<!-- First Photo Grid-->
 		<div id="divPerfiles">
 			<div th:replace="fragments/resultadoBusquedaPerfiles.html (resultadoBusqueda=${usuarios})"> </div>
 		</div>
-		<!-- End page content -->
+
 	</div>
 
 	<!-- Footer -->
 	<footer th:replace="fragments/navigation.html :: footer"></footer>
 
+	<!-- Modal -->
 	<div th:replace="fragments/modal.html"></div>
 </body>
 

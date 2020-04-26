@@ -9,7 +9,7 @@
 	<title>Influencing: Búsqueda de Propuestas</title>
 </head>
 
-<body style="width:100%" class="general">
+<body>
 
 	<!-- !PAGE CONTENT! -->
 	<div>
@@ -19,14 +19,18 @@
 			<div th:replace="fragments/navigation.html :: navBar(nombrePagina='BÚSQUEDA DE PROPUESTAS')"></div>
 			<div th:replace="fragments/navigation.html :: tagBar"></div>
 		</header>
+		
 		<div id ="divPropuestas">
 			<div th:replace="fragments/resultadoBusquedaPropuestas.html (resultadoBusqueda=${propuestas})"> </div>
 		</div>
-	<!-- Footer -->
-	<footer th:replace="fragments/navigation.html :: footer"></footer>
 
 	</div>
-		<div th:replace="fragments/modal.html"></div>
+
+	<!-- Footer -->
+	<footer th:replace="fragments/navigation.html :: footer"></footer>
+	
+	<!-- Modal -->
+	<div th:replace="fragments/modal.html"></div>
 
 </body>
 </html>
