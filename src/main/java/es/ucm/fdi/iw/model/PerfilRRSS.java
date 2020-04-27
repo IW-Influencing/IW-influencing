@@ -6,24 +6,19 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Perfil {
+public class PerfilRRSS {
 
 	private long id;
 	private Usuario influencer;
 	private String nombre;
-	private String[] numSeguidores;
-	private String imagen;
+	private int numSeguidores;
 
-	public Perfil() {
-	}
 
-	public Perfil(long id, Usuario influencer, String nombre, String[] numSeguidores, String imagen) {
+	public PerfilRRSS(long id, Usuario influencer, String nombre, int numSeguidores) {
 		this.id = id;
 		this.influencer = influencer;
 		this.nombre = nombre;
 		this.numSeguidores = numSeguidores;
-		this.imagen = imagen;
-
 	}
 
 	@Id
@@ -53,27 +48,12 @@ public class Perfil {
 		this.nombre = nombre;
 	}
 
-	public String[] getNumSeguidores() {
+	public int getNumSeguidores() {
 		return this.numSeguidores;
 	}
 
-	public void setNumSeguidores(String[] numSeguidores) {
+	public void setNumSeguidores(int numSeguidores) {
 		this.numSeguidores = numSeguidores;
-	}
-
-	public String getImagen() {
-		return this.imagen;
-	}
-
-	public void setImagen(String imagen) {
-		this.imagen = imagen;
-	}
-
-	@Override
-	public String toString() {
-		return "{" + " idPerfil='" + getId() + "'" + ", influencer='" + getInfluencer() + "'" + ", nombre='"
-				+ getNombre() + "'" + ", numSeguidores='" + getNumSeguidores() + "'" + ", imagen='" + getImagen() + "'"
-				+ "}";
 	}
 
 }

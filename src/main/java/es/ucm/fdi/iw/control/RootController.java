@@ -99,31 +99,6 @@ public class RootController {
 	  return "administracion";
   }
 
-  @GetMapping("/edicionPerfil")
-  public String edicionPerfil(Model model, HttpSession session) {
-	Usuario u = entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId());
-	model.addAttribute("tipo", "EDICION");
-	model.addAttribute("usuario", u);
-    return "modals/perfil";
-  }
-  
-  
-  @GetMapping("/perfil")
-  public String perfil(Model model, HttpSession session, @RequestParam long idUsuario) {
-	Usuario u = entityManager.find(Usuario.class, idUsuario);
-	model.addAttribute("tipo", "VISTA");
-	model.addAttribute("usuario", u);
-    return "modals/perfil";
-  }    
-
-  
-  @GetMapping("/registro")
-  public String registro(Model model, HttpSession session) {
-	  model.addAttribute("modo", "REGISTRO");
-	    return "modals/perfil";
-  }
-  
-
 
   @GetMapping("/notificaciones")
   public String notificaciones(HttpSession session, Model model) {
@@ -138,9 +113,5 @@ public class RootController {
     return "error";
   }
   
-  @GetMapping("/edicion")
-  public String edicion(Model model) {
-    return "edicion";
-  }
 
 }
