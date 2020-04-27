@@ -22,7 +22,7 @@ import es.ucm.fdi.iw.model.Usuario;
 @Controller()
 @RequestMapping("busquedaPerfil")
 public class BusquedaPerfilController {
-	private static final Logger log = LogManager.getLogger(ContratacionesController.class);
+	private static final Logger log = LogManager.getLogger(BusquedaPerfilController.class);
 	@Autowired 
 	private EntityManager entityManager;
 	private final int NUM_ELEMENTOS_PAGINA=2;

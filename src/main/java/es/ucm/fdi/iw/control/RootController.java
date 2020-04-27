@@ -114,44 +114,13 @@ public class RootController {
 	model.addAttribute("tipo", "VISTA");
 	model.addAttribute("usuario", u);
     return "modals/perfil";
-  }
-  
-  @GetMapping("/ultimatum")
-  public String ultimatum(Model model, HttpSession session, @RequestParam long idPropuesta) {
-	  Propuesta p = entityManager.find(Propuesta.class, idPropuesta);
-	  model.addAttribute("modo", "ULTIMATUM");
-	  model.addAttribute("propuesta", p);
-	  return "modals/propuesta";
-  }
-  
-  
-  @GetMapping("/vistaUltimatum")
-  public String vistaUltimatum(Model model, HttpSession session, @RequestParam long idPropuesta) {
-	  Propuesta p = entityManager.find(Propuesta.class, idPropuesta);
-	  model.addAttribute("modo", "VISTA-ULTIMATUM");
-	  model.addAttribute("propuesta", p);
-	  return "modals/propuesta";
-  }
-  
-  
-  @GetMapping("/propuesta")
-  public String propuesta(Model model, HttpSession session, @RequestParam long idPropuesta) {
-	  Propuesta p = entityManager.find(Propuesta.class, idPropuesta);
-	  model.addAttribute("propuesta", p);
-	  model.addAttribute("modo", "VISTA");
-	  return "modals/propuesta";
-  }
+  }    
+
   
   @GetMapping("/registro")
   public String registro(Model model, HttpSession session) {
 	  model.addAttribute("modo", "REGISTRO");
 	    return "modals/perfil";
-  }
-  
-  @GetMapping("/creacionPropuesta")
-  public String propuesta(Model model, HttpSession session) {
-	  model.addAttribute("modo","CREACION");
-	  return "modals/propuesta";
   }
   
 
