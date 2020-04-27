@@ -15,26 +15,31 @@
  </header>
 
   <!-- First Field Grid-->
-  <div class="contenido-propuesta" th:switch="${modo}">
+  <div class="contenido-propuesta w3-display-container">
     <div class="texto-propuesta">
-      <h2 th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'" th:text="${propuesta.nombre}">Nombre de propuesta</h2>
- 	  <div th:if="${modo} eq 'CREACION'"><h2>Nombre</h2><input type=text></div>
-	
-      <p th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'" th:text="${propuesta?.descripcion}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit,
-        vulputate eu pharetra nec,
-        mattis ac
-        neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend
-        tristique,
-        tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium
-        sit
-        amet quis magna. Aenean velit odio, elementum in tempus ut, vehicula eu diam. Pellentesque rhoncus aliquam
-        mattis.
-        Ut vulputate eros sed felis sodales nec vulputate justo hendrerit. Vivamus varius pretium ligula, a aliquam
-        odio
-        euismod sit amet. Quisque laoreet sem sit amet orci ullamcorper at ultricies metus viverra. Pellentesque
-        arcu
-        mauris, malesuada quis ornare accumsan, blandit sed diam.</p>
- 	  <div th:if="${modo} eq 'CREACION'"><h2>Descripcion</h2><input type=text></div>
+ 	  <div th:if="${modo} eq 'CREACION'">
+		<h2>Nombre</h2><input type=text>
+		<h2>Descripcion</h2><input type=text>
+		</div>
+ 	<div>
+		<h2 th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'" th:text="${propuesta.nombre}">Nombre de propuesta</h2>
+			
+		      <p th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'" th:text="${propuesta?.descripcion}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit,
+		        vulputate eu pharetra nec,
+		        mattis ac
+		        neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend
+		        tristique,
+		        tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium
+		        sit
+		        amet quis magna. Aenean velit odio, elementum in tempus ut, vehicula eu diam. Pellentesque rhoncus aliquam
+		        mattis.
+		        Ut vulputate eros sed felis sodales nec vulputate justo hendrerit. Vivamus varius pretium ligula, a aliquam
+		        odio
+		        euismod sit amet. Quisque laoreet sem sit amet orci ullamcorper at ultricies metus viverra. Pellentesque
+		        arcu
+		        mauris, malesuada quis ornare accumsan, blandit sed diam.</p>
+	</div>
+      
     </div>
 
     <div class="edad-propuesta">
@@ -79,12 +84,14 @@
     </div>
 
     <button  th:if="${modo} eq 'CREACION'" class="btn">Publicar</button>
-    <button  th:if="${modo} eq 'VISTA'" class="btn">Apuntarse</button>
+    <button  th:if="${modo} eq 'VISTA' and ${session.u.hasRole('INFLUENCER')}" class="btn">Apuntarse</button>
     <button  th:if="${modo} eq 'ULTIMATUM'" class="btn">Enviar</button>
 	<div class="botones-propuesta" th:if="${modo} eq 'VISTA-ULTIMATUM'"> 
 		<button class="btn btnAceptar">Aceptar</button>
 	    <button  class="btn btnRechazar">Rechazar</button>
 	</div>
+	
+	<button class="w3-display-topright" id="btnDenunciar">Denunciar</button>
 
 
   

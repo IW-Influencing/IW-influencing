@@ -4,6 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function cargaPropuestaModal(){
 	document.getElementById('modal').style.display='block';
-	return go2(config.rootUrl + "creacionPropuesta", 'GET')
+	return go2(config.rootUrl + "propuesta/creacion", 'GET')
 		.then(html => document.getElementById("contenidoModal").innerHTML=html);
 }

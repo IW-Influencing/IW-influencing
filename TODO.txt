@@ -1,7 +1,6 @@
 Propuesta
-  - Terminar adaptar vistas
-  - Añadir boton para apuntarse a la propuesta si eres influencer
-  - Boton denunciar para todos
+  - Fecha
+  - Creación
   
   
 Perfil

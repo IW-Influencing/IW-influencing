@@ -19,7 +19,7 @@ function insertaEnDiv(json, contenido, idPropuesta){
 
 function cargaUltimatumModal(idPropuesta){
 	document.getElementById('modal').style.display='block';
-	return go2(config.rootUrl + "ultimatum?idPropuesta=" + idPropuesta, 'GET')
+	return go2(config.rootUrl + "propuesta/ultimatum?idPropuesta=" + idPropuesta, 'GET')
 		.then(html => document.getElementById("contenidoModal").innerHTML=html);
 }
 
