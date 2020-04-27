@@ -10,16 +10,16 @@
 
   <!-- Header -->
   <header>
-    <div th:replace="fragments/navigation.html :: modalBar(nombrePagina=${modo})"></div>
+    <div th:replace="fragments/navigation.html :: modalBar(nombrePagina=${'PROPUESTA - ' + modo})"></div>
   </header>
 
   <!-- First Field Grid-->
   <div class="contenido-propuesta" th:switch="${modo}">
     <div class="texto-propuesta">
-      <h2 th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA'" th:text="${propuesta.nombre}">Nombre de propuesta</h2>
+      <h2 th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'" th:text="${propuesta.nombre}">Nombre de propuesta</h2>
  	  <div th:if="${modo} eq 'CREACION'"><h2>Nombre</h2><input type=text></div>
 	
-      <p th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA'" th:text="${propuesta?.descripcion}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit,
+      <p th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'" th:text="${propuesta?.descripcion}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit,
         vulputate eu pharetra nec,
         mattis ac
         neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend
@@ -47,7 +47,7 @@
           <option value="e3">15 - 20</option>
           <option value="e4">20 - 30</option>
         </select>
-        <span th:if="${modo} eq 'VISTA'" th:text="${propuesta?.edadMinPublico + ' - ' + propuesta?.edadMaxPublico}">  </span>
+        <span th:if="${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'" th:text="${propuesta?.edadMinPublico + ' - ' + propuesta?.edadMaxPublico}">  </span>
       años</p>
 	
     </div>
@@ -58,7 +58,7 @@
       <p th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'CREACION'">De <input type="date">
         a <input type="date"></p>
 
-		<p th:if="${modo} eq 'VISTA'"  th:text="${#temporals.format(localDateTime, 'dd-MM-yyyy')}"> </p>
+		<p th:if="${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'"  th:text="${#temporals.format(localDateTime, 'dd-MM-yyyy')}"> </p>
 	<!--'De ' + #dates.formatISO(propuesta?.fechaInicio) + ' a ' + #dates.formatISO(propuesta.fechaFin)-->
     </div>
     <div class="imagen-propuesta">
@@ -76,6 +76,8 @@
       <button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
       <button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
     </div>
+
+
     <button class="btn">Publicar</button>
   
   </div>

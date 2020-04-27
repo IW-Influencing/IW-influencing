@@ -124,6 +124,15 @@ public class RootController {
   }
   
   
+  @GetMapping("/vistaUltimatum")
+  public String vistaUltimatum(Model model, HttpSession session, @RequestParam long idPropuesta) {
+	  Propuesta p = entityManager.find(Propuesta.class, idPropuesta);
+	  model.addAttribute("modo", "VISTA-ULTIMATUM");
+	  model.addAttribute("propuesta", p);
+	  return "modals/propuesta";
+  }
+  
+  
   @GetMapping("/propuesta")
   public String propuesta(Model model, HttpSession session, @RequestParam long idPropuesta) {
 	  Propuesta p = entityManager.find(Propuesta.class, idPropuesta);

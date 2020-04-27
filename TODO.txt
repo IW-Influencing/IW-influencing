@@ -20,7 +20,10 @@ Valoracion
 
 Imagenes de usuario/propuestas
 
+Validacion formulario
 
-Busquedas por tag en perfil y propuesta
+Busquedas por tag en perfil y propuesta al pinchar en tag de uno especifico o seleccionar en la barra
 
 Registro
+
+Mostrar ultimatum chat
