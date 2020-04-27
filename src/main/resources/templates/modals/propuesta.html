@@ -10,8 +10,11 @@
 
   <!-- Header -->
   <header>
-    <div th:replace="fragments/navigation.html :: modalBar(nombrePagina=${'PROPUESTA - ' + modo})"></div>
-  </header>
+	<div th:if="${modo} eq 'VISTA' or ${modo} eq 'CREACION'"><div th:replace="fragments/navigation.html :: modalBar(nombrePagina='PROPUESTA')"></div></div>
+    <div th:if="${modo} eq 'ULTIMATUM'or ${modo} eq 'VISTA-ULTIMATUM'"> <div th:replace="fragments/navigation.html :: modalBar(nombrePagina='ULTIMATUM')"></div></div>
+
+ 
+ </header>
 
   <!-- First Field Grid-->
   <div class="contenido-propuesta" th:switch="${modo}">
