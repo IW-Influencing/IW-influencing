@@ -21,7 +21,7 @@ import es.ucm.fdi.iw.model.Usuario;
 
 @Controller()
 @RequestMapping("busquedaPerfil")
-public class PerfilController {
+public class BusquedaPerfilController {
 	private static final Logger log = LogManager.getLogger(ContratacionesController.class);
 	@Autowired 
 	private EntityManager entityManager;

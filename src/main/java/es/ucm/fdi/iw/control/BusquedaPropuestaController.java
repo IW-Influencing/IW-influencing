@@ -20,9 +20,9 @@ import org.apache.logging.log4j.Logger;
 
 @Controller()
 @RequestMapping("busquedaPropuesta")
-public class PropuestasController {
+public class BusquedaPropuestaController {
     
-    private static final Logger log = LogManager.getLogger(PropuestasController.class);
+    private static final Logger log = LogManager.getLogger(BusquedaPropuestaController.class);
     
     @Autowired 
     private EntityManager entityManager;

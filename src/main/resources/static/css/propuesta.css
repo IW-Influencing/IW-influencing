@@ -12,6 +12,12 @@ input[type=file] {
   margin: 0 1em 0 1em;
 }
 
+.botones-propuesta{
+	padding-top: 6em;
+	display:flex;
+	justify-content: center;
+}
+
 .contenido-propuesta{
 	display:flex;
 	flex-direction: column;
@@ -63,4 +69,15 @@ input[type=file] {
 	border-right: 1px solid #333333;
 	border-bottom: 1px solid #333333;
 	border-left: 1px solid #CCCCCC;
+}
+
+.btnAceptar{
+	font-size: 1.5em;
+	background-color: #98FB98;
+}
+
+.btnRechazar{
+	font-size: 1.5em;
+	background-color: #FA8072;
+
 }
