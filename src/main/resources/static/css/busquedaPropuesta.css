@@ -33,8 +33,9 @@ li a:hover:not(.active) {
     border: 1px solid deepskyblue;
     padding: 4px;
     margin: 2px;
-	width: fit-content;
+	  width: fit-content;
     min-width: 50px;
+    border-radius:12px;
 }
 
 .score {
@@ -71,11 +72,14 @@ input[type=text] {
     width: 25%;
 }
 
-img{height: 120px;}
+img{
+  height: 120px;
+  width:80%;
+}
 
 .imagen {
 	width: 100%;
-    text-align: center;
+  text-align: center;
 }
 
 
