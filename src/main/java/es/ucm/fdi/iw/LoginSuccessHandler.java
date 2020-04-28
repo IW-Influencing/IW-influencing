@@ -49,10 +49,16 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 	    
 	    // add a 'u' session variable, accessible from thymeleaf via ${session.u}
 	    log.info("Storing user info for {} in session {}", username, session.getId());
-		Usuario u = entityManager.createNamedQuery("Usuario.byNombreUsuario", Usuario.class)
-		        .setParameter("nombre", username)
+		Usuario u = entityManager.createNamedQuery("Usuario.byNombreCuenta", Usuario.class)
+		        .setParameter("nombreCuenta", username)
 		        .getSingleResult();		
 		session.setAttribute("u", u);
+		
+		long unread = entityManager.createNamedQuery("Message.countUnread", Long.class)
+		        .setParameter("idUsuario", u.getId())
+		        .getSingleResult();	
+		session.setAttribute("unread", unread);
+		
 		
 		// add a 'ws' session variable
 		session.setAttribute("ws", request.getRequestURL().toString()
@@ -64,7 +70,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		if (u.hasRole(Usuario.Rol.ADMIN)) {
 			redirect = "/administracion";
 		} else if (u.hasRole(Rol.EMPRESA) || u.hasRole(Rol.INFLUENCER)) {
-			redirect = "/profile/"+ u.getId();
+			redirect = "/inicio";
 		} else {
 			redirect = "/error";
 		}		

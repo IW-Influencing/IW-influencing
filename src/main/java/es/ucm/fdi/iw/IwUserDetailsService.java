@@ -27,8 +27,8 @@ public class IwUserDetailsService implements UserDetailsService {
 
     public UserDetails loadUserByUsername(String nombre){
     	try {
-    		Usuario u = entityManager.createNamedQuery("Usuario.byNombreUsuario", Usuario.class)
-                    .setParameter("nombre", nombre)
+    		Usuario u = entityManager.createNamedQuery("Usuario.byNombreCuenta", Usuario.class)
+                    .setParameter("nombreCuenta", nombre)
                     .getSingleResult();
 	        // build UserDetails object
 	        ArrayList<SimpleGrantedAuthority> roles = new ArrayList<>();

@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <!--  SDF-->
+
 <head>
-    <th:block th:replace="fragments/head.html :: header"/>
-    <link href="css/administracion.css" rel="stylesheet">
+    <th:block th:replace="fragments/head.html :: header" />
+    <link href="css/administracion.css" rel="stylesheet" />
+    <title>Influencing: Administración</title>
 </head>
 
 <body class="general">
@@ -14,9 +16,9 @@
     </header>
     <main>
 
-        
+
         <div class="principal">
-            <div class = "subheader">
+            <div class="subheader">
                 <div class="enlaces">
                     <a href="" class="category">Influencers</a>
                     <a href="" class="category">Empresas</a>
@@ -25,24 +27,19 @@
                 </div>
                 <div class="busqueda">
                     <form>
-                        <input type="text" class="textoBusqueda" placeholder="    Nombre de usuario/email">
+                        <input type="text" class="textoBusqueda" placeholder="  Nombre de usuario">
                         <input type="submit" value="Buscar" class="btnEnviar">
                     </form>
                 </div>
 				<div class="dropdown">
-					<span class="nombre-dropdown">Nombre administrador</span>
+					<span class="nombre-dropdown" th:text=${nombreUsuario}>Nombre administrador</span>
 					<div class="dropdown-content">
 						<div class="dropdown-element">							  
 							<p>Ultimas notificaciones</p>
-							<div class="dropdown-notificaciones">
-							<p>Notificacion</p>
-							<p>Notificacion</p>
-							<p>Notificacion</p>
-							<p>Notificacion</p>
-							<p>Notificacion</p>
-
+							<div class="dropdown-notificaciones" th:each="notificacion: ${notificaciones}">
+								<p th:text="${notificacion.descripcion}">Notificacion</p>
 							</div>
-							<a href="" class="dropdown-boton"> Ver todas</a>
+							<span class="dropdown-boton"> Ver todas</span>
 						</div>
 						<div class="dropdown-element">
 							<a href="" class="dropdown-boton"> Cerrar sesion</a>
@@ -51,89 +48,22 @@
 				</div>
             </div>
             <div class="contenido">
-                
+
                 <div class="recientes">
                     <h3>Búsquedas recientes</h3>
-                    <ul class="profilesList">
+                    <ul class="profilesList" th:each="perfil:${busquedas}">
                         <li>
                             <div class="usuario">
                                 <div class="imagenPerfil">
                                     <img width="50" height="50" src="img/perfilIcon.svg">
                                 </div>
                                 <div class="opcionesPerfil">
-                                    <p> Nombre de perfil - Tipo perfil (no verificado)</p>
+                                    <p th:text="${perfil.nombre} - {$perfil.roles} ({$perfil.estado})"> Nombre de perfil
+                                        - Tipo perfil (no verificado)</p>
                                     <div class="botonesAdmin">
                                         <a href="" class="boton">Editar usuario</a>
                                         <a href="" class="boton">Bloquear usuario</a>
                                         <a href="" class="boton">Verificar usuario</a>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="usuario">
-                                <div class="imagenPerfil">
-                                    <img width="50" height="50" src="img/perfilIcon.svg">
-                                </div>
-                                <div class="opcionesPerfil">
-                                    <p> Nombre de perfil - Tipo perfil (no verificado)</p>
-                                    <div class="botonesAdmin">
-                                        <a href="" class="boton">Editar usuario</a>
-                                        <a href="" class="boton">Bloquear usuario</a>
-                                        <a href="" class="boton">Verificar usuario</a>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="usuario">
-                                <div class="imagenPerfil">
-                                    <img width="50" height="50" src="img/perfilIcon.svg">
-
-                                </div>
-                                <div class="opcionesPerfil">
-                                    <p> Nombre de perfil - Tipo perfil (no verificado)</p>
-                                    <div class="botonesAdmin">
-                                        <a href="" class="boton">Editar usuario</a>
-                                        <a href="" class="boton">Bloquear usuario</a>
-                                        <a href="" class="boton">Verificar usuario</a>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="usuario">
-                                <div class="imagenPerfil">
-                                    <img width="50" height="50" src="img/perfilIcon.svg">
-
-                                </div>
-                                <div class="opcionesPerfil">
-                                    <p> Nombre de perfil - Tipo perfil (no verificado)</p>
-                                    <div class="botonesAdmin">
-                                        <a href="" class="boton">Editar usuario</a>
-                                        <a href="" class="boton">Bloquear usuario</a>
-                                        <a href="" class="boton">Verificar usuario</a>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="usuario">
-                                <div class="imagenPerfil">
-                                    <img width="50" height="50" src="img/perfilIcon.svg">
-
-                                </div>
-                                <div class="opcionesPerfil">
-                                    <p> Nombre de perfil - Tipo perfil (no verificado)</p>
-                                    <div class="botonesAdmin">
-                                        <a href="" class="boton">Editar usuario</a>
-                                        <a href="" class="boton">Bloquear usuario</a>
-                                        <a href="" class="boton">Verificar usuario</a>
-
                                     </div>
                                 </div>
                             </div>
@@ -145,7 +75,10 @@
 
     </main>
     <!-- Footer -->
-	<footer th:replace="fragments/navigation.html :: footer"></footer>
+    <footer th:replace="fragments/navigation.html :: footer"></footer>
+
+		<div th:replace="fragments/modal.html"></div>
+
 </body>
 
 </html>

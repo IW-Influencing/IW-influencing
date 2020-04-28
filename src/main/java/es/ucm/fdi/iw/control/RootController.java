@@ -1,5 +1,6 @@
 package es.ucm.fdi.iw.control;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -12,8 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import es.ucm.fdi.iw.model.Candidatura;
+import es.ucm.fdi.iw.model.Evento;
+import es.ucm.fdi.iw.model.Message;
 import es.ucm.fdi.iw.model.Propuesta;
 import es.ucm.fdi.iw.model.Usuario;
 import es.ucm.fdi.iw.model.Usuario.Rol;
@@ -26,6 +30,10 @@ import es.ucm.fdi.iw.services.UsuariosService;
 @Controller
 public class RootController {
 
+  private final int LIMITE_NOTIFICACIONES = 5;
+  private final int LIMITE_MENSAJES_INICIO = 3;
+  private final int LIMITE_PROPUESTAS_INICIO = 3;
+	
   private static final Logger log = LogManager.getLogger(RootController.class);
   @Autowired
   UsuariosService usuariosService;	
@@ -39,13 +47,19 @@ public class RootController {
   }
 
   @GetMapping("/inicio")
-  public String inicio(HttpSession session) {
+  public String inicio(HttpSession session,Model model) {
+	long idUsuario = ((Usuario)session.getAttribute("u")).getId();
+	List<Message> messages = entityManager.createNamedQuery("Message.getAll").setParameter("idUsuario", idUsuario ).setMaxResults(LIMITE_MENSAJES_INICIO).getResultList();
+	List<Candidatura> candidaturas = entityManager.createNamedQuery("Candidatura.getByUser").setParameter("idUsuario", idUsuario ).setMaxResults(LIMITE_PROPUESTAS_INICIO).getResultList();;
+	if(messages == null) System.out.println("YES");
+	model.addAttribute("mensajes", messages);
+	model.addAttribute("candidaturas", candidaturas);
     return "inicio";
   }
   
   @GetMapping("/valoracion")
-  public String valoracion(HttpSession session) {
-    return "valoracion";
+  public String valoracion(HttpSession session, @RequestParam long idContratacion) {
+    return "modals/valoracion";
   }
   
   @GetMapping("/finCampanna")
@@ -57,43 +71,74 @@ public class RootController {
   public String negociacion(Model model, HttpSession session) {
 	  
 	  //Obtener la lista de propuestas
-	  //long idUsuario = (int) session.getAttribute("idUsuario");
-	  long idUsuario = 1;
-	  //List<Propuesta> listaPropuestas = entityManager.createNamedQuery("Candidatura.byCandidato").setParameter("idCandidato", idUsuario).getResultList();
-	  //model.addAttribute("propuestas", listaPropuestas);
-	   
-	  
+	  long idUsuario = ((Usuario)session.getAttribute("u")).getId();
+    List<Candidatura> listaCandidatura = entityManager
+      .createNamedQuery("Candidatura.activeByCandidato")
+      .setParameter("idCandidato", idUsuario).getResultList();
+
+	  model.addAttribute("candidaturas", listaCandidatura);
+    
     return "negociacion";
     
   }
 
   @GetMapping("/administracion")
-  public String administracion(HttpSession session) {
-    return "administracion";
+  public String administracion(Model model, HttpSession session) {
+	  long idUsuario = ((Usuario)session.getAttribute("u")).getId();
+	  List<Evento> listaNotificaciones = entityManager.createNamedQuery("Evento.adminEventsByDate").setParameter("idUsuario", idUsuario).setMaxResults(LIMITE_NOTIFICACIONES).getResultList();
+	  model.addAttribute("notificaciones", listaNotificaciones);
+	  List<Evento> ultimasBusquedas = entityManager.createNamedQuery("Evento.searchesByDate").setParameter("idUsuario", idUsuario).setMaxResults(LIMITE_NOTIFICACIONES).getResultList();
+	  List<Usuario> usuariosBuscados = new ArrayList<>();
+	  for (Evento e : ultimasBusquedas) {
+		  for (Usuario u : ((List<Usuario>)entityManager.createNamedQuery("Usuario.byNombreUsuario").setParameter("nombre", e.getDescripcion()).getResultList())) {
+			  usuariosBuscados.add(u);
+		  }
+	  }
+	  model.addAttribute("nombreUsuario", ((Usuario)session.getAttribute("u")).getNombre());
+	  model.addAttribute("busquedas", usuariosBuscados);
+	  return "administracion";
   }
 
+  @GetMapping("/edicionPerfil")
+  public String edicionPerfil(Model model, HttpSession session) {
+	Usuario u = entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId());
+	model.addAttribute("tipo", "EDICION");
+	model.addAttribute("usuario", u);
+    return "modals/perfil";
+  }
+  
+  
   @GetMapping("/perfil")
-  public String perfil(HttpSession session) {
-    return "perfil";
+  public String perfil(Model model, HttpSession session, @RequestParam long idUsuario) {
+	Usuario u = entityManager.find(Usuario.class, idUsuario);
+	model.addAttribute("tipo", "VISTA");
+	model.addAttribute("usuario", u);
+    return "modals/perfil";
   }
-
-  @GetMapping("/busquedaPropuesta")
-  public String busquedaPropuesta(Model model, HttpSession session) {
-    List<Propuesta> propuestas = entityManager.createNamedQuery("Propuesta.getAllProposals", Propuesta.class).getResultList();
-    
-	  model.addAttribute("propuestas", propuestas);
-    return "busquedaPropuesta";
+  
+  @GetMapping("/ultimatum")
+  public String ultimatum(Model model, HttpSession session, @RequestParam long idPropuesta) {
+	  Propuesta p = entityManager.find(Propuesta.class, idPropuesta);
+	  model.addAttribute("modo", "ULTIMATUM");
+	  model.addAttribute("propuesta", p);
+	  return "modals/propuesta";
   }
-
+  
+  
   @GetMapping("/propuesta")
-  public String propuesta(HttpSession session) {
-    return "propuesta";
+  public String propuesta(Model model, HttpSession session, @RequestParam long idPropuesta) {
+	  Propuesta p = entityManager.find(Propuesta.class, idPropuesta);
+	  model.addAttribute("propuesta", p);
+	  model.addAttribute("modo", "VISTA");
+	  return "modals/propuesta";
   }
-
-  @GetMapping("/notificaciones")
-  public String notificaciones(HttpSession session) {
-    return "notificaciones";
+  
+  @GetMapping("/creacionPropuesta")
+  public String propuesta(Model model, HttpSession session) {
+	  model.addAttribute("modo","CREACION");
+	  return "modals/propuesta";
   }
+  
 
   @GetMapping("/contrataciones")
   public String contrataciones(Model model, HttpSession session) {
@@ -119,6 +164,11 @@ public class RootController {
     model.addAttribute("candidaturasPendientes", candidaturasPendientes);
     return "contrataciones";
     
+  @GetMapping("/notificaciones")
+  public String notificaciones(HttpSession session, Model model) {
+    List<Evento> listaNotificaciones = entityManager.createNamedQuery("Evento.adminEventsByDate").setParameter("idUsuario", ((Usuario)session.getAttribute("u")).getId()).setMaxResults(LIMITE_NOTIFICACIONES).getResultList();
+	  model.addAttribute("notificaciones", listaNotificaciones);
+    return "modals/notificaciones";
   }
 
 
@@ -131,16 +181,5 @@ public class RootController {
   public String edicion(Model model) {
     return "edicion";
   }
-  
-  //Metodos nuevos
-  @GetMapping("/perfiles")
-  public String busquedaPerfil(HttpSession session,Model model) {
-	  
-    List<Usuario> users = entityManager.createNamedQuery("Usuario.getAllUsers", Usuario.class).getResultList();
-	  model.addAttribute("usuarios", users);
-	  return "busquedaPerfil";
-  }			
-  /*
-  @PostMapping("/devuelveChatNegociacion")
-  public String postChat()*/
+
 }

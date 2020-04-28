@@ -1,20 +1,22 @@
 /**
  * WebSocket API, which only works once initialized
  */
-const ws = {		
+const ws = {
 
 	/**
 	 * Number of retries if connection fails
 	 */
-	retries: 5,
-		
+	retries: 3,
+
 	/**
 	 * Default action when message is received. 
 	 */
 	receive: (text) => {
 		console.log(text);
 	},
-	
+
+	headers: {'X-CSRF-TOKEN' : config.csrf.value},
+
 	/**
 	 * Attempts to establish communication with the specified
 	 * web-socket endpoint. If successfull, will call 
@@ -26,7 +28,7 @@ const ws = {
 				ws.stompClient.reconnect_delay = 2000;		// reconexión automática tras 2s		
 			}
 			const headers = {'X-CSRF-TOKEN' : config.csrf.value}
-			ws.stompClient.connect(headers, () => {
+			ws.stompClient.connect(ws.headers, () => {
 		        ws.connected = true;
 		        console.log('Connected to ', endpoint, ' - subscribing...');		        
 		        while (subs.length != 0) {
@@ -76,6 +78,30 @@ function go(url, method, data = {}) {
 	    	throw response.text();  // esto lo recibes con catch(d => ...)
 	    }
   	})
+}
+
+
+// envía json, espera json de vuelta; lanza error si status != 200
+function go2(url, method, data = {}) {
+	let params = {
+		method: method, // POST, GET, POST, PUT, DELETE, etc.
+		headers: {
+			"Content-Type": "application/json; charset=utf-8",
+		},
+		body: JSON.stringify(data)
+	};
+	if (method === "GET") {
+		// GET requests cannot have body
+		delete params.body;
+	}
+	console.log("sending", url, params)
+	return fetch(url, params).then(response => {
+		if (response.ok) {
+			return data = response.text();
+		} else {
+			response.text().then(t => { throw new Error(t + ", at " + url) });
+		}
+	})
 }
 
 /**

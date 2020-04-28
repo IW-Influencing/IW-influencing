@@ -2,18 +2,7 @@
   height: 100%;
   font-family: Arial, Helvetica, sans-serif;
 }
-* {
-  box-sizing: border-box;
-}
 
-body {
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-  height: 100%;
-  overflow-x: hidden;
-  margin: 0;
-}
 
 main {
   background-color:#F4F6F6 ;
@@ -28,31 +17,13 @@ main {
 
 #valoracion {
   font-size: 40px;
-}
-
-header {
-  background-color: #63D6D6;
-  width: 100%;
-  justify-content: space-between;
-  flex-direction: row;
-  flex-wrap: wrap;
   align-items: center;
-  display: flex;
 }
 
-footer,
-header {
-  color: #fafafa;
-  padding: 20px;
-  text-align: center;
-}
-
-footer{
-	background-color:#566573 ;
-}
 #tags {
   min-width: 250px;
   width: 30%;
+  align-items: center;
 }
 #tags ul {
   display: flex;
@@ -61,6 +32,7 @@ footer{
   justify-content: space-around;
   margin-left: -30px;
   width: 100%;
+  align-items: center;
 }
 
 #tags li {
@@ -70,6 +42,7 @@ footer{
   display: inline-block;
   border-radius: 4px;
   margin:3px;
+  align-items: center;
 }
 
 
@@ -81,6 +54,7 @@ footer{
   padding: 5px;
   transition: 0.2s ease-in;
   background-color: #d5dbdb;
+  align-items: center;
 }
 
 #propuestas span {
@@ -92,6 +66,7 @@ footer{
 
 #edad {
   margin-bottom: 15px;
+  align-items: center;
 }
 
 #edad-media {
@@ -99,6 +74,7 @@ footer{
   text-align: center;
   padding: 4px;
   font-weight: 700;
+  align-items: center;
 }
 
 #seguidores {
@@ -109,23 +85,28 @@ footer{
   display:flex;
   flex-direction:column;
   text-align:center;
+  align-items: center;
 }
 
 #seguidores ul {
   list-style-type: none;
   display:flex;
+  align-items: center;
 }
 
 #seguidores span {
   font-weight: 700;
+  align-items: center;
 }
 
 .numeroseguidores{
-	margin-left:10px;
+  margin-left:10px;
+  align-items: center;
 }
 
 #principal {
   text-align: center;
+  align-items: center;
 }
 
 #editar{

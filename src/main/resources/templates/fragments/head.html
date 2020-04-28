@@ -10,18 +10,20 @@
 			const config = {
 				socketUrl: "[[${session.ws}?:'']]",	// vacío indica falso
 				apiUrl: "[[${session.ws}?@{/api/v/}:'']]",
+				rootUrl: "[[${session.ws}?@{/}:'']]",
 				csrf: {
 					name: "[[${_csrf.parameterName}]]",
 					value: "[[${_csrf.token}]]"
 				},
-				admin: [[${ session.u != null && session.u.hasRole('ADMIN') } ? true : false]],
-				userId: [[${ session.u != null } ? ${ session.u.id }: -1]]
+				admin: "[[${ session.u != null && session.u.hasRole('ADMIN') } ? true : false]]",
+				userId: "[[${ session.u != null } ? ${ session.u.id }: -1]]"
 			};
 		</script>
 		<script th:src="@{/js/stomp.js}" src="js/stomp.js" type="text/javascript"></script>
 		<script th:src="@{/js/iwclient.js}" src="js/iwclient.js" type="text/javascript"></script>
 
 		<!--  Influencing-específico -->
+		<script th:src="@{/js/navigation.js}" src="js/navigation.js" type="text/javascript"></script>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="css/w3.css">

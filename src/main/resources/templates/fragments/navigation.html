@@ -1,68 +1,115 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <link rel="stylesheet" href="css/w3.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/fragments.css">
+    <script src="js/navigation.js" type="text/javascript"></script>
 </head>
 
 <body>
 
     <!-- NAVBAR -->
     <div th:fragment="navBar (nombrePagina)">
-        <div class="title" style="padding-left: 0!important;">
-            <div class="brand"><b style="margin-left: 1%;">INFLUENCING</b></div>
-            <div style="color: white;font-size: larger;margin: auto;text-align: center;"><b><span th:text="${nombrePagina}">nombrePagina</span></b></div>
+        <!-- Cabecera -->
+        <div class="title w3-display-container" style="padding-left: 0!important;">
+            <!-- Logo -->
+            <a class="brand w3-display-topleft" href="/inicio"><b style="margin-left: 1%; font-size: xxx-large;">INFLUENCING</b></a>
+            
+            <!-- Titulo Pagina -->
+            <div class="w3-display-bottommiddle" style="color: white;font-size: larger;margin: auto;text-align: center;">
+                <h4><b><span th:text="${nombrePagina}">nombrePagina</span></b></h4>
+            </div>
+
+            <!-- Dropdown Usuario -->
+            <div class="w3-dropdown-hover w3-right w3-margin-right w3-display-right">
+                <button class="w3-button" style="color: white; "th:text="${session.u.nombre}">
+                    <h4>Usuario</h4>
+                </button>
+                <div class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0">
+                    <span id="botonNotificacionesNav" class="w3-bar-item w3-button">Notificaciones</span>
+                    <span id="botonPerfilNav" class="w3-bar-item w3-button">Mi Perfil</span>
+                    <a href="logout" class="w3-bar-item w3-button">Cerrar sesión</a>
+                </div>
+            </div>
         </div>
         <br>
-        <center><!-- CAMBIAR, DEBE IR EN EL CSS -->
-        <div class="horizontalBar">
+        <!-- Barra de Navegación -->
+        <div class="horizontalBar" style="text-align: left;">
             <ul class="ulFragment">
-                <li><a th:href="@{/perfiles}"><i class="fa fa-search" aria-hidden="true"></i> Búsqueda de
-                        perfiles</a></li>
-                <li><a th:href="@{/negociacion}"><i class="fa fa-comment-o" aria-hidden="true"></i> Chat de Negociación</a>
-                </li>
-                <li><a class="${nombrePagina}=='BUSQUEDA DE PROPUESTAS'?'active':''" th:href="@{/busquedaPropuesta}"><i class="fa fa-suitcase" aria-hidden="true"></i> Búsqueda de
+                <li><a th:href="@{/busquedaPerfil}"><i class="fa fa-search" aria-hidden="true"></i> Búsqueda de
+                        Perfiles</a></li>
+                <li><a th:class="${nombrePagina=='BUSQUEDA DE PROPUESTAS'}?'active':''"
+                        th:href="@{/busquedaPropuesta}"><i class="fa fa-suitcase" aria-hidden="true"></i> Búsqueda de
                         Propuestas</a></li>
-                <li><a th:href="@{/contrataciones}"><i class="fa fa-file-text" aria-hidden="true"></i> Contrataciones</a>
-                </li>
+                <li><a th:href="@{/negociacion}"><i class="fa fa-comment" aria-hidden="true"></i> Chat de
+                        Negociación</a></li>
+                <li><a th:href="@{/contrataciones}"><i class="fa fa-file-contract" aria-hidden="true"></i>
+                        Contrataciones</a></li>
             </ul>
         </div>
-    </div> 
+
+        <!-- MODAL DE NOTIFICIACIONES
+        <div id="modalNoti" class="w3-modal">
+            <div class="w3-modal-content">
+                <div th:replace="modals/notificaciones.html :: notificaciones(notificaciones=${notificaciones})"></div>
+            </div>
+        </div>
+ -->
+    </div>
 
     <!-- MODALBAR -->
-    <div th:fragment="modalBar (nombrePagina)"  id="modalBar" class="title" style="padding-left: 0!important;">
-        <div id="volver" class="w3-button">
-             <div class="w3-padding w3 w3-text-white"><i class="fa fa-arrow-left"></i> VOLVER</div>
+    <div th:fragment="modalBar(nombrePagina)" id="modalBar" class="title w3-display-container"
+        style="padding-left: 0!important;">
+        <div id="volver" class="w3-button w3-display-topleft"
+            onclick="document.getElementById('modal').style.display='none'">
+            <div class="w3-padding w3 w3-text-white"><i class="fa fa-arrow-left w3-large"></i> VOLVER</div>
         </div>
-        <div id="nombrePagina" style="color: white;font-size: larger;text-align: center;">
-        	 <b><span th:text="${nombrePagina}">nombrePagina</span></b>
-        </div>    
+        <div id="nombrePagina" class="w3-display-middle" style="color: white; font-size: larger;text-align: center;">
+            <b><span th:text="${nombrePagina}">nombrePagina</span></b>
+        </div>
     </div> <!-- CAMBIAR, DEBE IR EN EL CSS -->
-    
+
+    <!-- MODALBAR GENERICO ->
+    <div th:fragment="modalBar (nombrePagina, tipoModal)" id="modalBar" class="title w3-display-container"
+        style="padding-left: 0!important;">
+        <div id="volver" class="w3-button w3-display-topleft"
+            onclick="document.getElementById('modal${tipoModal}').style.display='none'">
+            <div class="w3-padding w3 w3-text-white"><i class="fa fa-arrow-left w3-large"></i> VOLVER</div>
+        </div>
+        <div id="nombrePagina" class="w3-display-middle" style="color: white; font-size: larger;text-align: center;">
+            <b><span th:text="${nombrePagina}">nombrePagina</span></b>
+        </div>
+    </div> <!-- CAMBIAR, DEBE IR EN EL CSS -->
+
     <!-- TAGBAR -->
     <div th:fragment="tagBar">
         <div class="w3-section w3-bottombar wFilter3-padding-16 tagsList">
             <span class="w3-margin-right">Trending topics:</span>
             <button class="w3-button w3-blue tagFilterSelected">ALL</button>
             <button class="w3-button w3-white tagFilter"><i class="fa fa-diamond w3-margin-right"></i>Moda</button>
-            <button class="w3-button w3-white w3-hide-small tagFilter"><i class="fa fa-gamepad w3-margin-right"></i>Videojuegos</button>
-            <button class="w3-button w3-white w3-hide-small tagFilter"><i class="fa fa-globe w3-margin-right"></i>Viajes</button>
-            <button class="w3-button w3-white w3-hide-small tagFilter"><i class="fa fa-leaf w3-margin-right"></i>Naturaleza</button>
-            <button class="w3-button w3-white w3-hide-small tagFilter"><i class="fa fa-music w3-margin-right"></i>Música</button>
-            <input type="text" placeholder="Search..">
+            <button class="w3-button w3-white w3-hide-small tagFilter"><i
+                    class="fa fa-gamepad w3-margin-right"></i>Videojuegos</button>
+            <button class="w3-button w3-white w3-hide-small tagFilter"><i
+                    class="fa fa-globe w3-margin-right"></i>Viajes</button>
+            <button class="w3-button w3-white w3-hide-small tagFilter"><i
+                    class="fa fa-leaf w3-margin-right"></i>Naturaleza</button>
+            <button class="w3-button w3-white w3-hide-small tagFilter"><i
+                    class="fa fa-music w3-margin-right"></i>Música</button>
+            <input type="text" placeholder="Search.." id="cuadroBusquedaTagBar">
         </div>
-    </div> 
-</head>
+    </div>
 
     <!-- FOOTER -->
-    <footer class="w3-container w3-padding-32 w3-dark-grey" th:fragment="footer">
+    <footer class="w3-container w3-padding-32 w3-dark-grey footer" th:fragment="footer">
         <div class="links" style="text-align:center;">
             <a href="#" title="home" target="_blank" class="w3-hover-opacity">Influencing</a> -
             <a href="#" title="terms" target="_blank" class="w3-hover-opacity">Términos y condiciones</a> -
             <a href="#" title="contact" target="_blank" class="w3-hover-opacity">Contáctanos</a>
         </div>
     </footer>
+
 </body>
 
 </html>

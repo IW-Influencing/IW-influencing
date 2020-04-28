@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <th:block th:replace="fragments/head.html :: header" />
+  <link rel="stylesheet" type="text/css" href="css/perfil.css" />
+</head>
+
+<body>
+  <header>
+    <div th:replace="fragments/navigation.html :: modalBar(nombrePagina='PERFIL')"></div>
+  </header>
+  <main>
+    <div id="principal">
+      <img id="imagen-perfil" src="img/profile.png" width="200" />
+      <h2 th:text="${usuario.nombre}">Pepito</h2>
+      <div class="score">
+				<th:block th:each="i: ${#numbers.sequence(1, usuario.score)}">					
+					<i class="fa fa-star w3-margin-right"></i>
+				</th:block>
+			</div>
+    </div>
+    <div id="tags" th:text="${usuario.tags}">
+      <ul>
+        <li>Tag1</li>
+        <li>Tag2</li>
+        <li>Tag3</li>
+        <li>Tag4</li>
+      </ul>
+    </div>
+    <div id="propuestas">
+      <h2>Historial de propuestas</h2>
+      <ul>
+        <li>Propuesta1</li>
+        <li>Propuesta2</li>
+        <li>Propuesta3</li>
+        <li>Propuesta4</li>
+      </ul>
+    </div>
+    <div id="edad">
+      <h2>Edad media de los seguidores</h2>
+      <div id="edad-media" th:text="${usuario.edad}">17 años</div>
+    </div>
+    <div id="seguidores">
+      <h2>Seguidores en redes sociales</h2>
+      <ul>
+        <li>
+          <a href="twitter.com">@pepitoTwitter</a>
+          <span class="numeroseguidores"> 200k </span>
+          <img src="img/twitter.png" width="20" />
+        </li>
+        <li>
+          <a href="youtube.com">@pepitoYT</a>
+          <span class="numeroseguidores"> 250k </span>
+          <img src="img/youtube.png" width="20" />
+        </li>
+        <li>
+          <a href="instagram.com">@pepitoIG</a>
+          <span class="numeroseguidores"> 192k </span>
+          <img src="img/instagram.png" width="20" />
+        </li>
+      </ul>
+    </div>
+	
+  </main>
+</body>
+
+</html>

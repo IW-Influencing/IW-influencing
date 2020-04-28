@@ -1,0 +1,26 @@
+Propuesta
+  - Terminar adaptar vistas
+  - Añadir boton para apuntarse a la propuesta si eres influencer
+  - Boton denunciar para todos
+  
+  
+Perfil
+  - CSS y modelo
+  - Boton mandar mensaje privado
+  - Boton denunciar
+  - Adaptar vistas para modos
+
+Negociacion
+  - WebSocket para notificar cuantos chat hay sin leer
+
+Valoracion
+  - Ponerle thymeleaf
+  - Añadir boton enviar valoracion
+  - CSS
+
+Imagenes de usuario/propuestas
+
+
+Busquedas por tag en perfil y propuesta
+
+Registro

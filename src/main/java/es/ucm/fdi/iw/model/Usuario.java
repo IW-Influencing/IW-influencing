@@ -1,8 +1,10 @@
 package es.ucm.fdi.iw.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,38 +13,60 @@ import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name="Usuario.byNombreUsuario",
+	@NamedQuery(name="Usuario.byNombreCuenta",
 	query="SELECT u FROM Usuario u "
-			+ "WHERE u.nombre = :nombre AND u.activo = 1"),
+			+ "WHERE u.nombreCuenta = :nombreCuenta AND u.activo = 1"),
+	
 	@NamedQuery(name="Usuario.hasNombre",
 	query="SELECT COUNT(u) "
 			+ "FROM Usuario u "
 			+ "WHERE u.nombre = :nombre"),
+		
+	@NamedQuery(name="Usuario.searchByNombre",
+	query="SELECT u FROM Usuario u "
+			+ "WHERE u.nombre LIKE :nombre"),
+	
 	@NamedQuery(name="Usuario.getAllUsers",
 	query="SELECT u FROM Usuario u"),
 	
 })
+
+@Table(uniqueConstraints={@UniqueConstraint(columnNames={"nombreCuenta"})})
 public class Usuario {
 
+	
+	private static Logger log = LogManager.getLogger(Usuario.class);	
 	private static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	
 	private long id; // Id unico para cada usuario
 	private byte activo;
-	private String nombre;
+	@Column(name = "nombreCuenta")
+	private String nombreCuenta;
 	private String password;
 	public enum Rol {ADMIN, INFLUENCER, EMPRESA, USER};
 	private String roles; // Aqui se almacena el rol que tiene el usuario en la aplicación mediante números
+	private String nombre;
 	private String apellidos;
 	private int edad;
 	private String tags; // Se almacenan los tags
 	private String estado;
 	private Integer score;
-	
+
+	private List<Message> sent;
+
+	private List<Message> received;
+
 	@OneToMany(targetEntity=Propuesta.class)
 	@JoinColumn(name="empresa_id")
 	public List<Propuesta> getPropuestasPropias() {
@@ -142,6 +166,15 @@ public class Usuario {
 		this.tags = tags;
 	}
 
+	
+	public String getNombreCuenta() {
+		return nombreCuenta;
+	}
+
+	public void setNombreCuenta(String nombreCuenta) {
+		this.nombreCuenta = nombreCuenta;
+	}
+
 	public Integer getScore(){
 		return score;
 	}
@@ -173,7 +206,29 @@ public class Usuario {
 	public void setActivo(byte activo) {
 		this.activo = activo;
 	}
-	
+
+	@OneToMany(targetEntity = Message.class)
+	@JoinColumn(name = "sender_id")
+	@JsonIgnore
+	public List<Message> getSent() {
+		return sent;
+	}
+
+	public void setSent(List<Message> sent) {
+		this.sent = sent;
+	}
+
+	@OneToMany(targetEntity = Message.class)
+	@JoinColumn(name = "recipient_id")	
+	@JsonIgnore
+	public List<Message> getReceived() {
+		return received;
+	}
+
+	public void setReceived(List<Message> received) {
+		this.received = received;
+	}
+
 	/**
 	 * Checks whether this user has a given role.
 	 * @param role to check

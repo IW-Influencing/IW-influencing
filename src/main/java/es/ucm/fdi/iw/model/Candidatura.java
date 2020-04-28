@@ -12,7 +12,13 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
 	@NamedQuery(name="Candidatura.byCandidato", 
 	query="SELECT c.propuesta FROM Candidatura c WHERE c.candidato.id = :idCandidato"),
+	
+	@NamedQuery(name="Candidatura.activeByCandidato", 
+	query="SELECT c FROM Candidatura c WHERE c.candidato.id = :idCandidato AND (c.estado = 'EN_CURSO' OR c.estado = 'NEGOCIANDO')"),
 
+	@NamedQuery(name="Candidatura.searchByName",
+	query="SELECT c FROM Candidatura c WHERE c.propuesta.nombre LIKE :patron AND (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario)"),
+	
 	@NamedQuery(name="Candidatura.getAllActive",
 	query="SELECT c FROM Candidatura c WHERE c.aceptada = true AND c.estado = 'EN_CURSO'"),
 	@NamedQuery(name="Candidatura.getPendingCandidatures",
@@ -21,8 +27,13 @@ import javax.persistence.NamedQuery;
 	@NamedQuery(name="Candidatura.getAllActiveByCandidate",
 	query="SELECT c FROM Candidatura c WHERE c.aceptada = true AND c.estado = 'EN_CURSO' AND c.candidato.id = :idCandidato"),
 	@NamedQuery(name="Candidatura.getPendingCandidaturesByCandidate",
-	query="SELECT c FROM Candidatura c WHERE c.aceptada = false AND c.estado = 'EN_CURSO' AND c.candidato.id = :idCandidato")
+	query="SELECT c FROM Candidatura c WHERE c.aceptada = true AND (c.estado = 'EN_CURSO' OR c.estado = 'NEGOCIANDO') AND (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario)"),
+
+	@NamedQuery(name="Candidatura.getPendingCandidatures",
+	query="SELECT c FROM Candidatura c WHERE c.aceptada = false AND (c.estado = 'EN_CURSO' OR c.estado = 'NEGOCIANDO') AND (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario)"),
 	
+	@NamedQuery(name="Candidatura.getByUser",
+		query="SELECT c FROM Candidatura c WHERE c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario")
 })
 
 public class Candidatura {
@@ -31,7 +42,7 @@ public class Candidatura {
 	private Propuesta propuesta;
 	private Usuario candidato;
 	private Boolean aceptada;
-	public enum Estado {EN_CURSO, FINALIZADA};
+	public enum Estado {NEGOCIANDO, EN_CURSO, FINALIZADA};
 	private String estado;
 
 	@Id

@@ -1,69 +1,63 @@
 <!DOCTYPE html>
 <html lang="es">
 
-
 <head>
-    <th:block th:replace="fragments/head.html :: header"/>
+    <th:block th:replace="fragments/head.html :: header" />
     <link href="css/negociacion.css" rel="stylesheet">
+    <script src="js/negociacion.js" type="text/javascript"></script>
+    <title>Influencing: Chat de Negociación</title>
 </head>
 
 <body class="general">
-    
+
     <!-- Header -->
     <header>
         <div th:replace="fragments/navigation.html :: navBar(nombrePagina='CHAT DE NEGOCIACIÓN')"></div>
     </header>
     <main>
-        <div class="contenido">
+        <div class="contenido-negociacion">
 
-            <div class="lista" th:each="propuesta: ${propuestas}">
-                <div class="propuesta">
-                    <a href="">
+            <div class="lista">
+                <div class="propuesta" th:each="c: ${candidaturas}" th:attr="data-id=${c.id},data-prop-id=${c.propuesta.id}, data-prop-nombre=${c.propuesta.nombre}, 
+					data-otro-nombre=${session.u.hasRole('EMPRESA')?c.candidato.nombre:c.propuesta.empresa.nombre},
+					data-otro-id=${session.u.hasRole('EMPRESA')?c.candidato.id:c.propuesta.empresa.id}">
+                    <a>
                         <img width="50" height="50" src="img/perfilIcon.svg">
                     </a>
-                    <span th:text="${propuesta.nombre}"> Nombre de la propuesta</span>
+                    <span th:text="${c.propuesta.nombre}"> Nombre de la propuesta</span>
                 </div>
             </div>
 
-            <div class="chat">
+            <div class="chat" id="chat">
                 <div class="barraChat">
                     <div class="informacionChat">
-                        <a href="" class="perfil">Perfil de la empresa/influencer</a>
-                        <a href="" class="nombre">Zapatillas</a>
+                        <a class="perfil"></a>
+                        <a class="nombre"></a>
                     </div>
                     <div class="ultimatum">
-                        <a href="" class="boton">Enviar Ultimatum</a>
+                        <button class="btn" id="botonUltimatum">Enviar Ultimatum</button>
                     </div>
                 </div>
-                <p class="mensaje recibido">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit,
-                    vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt
-                    id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam
-                    nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna.
-
-                </p>
-                <p class="mensaje enviado">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit,
-                    vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt
-                    id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam
-                    nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna.
-                </p>
-				<p class="mensaje recibido">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit,
-                    vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt
-                    id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam
-                    nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna.
-
-                </p>
-                <p class="mensaje enviado">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit,
-                    vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt
-                    id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam
-                    nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna.
-                </p>
-
-                <input type="text" placeholder="Introduzca su mensaje...">
+                <div id="contenidoChat">
+                </div>
+                <input id="botonEnviar" type="text" placeholder="Introduzca su mensaje...">
 
             </div>
         </div>
+
+
+        <div id="modal" class="w3-modal">
+            <div class="w3-modal-content">
+                <div id="contenidoModal"></div>
+            </div>
+        </div>
+
+
+
     </main>
     <div th:replace="fragments/navigation.html :: footer"></div>
 </body>
+
+
 
 </html>
