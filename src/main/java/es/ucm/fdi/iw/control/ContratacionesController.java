@@ -35,10 +35,22 @@ public class ContratacionesController {
 	
 	@GetMapping("")
 	public String getContrataciones(Model model, HttpSession session) {
-		List<Candidatura> candidaturasEnVigor = entityManager.createNamedQuery("Candidatura.getAllActive", Candidatura.class)
+		Usuario u = (Usuario)session.getAttribute("u");
+		List<Candidatura> candidaturasEnVigor;
+		List<Candidatura> candidaturasPendientes;
+		
+		if(u.getRoles().contains("ADMIN")){
+			candidaturasEnVigor = entityManager.createNamedQuery("Candidatura.getAllActive", Candidatura.class).getResultList();
+	    	candidaturasPendientes = entityManager.createNamedQuery("Candidatura.getPendingCandidatures", Candidatura.class).getResultList();
+		}
+		else{
+			candidaturasEnVigor = entityManager.createNamedQuery("Candidatura.getAllActiveById", Candidatura.class)
 				.setParameter("idUsuario",((Usuario)session.getAttribute("u")).getId()).getResultList();
-	    List<Candidatura> candidaturasPendientes = entityManager.createNamedQuery("Candidatura.getPendingCandidatures", Candidatura.class)
+	    	candidaturasPendientes = entityManager.createNamedQuery("Candidatura.getPendingCandidaturesById", Candidatura.class)
 	    		.setParameter("idUsuario",((Usuario)session.getAttribute("u")).getId()).getResultList();
+
+		}
+
 	    model.addAttribute("candidaturasEnVigor", candidaturasEnVigor);
 	    model.addAttribute("candidaturasPendientes", candidaturasPendientes);
 		return "contrataciones";

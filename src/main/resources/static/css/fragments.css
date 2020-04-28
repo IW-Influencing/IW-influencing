@@ -9,8 +9,12 @@
     width: 100%;
     margin-left: 3%;
     text-align: left;
-    font-size: x-large;
-	margin:auto;
+    margin:auto;
+}
+
+.logo{
+  font-size: xx-large;
+  margin-left: 1%;
 }
 
 .ulFragment {
@@ -83,4 +87,21 @@ li a:hover:not(.active) {
 
 .footer{
 	height: 94px;
+}
+
+.links{
+  color: white; 
+  font-size: larger;
+  text-align: center;
+}
+
+.tituloPag{
+  color: white;
+  font-size: larger;
+  margin: auto;
+  text-align: center;
+}
+
+.userButton{
+  color: white;
 }

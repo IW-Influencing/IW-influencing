@@ -13,21 +13,21 @@
     <!-- NAVBAR -->
     <div th:fragment="navBar (nombrePagina)">
         <!-- Cabecera -->
-        <div class="title w3-display-container" style="padding-left: 0!important;">
+        <div class="title w3-display-container">
             <!-- Logo -->
-            <a class="brand w3-display-topleft" href="/inicio"><b style="margin-left: 1%; font-size: xxx-large;">INFLUENCING</b></a>
+            <a class="brand w3-display-topleft" href="/inicio"><b class="logo">INFLUENCING</b></a>
             
             <!-- Titulo Pagina -->
-            <div class="w3-display-bottommiddle" style="color: white;font-size: larger;margin: auto;text-align: center;">
+            <div class="w3-display-bottommiddle tituloPag">
                 <h4><b><span th:text="${nombrePagina}">nombrePagina</span></b></h4>
             </div>
 
             <!-- Dropdown Usuario -->
             <div class="w3-dropdown-hover w3-right w3-margin-right w3-display-right">
-                <button class="w3-button" style="color: white; "th:text="${session.u.nombre}">
+                <button class="w3-button userButton" th:text="${session.u.nombre}">
                     <h4>Usuario</h4>
                 </button>
-                <div class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0">
+                <div class="w3-dropdown-content w3-bar-block w3-card-4">
                     <span id="botonNotificacionesNav" class="w3-bar-item w3-button">Notificaciones</span>
                     <span id="botonPerfilNav" class="w3-bar-item w3-button">Mi Perfil</span>
                     <a href="logout" class="w3-bar-item w3-button">Cerrar sesión</a>
@@ -36,16 +36,19 @@
         </div>
         <br>
         <!-- Barra de Navegación -->
-        <div class="horizontalBar" style="text-align: left;">
+        <div class="horizontalBar">
             <ul class="ulFragment">
-                <li><a th:href="@{/busquedaPerfil}"><i class="fa fa-search" aria-hidden="true"></i> Búsqueda de
+                <li><a th:class="${nombrePagina=='BÚSQUEDA DE PERFILES'}?'active':''"
+                        th:href="@{/busquedaPerfil}"><i class="fa fa-search" aria-hidden="true"></i> Búsqueda de
                         Perfiles</a></li>
-                <li><a th:class="${nombrePagina=='BUSQUEDA DE PROPUESTAS'}?'active':''"
+                <li><a th:class="${nombrePagina=='BÚSQUEDA DE PROPUESTAS'}?'active':''"
                         th:href="@{/busquedaPropuesta}"><i class="fa fa-suitcase" aria-hidden="true"></i> Búsqueda de
                         Propuestas</a></li>
-                <li><a th:href="@{/negociacion}"><i class="fa fa-comment" aria-hidden="true"></i> Chat de
+                <li><a th:class="${nombrePagina=='CHAT DE NEGOCIACIÓN'}?'active':''"
+                        th:href="@{/negociacion}"><i class="fa fa-comment" aria-hidden="true"></i> Chat de
                         Negociación</a></li>
-                <li><a th:href="@{/contrataciones}"><i class="fa fa-file-contract" aria-hidden="true"></i>
+                <li><a th:class="${nombrePagina=='CONTRATACIONES'}?'active':''"
+                        th:href="@{/contrataciones}"><i class="fa fa-file-contract" aria-hidden="true"></i>
                         Contrataciones</a></li>
             </ul>
         </div>
@@ -60,13 +63,12 @@
     </div>
 
     <!-- MODALBAR -->
-    <div th:fragment="modalBar(nombrePagina)" id="modalBar" class="title w3-display-container"
-        style="padding-left: 0!important;">
+    <div th:fragment="modalBar(nombrePagina)" id="modalBar" class="title w3-display-container">
         <div id="volver" class="w3-button w3-display-topleft"
             onclick="document.getElementById('modal').style.display='none'">
             <div class="w3-padding w3 w3-text-white"><i class="fa fa-arrow-left w3-large"></i> VOLVER</div>
         </div>
-        <div id="nombrePagina" class="w3-display-middle" style="color: white; font-size: larger;text-align: center;">
+        <div id="nombrePagina" class="w3-display-middle nombrePagina">
             <b><span th:text="${nombrePagina}">nombrePagina</span></b>
         </div>
     </div> <!-- CAMBIAR, DEBE IR EN EL CSS -->
@@ -81,7 +83,7 @@
         <div id="nombrePagina" class="w3-display-middle" style="color: white; font-size: larger;text-align: center;">
             <b><span th:text="${nombrePagina}">nombrePagina</span></b>
         </div>
-    </div> <!-- CAMBIAR, DEBE IR EN EL CSS -->
+    </div> -->
 
     <!-- TAGBAR -->
     <div th:fragment="tagBar">
@@ -103,7 +105,7 @@
 
     <!-- FOOTER -->
     <footer class="w3-container w3-padding-32 w3-dark-grey footer" th:fragment="footer">
-        <div class="links" style="text-align:center;">
+        <div class="links">
             <a href="#" title="home" target="_blank" class="w3-hover-opacity">Influencing</a> -
             <a href="#" title="terms" target="_blank" class="w3-hover-opacity">Términos y condiciones</a> -
             <a href="#" title="contact" target="_blank" class="w3-hover-opacity">Contáctanos</a>
