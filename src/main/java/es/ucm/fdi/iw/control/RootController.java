@@ -138,31 +138,6 @@ public class RootController {
 	  model.addAttribute("modo","CREACION");
 	  return "modals/propuesta";
   }
-  
-
-  @GetMapping("/contrataciones")
-  public String contrataciones(Model model, HttpSession session) {
-    List<Candidatura> candidaturasEnVigor;
-    List<Candidatura> candidaturasPendientes;
-
-    Usuario u = (Usuario)session.getAttribute("u");
-    if(u.hasRole(Rol.ADMIN)){
-      candidaturasEnVigor = entityManager.createNamedQuery("Candidatura.getAllActive", Candidatura.class).getResultList();
-      candidaturasPendientes = entityManager.createNamedQuery("Candidatura.getPendingCandidatures", Candidatura.class).getResultList();
-
-    }
-    else if(u.hasRole(Rol.INFLUENCER)){
-      candidaturasEnVigor = entityManager.createNamedQuery("Candidatura.getAllActiveByCandidate", Candidatura.class).setParameter("idCandidato", u.getId()).getResultList();
-      candidaturasPendientes = entityManager.createNamedQuery("Candidatura.getPendingCandidaturesByCandidate", Candidatura.class).setParameter("idCandidato", u.getId()).getResultList();
-    }
-    else{
-      candidaturasEnVigor = entityManager.createNamedQuery("Candidatura.getAllActiveByCompany", Candidatura.class).getResultList();
-      candidaturasPendientes = entityManager.createNamedQuery("Candidatura.getPendingCandidaturesByCompany", Candidatura.class).getResultList();
-    }
-    
-    model.addAttribute("candidaturasEnVigor", candidaturasEnVigor);
-    model.addAttribute("candidaturasPendientes", candidaturasPendientes);
-    return "contrataciones";
     
   @GetMapping("/notificaciones")
   public String notificaciones(HttpSession session, Model model) {
