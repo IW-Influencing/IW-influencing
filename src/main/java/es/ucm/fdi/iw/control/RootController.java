@@ -21,6 +21,7 @@ import es.ucm.fdi.iw.model.Evento;
 import es.ucm.fdi.iw.model.Message;
 import es.ucm.fdi.iw.model.Propuesta;
 import es.ucm.fdi.iw.model.Usuario;
+import es.ucm.fdi.iw.model.Usuario.Rol;
 import es.ucm.fdi.iw.services.UsuariosService;					   
 /**
  * Landing-page controller
@@ -99,14 +100,52 @@ public class RootController {
 	  return "administracion";
   }
 
-
+  @GetMapping("/edicionPerfil")
+  public String edicionPerfil(Model model, HttpSession session) {
+	Usuario u = entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId());
+	model.addAttribute("tipo", "EDICION");
+	model.addAttribute("usuario", u);
+    return "modals/perfil";
+  }
+  
+  
+  @GetMapping("/perfil")
+  public String perfil(Model model, HttpSession session, @RequestParam long idUsuario) {
+	Usuario u = entityManager.find(Usuario.class, idUsuario);
+	model.addAttribute("tipo", "VISTA");
+	model.addAttribute("usuario", u);
+    return "modals/perfil";
+  }
+  
+  @GetMapping("/ultimatum")
+  public String ultimatum(Model model, HttpSession session, @RequestParam long idPropuesta) {
+	  Propuesta p = entityManager.find(Propuesta.class, idPropuesta);
+	  model.addAttribute("modo", "ULTIMATUM");
+	  model.addAttribute("propuesta", p);
+	  return "modals/propuesta";
+  }
+  
+  
+  @GetMapping("/propuesta")
+  public String propuesta(Model model, HttpSession session, @RequestParam long idPropuesta) {
+	  Propuesta p = entityManager.find(Propuesta.class, idPropuesta);
+	  model.addAttribute("propuesta", p);
+	  model.addAttribute("modo", "VISTA");
+	  return "modals/propuesta";
+  }
+  
+  @GetMapping("/creacionPropuesta")
+  public String propuesta(Model model, HttpSession session) {
+	  model.addAttribute("modo","CREACION");
+	  return "modals/propuesta";
+  }
+   
   @GetMapping("/notificaciones")
   public String notificaciones(HttpSession session, Model model) {
     List<Evento> listaNotificaciones = entityManager.createNamedQuery("Evento.adminEventsByDate").setParameter("idUsuario", ((Usuario)session.getAttribute("u")).getId()).setMaxResults(LIMITE_NOTIFICACIONES).getResultList();
 	  model.addAttribute("notificaciones", listaNotificaciones);
     return "modals/notificaciones";
   }
-
 
   @GetMapping("/error")
   public String error(Model model) {
