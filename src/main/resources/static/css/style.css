@@ -20,6 +20,10 @@ a:hover{
 }
 
 
+#desplegableUsuario{
+	right: 0;
+}
+
 .btn{
 	text-align: center;
     background-color: #6ed1dd;

@@ -27,7 +27,7 @@
                 <button class="w3-button userButton" th:text="${session.u.nombre}">
                     <h4>Usuario</h4>
                 </button>
-                <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                <div class="w3-dropdown-content w3-bar-block w3-card-4" id="desplegableUsuario">
                     <span id="botonNotificacionesNav" class="w3-bar-item w3-button">Notificaciones</span>
                     <span id="botonPerfilNav" class="w3-bar-item w3-button">Mi Perfil</span>
                     <form th:action="@{/logout}" method="post" class="w3-bar-item w3-button">
