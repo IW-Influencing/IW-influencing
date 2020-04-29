@@ -25,7 +25,7 @@ INSERT INTO usuario(id,activo,nombre_cuenta,nombre,password,roles,apellidos,edad
 	'INFLUENCER',
 	'Berta Muestrez',
 	22,
-	'fiesta',
+	'Fiesta',
 	'Estado del usuario',
 	4
 );
@@ -36,7 +36,7 @@ INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad
 	'INFLUENCER',
 	'Sanchez Garcia',
 	22,
-	'videojuegos',
+	'Videojuegos',
 	'Estado del usuario',
 	4
 );
@@ -47,7 +47,7 @@ INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad
 	'EMPRESA',
 	'Martin Gimeno',
 	22,
-	'comida',
+	'Moda',
 	'Estado del usuario',
 	3
 );

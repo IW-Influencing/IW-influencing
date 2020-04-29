@@ -18,8 +18,13 @@ document.addEventListener("DOMContentLoaded", () => {
 		p.onclick = c => cargaModalPerfil(p.dataset.id)
 	}
 	
-		for (let p of document.getElementsByClassName("btnDetalles")) {
+	for (let p of document.getElementsByClassName("btnDetalles")) {
 		p.onclick = c => cargaModalPerfil(p.dataset.id)
+	}
+
+	for (let p of document.getElementsByClassName("tagFilter")) {
+		
+		p.onclick = c => cargaBusquedasPorTag(p.dataset.id)
 	}
 	
 })
@@ -35,6 +40,15 @@ div.innerHTML = html;
 
 }
 
+function cargaBusquedasPorTag(tag){
+	return go2(config.rootUrl + "busquedaPerfil/tags?tag=" + tag, 'GET')
+	.then(html => { 
+var  div = document.getElementById("divPerfiles");
+div.innerHTML = html;
+})
+		.catch(e => console.log(e))
+
+}
 
 function cargaModalPerfil(idPerfil){
 	document.getElementById('modal').style.display='block';
