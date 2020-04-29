@@ -30,7 +30,9 @@
                 <div class="w3-dropdown-content w3-bar-block w3-card-4">
                     <span id="botonNotificacionesNav" class="w3-bar-item w3-button">Notificaciones</span>
                     <span id="botonPerfilNav" class="w3-bar-item w3-button">Mi Perfil</span>
-                    <a href="logout" class="w3-bar-item w3-button">Cerrar sesión</a>
+                    <form th:action="@{/logout}" method="post" class="w3-bar-item w3-button">
+                        <button type="submit">logout</button>
+                    </form>
                 </div>
             </div>
         </div>

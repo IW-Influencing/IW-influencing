@@ -44,7 +44,12 @@ public class RootController {
 
   @GetMapping("/")
   public String index(Model model) {
-    return "index";
+    return "login";
+  }
+
+  @GetMapping("/login")
+  public String login(Model model) {
+    return "login";
   }
 
   @GetMapping("/inicio")
