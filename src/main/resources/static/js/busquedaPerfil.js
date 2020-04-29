@@ -20,10 +20,17 @@ function prepareListeners() {
 		p.onclick = c => cargaModalPerfil(p.dataset.id)
 	}
 	
-		for (let p of document.getElementsByClassName("btnDetalles")) {
+	for (let p of document.getElementsByClassName("btnDetalles")) {
 		p.onclick = c => cargaModalPerfil(p.dataset.id)
 	}
+
+
+	for (let p of document.getElementsByClassName("tagFilter")) {
+		p.onclick = c => cargaBusquedasPorTag(p.dataset.id)
+	}
+	
 }
+
 
 document.addEventListener("DOMContentLoaded", () => {
 	prepareListeners();
@@ -37,6 +44,17 @@ function cargaBusquedas(patron){
 			div.innerHTML = html;
 			prepareListeners();
 		})
+		.catch(e => console.log(e))
+
+}
+
+
+function cargaBusquedasPorTag(tag){
+	return go2(config.rootUrl + "busquedaPerfil/tags?tag=" + tag, 'GET')
+	.then(html => { 
+var  div = document.getElementById("divPerfiles");
+div.innerHTML = html;
+})
 		.catch(e => console.log(e))
 
 }
