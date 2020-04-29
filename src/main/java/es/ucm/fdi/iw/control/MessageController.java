@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +38,9 @@ public class MessageController {
 	@Autowired 
 	private EntityManager entityManager;
 		
+	@Autowired
+	private SimpMessagingTemplate messagingTemplate;
+
 	@GetMapping("/")
 	public String getMessages(Model model, HttpSession session) {
 		return "messages";
@@ -76,6 +80,7 @@ public class MessageController {
 	@ResponseBody // para indicar que no devuelve vista, sino un objeto (jsonizado)
 	
 	public List<Evento.TransferChat> enviaMensaje(HttpSession session, @RequestParam long idCandidatura, @RequestParam String msg, @RequestParam long idReceptor) {
+		
 		Evento e = new Evento();
 		e.setDescripcion(msg);
 		e.setCandidatura(entityManager.find(Candidatura.class, idCandidatura));
@@ -86,7 +91,18 @@ public class MessageController {
 		e.setReceptor(entityManager.find(Usuario.class, idReceptor));
 		entityManager.persist(e);
 
-		return devuelveChat(session, idCandidatura);	
+		List<Evento.TransferChat> chatActualizado = devuelveChat(session, idCandidatura);
+
+		// y ahora, también lo enviamos por WS
+		messagingTemplate.convertAndSend(
+			"/user/a/queue/updates", 
+			chatActualizado);
+		messagingTemplate.convertAndSend(
+			"/user/"+e.getReceptor().getNombreCuenta()+"/queue/updates", 
+			chatActualizado);
+		log.info("Enviado mensaje via WS a {}", e.getReceptor().getNombreCuenta());
+		
+		return chatActualizado;
 	}	
 	
 
