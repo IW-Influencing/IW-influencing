@@ -41,12 +41,18 @@ public class BusquedaPerfilController {
 	  
 	  @GetMapping("/busca")
 		public String postSearch(Model model, HttpSession session, @RequestParam(required = true, defaultValue = "1") int indicePagina, @RequestParam String patron ) {
-			patron = "%"+patron+"%";
-			List<Usuario> usuarios = entityManager.createNamedQuery("Usuario.searchByNombre", Usuario.class)
-					.setParameter("nombre", patron).getResultList();
+			String patronParaLike = "%"+patron+"%";
+			List<Usuario> usuarios = null;
+			
+			if (patron.isEmpty()) { 
+				usuarios = entityManager.createQuery("select u from Usuario u", Usuario.class).getResultList();
+			} else {
+				usuarios = entityManager.createNamedQuery("Usuario.searchByNombre", Usuario.class)
+						.setParameter("nombre", patronParaLike).getResultList();			
+			}
 			model.addAttribute("numeroPaginas", Math.ceil((double)usuarios.size()/NUM_ELEMENTOS_PAGINA));
 			usuarios=usuarios.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, indicePagina*NUM_ELEMENTOS_PAGINA);
-
+			
 			model.addAttribute("resultadoBusqueda", usuarios);
 			model.addAttribute("patron", patron);
 
