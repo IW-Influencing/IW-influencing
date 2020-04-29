@@ -1,9 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
-	document.getElementById("botonCrearPropuesta").onclick = b => cargaPropuestaModal();
+	document.getElementById("registroLogin").onclick = c => cargaModalPerfil()
 })
 
-function cargaPropuestaModal(){
+
+function cargaModalPerfil(){
 	document.getElementById('modal').style.display='block';
-	return go2(config.rootUrl + "propuesta/creacion", 'GET')
+	return go2(config.rootUrl + "registro", 'GET')
 		.then(html => document.getElementById("contenidoModal").innerHTML=html);
 }

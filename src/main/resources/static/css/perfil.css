@@ -23,8 +23,10 @@ main {
 #tags {
   min-width: 250px;
   width: 30%;
-  align-items: center;
+  display:flex;
+  justify-content:center;
 }
+
 #tags ul {
   display: flex;
   flex-wrap: wrap;
@@ -47,12 +49,9 @@ main {
 
 
 #propuestas li {
-  border: 1px solid #000;
   list-style-type: none;
   text-align: center;
-  margin-left: -30px;
   padding: 5px;
-  transition: 0.2s ease-in;
   background-color: #d5dbdb;
   align-items: center;
 }
@@ -69,17 +68,18 @@ main {
   align-items: center;
 }
 
+#propuestas{
+	display:flex;
+	flex-direction: column;
+}
+
 #edad-media {
-  border: 1px solid black;
   text-align: center;
   padding: 4px;
   font-weight: 700;
-  align-items: center;
 }
 
 #seguidores {
-  width:30%;
-  border: 1px solid black;
   border-radius:10px;
   padding: 6px;
   display:flex;
@@ -97,6 +97,15 @@ main {
 #seguidores span {
   font-weight: 700;
   align-items: center;
+}
+
+.tags {
+    border: 1px solid deepskyblue;
+    padding: 4px;
+    margin: 2px;
+	width: fit-content;
+    min-width: 50px;
+	border-radius:12px;
 }
 
 .numeroseguidores{
