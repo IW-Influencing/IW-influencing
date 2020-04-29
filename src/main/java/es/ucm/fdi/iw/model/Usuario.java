@@ -42,7 +42,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 	
 	@NamedQuery(name="Usuario.searchByTag",
 	query="SELECT u FROM Usuario u "
-			+ "WHERE u.tags LIKE :tag)"),
+			+ "WHERE u.tags LIKE :tag")
 })
 
 @Table(uniqueConstraints={@UniqueConstraint(columnNames={"nombreCuenta"})})
