@@ -1,5 +1,4 @@
 function prepareListeners() {
-	console.log("prepareListeners");
 	let inputBusqueda =  document.getElementById("cuadroBusquedaTagBar")
 
 	inputBusqueda.addEventListener("keyup", function(event) {

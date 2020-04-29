@@ -51,8 +51,12 @@ public class BusquedaPerfilController {
 						.setParameter("nombre", patronParaLike).getResultList();			
 			}
 			model.addAttribute("numeroPaginas", Math.ceil((double)usuarios.size()/NUM_ELEMENTOS_PAGINA));
-			usuarios=usuarios.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, indicePagina*NUM_ELEMENTOS_PAGINA);
-			
+			if (indicePagina*NUM_ELEMENTOS_PAGINA <= usuarios.size())
+				usuarios=usuarios.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, indicePagina*NUM_ELEMENTOS_PAGINA);
+			else 
+				usuarios=usuarios.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, usuarios.size());
+
+					
 			model.addAttribute("resultadoBusqueda", usuarios);
 			model.addAttribute("patron", patron);
 
