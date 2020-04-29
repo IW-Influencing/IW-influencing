@@ -32,9 +32,9 @@ public class BusquedaPropuestaController {
     @GetMapping("")
 	public String getPropuestas(Model model, HttpSession session) {
 		List<Propuesta> propuestas = entityManager.createNamedQuery("Propuesta.getAllProposals", Propuesta.class).getResultList();
-                
+		model.addAttribute("numeroPaginas", Math.ceil((double)propuestas.size()/NUM_ELEMENTOS_PAGINA));
+		propuestas=propuestas.subList(0,NUM_ELEMENTOS_PAGINA);
 	    model.addAttribute("propuestas", propuestas);
-        
         return "busquedaPropuesta";
     }
     

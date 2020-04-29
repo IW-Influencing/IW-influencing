@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function cargaModalPropuesta(idPropuesta){
 	document.getElementById('modal').style.display='block';
+	console.log("Documento pillado");
 	return go2(config.rootUrl + "propuesta?idPropuesta=" + idPropuesta, 'GET')
 		.then(html => document.getElementById("contenidoModal").innerHTML=html);
 }

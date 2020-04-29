@@ -35,7 +35,7 @@ public class BusquedaPerfilController {
 	    List<Usuario> users = entityManager.createNamedQuery("Usuario.getAllUsers", Usuario.class).getResultList();
 		 model.addAttribute("numeroPaginas", Math.ceil((double)users.size()/NUM_ELEMENTOS_PAGINA));
 	     users=users.subList(0,NUM_ELEMENTOS_PAGINA);
-		  model.addAttribute("usuarios", users);
+		 model.addAttribute("usuarios", users);
 		  return "busquedaPerfil";
 	  }
 	  
