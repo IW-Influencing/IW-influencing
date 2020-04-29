@@ -51,6 +51,8 @@ function cargaChat(idCandidatura, idPropuesta, nombreUsuario, idReceptor, nombre
 		//Comprueba que el mensaje no esté vacío ni que solo contenga espacios en blanco
 		if (inputMensaje.value.length !== 0 && inputMensaje.value.trim())
 			    enviarMensajeChatNegociacion(inputMensaje.value, idCandidatura,idReceptor, contenido, idPropuesta);
+				inputMensaje.value = "";
+				
 			 }
 		}); 
 

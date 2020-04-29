@@ -79,8 +79,8 @@ public class RootController {
 	  //Obtener la lista de propuestas
 	  long idUsuario = ((Usuario)session.getAttribute("u")).getId();
     List<Candidatura> listaCandidatura = entityManager
-      .createNamedQuery("Candidatura.activeByCandidato")
-      .setParameter("idCandidato", idUsuario).getResultList();
+      .createNamedQuery("Candidatura.activeByIdUsuario")
+      .setParameter("idUsuario", idUsuario).getResultList();
 
 	  model.addAttribute("candidaturas", listaCandidatura);
     
