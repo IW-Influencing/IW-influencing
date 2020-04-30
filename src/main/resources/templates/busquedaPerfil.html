@@ -19,6 +19,7 @@
 			<div th:replace="fragments/navigation.html :: tagBar"></div>
 		</header>
 
+		<!-- Resultado busqueda de perfiles -->
 		<div id="divPerfiles">
 			<div th:replace="fragments/resultadoBusquedaPerfiles.html (resultadoBusqueda=${usuarios})"> </div>
 		</div>
@@ -30,6 +31,7 @@
 
 	<!-- Modal -->
 	<div th:replace="fragments/modal.html"></div>
+
 </body>
 
 </html>

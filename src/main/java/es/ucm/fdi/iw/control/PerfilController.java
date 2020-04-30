@@ -22,15 +22,15 @@ public class PerfilController {
     @GetMapping("")
     public String perfil(Model model, HttpSession session, @RequestParam long idUsuario) {
         Usuario u = entityManager.find(Usuario.class, idUsuario);
-        model.addAttribute("tipo", "VISTA");
+        model.addAttribute("modo", "VISTA");
         model.addAttribute("usuario", u);
         return "modals/perfil";
     }
 
-    @GetMapping("/edicionPerfil")
+    @GetMapping("/edicion")
     public String edicionPerfil(Model model, HttpSession session) {
         Usuario u = entityManager.find(Usuario.class, ((Usuario) session.getAttribute("u")).getId());
-        model.addAttribute("tipo", "EDICION");
+        model.addAttribute("modo", "EDICION");
         model.addAttribute("usuario", u);
         return "modals/perfil";
     }

@@ -19,6 +19,7 @@
 			<div th:replace="fragments/navigation.html :: tagBar"></div>
 		</header>
 		
+		<!-- Resultado busqueda de propuestas -->
 		<div id ="divPropuestas">
 			<div th:replace="fragments/resultadoBusquedaPropuestas.html (resultadoBusqueda=${propuestas})"> </div>
 		</div>
@@ -32,4 +33,5 @@
 	<div th:replace="fragments/modal.html"></div>
 
 </body>
+
 </html>

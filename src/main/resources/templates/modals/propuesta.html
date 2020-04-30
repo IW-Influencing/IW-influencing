@@ -6,42 +6,52 @@
   <link rel="stylesheet" href="css/propuesta.css">
 </head>
 
-<body style="width:100%" class="general"> <!-- general wtf¿?-->
+<body style="width:100%" class="general">
+  <!-- general wtf¿?-->
 
   <!-- Header -->
   <header>
-	<div th:if="${modo} eq 'VISTA' or ${modo} eq 'CREACION'"><div th:replace="fragments/navigation.html :: modalBar(nombrePagina='PROPUESTA')"></div></div>
-    <div th:if="${modo} eq 'ULTIMATUM'or ${modo} eq 'VISTA-ULTIMATUM'"> <div th:replace="fragments/navigation.html :: modalBar(nombrePagina='ULTIMATUM')"></div></div>
- </header>
+    <div th:if="${modo} eq 'VISTA' or ${modo} eq 'CREACION'">
+      <div th:replace="fragments/navigation.html :: modalBar(nombrePagina='PROPUESTA')"></div>
+    </div>
+    <div th:if="${modo} eq 'ULTIMATUM'or ${modo} eq 'VISTA-ULTIMATUM'">
+      <div th:replace="fragments/navigation.html :: modalBar(nombrePagina='ULTIMATUM')"></div>
+    </div>
+  </header>
 
-  <!-- First Field Grid-->
+  <!-- Contenido propuesta -->
   <div class="contenido-propuesta w3-display-container">
+
+    <!-- Texto propuesta -->
     <div class="texto-propuesta">
- 	  <div th:if="${modo} eq 'CREACION'">
-		<h2>Nombre</h2><input type=text>
-		<h2>Descripcion</h2><input type=text>
-		</div>
- 	<div>
-		<h2 th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'" th:text="${propuesta.nombre}">Nombre de propuesta</h2>
-			
-		      <p th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'" th:text="${propuesta?.descripcion}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit,
-		        vulputate eu pharetra nec,
-		        mattis ac
-		        neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend
-		        tristique,
-		        tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium
-		        sit
-		        amet quis magna. Aenean velit odio, elementum in tempus ut, vehicula eu diam. Pellentesque rhoncus aliquam
-		        mattis.
-		        Ut vulputate eros sed felis sodales nec vulputate justo hendrerit. Vivamus varius pretium ligula, a aliquam
-		        odio
-		        euismod sit amet. Quisque laoreet sem sit amet orci ullamcorper at ultricies metus viverra. Pellentesque
-		        arcu
-		        mauris, malesuada quis ornare accumsan, blandit sed diam.</p>
-	</div>
-      
+      <div th:if="${modo} eq 'CREACION'">
+        <h2>Nombre</h2><input type=text>
+        <h2>Descripcion</h2><input type=text>
+      </div>
+      <div>
+        <h2 th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'"
+          th:text="${propuesta.nombre}">Nombre de propuesta</h2>
+
+        <p th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'"
+          th:text="${propuesta?.descripcion}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit,
+          vulputate eu pharetra nec,
+          mattis ac
+          neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend
+          tristique,
+          tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium
+          sit
+          amet quis magna. Aenean velit odio, elementum in tempus ut, vehicula eu diam. Pellentesque rhoncus aliquam
+          mattis.
+          Ut vulputate eros sed felis sodales nec vulputate justo hendrerit. Vivamus varius pretium ligula, a aliquam
+          odio
+          euismod sit amet. Quisque laoreet sem sit amet orci ullamcorper at ultricies metus viverra. Pellentesque
+          arcu
+          mauris, malesuada quis ornare accumsan, blandit sed diam.</p>
+      </div>
+
     </div>
 
+    <!-- Edad Objetivo de la propuesta -->
     <div class="edad-propuesta">
 
       <h2>Edad Objetivo</h2>
@@ -53,20 +63,24 @@
           <option value="e3">15 - 20</option>
           <option value="e4">20 - 30</option>
         </select>
-        <span th:if="${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'" th:text="${propuesta?.edadMinPublico + ' - ' + propuesta?.edadMaxPublico}">  </span>
-      años</p>
-	
+        <span th:if="${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'"
+          th:text="${propuesta?.edadMinPublico + ' - ' + propuesta?.edadMaxPublico}"> </span>
+        años</p>
+
     </div>
 
+    <!-- Periodo -->
     <div class="periodo-propuesta">
 
       <h2>Periodo de la propuesta</h2>
       <p th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'CREACION'">De <input type="date">
         a <input type="date"></p>
 
-		<p th:if="${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'"  th:text="${#temporals.format(localDateTime, 'dd-MM-yyyy')}"> </p>
-	<!--'De ' + #dates.formatISO(propuesta?.fechaInicio) + ' a ' + #dates.formatISO(propuesta.fechaFin)-->
+      <p th:if="${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'" th:text="${#temporals.format(localDateTime, 'dd-MM-yyyy')}"> </p>
+	    <!--'De ' + #dates.formatISO(propuesta?.fechaInicio) + ' a ' + #dates.formatISO(propuesta.fechaFin)-->
     </div>
+
+    <!-- Imagen -->
     <div class="imagen-propuesta">
 
       <h2>Imagen Campaña</h2>
@@ -77,24 +91,24 @@
       </span>
 
     </div>
+
+    <!-- Tags -->
     <div class="tags-propuesta">
       <button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
       <button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
       <button class="w3-button w3-white tags" style="border-radius:12px;">Tag</button>
     </div>
 
+    <!-- Botones -->
     <button  th:if="${modo} eq 'CREACION'" class="btn">Publicar</button>
     <button  th:if="${modo} eq 'VISTA' and ${session.u.hasRole('INFLUENCER')}" class="btn">Apuntarse</button>
     <button  th:if="${modo} eq 'ULTIMATUM'" class="btn">Enviar</button>
-	<div class="botones-propuesta" th:if="${modo} eq 'VISTA-ULTIMATUM'"> 
-		<button class="btn btnAceptar">Aceptar</button>
+	  <div class="botones-propuesta" th:if="${modo} eq 'VISTA-ULTIMATUM'"> 
+		  <button class="btn btnAceptar">Aceptar</button>
 	    <button  class="btn btnRechazar">Rechazar</button>
-	</div>
-	
-	<button class="w3-display-topright" id="btnDenunciar">Denunciar</button>
-
-
-  
+	  </div>
+    <button class="w3-display-topright" id="btnDenunciar">Denunciar</button>
+    
   </div>
 
 </body>

@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function cargaPerfilModalNav(){
 	document.getElementById('modal').style.display='block';
-	return go2(config.rootUrl + "edicionPerfil", 'GET')
+	return go2(config.rootUrl + "perfil/edicion", 'GET')
 		.then(html => document.getElementById("contenidoModal").innerHTML=html);
 }
 

@@ -11,9 +11,11 @@
 <body>
 
     <!-- NAVBAR -->
-    <div th:fragment="navBar (nombrePagina)">
+    <div th:fragment="navBar(nombrePagina)">
+        
         <!-- Cabecera -->
         <div class="title w3-display-container">
+            
             <!-- Logo -->
             <a class="logo w3-display-topleft" href="/inicio">INFLUENCING</a>
             
@@ -35,11 +37,11 @@
                     </form>
                 </div>
             </div>
-
+            
         </div>
-        <br>
+        
         <!-- Barra de Navegación -->
-        <div class="horizontalBar">
+        <div class="horizontalBar w3-margin-top">
             <ul class="ulFragment">
                 <li><a th:class="${nombrePagina=='BÚSQUEDA DE PERFILES'}?'active':''"
                         th:href="@{/busquedaPerfil}"><i class="fa fa-search" aria-hidden="true"></i> Búsqueda de
@@ -89,13 +91,22 @@
     </div>
 
     <!-- FOOTER -->
-    <footer class="w3-container w3-padding-32 w3-dark-grey footer" th:fragment="footer">
+    <footer th:fragment="footer" class="w3-container w3-padding-32 w3-dark-grey footer">
         <div class="links">
             <a href="#" title="home" target="_blank" class="w3-hover-opacity">Influencing</a> -
             <a href="#" title="terms" target="_blank" class="w3-hover-opacity">Términos y condiciones</a> -
             <a href="#" title="contact" target="_blank" class="w3-hover-opacity">Contáctanos</a>
         </div>
     </footer>
+
+    <!-- PAGINATION-->
+    <div th:fragment="pagination(numeroPaginas)" class="w3-center w3-padding-32">
+        <div class="w3-bar">
+        <th:block th:each="i: ${#numbers.sequence(0,${numeroPaginas}-1)}">
+            <a class="w3-bar-item w3-button w3-hover-blue botonPaginacion" th:text="${i+1}" th:attr="data-prop-indice=${i+1},data-prop-patron=${patron}">No funciona</a>
+        </th:block>	
+        </div>
+    </div> <!-- ${numeroPaginas} -->
 
 </body>
 
