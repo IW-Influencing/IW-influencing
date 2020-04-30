@@ -15,7 +15,7 @@
         <!-- Cabecera -->
         <div class="title w3-display-container">
             <!-- Logo -->
-            <a class="brand w3-display-topleft" href="/inicio"><b class="logo">INFLUENCING</b></a>
+            <a class="logo w3-display-topleft" href="/inicio">INFLUENCING</a>
             
             <!-- Titulo Pagina -->
             <div class="w3-display-bottommiddle tituloPag">
@@ -31,10 +31,11 @@
                     <span id="botonNotificacionesNav" class="w3-bar-item w3-button">Notificaciones</span>
                     <span id="botonPerfilNav" class="w3-bar-item w3-button">Mi Perfil</span>
                     <form th:action="@{/logout}" method="post" class="w3-bar-item w3-button">
-                        <button type="submit">logout</button>
+                        <button type="submit">Cerrar sesión</button>
                     </form>
                 </div>
             </div>
+
         </div>
         <br>
         <!-- Barra de Navegación -->
@@ -64,9 +65,9 @@
             <div class="w3-padding w3 w3-text-white"><i class="fa fa-arrow-left w3-large"></i> VOLVER</div>
         </div>
         <div id="nombrePagina" class="w3-display-middle nombrePagina">
-            <b><span th:text="${nombrePagina}">nombrePagina</span></b>
+            <b><span class="w3-text-white" th:text="${nombrePagina}">nombrePagina</span></b>
         </div>
-    </div> <!-- CAMBIAR, DEBE IR EN EL CSS -->
+    </div>
 
 
     <!-- TAGBAR -->

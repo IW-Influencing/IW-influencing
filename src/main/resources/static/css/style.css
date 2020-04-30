@@ -1,4 +1,4 @@
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif;}
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif !important;}
 
 .header-config{
     background-color: #6ed1dd;                             /*Color que está en los moqups*/
@@ -36,6 +36,9 @@ a:hover{
 	overflow:hidden;
 }
 
+.container{
+    text-align: center !important;
+}
 
 .divResultadoBusqueda{
 	display: flex;
@@ -43,4 +46,11 @@ a:hover{
 	align-items:center;
 }
 
+.logo{
+    font-family: Aclonica;
+    font-size: xxx-large;
+    font-weight: bold;
+    margin-left: 1%;
+    text-decoration: none;
+}
 	

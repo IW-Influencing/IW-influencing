@@ -3,20 +3,6 @@
     background-color: #6ed1dd;
 }
 
-.brand{
-    font-family: Aclonica;
-    height: 52px;
-    width: 100%;
-    margin-left: 3%;
-    text-align: left;
-    margin:auto;
-}
-
-.logo{
-  font-size: xx-large;
-  margin-left: 1%;
-}
-
 .ulFragment {
 	margin: auto;
     list-style-type: none;
