@@ -20,11 +20,29 @@
   <!-- Main -->
   <main>
 
+    <h2 class="w3-padding-24">Nombre Cuenta</h2>
+    <input type="text" name="nombreCuenta" th:if="${modo} eq 'CREACION'" placeholder="Introduzca su usuario"></input>
+
     <!-- Nombre -->
     <h2 class="w3-padding-24">Nombre Perfil</h2>
     <span th:if="${modo} eq 'VISTA'" th:text="${usuario.nombre}">Nombre Perfil</span>
     <input type="text" name="nombre" th:if="${modo} eq 'EDICION'" th:text="${usuario.nombre}"></input>
     <input type="text" name="nombre" th:if="${modo} eq 'CREACION'" placeholder="Introduzca su nombre"></input>
+
+
+    <!-- Nombre -->
+    <h2 class="w3-padding-24">Contraseña</h2>
+    <span th:if="${modo} eq 'VISTA'" th:text="${usuario.nombre}">Nombre Perfil</span>
+    <input type="text" name="nombre" th:if="${modo} eq 'EDICION'" th:text="${usuario.nombre}"></input>
+	<div>
+	    <input type="password" name="pass1"  placeholder="Introduzca su contraseña"></input>
+<br>
+    	<input type="password" name="pass2"  placeholder="Repita la contraseña"></input>
+	</div>
+	<div>
+	
+	</div>
+
 
 
     <!-- Imagen -->

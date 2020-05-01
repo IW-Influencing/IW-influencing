@@ -19,7 +19,7 @@ Valoracion
 
 Imagenes de usuario/propuestas
 
-Validacion formulario
+Validacion formulario registro
 
 Busquedas por tag en perfil y propuesta al pinchar en tag de uno especifico o seleccionar en la barra
 

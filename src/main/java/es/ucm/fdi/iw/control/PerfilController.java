@@ -4,11 +4,13 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -49,6 +51,21 @@ public class PerfilController {
         model.addAttribute("modo", "CREACION");
         model.addAttribute("usuario",null);
         return "modals/perfil";
+    }
+    
+    @PostMapping("/registraUsuario")
+    @Transactional
+    public String registraUsuario(@RequestParam String nombreCuenta, @RequestParam String nombre
+    		,@RequestParam String pass1,@RequestParam String pass2,@RequestParam Object perfilTwitter
+    		,@RequestParam Object perfilFacebook,@RequestParam Object perfilInstagram,@RequestParam Object perfilYoutube){
+    	
+    	/*
+    	 * Validar campos
+    	 * Comprobar en los Object que perfilX.nombre != null y numSeguidores >= 0
+    	 * Insertar en BBDD
+    	 * */
+    	
+    	return "login";
     }
 
 }
