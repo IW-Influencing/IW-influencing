@@ -4,6 +4,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+
+
+@NamedQueries({
+	@NamedQuery(name="PerfilRRSS.byInfluencer",
+	query="SELECT p FROM PerfilRRSS p "
+			+ "WHERE p.influencer.id = :idUsuario")
+})
+
 
 @Entity
 public class PerfilRRSS {
@@ -12,6 +22,9 @@ public class PerfilRRSS {
 	private Usuario influencer;
 	private String nombre;
 	private int numSeguidores;
+	public enum RRSS {Twitter, Facebook, Instagram, Youtube};
+	private String rrss;
+
 
 
 	public PerfilRRSS(long id, Usuario influencer, String nombre, int numSeguidores) {
@@ -56,4 +69,16 @@ public class PerfilRRSS {
 		this.numSeguidores = numSeguidores;
 	}
 
+	public String getRrss() {
+		return rrss;
+	}
+
+	public void setRrss(String rrss) {
+		this.rrss = rrss;
+	}
+	
+	public void setRRSS(RRSS rrss) {
+		this.rrss = rrss.toString();
+	}
+	
 }

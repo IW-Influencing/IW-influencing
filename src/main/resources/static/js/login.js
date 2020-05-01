@@ -5,6 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function cargaModalPerfil(){
 	document.getElementById('modal').style.display='block';
-	return go2(config.rootUrl + "registro", 'GET')
+	return go2(config.rootUrl + "perfil/creacion", 'GET')
 		.then(html => document.getElementById("contenidoModal").innerHTML=html);
 }

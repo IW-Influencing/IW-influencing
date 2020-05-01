@@ -1,5 +1,7 @@
 package es.ucm.fdi.iw.control;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import es.ucm.fdi.iw.model.Candidatura;
+import es.ucm.fdi.iw.model.PerfilRRSS;
 import es.ucm.fdi.iw.model.Usuario;
 
 @Controller()
@@ -22,8 +26,13 @@ public class PerfilController {
     @GetMapping("")
     public String perfil(Model model, HttpSession session, @RequestParam long idUsuario) {
         Usuario u = entityManager.find(Usuario.class, idUsuario);
+        List<PerfilRRSS>perfiles = entityManager.createNamedQuery("PerfilRRSS.byInfluencer", PerfilRRSS.class)
+        		.setParameter("idUsuario",idUsuario).getResultList();
+        
         model.addAttribute("modo", "VISTA");
         model.addAttribute("usuario", u);
+        model.addAttribute("perfilesRRSS",perfiles); 		
+        		
         return "modals/perfil";
     }
 
@@ -38,6 +47,7 @@ public class PerfilController {
     @GetMapping("/creacion")
     public String creacion(Model model, HttpSession session) {
         model.addAttribute("modo", "CREACION");
+        model.addAttribute("usuario",null);
         return "modals/perfil";
     }
 

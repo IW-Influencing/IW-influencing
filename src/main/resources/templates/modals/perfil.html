@@ -20,7 +20,15 @@
   <!-- Main -->
   <main>
 
+    <!-- Nombre -->
+    <h2 class="w3-padding-24">Nombre Perfil</h2>
+    <span th:if="${modo} eq 'VISTA'" th:text="${usuario.nombre}">Nombre Perfil</span>
+    <input type="text" name="nombre" th:if="${modo} eq 'EDICION'" th:text="${usuario.nombre}"></input>
+    <input type="text" name="nombre" th:if="${modo} eq 'CREACION'" placeholder="Introduzca su nombre"></input>
+
+
     <!-- Imagen -->
+    <h2 class="w3-padding-24">Imagen Perfil</h2>
     <div class="w3-center" th:if="${modo} eq 'VISTA'">
       <img id="imagen-perfil" src="img/profile.png">
     </div>
@@ -32,11 +40,6 @@
       <input type="file" name="imagenPerfil">
     </div>
 
-    <!-- Nombre -->
-    <h2 th:if="${modo} eq 'VISTA'" th:text="${usuario.nombre}">Nombre Perfil</h2>
-    <div th:if="${modo} eq 'CREACION' or ${modo} eq 'EDICION'">
-      <input type="text" name="nombre" value="Nombre perfil" th:value="{usuario.nombre}">
-    </div>
 
     <!-- Valoracion-->
     <div th:if="${modo} eq 'VISTA' or ${modo} eq 'EDICION'">
@@ -58,8 +61,11 @@
       <!-- Hacer array con los tags y mostrarlos para poder seleccionarlos y que los tenga el perfil -->
     </div>
 
+
+
     <!-- Historial propuestas -->
-    <h2>Historial de propuestas</h2>
+	<div th:if="${modo} eq 'EDICION' or ${modo} eq 'VISTA'">
+    <h2 class="w3-padding-24">Historial de propuestas</h2>
     <div id="propuestas">
       <ul>
         <li>Propuesta1</li>
@@ -68,38 +74,74 @@
         <li>Propuesta4</li>
       </ul>
     </div>
+
+</div>
     <!-- Hacer historial de propuestas con query en el modelo -->
 
     <!-- Edad -->
-    <h2>Edad media de los seguidores</h2>
+    <h2 class="w3-padding-24">Edad media de los seguidores</h2>
     <div id="edad" th:if="${modo} eq 'VISTA'">
       <div id="edad-media" th:text="${usuario.edad}">Años de media</div>
     </div>
-    <div id="edad" th:if="${modo} eq 'EDICION' or ${modo} eq 'CREACION'">
-      <input type="text" name="nombre" value="Años de media" th:value="${usuario.edad}">
+    <div id="edad" th:if="${modo} eq 'EDICION'">
+      <input type="text" name="edad" value="Años de media" th:value="${usuario.edad}">
+    </div>
+
+    <div id="edad" th:if="${modo} eq 'CREACION'">
+      <input type="text" name="edad" placeholder="Años de media">
     </div>
 
     <!-- Seguidores-->
-    <h2>Seguidores en redes sociales</h2>
+    <h2 class="w3-padding-24">Perfiles en redes sociales</h2>
     <div id="seguidores">
-      <ul>
-        <li>
-          <a href="twitter.com">@pepitoTwitter</a>
-          <span class="numeroseguidores"> 200k </span>
-          <img src="img/twitter.png" width="20" />
-        </li>
-        <li>
-          <a href="youtube.com">@pepitoYT</a>
-          <span class="numeroseguidores"> 250k </span>
-          <img src="img/youtube.png" width="20" />
-        </li>
-        <li>
-          <a href="instagram.com">@pepitoIG</a>
-          <span class="numeroseguidores"> 192k </span>
-          <img src="img/instagram.png" width="20" />
+      <ul th:if="${modo} eq 'EDICION' or ${modo} eq 'VISTA'">
+        <li th:each="perfil: ${perfilesRRSS}">
+	      <span th:text="${perfil.nombre}">nombrePorDefecto</span>
+          <span class="numeroseguidores" th:text="${perfil.numSeguidores}"> 200k </span>
+          <img th:if="${perfil.rrss} eq 'Twitter'" src="img/twitter.png" width="20" />
+          <img th:if="${perfil.rrss} eq 'Facebook'" src="img/twitter.png" width="20" />
+          <img th:if="${perfil.rrss} eq 'Instagram'" src="img/instagram.png" width="20" />
+          <img th:if="${perfil.rrss} eq 'Youtube'" src="img/youtube.png" width="20" />
         </li>
       </ul>
+
+      <ul th:if="${modo} eq 'CREACION'">
+        <li>
+          <span>Twitter: </span>
+          <input type="text" name="nombreTwitter" placeholder="Nombre de la cuenta">
+          <input type="text" name="seguidoresTwitter" placeholder="Nº de seguidores">
+          <img src="img/twitter.png" width="20" />
+      
+        </li>
+        <li>
+          <span>Facebook: </span>
+          <input type="text" name="nombreFacebook" placeholder="Nombre de la cuenta">
+          <input type="text" name="seguidoresFacebook" placeholder="Nº de seguidores">
+          <img src="img/facebook.png" width="20" />
+      
+        </li>
+        <li>
+          <span>Instagram: </span>
+          <input type="text" name="nombreInstagram" placeholder="Nombre de la cuenta">
+          <input type="text" name="seguidoresInstagram" placeholder="Nº de seguidores">
+          <img src="img/instagram.png" width="20" />
+        </li>
+        <li>
+          <span>Youtube: </span>
+          <input type="text" name="nombreYoutube" placeholder="Nombre de la cuenta">
+          <input type="text" name="seguidoresYoutube" placeholder="Nº de seguidores">
+          <img src="img/youtube.png" width="20" />
+        </li>
+      </ul>
+
     </div>
+
+    <!-- Botones -->
+    <button th:if="${modo} eq 'VISTA'">Cerrar perfil</button>
+    <button th:if="${modo} eq 'EDICION'">Guardar cambios</button>
+    <button th:if="${modo} eq 'CREACION'" class="btn" id="botonRegistrarseUsuario">Registrar usuario</button>
+
+
     <!-- Repensar funcionalidad y posible cambio en el modelo -->
 	
   </main>
