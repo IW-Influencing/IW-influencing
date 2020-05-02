@@ -110,6 +110,11 @@ form{
   align-items: center;
 }
 
+#imagen-perfil{
+	  width:15em;
+}
+
+
 .tags {
     border: 1px solid deepskyblue;
     padding: 4px;

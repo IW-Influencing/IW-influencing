@@ -60,12 +60,12 @@
 			<div id="proposal_block" class="proposal_block">
 				<div class="content">
 					<h1>Propuestas recientes</h1>
-					<button class="btn">Ver todas las propuestas</button>
+					<button class="btn" id="verTodasPropuestas">Ver todas las propuestas</button>
 						<div th:each="candidatura : ${candidaturas}" id="proposal1" class="dark_block">
 						<div class="content">
 							<p th:text="${candidatura.getPropuesta().getEmpresa().getNombre() +': '+ candidatura.getPropuesta().getDescripcion()}">Creador de la propuesta + Descripcion</p>
                 			<div id="button_row_message" class="button_row">
-                    			<button class="button btn-row">Ir a la propuesta</button>
+                    			<button class="button btn-row btnVerPropuesta" th:attr="data-id=${candidatura.propuesta.id}">Ver la propuesta</button>
                     			<button class="button btn-row middle_button">Abandonar propuesta</button>
                     			<button class="button btn-row">Contactar</button>
                 			</div>

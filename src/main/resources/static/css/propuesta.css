@@ -12,6 +12,10 @@ input[type=file] {
   margin: 0 1em 0 1em;
 }
 
+#imagen-propuesta{
+	  width:15em;
+}
+
 .botones-propuesta{
 	padding-top: 6em;
 	display:flex;
@@ -61,6 +65,7 @@ input[type=file] {
 	padding: 2em 0 1em 0;
 	justify-content: center;
 	align-items: center;
+	flex-direction: column;
 }
 
 

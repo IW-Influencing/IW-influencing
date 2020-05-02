@@ -40,6 +40,7 @@ public class Propuesta {
 	private BigDecimal sueldo;
 	private LocalDateTime fechaInicio;
 	private LocalDateTime fechaFin;
+	private LocalDateTime fechaSubida;
 	private Boolean activa;
 	private int edadMinPublico;
 	private int edadMaxPublico;
@@ -152,6 +153,15 @@ public class Propuesta {
 		this.edadMaxPublico = edadMaxPublico;
 	}
 
+	public LocalDateTime getFechaSubida() {
+		return fechaSubida;
+	}
+
+	public void setFechaSubida(LocalDateTime fechaSubida) {
+		this.fechaSubida = fechaSubida;
+	}
+
+	
 
 	
 

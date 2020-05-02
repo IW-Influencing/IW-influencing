@@ -32,9 +32,8 @@
       <!-- Nombre Perfil -->
       <h2 class="w3-padding-24">Nombre Perfil</h2>
       <span th:if="${modo} eq 'VISTA'" th:text="${usuario.nombre}">Nombre Perfil</span>
-      <input type="text" name="nombre" th:if="${modo} eq 'EDICION'" th:text="${usuario.nombre}" required></input>
-      <input type="text" name="nombre" th:if="${modo} eq 'CREACION'" placeholder="Introduzca su nombre"
-        required></input>
+      <input th:if="${modo} eq 'EDICION'" type="text" name="nombre"  th:value="${usuario.nombre}" required></input>
+      <input th:if="${modo} eq 'CREACION'" type="text" name="nombre" placeholder="Introduzca su nombre" required></input>
 
 
       <!-- Contraseña (CREACION, EDICION) -->
@@ -89,7 +88,7 @@
 
 
       <!-- Historial propuestas (VISTA, EDICION) -->
-      <div th:if="${modo} eq 'VISTA' or ${modo} eq 'EDICION'">
+      <div th:if="${modo} eq 'VISTA' or ${modo} eq 'EDICION'" class="divCentrado">
         <h2 class="w3-padding-24">Historial de propuestas</h2>
         <div id="propuestas">
           <ul>
