@@ -46,6 +46,11 @@ a:hover{
 	align-items:center;
 }
 
+.divCentrado{
+    text-align: center;
+    align-items: center;
+}
+
 .logo{
     font-family: Aclonica;
     font-size: xxx-large;
@@ -53,4 +58,3 @@ a:hover{
     margin-left: 1%;
     text-decoration: none;
 }
-	
