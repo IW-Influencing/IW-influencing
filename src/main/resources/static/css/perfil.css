@@ -11,13 +11,20 @@ main {
   flex-direction: column;
   justify-content: space-evenly;
   width: 100%;
-padding-bottom:3em;
+  padding-bottom:3em;
   align-items: center;
 }
 
 #valoracion {
   font-size: 40px;
   align-items: center;
+}
+
+form{
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	
 }
 
 #tags {

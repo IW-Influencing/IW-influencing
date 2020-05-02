@@ -19,15 +19,15 @@
 
   <!-- Main -->
   <main>
-
+	<form>
     <h2 class="w3-padding-24">Nombre Cuenta</h2>
-    <input type="text" name="nombreCuenta" th:if="${modo} eq 'CREACION'" placeholder="Introduzca su usuario"></input>
+    <input type="text" name="nombreCuenta" th:if="${modo} eq 'CREACION'" placeholder="Introduzca su usuario" required></input>
 
     <!-- Nombre -->
     <h2 class="w3-padding-24">Nombre Perfil</h2>
     <span th:if="${modo} eq 'VISTA'" th:text="${usuario.nombre}">Nombre Perfil</span>
-    <input type="text" name="nombre" th:if="${modo} eq 'EDICION'" th:text="${usuario.nombre}"></input>
-    <input type="text" name="nombre" th:if="${modo} eq 'CREACION'" placeholder="Introduzca su nombre"></input>
+    <input type="text" name="nombre" th:if="${modo} eq 'EDICION'" th:text="${usuario.nombre}" required></input>
+    <input type="text" name="nombre" th:if="${modo} eq 'CREACION'" placeholder="Introduzca su nombre" required></input>
 
 
     <!-- Nombre -->
@@ -35,9 +35,9 @@
     <span th:if="${modo} eq 'VISTA'" th:text="${usuario.nombre}">Nombre Perfil</span>
     <input type="text" name="nombre" th:if="${modo} eq 'EDICION'" th:text="${usuario.nombre}"></input>
 	<div>
-	    <input type="password" name="pass1"  placeholder="Introduzca su contraseña"></input>
+	    <input type="password" name="pass1"  placeholder="Introduzca su contraseña" required></input>
 <br>
-    	<input type="password" name="pass2"  placeholder="Repita la contraseña"></input>
+    	<input type="password" name="pass2"  placeholder="Repita la contraseña" required></input>
 	</div>
 	<div>
 	
@@ -102,11 +102,11 @@
       <div id="edad-media" th:text="${usuario.edad}">Años de media</div>
     </div>
     <div id="edad" th:if="${modo} eq 'EDICION'">
-      <input type="text" name="edad" value="Años de media" th:value="${usuario.edad}">
+      <input type="number" name="edad" value="Años de media" th:value="${usuario.edad}">
     </div>
 
     <div id="edad" th:if="${modo} eq 'CREACION'">
-      <input type="text" name="edad" placeholder="Años de media">
+      <input type="number" name="edad" min="0" max="100" placeholder="Años de media">
     </div>
 
     <!-- Seguidores-->
@@ -127,27 +127,27 @@
         <li>
           <span>Twitter: </span>
           <input type="text" name="nombreTwitter" placeholder="Nombre de la cuenta">
-          <input type="text" name="seguidoresTwitter" placeholder="Nº de seguidores">
+          <input type="number" name="seguidoresTwitter" placeholder="Nº de seguidores">
           <img src="img/twitter.png" width="20" />
       
         </li>
         <li>
           <span>Facebook: </span>
           <input type="text" name="nombreFacebook" placeholder="Nombre de la cuenta">
-          <input type="text" name="seguidoresFacebook" placeholder="Nº de seguidores">
+          <input type="number" name="seguidoresFacebook" placeholder="Nº de seguidores">
           <img src="img/facebook.png" width="20" />
       
         </li>
         <li>
           <span>Instagram: </span>
           <input type="text" name="nombreInstagram" placeholder="Nombre de la cuenta">
-          <input type="text" name="seguidoresInstagram" placeholder="Nº de seguidores">
+          <input type="number" name="seguidoresInstagram" placeholder="Nº de seguidores">
           <img src="img/instagram.png" width="20" />
         </li>
         <li>
           <span>Youtube: </span>
           <input type="text" name="nombreYoutube" placeholder="Nombre de la cuenta">
-          <input type="text" name="seguidoresYoutube" placeholder="Nº de seguidores">
+          <input type="number" name="seguidoresYoutube" placeholder="Nº de seguidores">
           <img src="img/youtube.png" width="20" />
         </li>
       </ul>
@@ -155,13 +155,13 @@
     </div>
 
     <!-- Botones -->
-    <button th:if="${modo} eq 'VISTA'">Cerrar perfil</button>
-    <button th:if="${modo} eq 'EDICION'">Guardar cambios</button>
+    <button th:if="${modo} eq 'VISTA'" class="btn">Cerrar perfil</button>
+    <button th:if="${modo} eq 'EDICION'" class="btn">Guardar cambios</button>
     <button th:if="${modo} eq 'CREACION'" class="btn" id="botonRegistrarseUsuario">Registrar usuario</button>
 
 
     <!-- Repensar funcionalidad y posible cambio en el modelo -->
-	
+</form>
   </main>
 </body>
 
