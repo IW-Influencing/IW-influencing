@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +27,9 @@ public class PerfilController {
     @Autowired
     private EntityManager entityManager;
 
+	private static final Logger log = LogManager.getLogger(PerfilController.class);
+
+    
     @GetMapping("")
     public String perfil(Model model, HttpSession session, @RequestParam long idUsuario) {
         Usuario u = entityManager.find(Usuario.class, idUsuario);
@@ -64,6 +69,8 @@ public class PerfilController {
     	 * Comprobar en los Object que perfilX.nombre != null y numSeguidores >= 0
     	 * Insertar en BBDD
     	 * */
+    	
+		log.info("Registrando el usuario {} ", nombreCuenta);
     	
     	return "login";
     }

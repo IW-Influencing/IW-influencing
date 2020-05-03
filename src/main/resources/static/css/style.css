@@ -24,6 +24,21 @@ a:hover{
 	right: 0;
 }
 
+
+#cuadroBusquedaTagBar {
+	margin: auto;
+    padding: 6px;
+    margin-top: 8px;
+    margin-right: 3%;
+    border: none;
+    font-size: 17px;
+    height: 25px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    width: 25%;
+}
+
+
 .btn{
 	text-align: center;
     background-color: #6ed1dd;

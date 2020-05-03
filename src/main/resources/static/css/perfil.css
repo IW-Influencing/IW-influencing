@@ -14,7 +14,7 @@ main {
   align-items: center;
 }
 
-form{
+#formularioPerfil{
 	display:flex;
 	flex-direction:column;
 	align-items:center;

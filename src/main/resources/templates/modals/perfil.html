@@ -17,9 +17,10 @@
     </div>
   </header>
 
+
   <!-- Main -->
-  <main>
-    <form>
+  	<main>
+    <form id="formularioPerfil" th:action="${modo=='EDICION'}?@{/perfil/edicion}:@{/perfil/registraUsuario}" method="POST">
 
       <!-- Nombre de la cuenta (CREACION, EDICION) -->
       <div class="divCentrado" th:if="${modo} eq 'CREACION' or ${modo} eq 'EDICION'">
@@ -39,14 +40,14 @@
       <!-- Contraseña (CREACION, EDICION) -->
       <div class="divCentrado" th:if="${modo} eq 'CREACION' or ${modo} eq 'EDICION'">
         <h2 class="w3-padding-24">Contraseña</h2>
-        <input th:if="${modo} eq 'CREACION'" type="password" name="pass1" placeholder="Introduzca su contraseña"
+        <input th:if="${modo} eq 'CREACION'" type="password" name="pass" placeholder="Introduzca su contraseña"
           required></input>
-        <input th:if="${modo} eq 'EDICION'" type="password" name="pass1" placeholder="Introduzca su  nueva contraseña"
+        <input th:if="${modo} eq 'EDICION'" type="password" name="pass" placeholder="Introduzca su  nueva contraseña"
           required></input>
         <br>
-        <input th:if="${modo} eq 'CREACION'" type="password" name="pass2" placeholder="Repita la contraseña"
+        <input th:if="${modo} eq 'CREACION'" type="password" name="pass" placeholder="Repita la contraseña"
           required></input>
-        <input th:if="${modo} eq 'EDICION'" type="password" name="pass2" placeholder="Repita la nueva contraseña"
+        <input th:if="${modo} eq 'EDICION'" type="password" name="pass" placeholder="Repita la nueva contraseña"
           required></input>
       </div>
 
@@ -131,41 +132,47 @@
 
         <ul th:if="${modo} eq 'CREACION'">
           <li>
-            <span>Twitter: </span>
+            <span>             <img src="img/twitter.png" width="20" />
+ 			Twitter</span>
+
             <input type="text" name="nombreTwitter" placeholder="Nombre de la cuenta">
-            <input type="number" name="seguidoresTwitter" placeholder="Nº de seguidores">
-            <img src="img/twitter.png" width="20" />
-        
+            <input type="number" name="seguidoresTwitter" placeholder="Nº de seguidores"  min="0">
           </li>
           <li>
-            <span>Facebook: </span>
+            <span>            <img src="img/facebook.png" width="20" />
+ Facebook</span>
+<br>
+
             <input type="text" name="nombreFacebook" placeholder="Nombre de la cuenta">
-            <input type="number" name="seguidoresFacebook" placeholder="Nº de seguidores">
-            <img src="img/facebook.png" width="20" />
+            <input type="number" name="seguidoresFacebook" placeholder="Nº de seguidores"  min="0">
         
           </li>
           <li>
-            <span>Instagram: </span>
+            <span>            <img src="img/instagram.png" width="20" />
+ Instagram</span>
+<br>
+
             <input type="text" name="nombreInstagram" placeholder="Nombre de la cuenta">
-            <input type="number" name="seguidoresInstagram" placeholder="Nº de seguidores">
-            <img src="img/instagram.png" width="20" />
+            <input type="number" name="seguidoresInstagram" placeholder="Nº de seguidores"  min="0">
           </li>
           <li>
-            <span>Youtube: </span>
+ <span>             <img src="img/youtube.png" width="20" />
+ Youtube </span>           
+
             <input type="text" name="nombreYoutube" placeholder="Nombre de la cuenta">
-            <input type="number" name="seguidoresYoutube" placeholder="Nº de seguidores">
-            <img src="img/youtube.png" width="20" />
+            <input type="number" name="seguidoresYoutube" placeholder="Nº de seguidores"  min="0">
           </li>
         </ul>
 
       </div>
 
       <!-- Botones -->
-      <button th:if="${modo} eq 'VISTA'" class="btn">Cerrar perfil</button>
-      <button th:if="${modo} eq 'EDICION'" class="btn">Guardar cambios</button>
-      <button th:if="${modo} eq 'CREACION'" class="btn" id="botonRegistrarseUsuario">Registrar usuario</button>
+      <button th:if="${modo} eq 'EDICION'" class="btn" type="submit">Guardar cambios</button>
+      <button th:if="${modo} eq 'CREACION'" class="btn" id="botonRegistrarseUsuario" type="submit">Registrar usuario</button>
 
     </form>
+    <button th:if="${modo} eq 'VISTA'" class="btn" onclick="document.getElementById('modal').style.display='none'">Cerrar perfil</button>
+
   </main>
 </body>
 

@@ -11,19 +11,16 @@ Then status 200
 * def csrf = util.selectAttribute(response, "input[name=_csrf]", "value");
 * print csrf
 
-# selectores para util.select*: ver https://jsoup.org/cookbook/extracting-data/selector-syntax
-# objetivo de la forma
-# <html lang="en">...<body><div><form>
-#   <input name="_csrf" type="hidden" value="..." />
+
 
 Scenario: html url encoded form submit - post
     Given path 'login'
-    And form field username = 'a'
+    And form field username = 'b'
     And form field password = 'aa'
     And form field _csrf = csrf
     When method post
     Then status 200
     * string response = response    
-    * def h4s = util.selectHtml(response, "h4");
-    * print h4s
-    And match h4s contains 'Usuarios'
+    * def h2s = util.selectHtml(response, "h2");
+    * print h2s
+    And match h2s contains 'Panel de control'
