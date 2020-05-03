@@ -108,12 +108,12 @@
     </div>
 
     <!-- Botones -->
-    <button  th:if="${modo} eq 'CREACION'" class="btn">Publicar</button>
-    <button  th:if="${modo} eq 'VISTA' and ${session.u.hasRole('INFLUENCER')}" class="btn">Apuntarse</button>
-    <button  th:if="${modo} eq 'ULTIMATUM'" class="btn">Enviar</button>
+    <button  th:if="${modo} eq 'CREACION'" class="boton">Publicar</button>
+    <button  th:if="${modo} eq 'VISTA' and ${session.u.hasRole('INFLUENCER')}" class="boton">Apuntarse</button>
+    <button  th:if="${modo} eq 'ULTIMATUM'" class="boton">Enviar</button>
 	  <div class="botones-propuesta" th:if="${modo} eq 'VISTA-ULTIMATUM'"> 
-		  <button class="btn btnAceptar">Aceptar</button>
-	    <button  class="btn btnRechazar">Rechazar</button>
+		  <button class="boton btnAceptar">Aceptar</button>
+	    <button  class="boton btnRechazar">Rechazar</button>
 	  </div>
     <button th:if="${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'" class="w3-display-topright" id="btnDenunciar">Denunciar</button>
   </div>

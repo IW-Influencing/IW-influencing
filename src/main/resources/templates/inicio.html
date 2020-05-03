@@ -32,7 +32,7 @@
 				<input class="rounded_corner" type="submit" value="Buscar">
 				</div>
 				<div th:if="${session.u.hasRole('EMPRESA')}" class="divBotonPublicar">
-					<button class="btn" id="botonCrearPropuesta">Crear propuesta</button>
+					<button class="boton" id="botonCrearPropuesta">Crear propuesta</button>
 				</div>
 			</div>
 		</div>
@@ -40,16 +40,16 @@
 		<div id="messages" class="messages_panel w3-third w3-container">
 				<div class="content">
 					<h2> Mensajes recientes</h2>
-					<button class="btn">Ver todos los mensajes</button>
+					<button class="boton">Ver todos los mensajes</button>
 					<div th:each="mensaje : ${mensajes}" id="message1" class="dark_block">
 						<div class="content">	
 							<p th:text="${mensaje.getSender().getNombre() +': '+ mensaje.getText()}">Emisor + Mensaje</p>
 							</br>
 							</br>
 							<div class="button_row">
-								<button class="btn btn-row">Marcar como leído</button>
-                    			<button class="btn btn-row middle_button">Eliminar mensaje</button>
-                    			<button class="btn btn-row">Ir a la conversación</button>
+								<button class="boton btn-row">Marcar como leído</button>
+                    			<button class="boton btn-row middle_button">Eliminar mensaje</button>
+                    			<button class="boton btn-row">Ir a la conversación</button>
 							</div>
 						</div>	
 					</div>
@@ -60,7 +60,7 @@
 			<div id="proposal_block" class="proposal_block">
 				<div class="content">
 					<h1>Propuestas recientes</h1>
-					<button class="btn" id="verTodasPropuestas">Ver todas las propuestas</button>
+					<button class="boton" id="verTodasPropuestas">Ver todas las propuestas</button>
 						<div th:each="candidatura : ${candidaturas}" id="proposal1" class="dark_block">
 						<div class="content">
 							<p th:text="${candidatura.getPropuesta().getEmpresa().getNombre() +': '+ candidatura.getPropuesta().getDescripcion()}">Creador de la propuesta + Descripcion</p>

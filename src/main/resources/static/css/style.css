@@ -1,4 +1,4 @@
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif !important;}
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway" , sans-serif !important;}
 
 .header-config{
     background-color: #6ed1dd;                             /*Color que está en los moqups*/
@@ -51,6 +51,17 @@ a:hover{
 	overflow:hidden;
 }
 
+.boton{
+    text-align: center;
+	background-color: #77d4df;
+	height: 35px;
+	width: fit-content;
+	font-family: inherit;
+    border-radius: 10px;
+    padding: 0.5em;
+	margin: auto;
+}
+
 .container{
     text-align: center !important;
 }
@@ -72,4 +83,16 @@ a:hover{
     font-weight: bold;
     margin-left: 1%;
     text-decoration: none;
+}
+
+.bodyLogin {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #eee;
+}
+
+.formLogin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
 }
