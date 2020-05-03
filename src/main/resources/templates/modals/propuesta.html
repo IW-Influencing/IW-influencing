@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="css/propuesta.css">
 </head>
 
-<body style="width:100%" class="general">
+<body class="general">
   <!-- general wtf¿?-->
 
   <!-- Header -->
@@ -18,106 +18,99 @@
       <div th:replace="fragments/navigation.html :: modalBar(nombrePagina='ULTIMATUM')"></div>
     </div>
   </header>
-<form>
 
-  <!-- Contenido propuesta -->
-  <div class="contenido-propuesta w3-display-container">
-    <!-- Texto propuesta -->
-    <div class="texto-propuesta">
-      <div th:if="${modo} eq 'CREACION'">
-        <h2>Nombre de la propuesta</h2>
-		<input name="nombre" type=text required>
-        <h2>Descripción</h2>
-		<textarea name="descripcion"  rows="4" cols="50" required></textarea> 
-      </div>
-      <div>
-        <h2 th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'"
-          th:text="${propuesta.nombre}">Nombre de propuesta</h2>
+  <form>
+    <!-- Contenido propuesta -->
+    <div class="contenido-propuesta w3-display-container">
+      
+      <!-- Texto propuesta -->
+      <div class="texto-propuesta">
+        <div th:if="${modo} eq 'CREACION'">
 
-        <p th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'"
-          th:text="${propuesta?.descripcion}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit,
-          vulputate eu pharetra nec,
-          mattis ac
-          neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend
-          tristique,
-          tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium
-          sit
-          amet quis magna. Aenean velit odio, elementum in tempus ut, vehicula eu diam. Pellentesque rhoncus aliquam
-          mattis.
-          Ut vulputate eros sed felis sodales nec vulputate justo hendrerit. Vivamus varius pretium ligula, a aliquam
-          odio
-          euismod sit amet. Quisque laoreet sem sit amet orci ullamcorper at ultricies metus viverra. Pellentesque
-          arcu
-          mauris, malesuada quis ornare accumsan, blandit sed diam.</p>
+          <!-- Nombre -->
+          <h2>Nombre de la propuesta</h2>
+          <input name="nombre" type=text required>
+
+          <!-- Descripcion-->
+          <h2>Descripción</h2>
+          <textarea name="descripcion" rows="4" cols="50" required></textarea>
+        </div>
+        <div th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'">
+
+          <!-- Nombre -->
+          <h2 th:text="${propuesta.nombre}">Nombre de propuesta</h2>
+
+          <!-- Descripcion -->
+          <p th:text="${propuesta?.descripcion}">Aqui va la descripcion detallada de la propuesta</p>
+        </div>
+
       </div>
 
-    </div>
+      <!-- Edad Objetivo de la propuesta -->
+      <div class="edad-propuesta">
 
-    <!-- Edad Objetivo de la propuesta -->
-    <div class="edad-propuesta">
+        <h2>Edad objetivo</h2>
+        <p>Edades comprendidas entre
 
-      <h2>Edad objetivo</h2>
-      <p>Edades comprendidas entre
-
-        <select id="edades" name="edades" th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'CREACION'">
-          <option value="5-10">5 - 10</option>
-          <option value="10-15">10 - 15</option>
-          <option value="15-20">15 - 20</option>
-          <option value="20-25">20 - 25</option>
-          <option value="25-30">25 - 30</option>
-          <option value="30-35">30 - 35</option>
-          <option value="35-40">35 - 40</option>
-          <option value="40-45">40 - 45</option>
-        </select>
-        <span th:if="${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'"
-          th:text="${propuesta?.edadMinPublico + ' - ' + propuesta?.edadMaxPublico}"> </span>
+          <select id="edades" name="edades" th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'CREACION'">
+            <option value="5-10">5 - 10</option>
+            <option value="10-15">10 - 15</option>
+            <option value="15-20">15 - 20</option>
+            <option value="20-25">20 - 25</option>
+            <option value="25-30">25 - 30</option>
+            <option value="30-35">30 - 35</option>
+            <option value="35-40">35 - 40</option>
+            <option value="40-45">40 - 45</option>
+          </select>
+          <span th:if="${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'"
+            th:text="${propuesta?.edadMinPublico + ' - ' + propuesta?.edadMaxPublico}"> </span>
         años</p>
 
+      </div>
+
+      <!-- Periodo -->
+      <div class="periodo-propuesta">
+        <h2>Periodo de la propuesta</h2>
+        <p th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'CREACION'">De <input type="date" required>
+          a <input type="date" required></p>
+
+        <p th:if="${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'" th:text="${'Desde ' + #temporals.format(propuesta.fechaInicio,
+		      'dd-MM-yyyy') + ' hasta ' + #temporals.format(propuesta.fechaFin,'dd-MM-yyyy')}"></p>
+      </div>
+
+      <!-- Imagen -->
+      <div class="imagen-propuesta">
+        <h2>Imagen campaña</h2>
+        <span th:if="${modo} eq 'CREACION'">
+          <input type="file" name="imagenPropuesta" required>
+        </span>
+        <img th:if="${modo} eq 'VISTA' or ${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA-ULTIMATUM'" id="imagen-propuesta"
+          src="img/profile.png">
+      </div>
+
+      <!-- Tags -->
+      <div class="tags-propuesta">
+        <h2>Tags relacionados con la propuesta</h2>
+        <textarea th:if="${modo} eq 'CREACION'" name="tags" rows="2" cols="50" required
+          placeholder="Introduzca los tags separados por comas"></textarea>
+        <div th:if="${modo} eq 'VISTA' or ${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA-ULTIMATUM'">
+          <button th:each="tag:${#strings.listSplit(propuesta.tags, ',')}" class="w3-button w3-white tags" style="border-radius:12px;" th:text="${tag}"></button>
+		  </div>
+      </div>
+
+      <!-- Botones -->
+      <div>
+        <button  th:if="${modo} eq 'CREACION'" class="w3-btn btnColor w3-margin">Publicar</button>
+        <button  th:if="${modo} eq 'VISTA' and ${session.u.hasRole('INFLUENCER')}" class="w3-btn btnColor w3-margin">Apuntarse</button>
+        <button  th:if="${modo} eq 'ULTIMATUM'" class="w3-btn btnColor w3-margin">Enviar</button>
+        <div class="botones-propuesta" th:if="${modo} eq 'VISTA-ULTIMATUM'"> 
+          <button class="w3-btn btnColor w3-margin btnAceptar">Aceptar</button>
+          <button  class="w3-btn btnColor w3-margin btnRechazar">Rechazar</button>
+        </div>
+        <button th:if="${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'" class="w3-display-topright" id="btnDenunciar">Denunciar</button>
+      </div>
     </div>
-
-    <!-- Periodo -->
-    <div class="periodo-propuesta">
-
-      <h2>Periodo de la propuesta</h2>
-      <p th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'CREACION'">De <input type="date" required>
-        a <input type="date" required></p>
-
-      <p th:if="${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'" th:text="${'Desde ' + #temporals.format(propuesta.fechaInicio,
-		'dd-MM-yyyy') + ' hasta ' + #temporals.format(propuesta.fechaFin,'dd-MM-yyyy')}"></p>
-    </div>
-
-    <!-- Imagen -->
-    <div class="imagen-propuesta">
-
-      <h2>Imagen campaña</h2>
-	<span th:if="${modo} eq 'CREACION'">
-	       <input type="file" name="imagenPropuesta" required>
-	</span>
-	  <img th:if="${modo} eq 'VISTA' or ${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA-ULTIMATUM'" id="imagen-propuesta" src="img/profile.png">
-
-
-    </div>
-
-    <!-- Tags -->
-    <div class="tags-propuesta">
-	<h2>Tags relacionados con la propuesta</h2>
-		<textarea th:if="${modo} eq 'CREACION'" name="tags"  rows="2" cols="50" required placeholder="Introduzca los tags separados por comas"></textarea> 
-		<div th:if="${modo} eq 'VISTA' or ${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA-ULTIMATUM'">
-		      <button th:each="tag:${#strings.listSplit(propuesta.tags, ',')}" class="w3-button w3-white tags" style="border-radius:12px;" th:text="${tag}"></button>
-		</div>
-    </div>
-
-    <!-- Botones -->
-    <button  th:if="${modo} eq 'CREACION'" class="boton">Publicar</button>
-    <button  th:if="${modo} eq 'VISTA' and ${session.u.hasRole('INFLUENCER')}" class="boton">Apuntarse</button>
-    <button  th:if="${modo} eq 'ULTIMATUM'" class="boton">Enviar</button>
-	  <div class="botones-propuesta" th:if="${modo} eq 'VISTA-ULTIMATUM'"> 
-		  <button class="boton btnAceptar">Aceptar</button>
-	    <button  class="boton btnRechazar">Rechazar</button>
-	  </div>
-    <button th:if="${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'" class="w3-display-topright" id="btnDenunciar">Denunciar</button>
-  </div>
-<form>
+  </form>
 </body>
 
 </html>

@@ -12,12 +12,14 @@
     <form class="formLogin w3-round w3-white" method="post" th:action="@{/login}">
       <h3>Introduce nombre de usuario y contraseña</h3>
       <p>
+        <!-- Usuario-->
         <input type="text" id="username" name="username" class="w3-input w3-animate-input" placeholder="Usuario" required=""autofocus="">
       </p>
       <p>
+        <!-- Contraseña -->
         <input type="password" id="password" name="password" class="w3-input w3-animate-input" placeholder="Contraseña" required="">
       </p>
-      <button class="boton" type="submit">Entrar</button>
+      <button class="w3-btn btnColor w3-margin" type="submit">Entrar</button>
     </form>
     <a id="registroLogin"><u>Registro</u></a>
   </div>

@@ -19,7 +19,6 @@ a:hover{
     width: max-content;
 }
 
-
 #desplegableUsuario{
 	right: 0;
 }
@@ -38,17 +37,9 @@ a:hover{
     width: 25%;
 }
 
+.btnColor {
+    background-color: #77d4df;
 
-.btn{
-	text-align: center;
-    background-color: #6ed1dd;
-    font-size: large;
-    height: 35px;
-    width: fit-content;
-    font-family: inherit;
-    border-radius: 10px;
-    margin: auto;
-	overflow:hidden;
 }
 
 .boton{
@@ -58,7 +49,6 @@ a:hover{
 	width: fit-content;
 	font-family: inherit;
     border-radius: 10px;
-    padding: 0.5em;
 	margin: auto;
 }
 

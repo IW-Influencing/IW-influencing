@@ -4,6 +4,7 @@
 <head>
   <th:block th:replace="fragments/head.html :: header" />
   <link rel="stylesheet" type="text/css" href="css/perfil.css" />
+  
 </head>
 
 <body>
@@ -17,10 +18,7 @@
     </div>
   </header>
 
-
-  <!-- Main -->
-  	<main>
-    <form id="formularioPerfil" th:action="${modo=='EDICION'}?@{/perfil/edicion}:@{/perfil/registraUsuario}" method="POST">
+  <form id="formularioPerfil" th:action="${modo=='EDICION'}?@{/perfil/edicion}:@{/perfil/registraUsuario}" method="POST">
 
       <!-- Nombre de la cuenta (CREACION, EDICION) -->
       <div class="divCentrado" th:if="${modo} eq 'CREACION' or ${modo} eq 'EDICION'">
@@ -118,56 +116,70 @@
 
       <!-- Seguidores-->
       <h2 class="w3-padding-24">Perfiles en redes sociales</h2>
-      <div id="seguidores" class="w3-container w3-round-xlarge w3-aqua w3-margin-bottom">
-        <ul th:if="${modo} eq 'EDICION' or ${modo} eq 'VISTA'">
-          <li th:each="perfil: ${perfilesRRSS}">
-          <span th:text="${perfil.nombre}">nombrePorDefecto</span>
-            <span class="numeroseguidores" th:text="${perfil.numSeguidores}"> 200k </span>
-            <img th:if="${perfil.rrss} eq 'Twitter'" src="img/twitter.png" width="20" />
-            <img th:if="${perfil.rrss} eq 'Facebook'" src="img/twitter.png" width="20" />
-            <img th:if="${perfil.rrss} eq 'Instagram'" src="img/instagram.png" width="20"/>
-            <img th:if="${perfil.rrss} eq 'Youtube'" src="img/youtube.png" width="20" />
-          </li>
-        </ul>
 
-        <ul th:if="${modo} eq 'CREACION'">
-          <li>
-            <span><img src="img/twitter.png" width="20" />Twitter</span>
-            <input type="text" name="nombreTwitter" placeholder="Nombre de la cuenta">
-            <input type="number" name="seguidoresTwitter" placeholder="Nº de seguidores"  min="0">
-            <br>
-          </li>
-          <li>
-            <span><img src="img/facebook.png" width="20" />Facebook</span>
-            <input type="text" name="nombreFacebook" placeholder="Nombre de la cuenta">
-            <input type="number" name="seguidoresFacebook" placeholder="Nº de seguidores"  min="0">
-            <br>
-          </li>
-          <li>
-            <span><img src="img/instagram.png" width="20" />Instagram</span>
-            <br>
-            <input type="text" name="nombreInstagram" placeholder="Nombre de la cuenta">
-            <input type="number" name="seguidoresInstagram" placeholder="Nº de seguidores"  min="0">
-            <br>
-          </li>
-          <li>
-            <span><img src="img/youtube.png" width="20" />Youtube</span>           
-            <input type="text" name="nombreYoutube" placeholder="Nombre de la cuenta">
-            <input type="number" name="seguidoresYoutube" placeholder="Nº de seguidores"  min="0">
-            <br>
-          </li>
-        </ul>
+      <ul th:if="${modo} eq 'EDICION' or ${modo} eq 'VISTA'">
+        <li th:each="perfil: ${perfilesRRSS}">
+        <span th:text="${perfil.nombre}">nombrePorDefecto</span>
+          <span class="numeroseguidores" th:text="${perfil.numSeguidores}"> 200k </span>
+          <img th:if="${perfil.rrss} eq 'Twitter'" src="img/twitter.png" width="20" />
+          <img th:if="${perfil.rrss} eq 'Facebook'" src="img/twitter.png" width="20" />
+          <img th:if="${perfil.rrss} eq 'Instagram'" src="img/instagram.png" width="20"/>
+          <img th:if="${perfil.rrss} eq 'Youtube'" src="img/youtube.png" width="20" />
+        </li>
+      </ul>
+
+      <div th:if="${modo} eq 'CREACION'" class="w3-container w3-margin-bottom">
+        
+        <!-- Barra de seleccion RRSS -->
+        <div class="w3-row w3-margin">
+          <a onclick="abreEmpresa(event, 'Twitter');">
+            <div class="tablink w3-quarter w3-bottombar w3-hover-light-grey w3-padding w3-border-red">Twitter</div>
+          </a>
+          <a onclick="abreEmpresa(event, 'Facebook');">
+            <div class="tablink w3-quarter w3-bottombar w3-hover-light-grey w3-padding">Facebook</div>
+          </a>
+          <a onclick="abreEmpresa(event, 'Instagram');">
+            <div class="tablink w3-quarter w3-bottombar w3-hover-light-grey w3-padding">Instagram</div>
+          </a>
+          <a onclick="abreEmpresa(event, 'Youtube');">
+            <div class="tablink w3-quarter w3-bottombar w3-hover-light-grey w3-padding">Youtube</div>
+          </a>
+        </div>
+      
+        <!-- Contenido RRSS -->
+        <div id="Twitter" class="empresa w3-container w3-padding" style="display:block">
+          <span><img src="img/twitter.png" width="20" />Twitter</span>
+          <input type="text" name="nombreTwitter" placeholder="Nombre de la cuenta">
+          <input type="number" name="seguidoresTwitter" placeholder="Nº de seguidores"  min="0">
+        </div>
+      
+        <div id="Facebook" class="empresa w3-container w3-padding" style="display:none">
+          <span><img src="img/facebook.png" width="20" />Facebook</span>
+          <input type="text" name="nombreFacebook" placeholder="Nombre de la cuenta">
+          <input type="number" name="seguidoresFacebook" placeholder="Nº de seguidores"  min="0"> 
+        </div>
+      
+        <div id="Instagram" class="empresa w3-container w3-padding" style="display:none">
+          <span><img src="img/instagram.png" width="20" />Instagram</span>
+          <input type="text" name="nombreInstagram" placeholder="Nombre de la cuenta">
+          <input type="number" name="seguidoresInstagram" placeholder="Nº de seguidores"  min="0">
+        </div>
+      
+        <div id="Youtube" class="empresa w3-container w3-padding" style="display:none">
+          <span><img src="img/youtube.png" width="20" />Youtube</span> 
+          <input type="text" name="nombreYoutube" placeholder="Nombre de la cuenta">
+          <input type="number" name="seguidoresYoutube" placeholder="Nº de seguidores"  min="0">
+        </div>
 
       </div>
 
       <!-- Botones -->
-      <button th:if="${modo} eq 'EDICION'" class="boton" type="submit">Guardar cambios</button>
-      <button th:if="${modo} eq 'CREACION'" class="boton" id="botonRegistrarseUsuario" type="submit">Registrar usuario</button>
+      <button th:if="${modo} eq 'EDICION'" class="w3-btn btnColor w3-margin" type="submit">Guardar cambios</button>
+      <button th:if="${modo} eq 'CREACION'" class="w3-btn btnColor w3-margin" id="botonRegistrarseUsuario" type="submit">Registrar usuario</button>
+      <button th:if="${modo} eq 'VISTA'" class="w3-btn btnColor w3-margin" onclick="document.getElementById('modal').style.display='none'">Cerrar perfil</button>
 
-    </form>
-    <button th:if="${modo} eq 'VISTA'" class="boton" onclick="document.getElementById('modal').style.display='none'">Cerrar perfil</button>
-
-  </main>
+  </form>
+  
 </body>
 
 </html>

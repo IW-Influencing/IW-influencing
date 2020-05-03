@@ -31,12 +31,12 @@
 			<p th:text="${prop.descripcion}">Praesent tincidunt sed tellus ut rutrum.</p>
 
 			<!-- Detalles-->
-			<button class="boton btnDetalles" th:attr="data-id=${prop.id}">Detalles</button>
+			<button class="w3-btn btnColor w3-margin btnDetalles" th:attr="data-id=${prop.id}">Detalles</button>
 
 		</div>		
 	</div>
 </div>
 
 
-<!-- Pagination -->
+<!-- Paginacion -->
 <div th:replace="fragments/navigation.html :: pagination"></div>

@@ -60,7 +60,7 @@
 									pharetra nec, mattis ac neque. Duis vulputate commodo lectus...</p>
 							</div>
 							<div style="text-align:center;">
-								<button class="boton btnDetalles" th:attr="data-id=${c.propuesta.id}">Detalles</button>
+								<button class="w3-btn btnColor w3-margin btnDetalles" th:attr="data-id=${c.propuesta.id}">Detalles</button>
 							</div>
 
 						</div>
@@ -109,26 +109,22 @@
 									pharetra nec, mattis ac neque. Duis vulputate commodo lectus...</p>
 							</div>
 							<div style="text-align:center;">
-								<button class="boton btnDetalles" th:attr="data-id=${c.propuesta.id}">Detalles</button>
-								<button class="boton btnValorar" th:attr="data-id=${c.id}">Valorar</button>
+								<button class="w3-btn btnColor w3-margin btnDetalles" th:attr="data-id=${c.propuesta.id}">Detalles</button>
+								<button class="w3-btn btnColor w3-margin btnValorar" th:attr="data-id=${c.id}">Valorar</button>
 
 							</div>
-
 						</div>
 					</div>
-
 				</div>
-
 			</div>
-
-			<!-- End page content -->
 		</div>
-
-		<!-- Footer -->
-		<footer th:replace="fragments/navigation.html :: footer"></footer>
 	</div>
 	
-			<div th:replace="fragments/modal.html"></div>
+	<!-- Footer -->
+    <footer th:replace="fragments/navigation.html :: footer"></footer>
+    
+    <!-- Modal -->
+    <div th:replace="fragments/modal.html"></div>
 
 </body>
 
