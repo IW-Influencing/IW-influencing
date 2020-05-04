@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-	let inputBusqueda =  document.getElementById("inputBusquedaContrataciones")
+	let inputBusqueda =  document.getElementById("cuadroBusquedaTagBar")
 	inputBusqueda.addEventListener("keyup", function(event) {
 		if (event.keyCode === 13) {
 		    // Cancel the default action, if needed
@@ -14,8 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
 		p.onclick = c => cargaModalValorar(p.dataset.id)
 	}
 	
-		for (let p of document.getElementsByClassName("btnDetalles")) {
-		p.onclick = c => cargaModalPropuesta(p.dataset.id)
+	for (let p of document.getElementsByClassName("btnDetalles")) {
+			p.onclick = c => cargaModalPropuesta(p.dataset.id)
 	}
 		
 })
@@ -23,13 +23,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function cargaModalValorar(idContratacion){
 	document.getElementById('modal').style.display='block';
-	return go2(config.rootUrl + "valoracion?idContratacion=" + idContratacion, 'GET')
+	return go2(config.rootUrl + "contrataciones/valorar?idContratacion=" + idContratacion, 'GET')
 		.then(html => document.getElementById("contenidoModal").innerHTML=html);
 }
 
 function cargaModalPropuesta(idPropuesta){
 	document.getElementById('modal').style.display='block';
-	return go2(config.rootUrl + "propuesta?idPropuesta=" + idPropuesta, 'GET')
+	return go2(config.rootUrl + "contrataciones/vista?idPropuesta=" + idPropuesta, 'GET')
 		.then(html => document.getElementById("contenidoModal").innerHTML=html);
 }
 

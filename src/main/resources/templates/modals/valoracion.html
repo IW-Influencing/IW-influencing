@@ -16,27 +16,8 @@
     <div class="contenedor">
         <section class="contenido-propuesta">
             <div class="texto-propuesta">
-                <h2>
-                    Propuesta X
-                </h2>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Voluptatibus commodi consequatur accusantium veniam ut suscipit?
-                    Rerum blanditiis reprehenderit et possimus repudiandae placeat
-                    in sed incidunt, quidem delectus dolorem ullam tenetur.
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Voluptatibus commodi consequatur accusantium veniam ut suscipit?
-                    Rerum blanditiis reprehenderit et possimus repudiandae placeat
-                    in sed incidunt, quidem delectus dolorem ullam tenetur.
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Voluptatibus commodi consequatur accusantium veniam ut suscipit?
-                    Rerum blanditiis reprehenderit et possimus repudiandae placeat
-                    in sed incidunt, quidem delectus dolorem ullam tenetur.
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Voluptatibus commodi consequatur accusantium veniam ut suscipit?
-                    Rerum blanditiis reprehenderit et possimus repudiandae placeat
-                    in sed incidunt, quidem delectus dolorem ullam tenetur.
-                </p>
+                <h2 th:text="${propuesta.nombre}"></h2>
+                <p th:text="${propuesta.descripcion}"></p>
             </div>
 			<div>
 	            <img src="https://via.placeholder.com/200x300" />
@@ -59,27 +40,18 @@
                 </div>
             </div>
             <div class="comentario">
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Laboriosam enim aliquid voluptatibus harum repellendus at
-                    inventore quos, odio repellat sapiente recusandae ullam voluptates
-                    laudantium veniam, ex natus numquam rerum labore.
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Voluptatibus commodi consequatur accusantium veniam ut suscipit?
-                    Rerum blanditiis reprehenderit et possimus repudiandae placeat
-                    in sed incidunt, quidem delectus dolorem ullam tenetur.
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Voluptatibus commodi consequatur accusantium veniam ut suscipit?
-                    Rerum blanditiis reprehenderit et possimus repudiandae placeat
-                    in sed incidunt, quidem delectus dolorem ullam tenetur.
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Voluptatibus commodi consequatur accusantium veniam ut suscipit?
-                    Rerum blanditiis reprehenderit et possimus repudiandae placeat
-                    in sed incidunt, quidem delectus dolorem ullam tenetur.
+                <p th:if="${modo} eq 'VISTA'" th:text="${valoracion.valoracion}">
                 </p>
+          		<textarea th:if="${modo} eq 'CREACION'" name="valoracion" rows="4" cols="40" required></textarea>
             </div>
         </section>
+<div class="divCentrado">
+        <button th:if="${modo} eq 'VISTA'" class="w3-btn btnColor w3-margin" onclick="document.getElementById('modal').style.display='none'">Cerrar valoración</button>
+        <button th:if="${modo} eq 'CREACION'" class="w3-btn btnColor w3-margin" onclick="document.getElementById('modal').style.display='none'">Enviar valoración</button>
+
+ </div>
     </div>
+ 
 </body>
 
 </html>

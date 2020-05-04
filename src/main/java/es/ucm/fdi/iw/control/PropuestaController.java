@@ -44,6 +44,10 @@ public class PropuestaController {
 		  return "modals/propuesta";
 	  }
 	  
+
+	  
+	  
+	  
 	  @GetMapping("/ultimatum")
 	  public String ultimatum(Model model, HttpSession session, @RequestParam long idPropuesta) {
 		  Propuesta p = entityManager.find(Propuesta.class, idPropuesta);

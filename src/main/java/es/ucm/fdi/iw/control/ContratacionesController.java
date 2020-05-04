@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import es.ucm.fdi.iw.model.Candidatura;
 import es.ucm.fdi.iw.model.Evento;
 import es.ucm.fdi.iw.model.Message;
+import es.ucm.fdi.iw.model.Propuesta;
 import es.ucm.fdi.iw.model.Usuario;
 
 @Controller()
@@ -65,5 +66,21 @@ public class ContratacionesController {
 		model.addAttribute("resultadoBusqueda", candidaturas);
 		return "fragments/resultadoBusquedaContrataciones";
 	}
+	
+	@GetMapping("/valorar")
+	  public String valorarContratacion(Model model, HttpSession session, @RequestParam long idContratacion) {
+		  Propuesta p = entityManager.find(Propuesta.class, idContratacion);
+		  model.addAttribute("modo", "CREACION");
+		  model.addAttribute("propuesta", p);
+		  return "modals/valoracion";
+	  }
+	
+	  @GetMapping("/vista")
+	  public String vistaContratacion(Model model, HttpSession session, @RequestParam long idPropuesta) {
+		  Propuesta p = entityManager.find(Propuesta.class, idPropuesta);
+		  model.addAttribute("modo", "CONTRATACION");
+		  model.addAttribute("propuesta", p);
+		  return "modals/propuesta";
+	  }
 
 }

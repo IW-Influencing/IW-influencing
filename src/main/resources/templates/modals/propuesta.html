@@ -17,6 +17,10 @@
     <div th:if="${modo} eq 'ULTIMATUM'or ${modo} eq 'VISTA-ULTIMATUM'">
       <div th:replace="fragments/navigation.html :: modalBar(nombrePagina='ULTIMATUM')"></div>
     </div>
+<div th:if="${modo} eq 'CONTRATACION'">
+      <div th:replace="fragments/navigation.html :: modalBar(nombrePagina='CONTRATACION')"></div>
+
+</div>
   </header>
 
   <form>
@@ -35,7 +39,7 @@
           <h2>Descripción</h2>
           <textarea name="descripcion" rows="4" cols="50" required></textarea>
         </div>
-        <div th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'">
+        <div th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM' or ${modo} eq 'CONTRATACION'">
 
           <!-- Nombre -->
           <h2 th:text="${propuesta.nombre}">Nombre de propuesta</h2>
@@ -62,7 +66,7 @@
             <option value="35-40">35 - 40</option>
             <option value="40-45">40 - 45</option>
           </select>
-          <span th:if="${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'"
+          <span th:if="${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM' or ${modo} eq 'CONTRATACION'"
             th:text="${propuesta?.edadMinPublico + ' - ' + propuesta?.edadMaxPublico}"> </span>
         años</p>
 
@@ -74,7 +78,7 @@
         <p th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'CREACION'">De <input type="date" required>
           a <input type="date" required></p>
 
-        <p th:if="${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'" th:text="${'Desde ' + #temporals.format(propuesta.fechaInicio,
+        <p th:if="${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM' or ${modo} eq 'CONTRATACION'" th:text="${'Desde ' + #temporals.format(propuesta.fechaInicio,
 		      'dd-MM-yyyy') + ' hasta ' + #temporals.format(propuesta.fechaFin,'dd-MM-yyyy')}"></p>
       </div>
 
@@ -84,7 +88,7 @@
         <span th:if="${modo} eq 'CREACION'">
           <input type="file" name="imagenPropuesta" required>
         </span>
-        <img th:if="${modo} eq 'VISTA' or ${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA-ULTIMATUM'" id="imagen-propuesta"
+        <img th:if="${modo} eq 'VISTA' or ${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA-ULTIMATUM' or ${modo} eq 'CONTRATACION'" id="imagen-propuesta"
           src="img/profile.png">
       </div>
 
@@ -93,7 +97,7 @@
         <h2>Tags relacionados con la propuesta</h2>
         <textarea th:if="${modo} eq 'CREACION'" name="tags" rows="2" cols="50" required
           placeholder="Introduzca los tags separados por comas"></textarea>
-        <div th:if="${modo} eq 'VISTA' or ${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA-ULTIMATUM'">
+        <div th:if="${modo} eq 'VISTA' or ${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA-ULTIMATUM' or ${modo} eq 'CONTRATACION'">
           <button th:each="tag:${#strings.listSplit(propuesta.tags, ',')}" class="w3-button w3-white tags" style="border-radius:12px;" th:text="${tag}"></button>
 		  </div>
       </div>
@@ -107,7 +111,7 @@
           <button class="w3-btn btnColor w3-margin btnAceptar">Aceptar</button>
           <button  class="w3-btn btnColor w3-margin btnRechazar">Rechazar</button>
         </div>
-        <button th:if="${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM'" class="w3-display-topright" id="btnDenunciar">Denunciar</button>
+        <button th:if="${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM' or ${modo} eq 'CONTRATACION'" class="w3-display-topright" id="btnDenunciar">Denunciar</button>
       </div>
     </div>
   </form>

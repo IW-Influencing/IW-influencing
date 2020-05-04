@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import es.ucm.fdi.iw.model.Candidatura;
 import es.ucm.fdi.iw.model.PerfilRRSS;
@@ -58,11 +59,14 @@ public class PerfilController {
         return "modals/perfil";
     }
     
-    @PostMapping("/registraUsuario")
+    @PostMapping("/registra")
     @Transactional
-    public String registraUsuario(@RequestParam String nombreCuenta, @RequestParam String nombre
-    		,@RequestParam String pass1,@RequestParam String pass2,@RequestParam Object perfilTwitter
-    		,@RequestParam Object perfilFacebook,@RequestParam Object perfilInstagram,@RequestParam Object perfilYoutube){
+    public void registraUsuario(@RequestParam("nombreCuenta") String nombreCuenta, @RequestParam("nombre") String nombre,
+    		@RequestParam("pass1") String password,@RequestParam("pass2") String password2, @RequestParam("imagenPerfil") MultipartFile photo,
+    		@RequestParam("nombreTwitter") String perfilTwitter, @RequestParam("seguidoresTwitter") int numSeguidoresTwitter,
+    		@RequestParam("nombreFacebook") String perfilFacebook, @RequestParam("seguidoresFacebook") int numSeguidoresFacebook,
+    		@RequestParam("nombreInstagram") String perfilInstagram, @RequestParam("seguidoresInstagram") int numSeguidoresInstagram,
+    		@RequestParam("nombreYoutube") String perfilYoutube, @RequestParam("seguidoresYoutube") int numSeguidoresYoutube){
     	
     	/*
     	 * Validar campos
@@ -71,8 +75,9 @@ public class PerfilController {
     	 * */
     	
 		log.info("Registrando el usuario {} ", nombreCuenta);
-    	
-    	return "login";
+    	if (nombreCuenta!=null) {
+    		System.out.println("ggggg");
+    	}
     }
 
 }

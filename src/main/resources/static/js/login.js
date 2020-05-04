@@ -15,33 +15,15 @@ function cargaModalPerfil(){
 function asignaFuncionBotonRegistro(){
 	let b = document.getElementById("botonRegistrarseUsuario");
 			b.onclick = c => {
-				var nombreCuenta = document.getElementsByName("nombreCuenta")[0].value;
-				var nombre = document.getElementsByName("nombre")[0].value;
-				var edad = document.getElementsByName("edad")[0].value;	
-				var pass1 = document.getElementsByName("pass")[0].value;
-				var pass2 = document.getElementsByName("pass")[1].value;
-				validaPassword(pass1, pass2);
-				var perfilTwitter = devuelveDatosPerfil("Twitter");
-				var perfilFacebook = devuelveDatosPerfil("Facebook");
-				var perfilInstagram = devuelveDatosPerfil("Instagram");
-				var perfilYoutube = devuelveDatosPerfil("Youtube");
-				go(config.rootUrl + "perfil/registraUsuario", 'POST', 
-				{nombreCuenta: nombreCuenta,
-				 nombre: nombre,
-				 edad: edad,
-				 pass1: pass1,
-				 pass2: pass2,
-				 perfilTwitter: perfilTwitter,
-				 perfilFacebook: perfilFacebook,
-				 perfilInstagram: perfilInstagram,
-				 perfilYoutube: perfilYoutube})
-					.then(console.log("he vuelto"))
-					.catch()
-				registraUsuario(nombreCuenta, nombre, edad, pass1, pass2, perfilTwitter, perfilFacebook, perfilInstagram, perfilYoutube);
+				validaPassword(document.getElementsByName("pass1")[0].value, document.getElementsByName("pass2")[0].value);
+				validaDatosPerfil("Twitter");
+				validaDatosPerfil("Facebook");
+				validaDatosPerfil("Instagram");
+				validaDatosPerfil("Youtube");
 			}
 	}
 
-function devuelveDatosPerfil(perfil){
+function validaDatosPerfil(perfil){
 	let nombre = document.getElementsByName("nombre"+perfil)[0];
 	let seguidores = document.getElementsByName("seguidores"+perfil)[0];
 	if (nombre.value !== ""  || seguidores.value !== ""){
@@ -51,27 +33,11 @@ function devuelveDatosPerfil(perfil){
 		nombre.required = true;
 	}
 	
-	return {nombre:nombre.value, seguidores:seguidores.value};
 }
 
 function validaPassword(pass1, pass2){
 	document.getElementsByName("pass")[0].setCustomValidity(pass1 === pass2 ?"" : "Las contraseñas no coinciden")
 	document.getElementsByName("pass")[1].setCustomValidity(pass1 === pass2 ?"" : "Las contraseñas no coinciden")
-}
-
-function registraUsuario(nombreCuenta, nombre, edad, pass1, pass2, perfilTwitter, perfilFacebook, perfilInstagram, perfilYoutube){
-	go(config.rootUrl + "perfil/registraUsuario", 'POST', 
-	{nombreCuenta: nombreCuenta,
-	 nombre: nombre,
-	 edad: edad,
-	 pass1: pass1,
-	 pass2: pass2,
-	 perfilTwitter: perfilTwitter,
-	 perfilFacebook: perfilFacebook,
-	 perfilInstagram: perfilInstagram,
-	 perfilYoutube: perfilYoutube})
-		.then(console.log("he vuelto"))
-		.catch()	
 }
 
 
