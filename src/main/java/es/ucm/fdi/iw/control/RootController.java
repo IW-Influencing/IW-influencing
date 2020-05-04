@@ -55,10 +55,9 @@ public class RootController {
   @GetMapping("/inicio")
   public String inicio(HttpSession session,Model model) {
 	long idUsuario = ((Usuario)session.getAttribute("u")).getId();
-	List<Message> messages = entityManager.createNamedQuery("Message.getAll").setParameter("idUsuario", idUsuario ).setMaxResults(LIMITE_MENSAJES_INICIO).getResultList();
+	List<Evento> eventos = entityManager.createNamedQuery("Evento.getPrivateMessagesUnread").setParameter("idUsuario", idUsuario ).setMaxResults(LIMITE_MENSAJES_INICIO).getResultList();
 	List<Candidatura> candidaturas = entityManager.createNamedQuery("Candidatura.getByUser").setParameter("idUsuario", idUsuario ).setMaxResults(LIMITE_PROPUESTAS_INICIO).getResultList();;
-	if(messages == null) System.out.println("YES");
-	model.addAttribute("mensajes", messages);
+	model.addAttribute("mensajes", eventos);
 	model.addAttribute("candidaturas", candidaturas);
     return "inicio";
   }

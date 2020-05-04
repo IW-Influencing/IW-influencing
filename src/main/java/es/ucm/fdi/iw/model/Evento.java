@@ -25,6 +25,12 @@ import es.ucm.fdi.iw.model.Usuario.Rol;
 	
 	@NamedQuery(name="Evento.getChat",
 		query="SELECT e FROM Evento e WHERE e.tipo = 'CHAT' AND e.candidatura.id = :idCandidatura ORDER BY e.fechaEnviado"),
+	
+	@NamedQuery(name="Evento.getPrivateMessages",
+		query="SELECT e FROM Evento e WHERE e.tipo = 'PRIVADO' AND e.receptor = :idUsuario"),
+	
+	@NamedQuery(name="Evento.getPrivateMessagesUnread",
+	query="SELECT e FROM Evento e WHERE e.tipo = 'PRIVADO' AND e.receptor.id = :idUsuario AND e.leido = false"),
 })
 
 @Entity
