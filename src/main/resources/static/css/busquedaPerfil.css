@@ -33,15 +33,6 @@ li a:hover:not(.active) {
   background-color: #1695a5;
 }
 
-.tags {
-    border: 1px solid deepskyblue;
-    padding: 4px;
-    margin: 2px;
-	  width: fit-content;
-    min-width: 50px;
-    border-radius:12px;
-}
-
 .score {
 	margin: 3px;
 }

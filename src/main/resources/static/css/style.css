@@ -91,3 +91,12 @@ a:hover{
 	min-height: 71%;
 	overflow:hidden;
 }
+
+.tags {
+    border: 1px solid deepskyblue !important;
+    padding: 4px !important;
+    margin: 2px;
+	width: fit-content;
+    min-width: 50px;
+    border-radius:12px;
+}

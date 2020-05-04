@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
-
 <head>
     <th:block th:replace="fragments/head.html :: header"/>
     <link rel="stylesheet" href="css/valoracion.css">
@@ -8,13 +5,13 @@
 
 
 <header>
-        <div th:replace="fragments/navigation.html :: modalBar(nombrePagina='VALORACIÓN')"></div>
+    <div th:replace="fragments/navigation.html :: modalBar(nombrePagina='VALORACIÓN')"></div>
 </header>
 
 <body class="general">
 
     <div class="contenedor">
-        <section class="contenido-propuesta">
+        <div class="contenido-propuesta">
             <div class="texto-propuesta">
                 <h2 th:text="${propuesta.nombre}"></h2>
                 <p th:text="${propuesta.descripcion}"></p>
@@ -22,21 +19,22 @@
 			<div>
 	            <img src="https://via.placeholder.com/200x300" />
 			</div>
-        </section>
-        <section class="valoracion">
+        </div>
+        <div class="valoracion">
             <div id="cabecera">
+                <!-- Titulo -->
+                <h1>Valoración</h1>
                 
-                    <h1>
-                        Valoración
-                    </h1>
-                
+                <!-- Imagen perfil -->
                 <img src="https://via.placeholder.com/100" />
+
+                <!-- Estrellas -->
                 <div class="ec-stars-wrapper">
                     <a href="#" data-value="1" title="Votar con 1 estrellas">&#9733;</a>
                     <a href="#" data-value="2" title="Votar con 2 estrellas">&#9733;</a>
                     <a href="#" data-value="3" title="Votar con 3 estrellas">&#9733;</a>
-                    <a href="#" data-value="4" title="Votar con 4 estrellas">&#9733;</a>
-                    <a href="#" data-value="5" title="Votar con 5 estrellas">&#9733;</a>
+                    <a href="#" data-value="4" title="Votar con 4 estrellas">&#9734;</a>
+                    <a href="#" data-value="5" title="Votar con 5 estrellas">&#9734;</a>
                 </div>
             </div>
             <div class="comentario">
@@ -44,14 +42,12 @@
                 </p>
           		<textarea th:if="${modo} eq 'CREACION'" name="valoracion" rows="4" cols="40" required></textarea>
             </div>
-        </section>
-<div class="divCentrado">
-        <button th:if="${modo} eq 'VISTA'" class="w3-btn btnColor w3-margin" onclick="document.getElementById('modal').style.display='none'">Cerrar valoración</button>
-        <button th:if="${modo} eq 'CREACION'" class="w3-btn btnColor w3-margin" onclick="document.getElementById('modal').style.display='none'">Enviar valoración</button>
+        </div>
 
- </div>
+        <div class="divCentrado">
+            <button th:if="${modo} eq 'VISTA'" class="w3-btn btnColor w3-margin" onclick="document.getElementById('modal').style.display='none'">Cerrar valoración</button>
+            <button th:if="${modo} eq 'CREACION'" class="w3-btn btnColor w3-margin" onclick="document.getElementById('modal').style.display='none'">Enviar valoración</button>
+        </div>
     </div>
- 
-</body>
 
-</html>
+</body>
