@@ -39,12 +39,12 @@
       <h2 class="w3-padding-24">Contraseña</h2>
       <input th:if="${modo} eq 'CREACION'" type="password" name="pass1" placeholder="Introduzca su contraseña"
         required></input>
-      <input th:if="${modo} eq 'EDICION'" type="password" name="pass2" placeholder="Introduzca su  nueva contraseña"
+      <input th:if="${modo} eq 'EDICION'" type="password" name="pass1" placeholder="Introduzca su  nueva contraseña"
         required></input>
       <br>
-      <input th:if="${modo} eq 'CREACION'" type="password" name="pass" placeholder="Repita la contraseña"
+      <input th:if="${modo} eq 'CREACION'" type="password" name="pass2" placeholder="Repita la contraseña"
         required></input>
-      <input th:if="${modo} eq 'EDICION'" type="password" name="pass" placeholder="Repita la nueva contraseña"
+      <input th:if="${modo} eq 'EDICION'" type="password" name="pass2" placeholder="Repita la nueva contraseña"
         required></input>
     </div>
 
