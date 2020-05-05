@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-	document.getElementById("registroLogin").onclick = c => cargaModalPerfil()
+	document.getElementById("registroLogin").onclick = c => cargaModalPerfil();
 })
 
 
@@ -7,10 +7,20 @@ function cargaModalPerfil(){
 	document.getElementById('modal').style.display='block';
 	return go2(config.rootUrl + "perfil/creacion", 'GET')
 		.then(html => {document.getElementById("contenidoModal").innerHTML=html;
-			asignaFuncionBotonRegistro()});
-		
+			asignaFuncionBotonRegistro()
+			document.getElementById("tipoCuenta").addEventListener('change', compruebaPerfiles);});		
 }
 
+
+function compruebaPerfiles(){
+		if (this.value === 'Empresa'){
+			document.getElementById("divPerfilesCreacion").style.display = "none";
+		}
+		else{
+			document.getElementById("divPerfilesCreacion").style.display = "block";
+
+		}
+}
 
 function asignaFuncionBotonRegistro(){
 	let b = document.getElementById("botonRegistrarseUsuario");
@@ -27,8 +37,6 @@ function validaDatosPerfil(perfil){
 	let nombre = document.getElementsByName("nombre"+perfil)[0];
 	let seguidores = document.getElementsByName("seguidores"+perfil)[0];
 	if (nombre.value !== ""  || seguidores.value !== ""){
-		console.log(nombre.value)
-		console.log(seguidores.value)
 		seguidores.required = true;
 		nombre.required = true;
 	}

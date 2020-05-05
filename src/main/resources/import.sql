@@ -5,50 +5,46 @@
 
 -- Usuario de ejemplo con nombre = a y contraseña = aa  
 
-INSERT INTO usuario(id,activo,nombre_cuenta,nombre,password,roles,apellidos,edad,tags,estado,score) VALUES (
+INSERT INTO usuario(id,activo,nombre_cuenta,nombre,password,roles,apellidos,edad,tags,score) VALUES (
 	1, 1, 'a','a',
 	'{bcrypt}$2a$10$xLFtBIXGtYvAbRqM95JhcOaG23fHRpDoZIJrsF2cCff9xEHTTdK1u',
 	'ADMIN',
 	'Abundio Ejemplez',
 	23,
 	'ropa',
-	'Estado del usuario',
 	5
 );
 
 -- Otro usuario de ejemplo con username = b y contraseña = aa  
 
 
-INSERT INTO usuario(id,activo,nombre_cuenta,nombre,password,roles,apellidos,edad,tags,estado,score) VALUES (
+INSERT INTO usuario(id,activo,nombre_cuenta,nombre,password,roles,apellidos,edad,tags,score) VALUES (
 	2, 1, 'b','b',
 	'{bcrypt}$2a$10$xLFtBIXGtYvAbRqM95JhcOaG23fHRpDoZIJrsF2cCff9xEHTTdK1u',
 	'INFLUENCER',
 	'Berta Muestrez',
 	22,
 	'Fiesta',
-	'Estado del usuario',
 	4
 );
 
-INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad,tags,estado,score) VALUES (
+INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad,tags,score) VALUES (
 	3, 1, 'ca', 'c', 
 	'{bcrypt}$2a$10$xLFtBIXGtYvAbRqM95JhcOaG23fHRpDoZIJrsF2cCff9xEHTTdK1u',
 	'INFLUENCER',
 	'Sanchez Garcia',
 	22,
 	'Videojuegos',
-	'Estado del usuario',
 	4
 );
 
-INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad,tags,estado,score) VALUES (
+INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad,tags,score) VALUES (
 	4, 1, 'da', 'd',
 	'{bcrypt}$2a$10$xLFtBIXGtYvAbRqM95JhcOaG23fHRpDoZIJrsF2cCff9xEHTTdK1u',
 	'EMPRESA',
 	'Martin Gimeno',
 	22,
 	'Moda',
-	'Estado del usuario',
 	3
 );
 
@@ -139,28 +135,6 @@ INSERT INTO evento(id, descripcion, tipo, fecha_enviado,fecha_recibido, leido, c
 	1,
 	4,
 	2
-);
-
-
-INSERT INTO message(id, sender_id, recipient_id, text) VALUES (
-	1,
-	2,
-	1,
-	'hola, como te encuentras'
-);
-
-INSERT INTO message(id, sender_id, recipient_id, text) VALUES (
-	2,
-	2,
-	1,
-	'Perdona por mandarme un mensaje a mi mismo'
-);
-
-INSERT INTO message(id, sender_id, recipient_id, text) VALUES (
-	3,
-	2,
-	1,
-	'hola, como va esto'
 );
 
 INSERT INTO evento(id, descripcion, tipo, fecha_enviado,fecha_recibido,leido, candidatura_id, emisor_id, receptor_id) VALUES(

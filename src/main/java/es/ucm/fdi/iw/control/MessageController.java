@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import es.ucm.fdi.iw.model.Candidatura;
 import es.ucm.fdi.iw.model.Evento;
-import es.ucm.fdi.iw.model.Message;
 import es.ucm.fdi.iw.model.Usuario;
 import es.ucm.fdi.iw.model.Evento.Tipo;
 
@@ -46,16 +45,7 @@ public class MessageController {
 		return "messages";
 	}
 
-	@GetMapping(path = "/received", produces = "application/json")
-	@Transactional // para no recibir resultados inconsistentes
-	@ResponseBody // para indicar que no devuelve vista, sino un objeto (jsonizado)
-	public List<Message.Transfer> retrieveMessages(HttpSession session) {
-		long UsuarioId = ((Usuario)session.getAttribute("u")).getId();
-		Usuario u = entityManager.find(Usuario.class, UsuarioId);
-		log.info("Generating message list for Usuario {} ({} messages)", 
-				u.getNombre(), u.getReceived().size());
-		return Message.asTransferObjects(u.getReceived());
-	}
+
 	
 	
 	
@@ -68,8 +58,6 @@ public class MessageController {
 		long userId = ((Usuario)session.getAttribute("u")).getId();
 		List<Evento> mensajes = entityManager.createNamedQuery("Evento.getChat").setParameter("idCandidatura", idCandidatura).getResultList();
 		Usuario u = entityManager.find(Usuario.class, userId);
-		log.info("Generating message list for user {} ({} messages)", 
-				u.getNombre(), u.getReceived().size());
 		return Evento.asTransferObjects(mensajes, u);	
 	}	
 	

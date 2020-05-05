@@ -11,7 +11,11 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
 	@NamedQuery(name="PerfilRRSS.byInfluencer",
 	query="SELECT p FROM PerfilRRSS p "
-			+ "WHERE p.influencer.id = :idUsuario")
+			+ "WHERE p.influencer.id = :idUsuario"),
+	
+	@NamedQuery(name="PerfilRRSS.byNombre",
+	query="SELECT p FROM PerfilRRSS p "
+			+ "WHERE p.nombre = :nombre AND p.rrss = :rrss")
 })
 
 
@@ -24,15 +28,6 @@ public class PerfilRRSS {
 	private int numSeguidores;
 	public enum RRSS {Twitter, Facebook, Instagram, Youtube};
 	private String rrss;
-
-
-
-	public PerfilRRSS(long id, Usuario influencer, String nombre, int numSeguidores) {
-		this.id = id;
-		this.influencer = influencer;
-		this.nombre = nombre;
-		this.numSeguidores = numSeguidores;
-	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

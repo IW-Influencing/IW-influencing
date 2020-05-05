@@ -63,12 +63,9 @@ public class Usuario {
 	private String apellidos;
 	private int edad;
 	private String tags; // Se almacenan los tags
-	private String estado;
 	private Integer score;
 
-	private List<Message> sent;
 
-	private List<Message> received;
 
 	@OneToMany(targetEntity=Propuesta.class)
 	@JoinColumn(name="empresa_id")
@@ -186,14 +183,6 @@ public class Usuario {
 		this.score = score;
 	}
 
-	public String getEstado(){
-		return estado;
-	}
-
-	public void setEstado(String estado){
-		this.estado = estado;
-	}
-
 	public String getPassword() {
 		return password;
 	}
@@ -210,27 +199,7 @@ public class Usuario {
 		this.activo = activo;
 	}
 
-	@OneToMany(targetEntity = Message.class)
-	@JoinColumn(name = "sender_id")
-	@JsonIgnore
-	public List<Message> getSent() {
-		return sent;
-	}
-
-	public void setSent(List<Message> sent) {
-		this.sent = sent;
-	}
-
-	@OneToMany(targetEntity = Message.class)
-	@JoinColumn(name = "recipient_id")	
-	@JsonIgnore
-	public List<Message> getReceived() {
-		return received;
-	}
-
-	public void setReceived(List<Message> received) {
-		this.received = received;
-	}
+	
 
 	/**
 	 * Checks whether this user has a given role.

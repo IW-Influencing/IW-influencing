@@ -41,7 +41,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import es.ucm.fdi.iw.LocalData;
-import es.ucm.fdi.iw.model.Message;
 import es.ucm.fdi.iw.model.Usuario;
 import es.ucm.fdi.iw.model.Usuario.Rol;
 
@@ -167,22 +166,13 @@ public class UsuarioController {
 				Usuario.class, ((Usuario)session.getAttribute("u")).getId());
 		model.addAttribute("user", to);
 		
-		// construye mensaje, lo guarda en BD
-		Message m = new Message();
-		m.setRecipient(to);
-		m.setSender(sender);
-		m.setDateSent(LocalDateTime.now());
-		m.setText(text);
-		entityManager.persist(m);
-		entityManager.flush(); // to get Id before commit
-		
+		// construye mensaje, lo guarda en BD		
 		// construye json
 		ObjectMapper mapper = new ObjectMapper();
 		ObjectNode rootNode = mapper.createObjectNode();
 		rootNode.put("from", sender.getNombre());
 		rootNode.put("to", to.getNombre());
 		rootNode.put("text", text);
-		rootNode.put("id", m.getId());
 		String json = mapper.writeValueAsString(rootNode);
 		
 		log.info("Sending a message to {} with contents '{}'", id, json);

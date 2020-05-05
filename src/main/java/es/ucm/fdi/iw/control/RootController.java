@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
@@ -15,14 +14,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import es.ucm.fdi.iw.LocalData;
 import es.ucm.fdi.iw.model.Candidatura;
 import es.ucm.fdi.iw.model.Evento;
-import es.ucm.fdi.iw.model.Message;
-import es.ucm.fdi.iw.model.Propuesta;
 import es.ucm.fdi.iw.model.Usuario;
-import es.ucm.fdi.iw.model.Usuario.Rol;
-import es.ucm.fdi.iw.services.UsuariosService;					   
+
 /**
  * Landing-page controller
  * 
@@ -36,9 +31,7 @@ public class RootController {
   private final int LIMITE_PROPUESTAS_INICIO = 3;
 	
   private static final Logger log = LogManager.getLogger(RootController.class);
-  @Autowired
-  UsuariosService usuariosService;	
-  
+
  @Autowired
  private EntityManager entityManager;
 
