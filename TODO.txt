@@ -1,13 +1,20 @@
 Propuesta
-  - Fecha
   - Creación
-  
+
+Validacion formulario registro
+Busquedas por tag en perfil y propuesta al pinchar en tag de uno especifico o seleccionar en la barra
+
+Registro
+ * Tags del perfil
+ * Apellidos
+
+-----------------------------------------------------------------------------
+
+
   
 Perfil
-  - CSS y modelo
-  - Boton mandar mensaje privado
+  - ¿Boton mandar mensaje privado?
   - Boton denunciar
-  - Adaptar vistas para modos
 
 Negociacion
   - WebSocket para notificar cuantos chat hay sin leer
@@ -19,10 +26,5 @@ Valoracion
 
 Imagenes de usuario/propuestas
 
-Validacion formulario registro
-
-Busquedas por tag en perfil y propuesta al pinchar en tag de uno especifico o seleccionar en la barra
-
-Registro
 
 Mostrar ultimatum chat
