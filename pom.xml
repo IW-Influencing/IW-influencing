@@ -129,6 +129,14 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<!-- 
+				surefire se encarga de pasar pruebas JUnit. No queremos
+				que se ejecute Karate siempre, sólo si se especifica
+				
+				mvn test -Dtest=KarateTests 
+				(ojo: sólo se pueden pasar con la aplicación funcionando!)
+			-->
 			<plugin>
 			<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -143,6 +151,12 @@
 				</configuration>
 	
 			</plugin>
+
+			<!-- 
+				para ejecutar karate desde fuera (pruebas externas de interfaz):
+				
+				mvn test -Dexec.args=src/test/karate-ui/login.feature
+			-->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>

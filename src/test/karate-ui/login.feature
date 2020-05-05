@@ -3,7 +3,6 @@ Feature: browser automation 1
 Background:
   # chromium bajo linux; si usas google-chrome, puedes quitar executable (que es lo que usaría por defecto)
   * configure driver = { type: 'chrome', executable: '/usr/bin/chromium-browser', showDriverLog: true }
-    
   # descarga geckodriver de https://github.com/mozilla/geckodriver/releases para probar bajo firefox
   # * configure driver = { type: 'geckodriver', executable: './geckodriver', showDriverLog: true }
 
@@ -18,7 +17,7 @@ Background:
 Scenario: try to login to github
     and then do a google search
 
-  Given driver 'https://github.com/login'
+  Given driver 'https://github.com/login'  
   And input('#login_field', 'dummy')
   And input('#password', 'world')
   When submit().click("input[name=commit]")
