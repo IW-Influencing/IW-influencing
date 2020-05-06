@@ -19,6 +19,8 @@ import javax.persistence.NamedQuery;
 	@NamedQuery(name="Candidatura.activeByIdUsuario", 
 			query="SELECT c FROM Candidatura c WHERE (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario) AND (c.estado = 'EN_CURSO' OR c.estado = 'NEGOCIANDO')"),
 
+	@NamedQuery(name="Candidatura.byCandidatoAndPropuesta", 
+	query="SELECT c.propuesta FROM Candidatura c WHERE c.candidato.id = :idCandidato AND c.propuesta.id = :idPropuesta"),
 	
 	@NamedQuery(name="Candidatura.searchByName",
 	query="SELECT c FROM Candidatura c WHERE c.propuesta.nombre LIKE :patron AND (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario)"),

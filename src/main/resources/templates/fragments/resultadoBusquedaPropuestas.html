@@ -5,7 +5,8 @@
 			
 			<!-- Imagen-->
 			<div class="imagen" th:attr="data-id=${prop.id}">
-				<img src="img/sonyLogo.png" class="w3-hover-opacity imgPerfilBusqueda">
+				<img th:src="@{/propuesta/{id}/photo(id=${prop.id})}" class="w3-hover-opacity imgPerfilBusqueda">
+			
 			</div>
 
 			<!-- Nombre Propuesta -->

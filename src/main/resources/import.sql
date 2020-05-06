@@ -23,7 +23,7 @@ INSERT INTO usuario(id,activo,nombre_cuenta,nombre,password,roles,apellidos,edad
 	'{bcrypt}$2a$10$xLFtBIXGtYvAbRqM95JhcOaG23fHRpDoZIJrsF2cCff9xEHTTdK1u',
 	'INFLUENCER',
 	'Berta Muestrez',
-	22,
+	3,
 	'Fiesta',
 	4
 );

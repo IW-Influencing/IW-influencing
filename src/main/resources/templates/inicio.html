@@ -20,7 +20,7 @@
 
 	<div id="page_block" class="w3-row-padding global-div generalWebBody">
 		<div id= "left_panel" class="w3-third w3-container">
-			<div id="control_panel" class="control_panel">
+			<div id="control_panel" class="control_panel w3-display-container">
 				<div id="content" class="content">
 				<h2>Panel de control</h2>
 				<h3>Buscar usuario</h3>
@@ -32,7 +32,7 @@
 				<input class="rounded_corner" type="submit" value="Buscar">
 				</div>
 				<div th:if="${session.u.hasRole('EMPRESA')}" class="divBotonPublicar">
-					<button class="w3-btn btnColor w3-margin" id="botonCrearPropuesta">Crear propuesta</button>
+					<button class="w3-btn btnColor w3-margin w3-display-bottomleft" id="botonCrearPropuesta">Crear propuesta</button>
 				</div>
 			</div>
 		</div>

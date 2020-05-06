@@ -1,9 +1,18 @@
 package es.ucm.fdi.iw.control;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
@@ -12,13 +21,17 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import es.ucm.fdi.iw.LocalData;
 import es.ucm.fdi.iw.model.PerfilRRSS;
 import es.ucm.fdi.iw.model.Usuario;
 import es.ucm.fdi.iw.model.Usuario.Rol;
@@ -27,6 +40,9 @@ import es.ucm.fdi.iw.model.Usuario.Rol;
 @RequestMapping("perfil")
 public class PerfilController {
 
+	@Autowired
+	private LocalData localData;
+	
     @Autowired
     private EntityManager entityManager;
 
@@ -63,8 +79,8 @@ public class PerfilController {
     
     @PostMapping("/registra")
     @Transactional
-	public String registraUsuario(RedirectAttributes redirectAttributes, Model model, @RequestParam String nombreCuenta, 
-			@RequestParam String nombre,
+	public void registraUsuario(HttpSession session, HttpServletResponse response, Model model, 
+			@RequestParam String nombreCuenta, @RequestParam String nombre,
     		@RequestParam String pass1,@RequestParam String pass2, 
     		@RequestParam MultipartFile imagenPerfil, @RequestParam String tipoCuenta, 
     		@RequestParam String nombreTwitter, @RequestParam String seguidoresTwitter,
@@ -82,7 +98,7 @@ public class PerfilController {
         }
         else {
         	if (pass1.equals(pass2)) {
-        		if (nombreCuenta.equalsIgnoreCase(Usuario.Rol.INFLUENCER.toString())) {
+        		if (tipoCuenta.equalsIgnoreCase(Usuario.Rol.INFLUENCER.toString())) {
 	        		if(validaPerfiles(nombreTwitter, seguidoresTwitter, nombreFacebook, seguidoresFacebook, 
 	        				nombreInstagram, seguidoresInstagram, nombreYoutube, seguidoresYoutube)) {
 	        			Usuario u = new Usuario();
@@ -113,19 +129,36 @@ public class PerfilController {
     	        	u.setPassword(Usuario.encodePassword(pass1));
     	        	entityManager.persist(u);
     	        	entityManager.flush();
+    	      		File f = localData.getFile("usuario", String.valueOf(u.getId()));
+    	      		if (!imagenPerfil.isEmpty()) {
+    	      			//Subir imagen por defecto al perfil
+    	      			
+    	  			try (BufferedOutputStream stream =
+    	  					new BufferedOutputStream(new FileOutputStream(f))) {
+    	  				byte[] bytes = imagenPerfil.getBytes();
+    	  				stream.write(bytes);
+    	  			} catch (Exception e) {
+    	  				log.warn("Error uploading " + String.valueOf(u.getId()) + " ", e);
+    	  			}
+    	    		}
     	        	mensaje="Usuario registrado correctamente";
         		}
+       
+        		
         		
         	}
         	else
         	//Mostrar mensaje de error al usuario
         		mensaje = "Error. Las contraseñas no coinciden";
         }
-        List<Usuario> x = entityManager.createNamedQuery("Usuario.getAllUsers", Usuario.class).getResultList();
+		session.setAttribute("mensajeInfo", mensaje);
+		try {
+			response.sendRedirect("/login");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			log.info("Error al redireccionar");
+		}
 
-		log.info("fin  de registra; MENSAJE={}", mensaje);
-        model.addAttribute("mensaje", mensaje);
-        return "redirect:login";
     }
     
     @Transactional
@@ -195,5 +228,26 @@ public class PerfilController {
 		}
 		return null;
 	}
+	
+	
+	@GetMapping(value="/{id}/photo")
+	public StreamingResponseBody getPhotoUsuario(@PathVariable long id, Model model) throws IOException {		
+		File f = localData.getFile("usuario", ""+id);
+		InputStream in;
+		if (f.exists()) {
+			in = new BufferedInputStream(new FileInputStream(f));
+		} else {
+			in = new BufferedInputStream(getClass().getClassLoader()
+					.getResourceAsStream("static/img/profile.png"));
+		}
+		return new StreamingResponseBody() {
+			@Override
+			public void writeTo(OutputStream os) throws IOException {
+				FileCopyUtils.copy(in, os);
+			}
+		};
+	}
 
+	
+	
 }

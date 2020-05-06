@@ -52,10 +52,10 @@
     <!-- Imagen -->
     <h2 class="w3-padding-24">Imagen Perfil</h2>
     <div class="w3-center" th:if="${modo} eq 'VISTA'">
-      <img id="imagen-perfil" src="img/profile.png">
+      <img id="imagen-perfil" th:src="@{/perfil/{id}/photo(id=${usuario.id})}">
     </div>
     <div class="w3-center" th:if="${modo} eq 'EDICION'">
-      <img id="imagen-perfil" src="img/profile.png">
+      <img id="imagen-perfil" th:src="@{/perfil/{id}/photo(id=${usuario.id})}">
       <!-- ¿Boton para borrar la foto? -->
     </div>
     <div th:if="${modo} eq 'CREACION'">

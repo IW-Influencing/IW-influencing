@@ -65,21 +65,26 @@ public class BusquedaPerfilController {
 
 		@GetMapping("/tags")
 		public String postSearchByTag(Model model, HttpSession session, @RequestParam(required = true, defaultValue = "1") int indicePagina, @RequestParam String tag ) {
-			
-			List<Usuario> usuarios = entityManager.createNamedQuery("Usuario.searchByNombre", Usuario.class)
-					.setParameter("tag", tag).getResultList();
-
-			if(usuarios.size()>1){
-				model.addAttribute("numeroPaginas", Math.ceil((double)usuarios.size()/NUM_ELEMENTOS_PAGINA));
-				usuarios=usuarios.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, indicePagina*NUM_ELEMENTOS_PAGINA);
+			String tagsLike = "%"+tag+"%";
+			List<Usuario> usuarios = null;
+			if (tag.isEmpty()) { 
+				usuarios = entityManager.createQuery("select u from Usuario u", Usuario.class).getResultList();
+			} else {
+				usuarios = entityManager.createNamedQuery("Usuario.searchByTag", Usuario.class)
+						.setParameter("tag", tagsLike).getResultList();			
 			}
+			model.addAttribute("numeroPaginas", Math.ceil((double)usuarios.size()/NUM_ELEMENTOS_PAGINA));
+			if (indicePagina*NUM_ELEMENTOS_PAGINA <= usuarios.size())
+				usuarios=usuarios.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, indicePagina*NUM_ELEMENTOS_PAGINA);
+			else 
+				usuarios=usuarios.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, usuarios.size());
 
+					
 			model.addAttribute("resultadoBusqueda", usuarios);
-			model.addAttribute("tag", tag);
+			model.addAttribute("patron", tag);
 
 			return "fragments/resultadoBusquedaPerfiles";
 		}
-	  
 	  
 
 

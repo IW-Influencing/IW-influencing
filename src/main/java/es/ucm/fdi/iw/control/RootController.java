@@ -1,5 +1,11 @@
 package es.ucm.fdi.iw.control;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,9 +17,13 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
+import es.ucm.fdi.iw.LocalData;
 import es.ucm.fdi.iw.model.Candidatura;
 import es.ucm.fdi.iw.model.Evento;
 import es.ucm.fdi.iw.model.Usuario;
@@ -34,6 +44,9 @@ public class RootController {
 
  @Autowired
  private EntityManager entityManager;
+ 
+ @Autowired
+ private LocalData localData;
 
   @GetMapping("/")
   public String index(Model model) {
@@ -41,7 +54,9 @@ public class RootController {
   }
 
   @GetMapping("/login")
-  public String login(Model model) {
+  public String login(HttpSession session, Model model) {
+	model.addAttribute("mensaje",session.getAttribute("mensajeInfo"));
+	session.removeAttribute("mensajeInfo");
     return "login";
   }
 
@@ -110,6 +125,7 @@ public class RootController {
   public String error(Model model) {
     return "error";
   }
+  
   
 
 }

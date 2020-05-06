@@ -53,6 +53,7 @@ function cargaBusquedasPorTag(tag){
 	.then(html => { 
 var  div = document.getElementById("divPerfiles");
 div.innerHTML = html;
+prepareListeners();
 })
 		.catch(e => console.log(e))
 

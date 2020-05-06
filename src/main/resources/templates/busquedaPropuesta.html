@@ -21,11 +21,15 @@
 		<div th:replace="fragments/resultadoBusquedaPropuestas.html (resultadoBusqueda=${propuestas})"> </div>
 	</div>
 
+	<p id="mensajeInfo" th:text="${mensaje}" hidden></p>
 	<!-- Footer -->
 	<footer th:replace="fragments/navigation.html :: footer"></footer>
 	
 	<!-- Modal -->
 	<div th:replace="fragments/modal.html"></div>
+
+
+
 
 </body>
 

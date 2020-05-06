@@ -1,10 +1,17 @@
 package es.ucm.fdi.iw.control;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
@@ -13,13 +20,17 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import es.ucm.fdi.iw.LocalData;
 import es.ucm.fdi.iw.model.Candidatura;
 import es.ucm.fdi.iw.model.Evento;
 import es.ucm.fdi.iw.model.Propuesta;
@@ -32,6 +43,9 @@ import es.ucm.fdi.iw.model.Usuario.Rol;
 public class PropuestaController {
 	
 	private static final Logger log = LogManager.getLogger(PropuestaController.class);
+	
+	@Autowired
+	private LocalData localData;
 	
 	@Autowired 
 	private EntityManager entityManager;
@@ -70,16 +84,16 @@ public class PropuestaController {
 	  //Ruta que maneja cuando un usuario se apunta a una propuesta. Tiene que crear una candidatura
 	  @PostMapping("/solicitaPropuesta")
 	  @Transactional
-	public String solicitaPropuesta(Model model, HttpSession session, @RequestParam long idPropuesta){
+	public void solicitaPropuesta(Model model, HttpSession session,HttpServletResponse response,  @RequestParam long idPropuesta){
 		  
 		  String mensaje = "";
 		  //Comprobar que el usuario no esté apuntado previamente
-		  if (entityManager.createNamedQuery("Candidatura.byCandidato").setParameter("idCandidato", ((Usuario)session.getAttribute("u")).getId()).getResultList().isEmpty()) {
+		  if (entityManager.createNamedQuery("Candidatura.byCandidatoAndPropuesta").setParameter("idCandidato", ((Usuario)session.getAttribute("u")).getId()).setParameter("idPropuesta", idPropuesta).getResultList().isEmpty()) {
 			  Usuario usuarioLoggeado = entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId());
 			  int edad = usuarioLoggeado.getEdad();
 			  Propuesta p = entityManager.find(Propuesta.class, idPropuesta);
 			  if (p.getEdadMinPublico() > edad || p.getEdadMaxPublico() < edad) {
-				  mensaje="La edad de su público no corresponde con la propuesta";
+				  mensaje="La edad de tu público no corresponde con la propuesta";
 			  }
 			  else {
 				  Candidatura c = new Candidatura();
@@ -99,16 +113,25 @@ public class PropuestaController {
 					e.setTipo(Tipo.CHAT);
 					e.setReceptor(p.getEmpresa());
 					entityManager.persist(e);
+					mensaje = "Te has apuntado correctamente a la propuesta";
+
 			  }
+			  
+			  
 			  
 		  }
 		  else {
-			  mensaje = "Ya estaba apuntado a esta propuesta";
+			  mensaje = "Ya estabas apuntado a esta propuesta";
 		  }
 				 
 
-		  
-		  return "redirect:busquedaPropuesta";
+		  try {
+				session.setAttribute("mensajeInfo", mensaje);
+				response.sendRedirect("/busquedaPropuesta");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			log.info("Error al redireccionar");
+		}
 	  }
 	  
 	  
@@ -159,5 +182,24 @@ public class PropuestaController {
 
 	        return "redirect:login";
 	    }
+	  
+	  @GetMapping(value="/{id}/photo")
+		public StreamingResponseBody getPhotoUsuario(@PathVariable long id, Model model) throws IOException {		
+			File f = localData.getFile("propuesta", ""+id);
+			InputStream in;
+			if (f.exists()) {
+				in = new BufferedInputStream(new FileInputStream(f));
+			} else {
+				in = new BufferedInputStream(getClass().getClassLoader()
+						.getResourceAsStream("static/img/propuesta.png"));
+			}
+			return new StreamingResponseBody() {
+				@Override
+				public void writeTo(OutputStream os) throws IOException {
+					FileCopyUtils.copy(in, os);
+				}
+			};
+		}
+
 
 }

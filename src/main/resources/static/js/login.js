@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 	document.getElementById("registroLogin").onclick = c => cargaModalPerfil();
+	lanzaAlert();
+
 })
 
 

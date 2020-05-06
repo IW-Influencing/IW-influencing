@@ -1,12 +1,12 @@
 Propuesta
   - Creación
 
-Validacion formulario registro
 Busquedas por tag en perfil y propuesta al pinchar en tag de uno especifico o seleccionar en la barra
 
 Registro
  * Tags del perfil
  * Apellidos
+ * Validacion tags y apellidos
 
 -----------------------------------------------------------------------------
 
@@ -24,7 +24,7 @@ Valoracion
   - Añadir boton enviar valoracion
   - CSS
 
-Imagenes de usuario/propuestas
+propuestas
 
 
 Mostrar ultimatum chat

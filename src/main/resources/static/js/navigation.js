@@ -29,3 +29,8 @@ function abreEmpresa(evt, nombreEmpresa) {
 	document.getElementById(nombreEmpresa).style.display = "block";
 	evt.currentTarget.firstElementChild.className += " w3-border-red";
 }
+
+function lanzaAlert() {
+	if (document.getElementById("mensajeInfo").textContent !== "")
+	  alert(document.getElementById("mensajeInfo").textContent);
+}

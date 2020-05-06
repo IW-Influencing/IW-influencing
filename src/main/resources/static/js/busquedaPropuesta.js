@@ -28,6 +28,7 @@ let inputBusqueda =  document.getElementById("cuadroBusquedaTagBar")
 
 document.addEventListener("DOMContentLoaded", () => {
 	prepareListeners();
+	lanzaAlert();
 })
 
 
@@ -68,3 +69,4 @@ function botonLista(patron="", indice){
 		})
 		.catch(e => console.log(e))
 }
+

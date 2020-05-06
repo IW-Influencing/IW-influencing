@@ -20,7 +20,7 @@
 
 			<!-- Tags -->
 			<div th:each="tag: ${u.tags}">
-				<button class="w3-button w3-white tags" th:text="${tag}">Tag</button>
+				<button class="w3-button w3-white tags tagFilter" th:attr="data-id=${tag}" th:text="${tag}">Tag</button>
 			</div>
 			
 			<!-- Detalles-->
