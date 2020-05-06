@@ -17,7 +17,7 @@ function insertaEnDiv(json, contenido, idPropuesta){
 	
 	json.forEach(msg => {
 		let clase = msg.propio ? 'mensaje enviado' : 'mensaje recibido';
-		html.push("<p class='" + clase + "'> " + msg.sent + " - " + msg.text + "</p>");
+		html.push("<p class='" + clase + " msg'> " + msg.sent + " - " + msg.text + "</p>");
 	})
 	
 	contenido.innerHTML = html.join("\n");
