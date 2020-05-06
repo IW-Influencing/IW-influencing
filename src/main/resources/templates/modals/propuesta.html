@@ -18,9 +18,16 @@
     </div>
   </header>
 
-  <!-- Contenido propuesta -->
-  <form class="contenido-propuesta w3-display-container">
 
+  <!-- Contenido propuesta -->
+  <form class="contenido-propuesta w3-display-container" th:action="${modo=='VISTA'}?@{/propuesta/solicitaPropuesta}
+	:(${modo=='VISTA-ULTIMATUM'}?@{/propuesta/decideUltimatum}:(${modo=='ULTIMATUM'}?@{/propuesta/enviaUltimatum}:@{/propuesta/registraPropuesta}))"
+	 method="POST" enctype="multipart/form-data">
+	
+	<!-- Valor id oculto -->
+	<input th:if="${modo}!='CREACION' " type="hidden" name="idPropuesta" th:value="${propuesta.id}">
+	
+	
     <!-- Texto propuesta -->
     <div class="texto-propuesta">
       <div th:if="${modo} eq 'CREACION'">
@@ -69,8 +76,8 @@
     <!-- Periodo -->
     <div class="periodo-propuesta">
       <h2>Periodo de la propuesta</h2>
-      <p th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'CREACION'">De <input type="date" required>
-        a <input type="date" required></p>
+      <p th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'CREACION'">De <input type="date" name="fechaInicio" required>
+        a <input type="date" name="fechaFin" required></p>
 
       <p th:if="${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM' or ${modo} eq 'CONTRATACION'" th:text="${'Desde ' + #temporals.format(propuesta.fechaInicio,
         'dd-MM-yyyy') + ' hasta ' + #temporals.format(propuesta.fechaFin,'dd-MM-yyyy')}"></p>
