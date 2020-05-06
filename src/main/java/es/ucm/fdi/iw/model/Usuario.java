@@ -18,9 +18,8 @@ import javax.persistence.UniqueConstraint;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Entity
 @NamedQueries({
@@ -50,7 +49,7 @@ public class Usuario {
 
 	
 	private static Logger log = LogManager.getLogger(Usuario.class);	
-	private static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+	private static PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 	
 	private long id; // Id unico para cada usuario
 	private byte activo;
