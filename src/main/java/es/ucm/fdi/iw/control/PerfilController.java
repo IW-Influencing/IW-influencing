@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import es.ucm.fdi.iw.model.Candidatura;
 import es.ucm.fdi.iw.model.PerfilRRSS;
 import es.ucm.fdi.iw.model.Usuario;
+import es.ucm.fdi.iw.model.Usuario.Rol;
 
 @Controller()
 @RequestMapping("perfil")
@@ -63,7 +63,8 @@ public class PerfilController {
     
     @PostMapping("/registra")
     @Transactional
-    public String registraUsuario(RedirectAttributes redirectAttributes, Model model, @RequestParam String nombreCuenta, @RequestParam String nombre,
+	public String registraUsuario(RedirectAttributes redirectAttributes, Model model, @RequestParam String nombreCuenta, 
+			@RequestParam String nombre,
     		@RequestParam String pass1,@RequestParam String pass2, 
     		@RequestParam MultipartFile imagenPerfil, @RequestParam String tipoCuenta, 
     		@RequestParam String nombreTwitter, @RequestParam String seguidoresTwitter,
@@ -105,7 +106,10 @@ public class PerfilController {
     	        	u.setNombre(nombre);
     	        	u.setCandidaturas(new ArrayList<>());
     	        	u.setActivo(Byte.valueOf("1"));
-    	        	u.setRoles("Usuario,Empresa");
+					u.setRoles(String.join(",", new String[]{ 
+						Rol.USER.toString(), 
+						Rol.EMPRESA.toString() 
+					}));
     	        	u.setPassword(Usuario.encodePassword(pass1));
     	        	entityManager.persist(u);
     	        	entityManager.flush();
@@ -119,9 +123,10 @@ public class PerfilController {
         }
         List<Usuario> x = entityManager.createNamedQuery("Usuario.getAllUsers", Usuario.class).getResultList();
 
+		log.info("fin  de registra; MENSAJE={}", mensaje);
         model.addAttribute("mensaje", mensaje);
         return "redirect:login";
-        }
+    }
     
     @Transactional
 	private void insertaPerfiles(String nombreTwitter, String seguidoresTwitter, String nombreFacebook,

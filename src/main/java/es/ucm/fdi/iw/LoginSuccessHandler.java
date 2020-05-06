@@ -72,6 +72,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 		} else if (u.hasRole(Rol.EMPRESA) || u.hasRole(Rol.INFLUENCER)) {
 			redirect = "/inicio";
 		} else {
+			log.info("Ni empresa ni influencer - redirigiendo a ERROR");
 			redirect = "/error";
 		}		
 		response.sendRedirect(redirect);
