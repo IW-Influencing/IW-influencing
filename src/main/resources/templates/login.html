@@ -6,7 +6,7 @@
   <title>Login</title>
 </head>
 
-<body class="bodyLogin">
+<body id="bodyLogin">
   <div class="container">
     <p class="logo w3-display-center">INFLUENCING</p>
     <form class="formLogin w3-round w3-white" method="post" th:action="@{/login}">
@@ -21,8 +21,12 @@
       </p>
       <button class="w3-btn btnColor w3-margin" type="submit">Entrar</button>
     </form>
+
+    <!-- Boton de registro-->
     <a id="registroLogin"><u>Registro</u></a>
-	<p th:text="${mensaje}" id="mensajeInfo" hidden></p>
+
+    <!-- Mensaje de informacion -->
+	  <p th:text="${mensaje}" id="mensajeInfo" hidden></p>
   </div>
 
   <!-- Modal de Registro-->

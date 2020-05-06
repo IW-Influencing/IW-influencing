@@ -8,46 +8,45 @@
     <title>Influencing: Chat de Negociación</title>
 </head>
 
-<body class="general">
-
+<body>
+    
     <!-- Header -->
     <header>
         <div th:replace="fragments/navigation.html :: navBar(nombrePagina='CHAT DE NEGOCIACIÓN')"></div>
     </header>
 
     <!-- Contenido chat de negociacion -->
-    <main>
-        <div class="contenido-negociacion ">
+    <div class="contenido-negociacion ">
 
-            <div class="lista">
-                <div class="propuesta" th:each="c: ${candidaturas}" th:attr="data-id=${c.id},data-prop-id=${c.propuesta.id}, data-prop-nombre=${c.propuesta.nombre}, 
-					data-otro-nombre=${session.u.hasRole('EMPRESA')?c.candidato.nombre:c.propuesta.empresa.nombre},
-					data-otro-id=${session.u.hasRole('EMPRESA')?c.candidato.id:c.propuesta.empresa.id}">
-                    <a>
-                        <img width="50" height="50" src="img/perfilIcon.svg">
-                    </a>
-                    <span th:text="${c.propuesta.nombre}"> Nombre de la propuesta</span>
-                </div>
-            </div>
-
-            <div class="chat" id="chat">
-                <div class="barraChat">
-                    <div class="informacionChat">
-                        <a class="perfil"></a>
-                        <a class="nombre"></a>
-                    </div>
-                    <div class="ultimatum">
-                        <button class="w3-btn w3-black w3-margin" id="botonUltimatum">Enviar Ultimatum</button>
-                    </div>
-                </div>
-                <div id="contenidoChat">
-                </div>
-                <input id="botonEnviar" type="text" placeholder="Introduzca su mensaje...">
-
+        <!-- Lista de chats -->
+        <div class="lista">
+            <div class="propuesta" th:each="c: ${candidaturas}" th:attr="data-id=${c.id},data-prop-id=${c.propuesta.id}, data-prop-nombre=${c.propuesta.nombre}, 
+                data-otro-nombre=${session.u.hasRole('EMPRESA')?c.candidato.nombre:c.propuesta.empresa.nombre},
+                data-otro-id=${session.u.hasRole('EMPRESA')?c.candidato.id:c.propuesta.empresa.id}">
+                <a><img width="50" height="50" src="img/perfilIcon.svg"></a> <!-- ¿Insertar imagen? -->
+                <span th:text="${c.propuesta.nombre}"> Nombre de la propuesta</span>
             </div>
         </div>
 
-    </main>
+        <!-- Chat-->
+        <div class="chat" id="chat">
+
+            <!-- Barra chat -->
+            <div class="barraChat">
+                <div class="informacionChat">
+                    <a class="perfil"></a>
+                    <a class="nombre"></a>
+                </div>
+                <div class="ultimatum">
+                    <button class="w3-btn w3-black w3-margin" id="botonUltimatum">Enviar Ultimatum</button>
+                </div>
+            </div>
+
+            <!--Contenido Chat -->
+            <div id="contenidoChat"></div>
+            <input id="botonEnviar" class="w3-input w3-border" type="text" placeholder="Introduzca su mensaje...">
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer th:replace="fragments/navigation.html :: footer"></footer>
