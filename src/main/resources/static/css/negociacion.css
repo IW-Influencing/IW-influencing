@@ -45,6 +45,7 @@
     border-radius:20px;
 	padding: 1%;
 	word-wrap: break-word;
+	box-shadow: 5px 5px 5px rgba(109, 109, 109, 0.377);
 }
 
 .recibido {
@@ -84,14 +85,15 @@ input{
 	border: 1px solid;
 	box-shadow: 0 1px 3px -2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 	border-radius: 20px;
-	margin: 0.5em 0.5em 0.5em 2em;
 	padding: 0.5em !important;
 	background-color: #f9f9f9c4;
 	border: solid 1pt lightgrey;
+	margin: 1.5%
 }
 
 .propuesta:hover{
 	cursor:pointer;
+	background-color: rgb(182, 182, 182);
 }
 
 
@@ -102,8 +104,7 @@ ul {
 .lista {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-
+	margin: 1.5%
 }
 
 .perfil {
