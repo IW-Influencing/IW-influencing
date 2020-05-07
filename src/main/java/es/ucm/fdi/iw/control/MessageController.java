@@ -66,7 +66,7 @@ public class MessageController {
 	@Transactional // para no recibir resultados inconsistentes
 	@ResponseBody // para indicar que no devuelve vista, sino un objeto (jsonizado)
 	
-	public List<Evento.TransferChat> enviaMensaje(HttpSession session, @RequestParam long idCandidatura, @RequestParam String msg, @RequestParam long idReceptor) {
+	public List<Evento.TransferChat> enviaMensaje(HttpSession session, @RequestParam long idCandidatura, @RequestParam long idEmisor, @RequestParam String msg, @RequestParam long idReceptor) {
 		
 		Evento e = new Evento();
 		e.setDescripcion(msg);
@@ -78,7 +78,7 @@ public class MessageController {
 		e.setReceptor(entityManager.find(Usuario.class, idReceptor));
 		entityManager.persist(e);
 
-		List<Evento.TransferChat> chatPropio = devuelveChat(session, idCandidatura, ((Usuario)session.getAttribute("u")).getId());
+		List<Evento.TransferChat> chatPropio = devuelveChat(session, idCandidatura, idEmisor);
 		List<Evento.TransferChat> chatOtro = devuelveChat(session, idCandidatura, idReceptor);
 		// y ahora, también lo enviamos por WS
 		messagingTemplate.convertAndSend(

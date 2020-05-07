@@ -1,38 +1,59 @@
 document.addEventListener("DOMContentLoaded", () => {
 	for (let p of document.getElementsByClassName("propuesta")) {
 		p.onclick = c => {
-			var contenido = document.getElementById("contenidoChat");
-			var idCandidatura = p.dataset.id, idPropuesta=p.dataset.propId, nombreUsuario=p.dataset.otroNombre,
-			idEmisor = p.dataset.propioId, idReceptor = p.dataset.otroId, nombrePropuesta=p.dataset.propNombre;
-			config.propId = p.dataset.propId;	
-			cargaChat(idCandidatura, idPropuesta, nombreUsuario,idEmisor, idReceptor, nombrePropuesta,contenido);
-			document.getElementById("botonEnviar").addEventListener("keyup", function(event, idCandidatura, idReceptor, contenido, idPropuesta) {
+			setConfigs(p);
+			cargaChat(p.dataset.id, p.dataset.propId, p.dataset.otroNombre, p.dataset.propioId, p.dataset.otroId, p.dataset.propNombre,document.getElementById("contenidoChat"));
+		}
+	}
+	asignaListenerBarraEnvio();
+	ws.receive = json => {
+		if (pertenecePropuestaSeleccionada(json[0].nombrePropuesta,document.getElementsByClassName("nombre")[0].innerHTML)){
+			let contenido = document.getElementById("contenidoChat");
+			insertaEnDiv(json, contenido, config.propId);
+		}
+	}
+})
+
+function pertenecePropuestaSeleccionada(propuestaMensajes, propuestaSeleccionada){
+	return propuestaMensajes === propuestaSeleccionada;
+}
+
+function setConfigs(propuesta){
+			config.propId = propuesta.dataset.propId;	
+			config.receptorId = propuesta.dataset.otroId;
+			config.emisorId = propuesta.dataset.propioId;
+			config.candidaturaId = propuesta.dataset.id;
+}
+
+function asignaListenerBarraEnvio(){
+	document.getElementById("botonEnviar").addEventListener("keyup", function(event) {
 					if (event.keyCode === 13) {
 					    // Cancel the default action, if needed
 					    event.preventDefault();
 					    // Trigger the button element with a click
 				//Comprueba que el mensaje no esté vacío ni que solo contenga espacios en blanco
 				if (this.value.length !== 0 && this.value.trim())
-					    enviarMensajeChatNegociacion(this.value, p.dataset.id,p.dataset.otroId, document.getElementById("contenidoChat"), p.dataset.propId);
+					    enviarMensajeChatNegociacion(this.value, config.candidaturaId,config.receptorId, config.emisorId, document.getElementById("contenidoChat"), config.propId);
 						this.value = "";
 						
 					 }
 				});
-			}
-	}
+}
 
-	ws.receive = json => {
-		let contenido = document.getElementById("contenidoChat");
-		insertaEnDiv(json, contenido, config.propId);
-	}
-})
+
+function parseaFecha(fecha){
+	let array = fecha.split("T");
+	let dias = array[0].split("-");
+	let minutos = array[1].split(":");
+	return dias[2] + "/" + dias[1] + "/" + dias[0] + "  " + minutos[0] + ":" + minutos[1];
+}
 
 function insertaEnDiv(json, contenido, idPropuesta){
 	let html = []
 	
 	json.forEach(msg => {
 		let clase = msg.propio ? 'mensaje enviado' : 'mensaje recibido';
-		html.push("<p class='" + clase + " msg'> " + msg.sent + " - " + msg.text + "</p>");
+		html.push("<p class='" + clase + " msg'> " + parseaFecha(msg.sent) + " - " + msg.text + "</p>");
 	})
 	
 	contenido.innerHTML = html.join("\n");
@@ -68,8 +89,8 @@ function cargaChat(idCandidatura, idPropuesta, nombreUsuario,idEmisor, idRecepto
 		.then(json => insertaEnDiv(json, contenido, idPropuesta));
 }
 
-function enviarMensajeChatNegociacion(mensaje, idCandidatura,idReceptor, contenido, idPropuesta){
-	return go(config.rootUrl + "message/insertaMsg?idCandidatura=" + idCandidatura + "&msg=" + mensaje +"&idReceptor="+idReceptor, 'GET')
+function enviarMensajeChatNegociacion(mensaje, idCandidatura,idReceptor, idEmisor, contenido, idPropuesta){
+	return go(config.rootUrl + "message/insertaMsg?idCandidatura=" + idCandidatura + "&msg=" + mensaje +"&idEmisor="+idEmisor+"&idReceptor="+idReceptor, 'GET')
 		.then(json => insertaEnDiv(json, contenido, idPropuesta));
 		
 }

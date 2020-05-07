@@ -63,7 +63,7 @@ public class Evento {
 				t.setNombreUsuario(m.getCandidatura().getPropuesta().getEmpresa().getNombre());
 			}
 			else {
-				t.setNombrePropuesta(m.getCandidatura().getCandidato().getNombre());
+				t.setNombreUsuario(m.getCandidatura().getCandidato().getNombre());
 			}
 			all.add(t);
 		}
