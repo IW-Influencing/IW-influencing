@@ -19,7 +19,7 @@ INSERT INTO usuario(id,activo,nombre_cuenta,nombre,password,roles,apellidos,edad
 
 
 INSERT INTO usuario(id,activo,nombre_cuenta,nombre,password,roles,apellidos,edad,tags,score) VALUES (
-	2, 1, 'b','b',
+	2, 1, 'b','InfluencerB',
 	'{bcrypt}$2a$10$xLFtBIXGtYvAbRqM95JhcOaG23fHRpDoZIJrsF2cCff9xEHTTdK1u',
 	'INFLUENCER',
 	'Berta Muestrez',
@@ -29,7 +29,7 @@ INSERT INTO usuario(id,activo,nombre_cuenta,nombre,password,roles,apellidos,edad
 );
 
 INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad,tags,score) VALUES (
-	3, 1, 'ca', 'c', 
+	3, 1, 'InfluencerC', 'c', 
 	'{bcrypt}$2a$10$xLFtBIXGtYvAbRqM95JhcOaG23fHRpDoZIJrsF2cCff9xEHTTdK1u',
 	'INFLUENCER',
 	'Sanchez Garcia',
@@ -39,7 +39,7 @@ INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad
 );
 
 INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad,tags,score) VALUES (
-	4, 1, 'da', 'd',
+	4, 1, 'EmpresaD', 'd',
 	'{bcrypt}$2a$10$xLFtBIXGtYvAbRqM95JhcOaG23fHRpDoZIJrsF2cCff9xEHTTdK1u',
 	'EMPRESA',
 	'Martin Gimeno',
@@ -59,10 +59,10 @@ INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id,activa, edad_
 
 INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id,activa, edad_min_publico, edad_max_publico, fecha_inicio, fecha_fin, fecha_subida) VALUES (
 	2,
-	'Realizar publicidad en metro 2',
-	'Metropubli',
+	'Realizar publicidad en taxi',
+	'Taxipubli',
 	200,
-	'Ciudad,Metro,Transporte',
+	'Ciudad,Taxi,Transporte',
 	4,true,1,5,'2019-07-23','2019-07-23','2019-07-23'
 );
 INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id, activa, edad_min_publico, edad_max_publico, fecha_inicio, fecha_fin, fecha_subida) VALUES (

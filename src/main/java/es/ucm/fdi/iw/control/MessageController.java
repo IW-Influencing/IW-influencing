@@ -53,11 +53,10 @@ public class MessageController {
 	@Transactional // para no recibir resultados inconsistentes
 	@ResponseBody // para indicar que no devuelve vista, sino un objeto (jsonizado)
 	
-	public List<Evento.TransferChat> devuelveChat(HttpSession session, @RequestParam long idCandidatura) {
+	public List<Evento.TransferChat> devuelveChat(HttpSession session, @RequestParam long idCandidatura, @RequestParam long idUsuario) {
 		
-		long userId = ((Usuario)session.getAttribute("u")).getId();
 		List<Evento> mensajes = entityManager.createNamedQuery("Evento.getChat").setParameter("idCandidatura", idCandidatura).getResultList();
-		Usuario u = entityManager.find(Usuario.class, userId);
+		Usuario u = entityManager.find(Usuario.class, idUsuario);
 		return Evento.asTransferObjects(mensajes, u);	
 	}	
 	
@@ -79,18 +78,18 @@ public class MessageController {
 		e.setReceptor(entityManager.find(Usuario.class, idReceptor));
 		entityManager.persist(e);
 
-		List<Evento.TransferChat> chatActualizado = devuelveChat(session, idCandidatura);
-
+		List<Evento.TransferChat> chatPropio = devuelveChat(session, idCandidatura, ((Usuario)session.getAttribute("u")).getId());
+		List<Evento.TransferChat> chatOtro = devuelveChat(session, idCandidatura, idReceptor);
 		// y ahora, también lo enviamos por WS
 		messagingTemplate.convertAndSend(
 			"/user/a/queue/updates", 
-			chatActualizado);
+			chatOtro);
 		messagingTemplate.convertAndSend(
 			"/user/"+e.getReceptor().getNombreCuenta()+"/queue/updates", 
-			chatActualizado);
+			chatOtro);
 		log.info("Enviado mensaje via WS a {}", e.getReceptor().getNombreCuenta());
 		
-		return chatActualizado;
+		return chatPropio;
 	}	
 	
 
