@@ -115,11 +115,11 @@
       </div>
 
       <div id="edad" th:if="${modo} eq 'EDICION'">
-        <input type="number" name="edad" min="0" max="100" value="Años de media" th:value="${usuario.edad}">
+        <input type="number" name="edad" min="0" max="100" value="Años de media" th:value="${usuario.edad}" class="inputCentrado">
       </div>
 
       <div id="edad" th:if="${modo} eq 'CREACION'">
-        <input type="number" name="edad" min="0" max="100" placeholder="Años de media">
+        <input type="number" name="edad" min="0" max="100" placeholder="Años de media" class="inputCentrado">
       </div>
 
       <!-- Seguidores-->

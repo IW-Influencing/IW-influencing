@@ -1,12 +1,17 @@
 package es.ucm.fdi.iw.control;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -158,8 +163,7 @@ public class PropuestaController {
 	  @PostMapping("/enviaUltimatum")
 	    @Transactional
 		public String enviaUltimatum(RedirectAttributes redirectAttributes, Model model, @RequestParam String nombreCuenta, 
-				@RequestParam String nombre,
-	    		@RequestParam String pass1,@RequestParam String pass2, 
+				@RequestParam String nombre, @RequestParam String pass1,@RequestParam String pass2, 
 	    		@RequestParam MultipartFile imagenPerfil, @RequestParam String tipoCuenta, 
 	    		@RequestParam String nombreTwitter, @RequestParam String seguidoresTwitter,
 	    		@RequestParam String nombreFacebook, @RequestParam String seguidoresFacebook,
@@ -175,16 +179,50 @@ public class PropuestaController {
 	  //Tiene que registrar la propuesta en la BDD
 	  @PostMapping("/registraPropuesta")
 	    @Transactional
-		public String registraPropuesta(RedirectAttributes redirectAttributes, Model model, 
-				@RequestParam String nombre, @RequestParam String descripcion,
+		public void registraPropuesta(HttpSession session, HttpServletResponse response, RedirectAttributes redirectAttributes, Model model, 
+				@RequestParam String nombre, @RequestParam String descripcion, @RequestParam String sueldo,
 	    		@RequestParam String edades,@RequestParam String fechaInicio, @RequestParam String fechaFin, 
-	    		@RequestParam MultipartFile imagenPropuesta, @RequestParam String tags, @RequestParam long idPropuesta){
+	    		@RequestParam MultipartFile imagenPropuesta, @RequestParam String tags){
 
-	        return "redirect:login";
-	    }
+	      String mensaje = "";
+		  //Comprobar fecha inicio
+		  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		  LocalDateTime fechaIni = LocalDate.parse(fechaInicio).atTime(LocalTime.now());
+		  LocalDateTime fechaFinal = LocalDate.parse(fechaFin).atTime(LocalTime.now());
+
+		  if (fechaIni.isBefore(LocalDateTime.now())){
+			  mensaje = "Error. Las fechas deben ser como mínimo las actuales";
+		  }
+		  else {
+			  Propuesta p = new Propuesta();
+			  p.setActiva(true);
+			  p.setCandidaturas(new ArrayList<Candidatura>());
+			  p.setDescripcion(descripcion);
+			  p.setNombre(nombre);
+			  p.setEdadMinPublico(Integer.valueOf(edades.split("-")[0]));
+			  p.setEdadMaxPublico(Integer.valueOf(edades.split("-")[1]));
+			  p.setSueldo(Integer.valueOf(sueldo));
+			  p.setFechaSubida(LocalDateTime.now());
+			  p.setTags(tags);
+			  Usuario usuarioLoggeado = entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId());
+
+			  p.setEmpresa(usuarioLoggeado);
+			  entityManager.persist(p);
+			  entityManager.flush();
+			  insertaImagenPropuesta(imagenPropuesta, p.getId());
+			  mensaje = "Propuesta insertada correctamente";
+		  }
+		session.setAttribute("mensajeInfo", mensaje);
+		try {
+			response.sendRedirect("/inicio");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			log.info("Error al redireccionar");
+		}
+	   }
 	  
 	  @GetMapping(value="/{id}/photo")
-		public StreamingResponseBody getPhotoUsuario(@PathVariable long id, Model model) throws IOException {		
+		public StreamingResponseBody getPhotoPropuesta(@PathVariable long id, Model model) throws IOException {		
 			File f = localData.getFile("propuesta", ""+id);
 			InputStream in;
 			if (f.exists()) {
@@ -200,6 +238,22 @@ public class PropuestaController {
 				}
 			};
 		}
+	  
+	  
+  	private void insertaImagenPropuesta(MultipartFile imagenPropuesta, long idPropuesta) {	
+    	File f = localData.getFile("propuesta", String.valueOf(idPropuesta));
+  		if (!imagenPropuesta.isEmpty()) {
+  			//Subir imagen por defecto al perfil
+  			try (BufferedOutputStream stream =
+  					new BufferedOutputStream(new FileOutputStream(f))) {
+  				byte[] bytes = imagenPropuesta.getBytes();
+  				stream.write(bytes);
+  			} catch (Exception e) {
+  				log.warn("Error uploading " + String.valueOf(idPropuesta) + " ", e);
+  			}
+		}
+  	}
+
 
 
 }

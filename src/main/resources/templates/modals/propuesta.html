@@ -34,7 +34,7 @@
 
         <!-- Nombre -->
         <h2>Nombre de la propuesta</h2>
-        <input name="nombre" type=text required>
+        <input name="nombre" type=text required size=30>
 
         <!-- Descripcion-->
         <h2>Descripción</h2>
@@ -57,7 +57,7 @@
       <h2>Edad objetivo</h2>
       <p>Edades comprendidas entre
 
-        <select id="edades" name="edades" th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'CREACION'" required>
+        <select class="inputCentrado" id="edades" name="edades" th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'CREACION'" required>
     	<option value="" disabled selected>Elige la edad objetivo</option>
           <option value="5-10">5 - 10</option>
           <option value="10-15">10 - 15</option>
@@ -73,6 +73,19 @@
       años</p>
 
     </div>
+
+
+
+    <!-- Sueldo de la propuesta -->
+    <div class="sueldo-propuesta">
+      <h2>Sueldo mensual</h2>
+        <input th:if="${modo} eq 'ULTIMATUM' or ${modo} eq 'CREACION'" required type="number" name="sueldo" min="0" class="inputCentrado">
+		<span th:if="${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM' or ${modo} eq 'CONTRATACION'"
+          th:text="${propuesta.sueldo + '€'}"> </span>
+
+     </div>
+  
+
 
     <!-- Periodo -->
     <div class="periodo-propuesta">
@@ -107,7 +120,7 @@
 
     <!-- Botones interactivos -->
     <div class="divCentrado"> 
-      <button  th:if="${modo} eq 'CREACION'" class="w3-btn btnColor w3-margin">Publicar</button>
+      <button  th:if="${modo} eq 'CREACION'" class="w3-btn btnColor w3-margin" id="btnPublicarPropuesta">Publicar</button>
       <button  th:if="${modo} eq 'VISTA' and ${session.u.hasRole('INFLUENCER')}" class="w3-btn btnColor w3-margin">Apuntarse</button>
       <button  th:if="${modo} eq 'ULTIMATUM'" class="w3-btn btnColor w3-margin">Enviar</button>
       <div class="botones-propuesta" th:if="${modo} eq 'VISTA-ULTIMATUM'"> 

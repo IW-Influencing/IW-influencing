@@ -1,5 +1,4 @@
-Propuesta
-  - Creación
+Boton cerrar propuesta en modo vista del modal
 
 Busquedas por tag en perfil y propuesta al pinchar en tag de uno especifico o seleccionar en la barra
 

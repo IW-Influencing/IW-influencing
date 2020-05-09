@@ -67,6 +67,8 @@ public class RootController {
 	List<Candidatura> candidaturas = entityManager.createNamedQuery("Candidatura.getByUser").setParameter("idUsuario", idUsuario ).setMaxResults(LIMITE_PROPUESTAS_INICIO).getResultList();;
 	model.addAttribute("mensajes", eventos);
 	model.addAttribute("candidaturas", candidaturas);
+	model.addAttribute("mensaje",session.getAttribute("mensajeInfo"));
+	session.removeAttribute("mensajeInfo");
     return "inicio";
   }
   

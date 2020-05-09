@@ -27,11 +27,15 @@ function compruebaPerfiles(){
 function asignaFuncionBotonRegistro(){
 	let b = document.getElementById("botonRegistrarseUsuario");
 			b.onclick = c => {
-				validaPassword(document.getElementsByName("pass1")[0].value, document.getElementsByName("pass2")[0].value);
+				validaPassword(document.getElementsByName("pass1")[0], document.getElementsByName("pass2")[0]);
+				validaTexto(document.getElementsByName("nombre")[0]);
+				validaTexto(document.getElementsByName("nombreCuenta")[0]);
 				validaDatosPerfil("Twitter");
 				validaDatosPerfil("Facebook");
 				validaDatosPerfil("Instagram");
 				validaDatosPerfil("Youtube");
+				if (document.getElementsByName("tipoCuenta")[0].value == 'Influencer')
+					document.getElementsByName("edad")[0].required=true;
 			}
 	}
 
@@ -45,9 +49,13 @@ function validaDatosPerfil(perfil){
 	
 }
 
+function validaTexto(campo){
+	campo.setCustomValidity(campo.value === campo.value.trim()?"":"No se pueden introducir espacios al comienzo ni al final");
+}
+
 function validaPassword(pass1, pass2){
-	document.getElementsByName("pass")[0].setCustomValidity(pass1 === pass2 ?"" : "Las contraseñas no coinciden")
-	document.getElementsByName("pass")[1].setCustomValidity(pass1 === pass2 ?"" : "Las contraseñas no coinciden")
+	pass1.setCustomValidity(pass1.value === pass2.value ?"" : "Las contraseñas no coinciden")
+	pass2.setCustomValidity(pass1.value === pass2.value ?"" : "Las contraseñas no coinciden")
 }
 
 

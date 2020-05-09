@@ -82,8 +82,8 @@ public class PerfilController {
 	public void registraUsuario(HttpSession session, HttpServletResponse response, Model model, 
 			@RequestParam String nombreCuenta, @RequestParam String nombre,
     		@RequestParam String pass1,@RequestParam String pass2, 
-    		@RequestParam MultipartFile imagenPerfil, @RequestParam String tipoCuenta, 
-    		@RequestParam String nombreTwitter, @RequestParam String seguidoresTwitter,
+    		@RequestParam MultipartFile imagenPerfil, @RequestParam String tipoCuenta,
+    		@RequestParam String edad,	@RequestParam String nombreTwitter, @RequestParam String seguidoresTwitter,
     		@RequestParam String nombreFacebook, @RequestParam String seguidoresFacebook,
     		@RequestParam String nombreInstagram, @RequestParam String seguidoresInstagram,
     		@RequestParam String nombreYoutube, @RequestParam String seguidoresYoutube){
@@ -99,22 +99,33 @@ public class PerfilController {
         else {
         	if (pass1.equals(pass2)) {
         		if (tipoCuenta.equalsIgnoreCase(Usuario.Rol.INFLUENCER.toString())) {
-	        		if(validaPerfiles(nombreTwitter, seguidoresTwitter, nombreFacebook, seguidoresFacebook, 
-	        				nombreInstagram, seguidoresInstagram, nombreYoutube, seguidoresYoutube)) {
-	        			Usuario u = new Usuario();
-	    	        	u.setNombreCuenta(nombreCuenta);
-	    	        	u.setNombre(nombre);
-	    	        	u.setPassword(Usuario.encodePassword(pass1));
-	    	        	u.setRoles("Usuario,Influencer");
-	    	        	u.setActivo(Byte.MAX_VALUE);
-	    	        	entityManager.persist(u);
-	    	        	insertaPerfiles(nombreTwitter, seguidoresTwitter, nombreFacebook, seguidoresFacebook, 
-	        				nombreInstagram, seguidoresInstagram, nombreYoutube, seguidoresYoutube, u);
-	    	        	mensaje="Usuario registrado correctamente";
+        			if (edad.length()>0) {
+		        		if(validaPerfiles(nombreTwitter, seguidoresTwitter, nombreFacebook, seguidoresFacebook, 
+		        				nombreInstagram, seguidoresInstagram, nombreYoutube, seguidoresYoutube)) {
+		        			Usuario u = new Usuario();
+		    	        	u.setNombreCuenta(nombreCuenta);
+		    	        	u.setNombre(nombre);
+		    	        	u.setEdad(Integer.valueOf(edad));
+		    	        	u.setPassword(Usuario.encodePassword(pass1));
+		    	        	u.setRoles("Usuario,Influencer");
+		    	        	u.setActivo(Byte.MAX_VALUE);
+		    	        	entityManager.persist(u);
+		    	        	insertaPerfiles(nombreTwitter, seguidoresTwitter, nombreFacebook, seguidoresFacebook, 
+			        				nombreInstagram, seguidoresInstagram, nombreYoutube, seguidoresYoutube, u);
+		    	        	entityManager.flush();
+		    	        	insertaImagenUsuario(imagenPerfil, u.getId());
+
+		    	        	
+		    	        	mensaje="Usuario registrado correctamente";
+		        		}
+		        		else {
+		        			//Mostrar mensaje de error al usuario
+		                	mensaje = "Error. Perfiles de RRSS no válidos";
+		        		}
 	        		}
-	        		else
-	        			//Mostrar mensaje de error al usuario
-	                	mensaje = "Error. Perfiles de RRSS no válidos";
+        			else {
+        				mensaje="Error. Debe introducir una edad media de sus seguidores";
+        			}
         		}
         		else {
         			Usuario u = new Usuario();
@@ -129,18 +140,7 @@ public class PerfilController {
     	        	u.setPassword(Usuario.encodePassword(pass1));
     	        	entityManager.persist(u);
     	        	entityManager.flush();
-    	      		File f = localData.getFile("usuario", String.valueOf(u.getId()));
-    	      		if (!imagenPerfil.isEmpty()) {
-    	      			//Subir imagen por defecto al perfil
-    	      			
-    	  			try (BufferedOutputStream stream =
-    	  					new BufferedOutputStream(new FileOutputStream(f))) {
-    	  				byte[] bytes = imagenPerfil.getBytes();
-    	  				stream.write(bytes);
-    	  			} catch (Exception e) {
-    	  				log.warn("Error uploading " + String.valueOf(u.getId()) + " ", e);
-    	  			}
-    	    		}
+    	        	insertaImagenUsuario(imagenPerfil, u.getId());
     	        	mensaje="Usuario registrado correctamente";
         		}
        
@@ -161,7 +161,24 @@ public class PerfilController {
 
     }
     
-    @Transactional
+    private void insertaImagenUsuario(MultipartFile imagenPerfil, long idUsuario) {
+		// TODO Auto-generated method stub
+    	
+    	File f = localData.getFile("usuario", String.valueOf(idUsuario));
+  		if (!imagenPerfil.isEmpty()) {
+  			//Subir imagen por defecto al perfil
+  			try (BufferedOutputStream stream =
+  					new BufferedOutputStream(new FileOutputStream(f))) {
+  				byte[] bytes = imagenPerfil.getBytes();
+  				stream.write(bytes);
+  			} catch (Exception e) {
+  				log.warn("Error uploading " + String.valueOf(idUsuario) + " ", e);
+  			}
+		}
+		
+	}
+
+	@Transactional
 	private void insertaPerfiles(String nombreTwitter, String seguidoresTwitter, String nombreFacebook,
 			String seguidoresFacebook, String nombreInstagram, String seguidoresInstagram, String nombreYoutube,
 			String seguidoresYoutube, Usuario u) {

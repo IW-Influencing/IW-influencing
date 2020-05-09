@@ -37,7 +37,7 @@ public class Propuesta {
 	private String nombre;
 	private String tags;
 	private String descripcion;
-	private BigDecimal sueldo;
+	private int sueldo;
 	private LocalDateTime fechaInicio;
 	private LocalDateTime fechaFin;
 	private LocalDateTime fechaSubida;
@@ -116,11 +116,11 @@ public class Propuesta {
 		this.descripcion = descripcion;
 	}
 
-	public BigDecimal getSueldo() {
+	public int getSueldo() {
 		return sueldo;
 	}
 
-	public void setSueldo(BigDecimal sueldo) {
+	public void setSueldo(int sueldo) {
 		this.sueldo = sueldo;
 	}
 

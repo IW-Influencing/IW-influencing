@@ -24,6 +24,11 @@ a:hover{
 }
 
 
+.inputCentrado{
+	text-align: center;
+}
+
+
 #cuadroBusquedaTagBar {
 	margin: auto;
     padding: 6px;
