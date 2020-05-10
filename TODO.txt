@@ -1,7 +1,5 @@
 Boton cerrar propuesta en modo vista del modal
 
-Busqueda por tag ALL
-
 Registro
  * Tags del perfil
  * Apellidos
