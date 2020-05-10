@@ -63,8 +63,12 @@ public class BusquedaPerfilController {
 		}
 
 		@GetMapping("/tags")
-		public String postSearchByTag(Model model, HttpSession session, @RequestParam(required = true, defaultValue = "1") int indicePagina, @RequestParam String tag ) {
-			String tagsLike = "%"+tag+"%";
+		public String postSearchByTag(Model model, HttpSession session, @RequestParam(required = true, defaultValue = "1") int indicePagina, @RequestParam String tag) {
+			String tagsLike;
+			if (tag.equals(" ALL"))
+				tagsLike = "%%";
+			else
+				tagsLike = "%"+tag+"%";
 			List<Usuario> usuarios = null;
 			if (tag.isEmpty()) { 
 				usuarios = entityManager.createQuery("select u from Usuario u", Usuario.class).getResultList();

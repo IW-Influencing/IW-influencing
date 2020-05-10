@@ -92,7 +92,6 @@ function botonListaBusqueda(patron="", indice){
 }
 
 function botonListaTags(tag="", indice){
-	console.log("botonLista", patron, indice);
 	return go2(config.rootUrl + "busquedaPropuesta/tags?tag=" + tag+"&indicePagina="+indice, 'GET')
 		.then(html => { 
 			var  div = document.getElementById("divPropuestas");

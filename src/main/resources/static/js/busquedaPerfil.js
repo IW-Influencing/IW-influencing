@@ -12,8 +12,7 @@ function prepareListeners(tipo) {
 	}); 
 	if (tipo == "tag"){
 		for (let boton of document.getElementsByClassName("botonPaginacion")) {
-			boton.onclick = p => botonListaTags(boton.dataset.propPatron,boton.dataset.propIndice);
-			
+			boton.onclick = p => botonListaTags(boton.dataset.propPatron,boton.dataset.propIndice);			
 		}
 	}
 	else{
@@ -43,7 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 function cargaBusquedas(patron){
-	console.log("cargaBusquedas", patron);
 	return go2(config.rootUrl + "busquedaPerfil/busca?patron=" + patron, 'GET')
 		.then(html => { 
 			var  div = document.getElementById("divPerfiles");
@@ -68,14 +66,12 @@ function cargaBusquedasPorTag(tag){
 
 function cargaModalPerfil(idPerfil){
 	document.getElementById('modal').style.display='block';
-	
 	return go2(config.rootUrl + "perfil?idUsuario=" + idPerfil, 'GET')
 		.then(html => document.getElementById("contenidoModal").innerHTML=html);
 }
 
 
 function botonLista(patron="", indice){
-	console.log("botonLista", patron, indice);
 	return go2(config.rootUrl + "busquedaPerfil/busca?patron=" + patron+"&indicePagina="+indice, 'GET')
 		.then(html => { 
 			var  div = document.getElementById("divPerfiles");
@@ -86,7 +82,6 @@ function botonLista(patron="", indice){
 }
 
 function botonListaTags(tag="", indice){
-	console.log("botonLista", patron, indice);
 	return go2(config.rootUrl + "busquedaPerfil/tags?tag=" + tag+"&indicePagina="+indice, 'GET')
 		.then(html => { 
 			var  div = document.getElementById("divPerfiles");

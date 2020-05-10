@@ -66,7 +66,11 @@ public class BusquedaPropuestaController {
     
     @GetMapping("/tags")
 	public String postSearchByTag(Model model, HttpSession session, @RequestParam(required = true, defaultValue = "1") int indicePagina, @RequestParam String tag ) {
-		String tagsLike = "%"+tag+"%";
+		String tagsLike;
+		if (tag.equals(" ALL"))
+			tagsLike = "%%";
+		else
+			tagsLike = "%"+tag+"%";
 		List<Propuesta> propuestas = null;
 		if (tag.isEmpty()) { 
 			propuestas = entityManager.createQuery("select p from Propuesta p", Propuesta.class).getResultList();
