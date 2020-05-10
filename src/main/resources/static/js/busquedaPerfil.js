@@ -1,4 +1,4 @@
-function prepareListeners() {
+function prepareListeners(tipo) {
 	let inputBusqueda =  document.getElementById("cuadroBusquedaTagBar")
 
 	inputBusqueda.addEventListener("keyup", function(event) {
@@ -10,9 +10,16 @@ function prepareListeners() {
 		    	cargaBusquedas(inputBusqueda.value);
 		 }
 	}); 
-	
+	if (tipo == "tag"){
+		for (let boton of document.getElementsByClassName("botonPaginacion")) {
+			boton.onclick = p => botonListaTags(boton.dataset.propPatron,boton.dataset.propIndice);
+			
+		}
+	}
+	else{
 	for (let boton of document.getElementsByClassName("botonPaginacion")) {
 			boton.onclick = p => botonLista(boton.dataset.propPatron,boton.dataset.propIndice);
+	}
 	}
 	
 	for (let p of document.getElementsByClassName("imagen")) {
@@ -51,10 +58,10 @@ function cargaBusquedas(patron){
 function cargaBusquedasPorTag(tag){
 	return go2(config.rootUrl + "busquedaPerfil/tags?tag=" + tag, 'GET')
 	.then(html => { 
-var  div = document.getElementById("divPerfiles");
-div.innerHTML = html;
-prepareListeners();
-})
+	var  div = document.getElementById("divPerfiles");
+		div.innerHTML = html;
+		prepareListeners("tag");
+	})
 		.catch(e => console.log(e))
 
 }
@@ -74,6 +81,17 @@ function botonLista(patron="", indice){
 			var  div = document.getElementById("divPerfiles");
 			div.innerHTML = html;
 			prepareListeners();
+		})
+		.catch(e => console.log(e))
+}
+
+function botonListaTags(tag="", indice){
+	console.log("botonLista", patron, indice);
+	return go2(config.rootUrl + "busquedaPerfil/tags?tag=" + tag+"&indicePagina="+indice, 'GET')
+		.then(html => { 
+			var  div = document.getElementById("divPerfiles");
+			div.innerHTML = html;
+			prepareListeners("tag");
 		})
 		.catch(e => console.log(e))
 }

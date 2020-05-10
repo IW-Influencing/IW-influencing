@@ -56,7 +56,6 @@ public class BusquedaPerfilController {
 			else 
 				usuarios=usuarios.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, usuarios.size());
 
-					
 			model.addAttribute("resultadoBusqueda", usuarios);
 			model.addAttribute("patron", patron);
 
@@ -82,7 +81,6 @@ public class BusquedaPerfilController {
 					
 			model.addAttribute("resultadoBusqueda", usuarios);
 			model.addAttribute("patron", tag);
-
 			return "fragments/resultadoBusquedaPerfiles";
 		}
 	  

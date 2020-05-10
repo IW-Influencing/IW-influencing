@@ -1,3 +1,9 @@
+
+<div th:if="${#lists.isEmpty(resultadoBusqueda)}" class="divCentrado">
+	<h3>No hay resultados</h3>
+</div>
+<div th:unless="${#lists.isEmpty(resultadoBusqueda)}">
+
 <div class="w3-row-padding">
 
 	<div th:each="u: ${resultadoBusqueda}" class="w3-third w3-container w3-margin-bottom box">
@@ -30,6 +36,6 @@
 	</div>
 </div>
 
-
 <!-- Paginacion -->
 <div th:replace="fragments/navigation.html :: pagination"></div>
+</div>

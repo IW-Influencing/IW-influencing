@@ -49,7 +49,7 @@ public class BusquedaPropuestaController {
 			propuestas = entityManager.createQuery("select p from Propuesta p", Propuesta.class).getResultList();
 		} else {
 			propuestas = entityManager.createNamedQuery("Propuesta.searchByNombre", Propuesta.class)
-					.setParameter("nombre", patron).getResultList();		
+					.setParameter("nombre", patronParaLike).getResultList();		
 		}
 		
 		model.addAttribute("numeroPaginas", Math.ceil((double)propuestas.size()/NUM_ELEMENTOS_PAGINA));
@@ -59,13 +59,32 @@ public class BusquedaPropuestaController {
 			propuestas=propuestas.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, propuestas.size());
 
 		
-		
 		model.addAttribute("patron", patron);
 		model.addAttribute("resultadoBusqueda", propuestas);
 		return "fragments/resultadoBusquedaPropuestas";
 	}
     
-    
+    @GetMapping("/tags")
+	public String postSearchByTag(Model model, HttpSession session, @RequestParam(required = true, defaultValue = "1") int indicePagina, @RequestParam String tag ) {
+		String tagsLike = "%"+tag+"%";
+		List<Propuesta> propuestas = null;
+		if (tag.isEmpty()) { 
+			propuestas = entityManager.createQuery("select p from Propuesta p", Propuesta.class).getResultList();
+		} else {
+			propuestas = entityManager.createNamedQuery("Propuesta.searchByTag", Propuesta.class)
+					.setParameter("tag", tagsLike).getResultList();			
+		}
+		model.addAttribute("numeroPaginas", Math.ceil((double)propuestas.size()/NUM_ELEMENTOS_PAGINA));
+		if (indicePagina*NUM_ELEMENTOS_PAGINA <= propuestas.size())
+			propuestas=propuestas.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, indicePagina*NUM_ELEMENTOS_PAGINA);
+		else 
+			propuestas=propuestas.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, propuestas.size());
+
+				
+		model.addAttribute("resultadoBusqueda", propuestas);
+		model.addAttribute("patron", tag);
+		return "fragments/resultadoBusquedaPropuestas";
+	}
   
     @GetMapping("/propuesta")
     public String propuesta(Model model, HttpSession session, @RequestParam long idPropuesta) {
