@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+function prepareListeners(tipo) {
 	let inputBusqueda =  document.getElementById("cuadroBusquedaTagBar")
 	inputBusqueda.addEventListener("keyup", function(event) {
 		if (event.keyCode === 13) {
@@ -9,7 +9,16 @@ document.addEventListener("DOMContentLoaded", () => {
 			    cargaBusquedas(inputBusqueda.value);
 		 }
 	});
-	
+	if (tipo == "tipo"){
+		for (let boton of document.getElementsByClassName("botonPaginacion")) {
+			boton.onclick = p => botonListaEstados(boton.dataset.propPatron,boton.dataset.propIndice);			
+		}
+	}
+	else{
+		for (let boton of document.getElementsByClassName("botonPaginacion")) {
+				boton.onclick = p => botonLista(boton.dataset.propPatron,boton.dataset.propIndice);
+		}
+	}
 	for (let p of document.getElementsByClassName("btnValorar")) {
 		p.onclick = c => cargaModalValorar(p.dataset.id)
 	}
@@ -17,6 +26,16 @@ document.addEventListener("DOMContentLoaded", () => {
 	for (let p of document.getElementsByClassName("btnDetalles")) {
 			p.onclick = c => cargaModalPropuesta(p.dataset.id)
 	}
+	for (let p of document.getElementsByClassName("tagFilter")) {
+		p.onclick = c => cargaBusquedasPorEstado(p.dataset.id)
+	}
+	
+	
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+	prepareListeners();
 		
 })
 
@@ -40,4 +59,35 @@ function cargaBusquedas(patron){
 })
 		.catch(e => console.log(e))
 
+}
+
+function cargaBusquedasPorEstado(estado){
+	return go2(config.rootUrl + "contrataciones/estado?estado=" + estado, 'GET')
+	.then(html => { 
+	var  div = document.getElementById("divContrataciones");
+		div.innerHTML = html;
+		prepareListeners("tag");
+	})
+		.catch(e => console.log(e))
+
+}
+
+function botonLista(patron="", indice){
+	return go2(config.rootUrl + "contrataciones/busca?patron=" + patron+"&indicePagina="+indice, 'GET')
+		.then(html => { 
+			var  div = document.getElementById("divContrataciones");
+			div.innerHTML = html;
+			prepareListeners();
+		})
+		.catch(e => console.log(e))
+}
+
+function botonListaEstados(estado="", indice){
+	return go2(config.rootUrl + "contrataciones/estado?estado=" + estado+"&indicePagina="+indice, 'GET')
+		.then(html => { 
+			var  div = document.getElementById("divContrataciones");
+			div.innerHTML = html;
+			prepareListeners("tag");
+		})
+		.catch(e => console.log(e))
 }

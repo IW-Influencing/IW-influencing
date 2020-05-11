@@ -13,12 +13,13 @@
 	<!-- Header -->
 	<header>
 		<div th:replace="fragments/navigation.html :: navBar(nombrePagina='CONTRATACIONES')"></div>
+		<div th:replace="fragments/navigation.html :: tagBar(nombrePagina='CONTRATACIONES')"></div>
+
+		
 	</header>
 
 	<!-- Busqueda -->
-	<div id="divBusquedaContrataciones">
-		<input type="text" class="w3-input w3-animate-input" placeholder="Buscar..." id="cuadroBusquedaTagBar">
-	</div>
+		
 
 	<!-- Contrataciones -->
 	<div id ="divContrataciones">

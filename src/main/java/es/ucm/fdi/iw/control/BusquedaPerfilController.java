@@ -25,18 +25,19 @@ public class BusquedaPerfilController {
 	private static final Logger log = LogManager.getLogger(BusquedaPerfilController.class);
 	@Autowired 
 	private EntityManager entityManager;
-	private final int NUM_ELEMENTOS_PAGINA=2;
+	private final int NUM_ELEMENTOS_PAGINA=4;
 	
 	  
 	  //Metodos nuevos
 	  @GetMapping("")
 	  public String busquedaPerfil(HttpSession session,Model model) {
 		  
-	    List<Usuario> users = entityManager.createNamedQuery("Usuario.getAllUsers", Usuario.class).getResultList();
-		 model.addAttribute("numeroPaginas", Math.ceil((double)users.size()/NUM_ELEMENTOS_PAGINA));
-	     users=users.subList(0,NUM_ELEMENTOS_PAGINA);
-		 model.addAttribute("usuarios", users);
-		  return "busquedaPerfil";
+	    List<Usuario> usuarios = entityManager.createNamedQuery("Usuario.getAllUsers", Usuario.class).getResultList();
+		model.addAttribute("numeroPaginas", Math.ceil((double)usuarios.size()/NUM_ELEMENTOS_PAGINA));
+		if (NUM_ELEMENTOS_PAGINA <= usuarios.size())
+			usuarios=usuarios.subList(0,NUM_ELEMENTOS_PAGINA);
+		model.addAttribute("usuarios", usuarios);
+		return "busquedaPerfil";
 	  }
 	  
 	  @GetMapping("/busca")

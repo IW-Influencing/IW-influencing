@@ -29,6 +29,7 @@ public class ContratacionesController {
 	private static final Logger log = LogManager.getLogger(ContratacionesController.class);
 	@Autowired 
 	private EntityManager entityManager;
+	private final int NUM_ELEMENTOS_PAGINA = 3;
 	
 	
 	
@@ -36,35 +37,69 @@ public class ContratacionesController {
 	@GetMapping("")
 	public String getContrataciones(Model model, HttpSession session) {
 		Usuario u = (Usuario)session.getAttribute("u");
-		List<Candidatura> candidaturasEnVigor;
-		List<Candidatura> candidaturasPendientes;
-		
-		if(u.getRoles().contains("ADMIN")){
-			candidaturasEnVigor = entityManager.createNamedQuery("Candidatura.getAllActive", Candidatura.class).getResultList();
-	    	candidaturasPendientes = entityManager.createNamedQuery("Candidatura.getPendingCandidatures", Candidatura.class).getResultList();
-		}
-		else{
-			candidaturasEnVigor = entityManager.createNamedQuery("Candidatura.getAllActiveById", Candidatura.class)
+		List<Candidatura> candidaturas;
+		candidaturas = entityManager.createNamedQuery("Candidatura.getByUser", Candidatura.class)					
 				.setParameter("idUsuario",((Usuario)session.getAttribute("u")).getId()).getResultList();
-	    	candidaturasPendientes = entityManager.createNamedQuery("Candidatura.getPendingCandidaturesById", Candidatura.class)
-	    		.setParameter("idUsuario",((Usuario)session.getAttribute("u")).getId()).getResultList();
-
-		}
-
-	    model.addAttribute("candidaturasEnVigor", candidaturasEnVigor);
-	    model.addAttribute("candidaturasPendientes", candidaturasPendientes);
+		model.addAttribute("numeroPaginas", Math.ceil((double)candidaturas.size()/NUM_ELEMENTOS_PAGINA));
+		if (NUM_ELEMENTOS_PAGINA <= candidaturas.size())
+			candidaturas=candidaturas.subList(0,NUM_ELEMENTOS_PAGINA);
+		model.addAttribute("modo", "Contrataciones");
+	    model.addAttribute("resultadoBusqueda", candidaturas);
 		return "contrataciones";
 	}
 	
-	@GetMapping("/busca")
-	public String postSearch(Model model, HttpSession session, @RequestParam String patron) {
-		patron = "%"+patron+"%";
-		List<Candidatura> candidaturas = entityManager.createNamedQuery("Candidatura.searchByName", Candidatura.class)
-				.setParameter("patron", patron).setParameter("idUsuario",((Usuario)session.getAttribute("u")).getId())
-				.getResultList();
-		model.addAttribute("resultadoBusqueda", candidaturas);
-		return "fragments/resultadoBusquedaContrataciones";
-	}
+	
+	   @GetMapping("/busca")
+		public String postSearch(Model model, HttpSession session,@RequestParam(required = true, defaultValue = "1") int indicePagina, @RequestParam String patron) {
+		    String patronParaLike = "%"+patron+"%";
+			List<Candidatura> candidaturas = null;
+			if (patron.isEmpty()) { 
+				candidaturas = entityManager.createNamedQuery("Candidatura.getByUser", Candidatura.class)					
+						.setParameter("idUsuario",((Usuario)session.getAttribute("u")).getId()).getResultList();
+			} else {
+				candidaturas = entityManager.createNamedQuery("Candidatura.searchByName", Candidatura.class)
+						.setParameter("patron", patron).setParameter("idUsuario",((Usuario)session.getAttribute("u")).getId())
+						.getResultList();		
+			}
+			
+			model.addAttribute("numeroPaginas", Math.ceil((double)candidaturas.size()/NUM_ELEMENTOS_PAGINA));
+			if (indicePagina*NUM_ELEMENTOS_PAGINA <= candidaturas.size())
+				candidaturas=candidaturas.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, indicePagina*NUM_ELEMENTOS_PAGINA);
+			else 
+				candidaturas=candidaturas.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, candidaturas.size());
+
+			model.addAttribute("modo", "Resultados de la búsqueda");
+			model.addAttribute("patron", patron);
+			model.addAttribute("resultadoBusqueda", candidaturas);
+			return "fragments/resultadoBusquedaContrataciones";
+		}
+	    
+	    @GetMapping("/estado")
+		public String postSearchByTag(Model model, HttpSession session, @RequestParam(required = true, defaultValue = "1") int indicePagina, @RequestParam String estado ) {
+			String estadoLike;
+			if (estado.equals(" ALL"))
+				estadoLike = "%%";
+			else
+				estadoLike = "%"+estado+"%";
+			List<Candidatura> candidaturas = null;
+			if (estado.isEmpty()) { 
+				candidaturas = entityManager.createQuery("select c from Candidatura c", Candidatura.class).getResultList();
+			} else {
+				candidaturas = entityManager.createNamedQuery("Candidatura.searchByEstado", Candidatura.class)
+						.setParameter("estado", estadoLike).setParameter("idUsuario",((Usuario)session.getAttribute("u")).getId()).getResultList();			
+			}
+			model.addAttribute("numeroPaginas", Math.ceil((double)candidaturas.size()/NUM_ELEMENTOS_PAGINA));
+			if (indicePagina*NUM_ELEMENTOS_PAGINA <= candidaturas.size())
+				candidaturas=candidaturas.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, indicePagina*NUM_ELEMENTOS_PAGINA);
+			else 
+				candidaturas=candidaturas.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, candidaturas.size());
+
+			model.addAttribute("modo", "Contrataciones "+ estado);
+
+			model.addAttribute("resultadoBusqueda", candidaturas);
+			model.addAttribute("patron", estado);
+			return "fragments/resultadoBusquedaContrataciones";
+		}
 	
 	@GetMapping("/valorar")
 	  public String valorarContratacion(Model model, HttpSession session, @RequestParam long idContratacion) {

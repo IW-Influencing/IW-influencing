@@ -26,7 +26,7 @@ public class BusquedaPropuestaController {
     
     @Autowired 
     private EntityManager entityManager;
-	private final int NUM_ELEMENTOS_PAGINA=2;
+	private final int NUM_ELEMENTOS_PAGINA=4;
 
     
     @GetMapping("")
@@ -35,7 +35,9 @@ public class BusquedaPropuestaController {
 		model.addAttribute("mensaje",session.getAttribute("mensajeInfo"));
 	    session.removeAttribute("mensajeInfo");
 		model.addAttribute("numeroPaginas", Math.ceil((double)propuestas.size()/NUM_ELEMENTOS_PAGINA));
-		propuestas=propuestas.subList(0,NUM_ELEMENTOS_PAGINA);
+		if (NUM_ELEMENTOS_PAGINA <= propuestas.size())
+			propuestas=propuestas.subList(0,NUM_ELEMENTOS_PAGINA);
+		
 	    model.addAttribute("propuestas", propuestas);
         return "busquedaPropuesta";
     }

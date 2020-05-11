@@ -119,9 +119,3 @@ w3-padding-32 {
 	width: 100%;
 	margin-bottom:1%
 }
-
-#divBusquedaContrataciones{
-	display:flex;
-	justify-content: center;
-	align-items:center;
-}

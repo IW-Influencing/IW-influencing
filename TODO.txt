@@ -1,12 +1,24 @@
-Boton cerrar propuesta en modo vista del modal
+Contrataciones
+  - Busqueda por nombre
+  - Arreglar paginacion de las busquedas
+  - Arreglar titulo de tipo de resultados
+
+Valoracion
+  - Ponerle thymeleaf
+  - Añadir boton enviar valoracion
+  - Arreglar que no reviente el CSS
+  - Registrar valoracion en BD
+  - Cambiar estado de contratacion a finalizada
+
+
+-----------------------------------------------------------------------------
+
+Tags guardados en mayusculas
 
 Registro
  * Tags del perfil
  * Apellidos
  * Validacion tags y apellidos
-
------------------------------------------------------------------------------
-
 
   
 Perfil
@@ -16,12 +28,8 @@ Perfil
 Negociacion
   - WebSocket para notificar cuantos chat hay sin leer
 
-Valoracion
-  - Ponerle thymeleaf
-  - Añadir boton enviar valoracion
-  - CSS
-
-propuestas
+Propuesta
+  - Funcionalidad apuntarse a una propuesta
 
 
 Mostrar ultimatum chat

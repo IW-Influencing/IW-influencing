@@ -73,22 +73,35 @@
 
 
     <!-- TAGBAR -->
-    <div th:fragment="tagBar" class="w3-display-container">
+    <div th:fragment="tagBar(nombrePagina)" class="w3-display-container">
         <div class="w3-section w3-bottombar wFilter3-padding-16 tagsList">
-            <span class="w3-margin-right">Trending topics:</span>
-            <button class="w3-button w3-blue tagFilter tagFilterSelected" th:attr="data-id=' ALL '">ALL</button>
-            <button class="w3-button w3-white tagFilter" th:attr="data-id='Moda'"><i class="fa fa-tshirt w3-margin-right"></i>Moda</button>
-            <button class="w3-button w3-white w3-hide-small tagFilter" th:attr="data-id='Videojuegos'"><i
-                    class="fa fa-gamepad w3-margin-right"></i>Videojuegos</button>
-            <button class="w3-button w3-white w3-hide-small tagFilter" th:attr="data-id='Viajes'"><i
-                    class="fa fa-globe w3-margin-right"></i>Viajes</button>
-            <button class="w3-button w3-white w3-hide-small tagFilter" th:attr="data-id='Naturaleza'"><i
-                    class="fa fa-leaf w3-margin-right"></i>Naturaleza</button>
-            <button class="w3-button w3-white w3-hide-small tagFilter" th:attr="data-id='Música'"><i
-                    class="fa fa-music w3-margin-right"></i>Música</button>
+			<div th:unless="${nombrePagina} eq 'CONTRATACIONES'"class="divFlex divCentrado">
+			            <span class="w3-margin-right"><b>Tags:</b></span>
+
+	            <button class="w3-button w3-blue tagFilter tagFilterSelected" th:attr="data-id=' ALL '">ALL</button>
+	            <button class="w3-button w3-white tagFilter" th:attr="data-id='Moda'"><i class="fa fa-tshirt w3-margin-right"></i>Moda</button>
+	            <button class="w3-button w3-white w3-hide-small tagFilter" th:attr="data-id='Videojuegos'"><i
+	                    class="fa fa-gamepad w3-margin-right"></i>Videojuegos</button>
+	            <button class="w3-button w3-white w3-hide-small tagFilter" th:attr="data-id='Viajes'"><i
+	                    class="fa fa-globe w3-margin-right"></i>Viajes</button>
+	            <button class="w3-button w3-white w3-hide-small tagFilter" th:attr="data-id='Naturaleza'"><i
+	                    class="fa fa-leaf w3-margin-right"></i>Naturaleza</button>
+	            <button class="w3-button w3-white w3-hide-small tagFilter" th:attr="data-id='Música'"><i
+	                    class="fa fa-music w3-margin-right"></i>Música</button>
+			</div>
+			<div th:if="${nombrePagina} eq 'CONTRATACIONES'"class="divFlex divCentrado">
+			            <span class="w3-margin-right"><b>Estado:</b></span>
+
+				<button class="w3-button w3-blue tagFilter tagFilterSelected" th:attr="data-id=' ALL '">Todas</button>
+	            <button class="w3-button w3-white tagFilter" th:attr="data-id='EN_CURSO'">En vigor</button>
+	            <button class="w3-button w3-white tagFilter" th:attr="data-id='EN_VALORACION'"><i class="fa fa-tshirt w3-margin-right"></i>Pendientes de valorar</button>
+	            <button class="w3-button w3-white w3-hide-small tagFilter" th:attr="data-id='FINALIZADA'"><i
+	                    class="fa fa-gamepad w3-margin-right"></i>Valoradas</button>
+	            
+			</div>
             <input type="text" placeholder="Buscar..." id="cuadroBusquedaTagBar">
         </div>
-    </div>
+    </div>	
 
     <!-- FOOTER -->
     <footer th:fragment="footer" class="w3-container w3-padding-32 w3-dark-grey footer">

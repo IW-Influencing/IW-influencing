@@ -135,6 +135,8 @@
   <!-- Boton de cerrar -->
   <div class="divCentrado"> 
     <button th:if="${modo} eq 'CONTRATACION'" class="w3-btn btnColor w3-margin" onclick="document.getElementById('modal').style.display='none'">Cerrar contratación</button>
+    <button th:if="${modo} eq 'VISTA' and ${session.u.hasRole('EMPRESA')}" class="w3-btn btnColor w3-margin" onclick="document.getElementById('modal').style.display='none'">Cerrar propuesta</button>
+
   </div>
 
 </body>
