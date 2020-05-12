@@ -3,6 +3,11 @@ package es.ucm.fdi.iw.model;
 import javax.persistence.*;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="Valoraciones.getByUser",
+	query="SELECT v.candidatura.id FROM Valoracion v "
+			+ "WHERE v.emisor.id = :idUsuario")
+})
 public class Valoracion {
 
 	private long id;

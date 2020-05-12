@@ -6,8 +6,7 @@ function prepareListeners(tipo) {
 		    // Cancel the default action, if needed
 		    event.preventDefault();
 		    // Trigger the button element with a click
-			if (inputBusqueda.value != "")
-		    	cargaBusquedas(inputBusqueda.value);
+		    cargaBusquedas(inputBusqueda.value);
 		 }
 	}); 
 	if (tipo == "tag"){

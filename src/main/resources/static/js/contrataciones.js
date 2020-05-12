@@ -5,8 +5,7 @@ function prepareListeners(tipo) {
 		    // Cancel the default action, if needed
 		    event.preventDefault();
 		    // Trigger the button element with a click
-			if (inputBusqueda.value != "")
-			    cargaBusquedas(inputBusqueda.value);
+			cargaBusquedas(inputBusqueda.value);
 		 }
 	});
 	if (tipo == "tipo"){
@@ -20,7 +19,7 @@ function prepareListeners(tipo) {
 		}
 	}
 	for (let p of document.getElementsByClassName("btnValorar")) {
-		p.onclick = c => cargaModalValorar(p.dataset.id)
+		p.onclick = c => cargaModalValorar(p.dataset.id, p.dataset.idPropuesta);
 	}
 	
 	for (let p of document.getElementsByClassName("btnDetalles")) {
@@ -40,9 +39,9 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 
-function cargaModalValorar(idContratacion){
+function cargaModalValorar(idCandidatura, idPropuesta){
 	document.getElementById('modal').style.display='block';
-	return go2(config.rootUrl + "contrataciones/valorar?idContratacion=" + idContratacion, 'GET')
+	return go2(config.rootUrl + "contrataciones/valorar?idCandidatura="+idCandidatura+"&idPropuesta=" + idPropuesta, 'GET')
 		.then(html => document.getElementById("contenidoModal").innerHTML=html);
 }
 
@@ -66,7 +65,7 @@ function cargaBusquedasPorEstado(estado){
 	.then(html => { 
 	var  div = document.getElementById("divContrataciones");
 		div.innerHTML = html;
-		prepareListeners("tag");
+		prepareListeners("tipo");
 	})
 		.catch(e => console.log(e))
 
@@ -87,7 +86,7 @@ function botonListaEstados(estado="", indice){
 		.then(html => { 
 			var  div = document.getElementById("divContrataciones");
 			div.innerHTML = html;
-			prepareListeners("tag");
+			prepareListeners("tipo");
 		})
 		.catch(e => console.log(e))
 }

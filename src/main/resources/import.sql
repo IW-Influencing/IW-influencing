@@ -95,7 +95,7 @@ INSERT INTO candidatura(id,aceptada,estado,candidato_id,propuesta_id) VALUES (
 INSERT INTO candidatura(id,aceptada,estado,candidato_id,propuesta_id) VALUES (
 	3,
 	true,
-	'FINALIZADA',
+	'EN_VALORACION',
 	3,
 	3
 );

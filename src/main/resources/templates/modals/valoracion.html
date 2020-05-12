@@ -8,26 +8,28 @@
     <div th:replace="fragments/navigation.html :: modalBar(nombrePagina='VALORACIÓN')"></div>
 </header>
 
-<body class="general">
+<body>
 
-    <div class="contenedor">
-        <div class="contenido-propuesta">
+	<form th:action="@{/contrataciones/valorar}" method="POST">
+	<input type="hidden" name="idCandidatura" th:value="${idCandidatura}">
+    <div class="w3-container">
+        <div class="w3-container w3-margin-bottom box divFlexSpaceEvenly divCentrado">
             <div class="texto-propuesta">
                 <h2 th:text="${propuesta.nombre}"></h2>
                 <p th:text="${propuesta.descripcion}"></p>
             </div>
-			<div>
-	            <img src="https://via.placeholder.com/200x300" />
+			<div >
+	            <img class="imgValoracion" th:src="@{/propuesta/{id}/photo(id=${propuesta.id})}"/>
 			</div>
         </div>
-        <div class="valoracion">
+        <div class="w3-container w3-margin-bottom box divFlexSpaceEvenly">
             <div id="cabecera">
                 <!-- Titulo -->
                 <h1>Valoración</h1>
                 
                 <!-- Imagen perfil -->
-                <img src="https://via.placeholder.com/100" />
-
+                <img class="imgValoracion" th:src="@{/perfil/{id}/photo(id=${idUsuario})}" />
+				<input type="number" name="puntuacion" required>
                 <!-- Estrellas -->
                 <div class="ec-stars-wrapper">
                     <a href="#" data-value="1" title="Votar con 1 estrellas">&#9733;</a>
@@ -38,16 +40,18 @@
                 </div>
             </div>
             <div class="comentario">
-                <p th:if="${modo} eq 'VISTA'" th:text="${valoracion.valoracion}">
-                </p>
-          		<textarea th:if="${modo} eq 'CREACION'" name="valoracion" rows="4" cols="40" required></textarea>
+                <p th:if="${modo} eq 'VISTA'" th:text="${valoracion.valoracion}"></p>
+          		<textarea th:if="${modo} eq 'CREACION'" name="valoracion" rows="10" cols="50" required placeholder="Introduzca su valoracion"></textarea>
             </div>
         </div>
 
         <div class="divCentrado">
-            <button th:if="${modo} eq 'VISTA'" class="w3-btn btnColor w3-margin" onclick="document.getElementById('modal').style.display='none'">Cerrar valoración</button>
-            <button th:if="${modo} eq 'CREACION'" class="w3-btn btnColor w3-margin" onclick="document.getElementById('modal').style.display='none'">Enviar valoración</button>
+            <button th:if="${modo} eq 'CREACION'" class="w3-btn btnColor w3-margin" type="submit">Enviar valoración</button>
         </div>
     </div>
+	</form>
+	<div class="divCentrado">
+	            <button th:if="${modo} eq 'VISTA'" class="w3-btn btnColor w3-margin" onclick="document.getElementById('modal').style.display='none'">Cerrar valoración</button>
+	</div>
 
 </body>

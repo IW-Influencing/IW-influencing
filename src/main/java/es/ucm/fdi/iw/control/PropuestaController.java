@@ -203,6 +203,7 @@ public class PropuestaController {
 			  p.setEdadMaxPublico(Integer.valueOf(edades.split("-")[1]));
 			  p.setSueldo(Integer.valueOf(sueldo));
 			  p.setFechaSubida(LocalDateTime.now());
+			  tags = tags.toUpperCase();
 			  p.setTags(tags);
 			  Usuario usuarioLoggeado = entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId());
 

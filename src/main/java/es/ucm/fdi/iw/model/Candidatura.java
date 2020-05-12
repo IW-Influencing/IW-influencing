@@ -23,7 +23,7 @@ import javax.persistence.NamedQuery;
 	query="SELECT c.propuesta FROM Candidatura c WHERE c.candidato.id = :idCandidato AND c.propuesta.id = :idPropuesta"),
 	
 	@NamedQuery(name="Candidatura.searchByName",
-	query="SELECT c FROM Candidatura c WHERE c.propuesta.nombre LIKE :patron AND (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario)"),
+	query="SELECT c FROM Candidatura c WHERE (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario) AND c.propuesta.nombre LIKE :patron"),
 	
 	@NamedQuery(name="Candidatura.getAllActive",
 	query="SELECT c FROM Candidatura c WHERE c.aceptada = true AND (c.estado = 'EN_CURSO' OR c.estado = 'NEGOCIANDO')"),
@@ -41,7 +41,7 @@ import javax.persistence.NamedQuery;
 	query="SELECT c FROM Candidatura c WHERE c.estado LIKE :estado AND (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario) ORDER BY c.propuesta.fechaInicio"),
 	
 	@NamedQuery(name="Candidatura.getByUser",
-		query="SELECT c FROM Candidatura c WHERE c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario ORDER BY c.propuesta.fechaInicio")
+		query="SELECT c FROM Candidatura c WHERE (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario) ORDER BY c.propuesta.fechaInicio")
 })
 
 

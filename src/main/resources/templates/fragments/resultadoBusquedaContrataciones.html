@@ -1,3 +1,9 @@
+
+<div th:if="${#lists.isEmpty(resultadoBusqueda)}" class="divCentrado">
+	<h3>No hay resultados</h3>
+</div>
+<div th:unless="${#lists.isEmpty(resultadoBusqueda)}">
+
 <div id="divContrataciones">
 
 	<h2 th:text="${modo}"></h2>
@@ -7,7 +13,7 @@
 				<div class="firstCol">
 					<div class="w3-third w3-container fecha divCentrado">
 					 	<p th:text="${#temporals.format(c.propuesta.fechaInicio, 'dd/MM/yyyy') + ' - ' + #temporals.format(c.propuesta.fechaFin,'dd/MM/yyyy')}">
-						<p th:utext="'<b>' + ${c.estado} + '</b>'"></p>
+						<p class="negrita" th:text="${#strings.replace(c.estado,'_',' ')}"></p>
 					</div>
 					<div>
 						<img th:src="@{/propuesta/{id}/photo(id=${c.propuesta.id})}" style="width:100%">
@@ -29,6 +35,10 @@
 					<div style="text-align:center;">
 						<button class="w3-btn btnColor w3-margin btnDetalles"
 							th:attr="data-id=${c.propuesta.id}">Detalles</button>
+							
+						<button th:if="${c.estado} eq 'EN_VALORACION'"class="w3-btn btnColor w3-margin btnValorar"
+							th:attr="data-id-propuesta=${c.propuesta.id}, data-id=${c.id}">Valorar</button>
+							
 					</div>
 				</div>
 			</div>

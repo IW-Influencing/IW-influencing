@@ -1,14 +1,8 @@
-Contrataciones
-  - Busqueda por nombre
-  - Arreglar paginacion de las busquedas
-  - Arreglar titulo de tipo de resultados
-
 Valoracion
-  - Ponerle thymeleaf
-  - Añadir boton enviar valoracion
-  - Arreglar que no reviente el CSS
+  - Comprobar si el usuario ya ha valorado la candidatura cuando esta en valoracion
+  - Hacer la consulta de idsValorados en todos los tipos de busquedas
   - Registrar valoracion en BD
-  - Cambiar estado de contratacion a finalizada
+  - Cambiar estado de contratacion a finalizada si ya ha recibido valoracion por las dos partes
 
 
 -----------------------------------------------------------------------------

@@ -9,6 +9,15 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway" , sans-serif !important;}
     color: #FFFFFF; 
 }
 
+.negrita{
+	font-weight: bold;
+}
+
+.divFlexSpaceEvenly{
+	display:flex;
+	justify-content: space-evenly;
+}
+
 a:hover{
 	color : #1b3879;
 	cursor: pointer;

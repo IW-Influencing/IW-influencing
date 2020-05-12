@@ -47,13 +47,8 @@ public class BusquedaPropuestaController {
 	public String postSearch(Model model, HttpSession session,@RequestParam(required = true, defaultValue = "1") int indicePagina, @RequestParam String patron) {
 		String patronParaLike = "%"+patron+"%";
 		List<Propuesta> propuestas = null;
-		if (patron.isEmpty()) { 
-			propuestas = entityManager.createQuery("select p from Propuesta p", Propuesta.class).getResultList();
-		} else {
-			propuestas = entityManager.createNamedQuery("Propuesta.searchByNombre", Propuesta.class)
-					.setParameter("nombre", patronParaLike).getResultList();		
-		}
-		
+		propuestas = entityManager.createNamedQuery("Propuesta.searchByNombre", Propuesta.class)
+				.setParameter("nombre", patronParaLike).getResultList();		
 		model.addAttribute("numeroPaginas", Math.ceil((double)propuestas.size()/NUM_ELEMENTOS_PAGINA));
 		if (indicePagina*NUM_ELEMENTOS_PAGINA <= propuestas.size())
 			propuestas=propuestas.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, indicePagina*NUM_ELEMENTOS_PAGINA);

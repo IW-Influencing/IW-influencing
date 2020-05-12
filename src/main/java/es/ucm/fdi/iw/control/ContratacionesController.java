@@ -1,8 +1,10 @@
 package es.ucm.fdi.iw.control;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
@@ -22,6 +24,7 @@ import es.ucm.fdi.iw.model.Candidatura;
 import es.ucm.fdi.iw.model.Evento;
 import es.ucm.fdi.iw.model.Propuesta;
 import es.ucm.fdi.iw.model.Usuario;
+import es.ucm.fdi.iw.model.Valoracion;
 
 @Controller()
 @RequestMapping("contrataciones")
@@ -43,25 +46,33 @@ public class ContratacionesController {
 		model.addAttribute("numeroPaginas", Math.ceil((double)candidaturas.size()/NUM_ELEMENTOS_PAGINA));
 		if (NUM_ELEMENTOS_PAGINA <= candidaturas.size())
 			candidaturas=candidaturas.subList(0,NUM_ELEMENTOS_PAGINA);
+		
+		model.addAttribute("valoradas", devuelveContratacionesValoradas(((Usuario)session.getAttribute("u")).getId()));
 		model.addAttribute("modo", "Contrataciones");
 	    model.addAttribute("resultadoBusqueda", candidaturas);
 		return "contrataciones";
 	}
 	
 	
-	   @GetMapping("/busca")
+	   private List<Long> devuelveContratacionesValoradas(long idUsuario) {
+		  // List<Integer> retorno = new ArrayList<>();
+		   List<Long> retorno = entityManager.createNamedQuery("Valoraciones.getByUser", Long.class)
+					.setParameter("idUsuario",idUsuario).getResultList();
+		/*	for (Valoracion v : valoraciones) {
+				retorno.add((int) v.getCandidatura().getId());
+			}*/
+		// TODO Auto-generated method stub
+			return retorno;
+	}
+
+
+	@GetMapping("/busca")
 		public String postSearch(Model model, HttpSession session,@RequestParam(required = true, defaultValue = "1") int indicePagina, @RequestParam String patron) {
 		    String patronParaLike = "%"+patron+"%";
 			List<Candidatura> candidaturas = null;
-			if (patron.isEmpty()) { 
-				candidaturas = entityManager.createNamedQuery("Candidatura.getByUser", Candidatura.class)					
-						.setParameter("idUsuario",((Usuario)session.getAttribute("u")).getId()).getResultList();
-			} else {
-				candidaturas = entityManager.createNamedQuery("Candidatura.searchByName", Candidatura.class)
-						.setParameter("patron", patron).setParameter("idUsuario",((Usuario)session.getAttribute("u")).getId())
-						.getResultList();		
-			}
-			
+			candidaturas = entityManager.createNamedQuery("Candidatura.searchByName", Candidatura.class)
+					.setParameter("patron", patronParaLike).setParameter("idUsuario",((Usuario)session.getAttribute("u")).getId())
+					.getResultList();		
 			model.addAttribute("numeroPaginas", Math.ceil((double)candidaturas.size()/NUM_ELEMENTOS_PAGINA));
 			if (indicePagina*NUM_ELEMENTOS_PAGINA <= candidaturas.size())
 				candidaturas=candidaturas.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, indicePagina*NUM_ELEMENTOS_PAGINA);
@@ -94,18 +105,48 @@ public class ContratacionesController {
 			else 
 				candidaturas=candidaturas.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, candidaturas.size());
 
-			model.addAttribute("modo", "Contrataciones "+ estado);
-
+			String tipoBusqueda = "";
+			switch(estado) {
+				case " ALL": break;
+				case "EN_CURSO": tipoBusqueda = "en curso";break;
+				case "EN_VALORACION": tipoBusqueda = "en valoración";break;
+				case "FINALIZADA": tipoBusqueda = "finalizadas";break;
+			}
+			
+			model.addAttribute("modo", "Contrataciones "+ tipoBusqueda);
 			model.addAttribute("resultadoBusqueda", candidaturas);
 			model.addAttribute("patron", estado);
 			return "fragments/resultadoBusquedaContrataciones";
 		}
 	
-	@GetMapping("/valorar")
-	  public String valorarContratacion(Model model, HttpSession session, @RequestParam long idContratacion) {
-		  Propuesta p = entityManager.find(Propuesta.class, idContratacion);
+	  @GetMapping("/valorar")
+	  public String valorarContratacion(Model model, HttpSession session, @RequestParam long idCandidatura, @RequestParam long idPropuesta) {
+		  Propuesta p = entityManager.find(Propuesta.class, idPropuesta);		  
 		  model.addAttribute("modo", "CREACION");
 		  model.addAttribute("propuesta", p);
+		  model.addAttribute("idCandidatura",idCandidatura);
+		  model.addAttribute("idUsuario", ((Usuario)session.getAttribute("u")).getId());
+		  return "modals/valoracion";
+	  }
+	
+	
+	  @PostMapping("/valorar")
+   	  @Transactional
+	  public String valoraContratacion(Model model, HttpServletResponse response, HttpSession session, @RequestParam long idCandidatura, 
+			  @RequestParam String valoracion,  @RequestParam int puntuacion) {
+		
+		  //Comprobar que no existe una valoracion a esa candidatura previamente con el id de session
+		  //Despues de insertar comprobar nº de valoraciones en la BD. Si nº == 2 entonces ya se ha valorado por las dos partes.
+		  
+		  String mensaje = "";
+		  Candidatura c = entityManager.find(Candidatura.class, idCandidatura);
+		  Valoracion v = new Valoracion();
+		  v.setCandidatura(c);
+		  v.setPuntuacion(puntuacion);
+		  v.setValoracion(valoracion);
+      	  mensaje="Valoracion insertada correctamente";
+
+		  
 		  return "modals/valoracion";
 	  }
 	
