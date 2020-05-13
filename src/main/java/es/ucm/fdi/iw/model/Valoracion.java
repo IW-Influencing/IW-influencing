@@ -5,8 +5,13 @@ import javax.persistence.*;
 @Entity
 @NamedQueries({
 	@NamedQuery(name="Valoraciones.getByUser",
-	query="SELECT v.candidatura.id FROM Valoracion v "
-			+ "WHERE v.emisor.id = :idUsuario")
+	query="SELECT v.candidatura.id FROM Valoracion v WHERE v.emisor.id = :idUsuario"),
+	
+	@NamedQuery(name="Valoraciones.getByEmisorAndCandidatura",
+	query="SELECT v FROM Valoracion v WHERE v.emisor.id = :idUsuario AND v.candidatura.id = :idCandidatura"),
+	
+	@NamedQuery(name="Valoraciones.getByCandidatura",
+	query="SELECT v FROM Valoracion v WHERE v.candidatura.id = :idCandidatura")
 })
 public class Valoracion {
 
@@ -35,7 +40,7 @@ public class Valoracion {
 		this.emisor = emisor;
 	}
 
-	@OneToOne(targetEntity = Propuesta.class)
+	@ManyToOne(targetEntity = Candidatura.class)
 	public Candidatura getCandidatura() {
 		return candidatura;
 	}

@@ -1,5 +1,6 @@
 package es.ucm.fdi.iw.control;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,7 @@ import es.ucm.fdi.iw.model.Evento;
 import es.ucm.fdi.iw.model.Propuesta;
 import es.ucm.fdi.iw.model.Usuario;
 import es.ucm.fdi.iw.model.Valoracion;
+import jdk.internal.jline.internal.Log;
 
 @Controller()
 @RequestMapping("contrataciones")
@@ -43,11 +45,11 @@ public class ContratacionesController {
 		List<Candidatura> candidaturas;
 		candidaturas = entityManager.createNamedQuery("Candidatura.getByUser", Candidatura.class)					
 				.setParameter("idUsuario",((Usuario)session.getAttribute("u")).getId()).getResultList();
+		model.addAttribute("mensaje",session.getAttribute("mensajeInfo"));
 		model.addAttribute("numeroPaginas", Math.ceil((double)candidaturas.size()/NUM_ELEMENTOS_PAGINA));
 		if (NUM_ELEMENTOS_PAGINA <= candidaturas.size())
 			candidaturas=candidaturas.subList(0,NUM_ELEMENTOS_PAGINA);
-		
-		model.addAttribute("valoradas", devuelveContratacionesValoradas(((Usuario)session.getAttribute("u")).getId()));
+		model.addAttribute("valoradas",  devuelveContratacionesValoradas(((Usuario)session.getAttribute("u")).getId()));
 		model.addAttribute("modo", "Contrataciones");
 	    model.addAttribute("resultadoBusqueda", candidaturas);
 		return "contrataciones";
@@ -55,8 +57,8 @@ public class ContratacionesController {
 	
 	
 	   private List<Long> devuelveContratacionesValoradas(long idUsuario) {
-		  // List<Integer> retorno = new ArrayList<>();
-		   List<Long> retorno = entityManager.createNamedQuery("Valoraciones.getByUser", Long.class)
+		   List<Long> retorno = new ArrayList<>();
+		   retorno = entityManager.createNamedQuery("Valoraciones.getByUser", Long.class)
 					.setParameter("idUsuario",idUsuario).getResultList();
 		/*	for (Valoracion v : valoraciones) {
 				retorno.add((int) v.getCandidatura().getId());
@@ -78,7 +80,8 @@ public class ContratacionesController {
 				candidaturas=candidaturas.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, indicePagina*NUM_ELEMENTOS_PAGINA);
 			else 
 				candidaturas=candidaturas.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, candidaturas.size());
-
+			
+			model.addAttribute("valoradas",  devuelveContratacionesValoradas(((Usuario)session.getAttribute("u")).getId()));
 			model.addAttribute("modo", "Resultados de la búsqueda");
 			model.addAttribute("patron", patron);
 			model.addAttribute("resultadoBusqueda", candidaturas);
@@ -107,10 +110,19 @@ public class ContratacionesController {
 
 			String tipoBusqueda = "";
 			switch(estado) {
-				case " ALL": break;
-				case "EN_CURSO": tipoBusqueda = "en curso";break;
-				case "EN_VALORACION": tipoBusqueda = "en valoración";break;
-				case "FINALIZADA": tipoBusqueda = "finalizadas";break;
+				case " ALL": 					
+					model.addAttribute("valoradas",  devuelveContratacionesValoradas(((Usuario)session.getAttribute("u")).getId()));
+					break;
+				case "EN_CURSO": 
+					tipoBusqueda = "en curso";
+					break;
+				case "EN_VALORACION": 
+					tipoBusqueda = "en valoración";
+					model.addAttribute("valoradas",  devuelveContratacionesValoradas(((Usuario)session.getAttribute("u")).getId()));
+					break;
+				case "FINALIZADA": 
+					tipoBusqueda = "finalizadas";
+					break;
 			}
 			
 			model.addAttribute("modo", "Contrataciones "+ tipoBusqueda);
@@ -132,22 +144,55 @@ public class ContratacionesController {
 	
 	  @PostMapping("/valorar")
    	  @Transactional
-	  public String valoraContratacion(Model model, HttpServletResponse response, HttpSession session, @RequestParam long idCandidatura, 
+	  public void valoraContratacion(Model model, HttpServletResponse response, HttpSession session, @RequestParam long idCandidatura, 
 			  @RequestParam String valoracion,  @RequestParam int puntuacion) {
-		
-		  //Comprobar que no existe una valoracion a esa candidatura previamente con el id de session
-		  //Despues de insertar comprobar nº de valoraciones en la BD. Si nº == 2 entonces ya se ha valorado por las dos partes.
-		  
+				  
 		  String mensaje = "";
-		  Candidatura c = entityManager.find(Candidatura.class, idCandidatura);
-		  Valoracion v = new Valoracion();
-		  v.setCandidatura(c);
-		  v.setPuntuacion(puntuacion);
-		  v.setValoracion(valoracion);
-      	  mensaje="Valoracion insertada correctamente";
-
-		  
-		  return "modals/valoracion";
+		  if (!(entityManager.createNamedQuery("Valoraciones.getByEmisorAndCandidatura", Valoracion.class)
+				  .setParameter("idUsuario", ((Usuario)session.getAttribute("u")).getId())
+				  .setParameter("idCandidatura", idCandidatura).getResultList().isEmpty())) {
+			  mensaje="Ya has valorado esta candidatura";
+		  }
+		  else if (puntuacion > 5 || puntuacion < 0) {
+			  mensaje = "Puntuación introducida no válida (debe situarse entre 0 y 5)";
+		  }
+		  else {
+			  Candidatura c = entityManager.find(Candidatura.class, idCandidatura);
+			  Valoracion v = new Valoracion();
+			  v.setCandidatura(c);
+			  v.setEmisor(entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId()));
+			  v.setPuntuacion(puntuacion);
+			  v.setValoracion(valoracion);
+			  entityManager.persist(v);
+			  entityManager.flush();
+			  Usuario valorado;
+			  if (((Usuario)session.getAttribute("u")).hasRole(Usuario.Rol.EMPRESA)){
+				  valorado = entityManager.find(Usuario.class, c.getCandidato().getId()); 
+				  valorado.updatePuntuacion(puntuacion);
+				  entityManager.persist(valorado);
+				  
+			  }
+			  else {
+				  valorado = entityManager.find(Usuario.class, c.getPropuesta().getEmpresa().getId()); 
+				  valorado.updatePuntuacion(puntuacion);
+				  entityManager.persist(valorado);
+			  }
+			  
+			  if (entityManager.createNamedQuery("Valoraciones.getByCandidatura", Valoracion.class)
+					  .setParameter("idCandidatura", idCandidatura).getResultList().size() == 2) {
+				  c.setEstado(Candidatura.Estado.FINALIZADA.toString());
+				  entityManager.persist(c);
+			  }
+			  
+	      	  mensaje="Valoración insertada correctamente";
+		  }
+		session.setAttribute("mensajeInfo", mensaje);
+		try {
+			response.sendRedirect("/contrataciones");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			Log.info("Error al redireccionar");
+		}
 	  }
 	
 	  @GetMapping("/vista")

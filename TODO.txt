@@ -1,10 +1,3 @@
-Valoracion
-  - Comprobar si el usuario ya ha valorado la candidatura cuando esta en valoracion
-  - Hacer la consulta de idsValorados en todos los tipos de busquedas
-  - Registrar valoracion en BD
-  - Cambiar estado de contratacion a finalizada si ya ha recibido valoracion por las dos partes
-
-
 -----------------------------------------------------------------------------
 
 Tags guardados en mayusculas
@@ -18,6 +11,7 @@ Registro
 Perfil
   - ¿Boton mandar mensaje privado?
   - Boton denunciar
+  - Mostrar valoracion del usuario
 
 Negociacion
   - WebSocket para notificar cuantos chat hay sin leer

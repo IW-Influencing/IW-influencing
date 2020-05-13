@@ -79,7 +79,7 @@ true,1,5,'2018-07-23','2018-07-23','2018-07-23'
 INSERT INTO candidatura(id,aceptada,estado,candidato_id,propuesta_id) VALUES (
 	1,
 	true,
-	'EN_CURSO',
+	'EN_VALORACION',
 	2,
 	1
 );
@@ -156,5 +156,9 @@ INSERT INTO evento(id, descripcion, tipo, fecha_enviado,fecha_recibido,leido, ca
 	NULL,
 	2,
 	1
+);
+
+INSERT INTO valoracion(id, emisor_id, candidatura_id, valoracion, puntuacion) VALUES(
+	1, 2, 1,'me ha timado', 0
 );
 

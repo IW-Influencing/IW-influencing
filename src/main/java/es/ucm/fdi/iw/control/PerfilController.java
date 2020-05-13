@@ -109,6 +109,7 @@ public class PerfilController {
 		    	        	u.setPassword(Usuario.encodePassword(pass1));
 		    	        	u.setRoles("Usuario,Influencer");
 		    	        	u.setActivo(Byte.MAX_VALUE);
+		    	        	u.setNum_contrataciones(0);
 		    	        	entityManager.persist(u);
 		    	        	insertaPerfiles(nombreTwitter, seguidoresTwitter, nombreFacebook, seguidoresFacebook, 
 			        				nombreInstagram, seguidoresInstagram, nombreYoutube, seguidoresYoutube, u);
@@ -138,6 +139,7 @@ public class PerfilController {
 						Rol.EMPRESA.toString() 
 					}));
     	        	u.setPassword(Usuario.encodePassword(pass1));
+    	        	u.setNum_contrataciones(0);
     	        	entityManager.persist(u);
     	        	entityManager.flush();
     	        	insertaImagenUsuario(imagenPerfil, u.getId());

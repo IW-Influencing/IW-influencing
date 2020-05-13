@@ -62,6 +62,7 @@ public class Usuario {
 	private String apellidos;
 	private int edad;
 	private String tags; // Se almacenan los tags
+	private int num_contrataciones;
 	private Integer score;
 
 
@@ -199,6 +200,14 @@ public class Usuario {
 	}
 
 	
+	
+	public int getNum_contrataciones() {
+		return num_contrataciones;
+	}
+
+	public void setNum_contrataciones(int num_contrataciones) {
+		this.num_contrataciones = num_contrataciones;
+	}
 
 	/**
 	 * Checks whether this user has a given role.
@@ -209,6 +218,12 @@ public class Usuario {
 		String roleName = role.name();
 		return Arrays.stream(roles.split(","))
 				.anyMatch(r -> r.equals(roleName));
+	}
+
+	public void updatePuntuacion(int puntuacion) {
+		// TODO Auto-generated method stub
+		this.num_contrataciones+=1;
+		this.score = (this.score*(num_contrataciones-1) + puntuacion)/(num_contrataciones);
 	}
 	
 
