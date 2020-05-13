@@ -19,5 +19,7 @@ Negociacion
 Propuesta
   - Funcionalidad apuntarse a una propuesta
 
+ADMINISTRACION
 
 Mostrar ultimatum chat
+Mensaje de valoracion, buscarle sentido
