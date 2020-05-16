@@ -93,10 +93,12 @@
 			            <span class="w3-margin-right"><b>Estado:</b></span>
 
 				<button class="w3-button w3-blue tagFilter tagFilterSelected" th:attr="data-id=' ALL '">Todas</button>
-	            <button class="w3-button w3-white tagFilter" th:attr="data-id='EN_CURSO'">En curso</button>
-	            <button class="w3-button w3-white tagFilter" th:attr="data-id='EN_VALORACION'"><i class="fa fa-tshirt w3-margin-right"></i>En valoración</button>
-	            <button class="w3-button w3-white w3-hide-small tagFilter" th:attr="data-id='FINALIZADA'"><i
-	                    class="fa fa-gamepad w3-margin-right"></i>Finalizadas</button>
+	            <button class="w3-button w3-white tagFilter" th:attr="data-id='EN_CURSO'">
+                    <i class="fa fa-user-clock w3-margin-right"></i>En curso</button>
+	            <button class="w3-button w3-white tagFilter" th:attr="data-id='EN_VALORACION'">
+                    <i class="fa fa-user-edit w3-margin-right"></i>En valoración</button>
+	            <button class="w3-button w3-white w3-hide-small tagFilter" th:attr="data-id='FINALIZADA'">
+                    <i class="fa fa-check-double w3-margin-right"></i>Finalizadas</button>
 	            
 			</div>
             <input type="text" placeholder="Buscar..." id="cuadroBusquedaTagBar">
