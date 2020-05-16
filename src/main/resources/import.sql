@@ -5,13 +5,12 @@
 
 -- Usuario de ejemplo con nombre = a y contraseña = aa  
 
-INSERT INTO usuario(id,activo,nombre_cuenta,nombre,password,roles,apellidos,edad,tags,score,num_contrataciones) VALUES (
+INSERT INTO usuario(id,activo,nombre_cuenta,nombre,password,roles,apellidos,edad,score,num_contrataciones) VALUES (
 	1, 1, 'a','a',
 	'{bcrypt}$2a$10$xLFtBIXGtYvAbRqM95JhcOaG23fHRpDoZIJrsF2cCff9xEHTTdK1u',
 	'ADMIN',
 	'Abundio Ejemplez',
 	23,
-	'ropa',
 	5,
 	1
 );
@@ -45,7 +44,7 @@ INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad
 	'EMPRESA',
 	'Martin Gimeno',
 	22,
-	'Moda',
+	'Bebidas,Espirituosas',
 	3,1
 );
 

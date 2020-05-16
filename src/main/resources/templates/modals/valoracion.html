@@ -29,19 +29,19 @@
                 
                 <!-- Imagen perfil -->
                 <img class="imgValoracion" th:src="@{/perfil/{id}/photo(id=${idUsuario})}" />
-				<input type="number" name="puntuacion" required>
+				<input type="number" name="puntuacion" min="0" max="5" step="0.5" required class="w3-input w3-border w3-center w3-margin-bottom">
                 <!-- Estrellas -->
                 <div class="ec-stars-wrapper">
-                    <a href="#" data-value="1" title="Votar con 1 estrellas">&#9733;</a>
-                    <a href="#" data-value="2" title="Votar con 2 estrellas">&#9733;</a>
-                    <a href="#" data-value="3" title="Votar con 3 estrellas">&#9733;</a>
-                    <a href="#" data-value="4" title="Votar con 4 estrellas">&#9734;</a>
-                    <a href="#" data-value="5" title="Votar con 5 estrellas">&#9734;</a>
+                    <a class="estrella far fa-star"></a>
+                    <a class="estrella far fa-star"></a>
+                    <a class="estrella far fa-star"></a>
+                    <a class="estrella far fa-star"></a>
+                    <a class="estrella far fa-star"></a>
                 </div>
             </div>
             <div class="comentario">
                 <p th:if="${modo} eq 'VISTA'" th:text="${valoracion.valoracion}"></p>
-          		<textarea th:if="${modo} eq 'CREACION'" name="valoracion" rows="10" cols="50" required placeholder="Introduzca su valoracion"></textarea>
+          		<textarea th:if="${modo} eq 'CREACION'" name="valoracion" rows="10" cols="50" class="w3-input w3-border" required placeholder="Introduzca su valoracion"></textarea>
             </div>
         </div>
 

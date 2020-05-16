@@ -29,11 +29,14 @@ function asignaFuncionBotonRegistro(){
 			b.onclick = c => {
 				validaPassword(document.getElementsByName("pass1")[0], document.getElementsByName("pass2")[0]);
 				validaTexto(document.getElementsByName("nombre")[0]);
+				validaTexto(document.getElementsByName("apellidos")[0]);
 				validaTexto(document.getElementsByName("nombreCuenta")[0]);
 				validaDatosPerfil("Twitter");
 				validaDatosPerfil("Facebook");
 				validaDatosPerfil("Instagram");
 				validaDatosPerfil("Youtube");
+				validaTexto(document.getElementsByName("tags")[0]);
+				validaTags(document.getElementsByName("tags")[0]);
 				if (document.getElementsByName("tipoCuenta")[0].value == 'Influencer')
 					document.getElementsByName("edad")[0].required=true;
 			}
@@ -47,6 +50,22 @@ function validaDatosPerfil(perfil){
 		nombre.required = true;
 	}
 	
+}
+
+function validaTags(tags){
+	let valores = tags.value;
+	let valido = true;
+	let largo = false;
+	for (p of valores.split(",")){
+		if (p !== p.trim())
+			valido = false;
+		else if(p.length > 30){
+			largo = true;
+		}
+		
+	}
+	tags.setCustomValidity(!valido?"No se pueden introducir espacios al principio ni al final del tag":
+						  (!largo)?"":"La longitud máxima de un tag es de 30 caracteres");
 }
 
 function validaTexto(campo){

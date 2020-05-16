@@ -81,8 +81,10 @@ public class PerfilController {
     @Transactional
 	public void registraUsuario(HttpSession session, HttpServletResponse response, Model model, 
 			@RequestParam String nombreCuenta, @RequestParam String nombre,
+			@RequestParam String apellidos,
     		@RequestParam String pass1,@RequestParam String pass2, 
     		@RequestParam MultipartFile imagenPerfil, @RequestParam String tipoCuenta,
+    		@RequestParam String tags,
     		@RequestParam String edad,	@RequestParam String nombreTwitter, @RequestParam String seguidoresTwitter,
     		@RequestParam String nombreFacebook, @RequestParam String seguidoresFacebook,
     		@RequestParam String nombreInstagram, @RequestParam String seguidoresInstagram,
@@ -105,10 +107,12 @@ public class PerfilController {
 		        			Usuario u = new Usuario();
 		    	        	u.setNombreCuenta(nombreCuenta);
 		    	        	u.setNombre(nombre);
+		    	        	u.setApellidos(apellidos);
 		    	        	u.setEdad(Integer.valueOf(edad));
 		    	        	u.setPassword(Usuario.encodePassword(pass1));
 		    	        	u.setRoles("Usuario,Influencer");
 		    	        	u.setActivo(Byte.MAX_VALUE);
+		    	        	u.setTags(tags.toUpperCase());
 		    	        	u.setNum_contrataciones(0);
 		    	        	entityManager.persist(u);
 		    	        	insertaPerfiles(nombreTwitter, seguidoresTwitter, nombreFacebook, seguidoresFacebook, 
@@ -132,6 +136,7 @@ public class PerfilController {
         			Usuario u = new Usuario();
     	        	u.setNombreCuenta(nombreCuenta);
     	        	u.setNombre(nombre);
+    	        	u.setApellidos(apellidos);
     	        	u.setCandidaturas(new ArrayList<>());
     	        	u.setActivo(Byte.valueOf("1"));
 					u.setRoles(String.join(",", new String[]{ 

@@ -43,7 +43,32 @@ document.addEventListener("DOMContentLoaded", () => {
 function cargaModalValorar(idCandidatura, idPropuesta){
 	document.getElementById('modal').style.display='block';
 	return go2(config.rootUrl + "contrataciones/valorar?idCandidatura="+idCandidatura+"&idPropuesta=" + idPropuesta, 'GET')
-		.then(html => document.getElementById("contenidoModal").innerHTML=html);
+		.then(html => {
+			document.getElementById("contenidoModal").innerHTML=html;
+			document.getElementsByName("puntuacion")[0].addEventListener('change', pintaEstrellas);
+		});
+}
+
+function pintaEstrellas(puntuacion){
+	let parteEntera = puntuacion.target.value[0];
+	let parteDecimal = puntuacion.target.value[2];
+	
+	tablinks = document.getElementsByClassName("estrella");
+	for (i = 0; i < parteEntera; i++) {
+		tablinks[i].className = tablinks[i].className = "estrella fa fa-star";
+	}
+	if (parteDecimal === '5'){
+		tablinks[parteEntera].className = tablinks[parteEntera].className = "estrella fa fa-star-half-alt";
+		for (i = parteEntera+1; i < 5; i++){
+		tablinks[i].className = tablinks[i].className = "estrella far fa-star";
+	}
+	}
+	else{
+		for (i = parteEntera; i < 5; i++){
+		tablinks[i].className = tablinks[i].className = "estrella far fa-star";
+	}
+	}
+		
 }
 
 function cargaModalPropuesta(idPropuesta){

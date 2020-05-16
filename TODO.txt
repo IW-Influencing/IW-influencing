@@ -1,12 +1,13 @@
 -----------------------------------------------------------------------------
 
-Tags guardados en mayusculas
 
+EDICION PERFIL 
+ - Manejador controlador
+ 
 Registro
- * Tags del perfil
- * Apellidos
- * Validacion tags y apellidos
+  * Empresa no deberian salir apellidos
 
+Busqueda perfil no salgan administradores
   
 Perfil
   - ¿Boton mandar mensaje privado?

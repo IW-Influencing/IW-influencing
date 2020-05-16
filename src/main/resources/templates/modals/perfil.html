@@ -20,37 +20,40 @@
 
     <!-- Nombre de la cuenta (CREACION, EDICION) -->
     <div class="divCentrado" th:if="${modo} eq 'CREACION' or ${modo} eq 'EDICION'">
-      <h2 class="w3-padding-24">Nombre Cuenta</h2>
+      <h2 class="w3-padding-24">Nombre cuenta</h2>
       <input th:if="${modo} eq 'CREACION'" type="text" name="nombreCuenta" placeholder="Introduzca su usuario"
-        required></input>
-      <span th:if="${modo} eq 'EDICION'" th:text="${usuario.nombreCuenta}" class="w3-padding-24">Nombre Cuenta</span>
+        required class="w3-input"></input>
+      <span th:if="${modo} eq 'EDICION'" th:text="${usuario.nombreCuenta}" class="w3-padding-24">Nombre cuenta</span>
     </div>
 
 
     <!-- Nombre Perfil -->
-    <h2 class="w3-padding-24">Nombre Perfil</h2>
-    <span th:if="${modo} eq 'VISTA'" th:text="${usuario.nombre}">Nombre Perfil</span>
-    <input th:if="${modo} eq 'EDICION'" type="text" name="nombre" th:value="${usuario.nombre}" required></input>
-    <input th:if="${modo} eq 'CREACION'" type="text" name="nombre" placeholder="Introduzca su nombre" required></input>
-
+<div class="divCentrado">
+    <h2 class="w3-padding-24">Nombre y apellidos</h2>
+    <span th:if="${modo} eq 'VISTA'" th:text="${usuario.nombre} + ' ' + ${usuario.apellidos}"></span>
+    <input th:if="${modo} eq 'EDICION'" class="w3-input" type="text" name="nombre" th:value="${usuario.nombre}" required ></input>
+    <input th:if="${modo} eq 'EDICION'" class="w3-margin-top w3-input" type="text" name="apellidos" th:value="${usuario.apellidos}" required ></input>
+    <input th:if="${modo} eq 'CREACION'" type="text"  class="w3-input" name="nombre" placeholder="Introduzca su nombre" required></input>
+    <input th:if="${modo} eq 'CREACION'" type="text"  class="w3-margin-top w3-input"  name="apellidos" placeholder="Introduzca sus apellidos"required></input>
+</div>
 
     <!-- Contraseña (CREACION, EDICION) -->
     <div class="divCentrado" th:if="${modo} eq 'CREACION' or ${modo} eq 'EDICION'">
       <h2 class="w3-padding-24">Contraseña</h2>
       <input th:if="${modo} eq 'CREACION'" type="password" name="pass1" placeholder="Introduzca su contraseña"
-        required></input>
-      <input th:if="${modo} eq 'EDICION'" type="password" name="pass1" placeholder="Introduzca su  nueva contraseña"
-        required></input>
+        required class="w3-input"></input>
+      <input th:if="${modo} eq 'EDICION'" type="password" name="pass1"  placeholder="Introduzca su  nueva contraseña"
+        required class="w3-input" size=30></input>
       <br>
-      <input th:if="${modo} eq 'CREACION'" type="password" name="pass2" placeholder="Repita la contraseña"
-        required></input>
-      <input th:if="${modo} eq 'EDICION'" type="password" name="pass2" placeholder="Repita la nueva contraseña"
-        required></input>
+      <input th:if="${modo} eq 'CREACION'" type="password" name="pass2" class="w3-margin-top w3-input" placeholder="Repita la contraseña"
+        required ></input>
+      <input th:if="${modo} eq 'EDICION'" type="password" name="pass2" class="w3-margin-top w3-input" placeholder="Repita la nueva contraseña"
+        required ></input>
     </div>
 
 
     <!-- Imagen -->
-    <h2 class="w3-padding-24">Imagen Perfil</h2>
+    <h2 class="w3-padding-24">Imagen perfil</h2>
     <div class="w3-center" th:if="${modo} eq 'VISTA'">
       <img id="imagen-perfil" th:src="@{/perfil/{id}/photo(id=${usuario.id})}">
     </div>
@@ -59,12 +62,12 @@
       <!-- ¿Boton para borrar la foto? -->
     </div>
     <div th:if="${modo} eq 'CREACION'">
-      <input type="file" name="imagenPerfil">
+      <input type="file" name="imagenPerfil" class="w3-input w3-border">
     </div>
 
 	<div th:if="${modo} eq 'CREACION'">
 	<h2 class="w3-padding-24">Tipo de cuenta</h2>
-	<select class="w3-select w3-border" id="tipoCuenta" name="tipoCuenta" required>
+	<select class="w3-select w3-border w3-margin-bottom" id="tipoCuenta" name="tipoCuenta" required>
     <option value="" disabled selected>Elige tu tipo de cuenta</option>
     <option value="Influencer">Influencer</option>
     <option value="Empresa">Empresa</option>
@@ -73,9 +76,10 @@
 
     <!-- Valoracion (VISTA, EDICION) -->
     <div class="divCentrado" th:if="${modo} eq 'VISTA' or ${modo} eq 'EDICION'">
+	  <h2>Valoración media</h2>
       <div class="score" th:if="${usuario.score != null}">
         <th:block th:each="i: ${#numbers.sequence(1, usuario.score)}">					
-          <i class="fa fa-star w3-margin-right"></i>
+          <i class="fa fa-star w3-margin"></i>
           </th:block>
         </div>
         <div class="score" th:if="${usuario.score == null}">
@@ -85,16 +89,21 @@
     
       <!-- Tags -->
       <div id="tags" th:if="${modo} eq 'VISTA'">
-        <button th:each="i : ${usuario.tags}" class="w3-button w3-white tags" th:text="${i}" style="border-radius:12px;">Tags</li>
-      </div>
-      <div id="tags" th:if="${modo} eq 'EDICION' or ${modo} eq 'CREACION'">
-        <!-- Hacer array con los tags y mostrarlos para poder seleccionarlos y que los tenga el perfil -->
+        <button th:each="i : ${#strings.listSplit(usuario.tags, ',')}" class="w3-button w3-white tags" th:text="${i}" style="border-radius:12px;">Tags</li>
       </div>
 
+    <div class="tags-perfil" th:unless="${modo} eq 'VISTA'">
+      <h2>Tags relacionados con el perfil</h2>
+      <textarea th:if="${modo} eq 'CREACION'" name="tags" rows="2" cols="50" required
+        placeholder="Introduzca los tags separados por comas" class="w3-input w3-border"></textarea>
+
+      <textarea th:if="${modo} eq 'EDICION'" name="tags" rows="2" cols="50" required
+        placeholder="Introduzca los tags separados por comas" th:text="${usuario.tags}" class="w3-input w3-border"></textarea>
+    </div>
 
 
-      <!-- Historial propuestas (VISTA, EDICION) -->
-      <div th:if="${modo} eq 'VISTA' or ${modo} eq 'EDICION'" class="divCentrado">
+  <!-- Historial propuestas (VISTA, EDICION) -->
+      <div th:if="${modo} eq 'VISTA' or ${modo} eq 'EDICION'" class="divCentrado w3-margin-bottom">
         <h2 class="w3-padding-24">Historial de propuestas</h2>
         <div id="propuestas">
           <ul>
@@ -105,22 +114,22 @@
           </ul>
         </div>
       </div>
-      <!-- Hacer historial de propuestas con query en el modelo -->
+    
+
+
+  <!-- Hacer historial de propuestas con query en el modelo -->
 	
-	<div  class="divCentrado" id="divPerfilesCreacion">
+	<div  class="divCentrado" id="divPerfilesCreacion" style="display:none">
       <!-- Edad -->
-      <h2 class="w3-padding-24">Edad media de los seguidores</h2>
-      <div id="edad" th:if="${modo} eq 'VISTA'">
-        <div id="edad-media" th:text="${usuario.edad}">Años de media</div>
-      </div>
+     <h2 class="w3-padding-24">Edad media de los seguidores</h2>
+	<div class="divFlexSpaceEvenly">
+        <div th:if="${modo} eq 'VISTA'" id="edad-media" th:text="${usuario.edad}">Años de media</div>
+        <input th:if="${modo} eq 'EDICION'" type="number" name="edad" min="0" max="100" value="Años de media" th:value="${usuario.edad}" class="inputCentrado inputEdad">
+        <input th:if="${modo} eq 'CREACION'" type="number" name="edad" min="0" max="100" placeholder="Años de media" class="inputCentrado w3-input inputEdad">
+    
+	</div>
+	
 
-      <div id="edad" th:if="${modo} eq 'EDICION'">
-        <input type="number" name="edad" min="0" max="100" value="Años de media" th:value="${usuario.edad}" class="inputCentrado">
-      </div>
-
-      <div id="edad" th:if="${modo} eq 'CREACION'">
-        <input type="number" name="edad" min="0" max="100" placeholder="Años de media" class="inputCentrado">
-      </div>
 
       <!-- Seguidores-->
       <h2 class="w3-padding-24">Perfiles en redes sociales</h2>
@@ -157,26 +166,26 @@
         <!-- Contenido RRSS -->
         <div id="Twitter" class="empresa w3-container w3-padding" style="display:block">
           <span><img src="img/twitter.png" width="20" />Twitter</span>
-          <input type="text" name="nombreTwitter" placeholder="Nombre de la cuenta">
-          <input type="number" name="seguidoresTwitter" placeholder="Nº de seguidores"  min="0">
+          <input type="text" name="nombreTwitter" placeholder="Nombre de la cuenta" class="w3-input">
+          <input type="number" name="seguidoresTwitter" placeholder="Nº de seguidores"  min="0" class="w3-input">
         </div>
       
         <div id="Facebook" class="empresa w3-container w3-padding" style="display:none">
           <span><img src="img/facebook.png" width="20" />Facebook</span>
-          <input type="text" name="nombreFacebook" placeholder="Nombre de la cuenta">
-          <input type="number" name="seguidoresFacebook" placeholder="Nº de seguidores"  min="0"> 
+          <input type="text" name="nombreFacebook" placeholder="Nombre de la cuenta" class="w3-input">
+          <input type="number" name="seguidoresFacebook" placeholder="Nº de seguidores"  min="0" class="w3-input"> 
         </div>
       
         <div id="Instagram" class="empresa w3-container w3-padding" style="display:none">
           <span><img src="img/instagram.png" width="20" />Instagram</span>
-          <input type="text" name="nombreInstagram" placeholder="Nombre de la cuenta">
-          <input type="number" name="seguidoresInstagram" placeholder="Nº de seguidores"  min="0">
+          <input type="text" name="nombreInstagram" placeholder="Nombre de la cuenta" class="w3-input">
+          <input type="number" name="seguidoresInstagram" placeholder="Nº de seguidores"  min="0" class="w3-input">
         </div>
       
         <div id="Youtube" class="empresa w3-container w3-padding" style="display:none">
           <span><img src="img/youtube.png" width="20" />Youtube</span> 
-          <input type="text" name="nombreYoutube" placeholder="Nombre de la cuenta">
-          <input type="number" name="seguidoresYoutube" placeholder="Nº de seguidores"  min="0">
+          <input type="text" name="nombreYoutube" placeholder="Nombre de la cuenta" class="w3-input">
+          <input type="number" name="seguidoresYoutube" placeholder="Nº de seguidores"  min="0" class="w3-input">
         </div>
 
       </div>
