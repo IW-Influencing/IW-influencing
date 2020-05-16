@@ -13,7 +13,7 @@ INSERT INTO usuario(id,activo,nombre_cuenta,nombre,password,roles,apellidos,edad
 	23,
 	'ropa',
 	5,
-	0
+	1
 );
 
 -- Otro usuario de ejemplo con username = b y contraseña = aa  
@@ -26,7 +26,7 @@ INSERT INTO usuario(id,activo,nombre_cuenta,nombre,password,roles,apellidos,edad
 	'Berta Muestrez',
 	3,
 	'Fiesta',
-	4,0
+	4,1
 );
 
 INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad,tags,score,num_contrataciones) VALUES (
@@ -36,7 +36,7 @@ INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad
 	'Sanchez Garcia',
 	22,
 	'Videojuegos',
-	4,0
+	4,1
 );
 
 INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad,tags,score,num_contrataciones) VALUES (
@@ -46,7 +46,7 @@ INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad
 	'Martin Gimeno',
 	22,
 	'Moda',
-	3,0
+	3,1
 );
 
 INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id,activa, edad_min_publico, edad_max_publico, fecha_inicio, fecha_fin, fecha_subida)  VALUES (
