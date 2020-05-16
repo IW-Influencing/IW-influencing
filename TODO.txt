@@ -12,7 +12,6 @@ Busqueda perfil no salgan administradores
 Perfil
   - ¿Boton mandar mensaje privado?
   - Boton denunciar
-  - Mostrar valoracion del usuario
 
 Negociacion
   - WebSocket para notificar cuantos chat hay sin leer

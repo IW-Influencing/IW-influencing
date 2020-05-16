@@ -77,11 +77,18 @@
     <!-- Valoracion (VISTA, EDICION) -->
     <div class="divCentrado" th:if="${modo} eq 'VISTA' or ${modo} eq 'EDICION'">
 	  <h2>Valoración media</h2>
-      <div class="score" th:if="${usuario.score != null}">
-        <th:block th:each="i: ${#numbers.sequence(1, usuario.score)}">					
-          <i class="fa fa-star w3-margin"></i>
-          </th:block>
-        </div>
+
+
+			<div class="score" th:if="${usuario.score!=null}">
+				<th:block th:each="i: ${#numbers.sequence(1, usuario.score)}">					
+					<i class="fa fa-star w3-margin estrella"></i>
+				</th:block>
+				<i th:if="${#strings.substring(usuario.score,2) >= '5'}" class="fa fa-star-half-alt w3-margin estrella"></i>
+			</div>
+
+
+
+
         <div class="score" th:if="${usuario.score == null}">
           <p>No tiene valoraciones aun</p>
         </div>

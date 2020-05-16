@@ -35,13 +35,7 @@
 	font-size: 0;
 	display: inline-block;
 }
-.ec-stars-wrapper a {
-	text-decoration: none;
-	font-size: 32px;
-	font-size: 2rem;
-	
-	color: #F1C40F;
-}
+
 
 img{
 	border-radius: 20px;

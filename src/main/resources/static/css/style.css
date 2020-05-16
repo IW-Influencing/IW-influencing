@@ -18,6 +18,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway" , sans-serif !important;}
 	align-self:center;
 }
 
+.estrella {
+	text-decoration: none;
+	font-size: 32px;
+	font-size: 1.5rem;
+	color: #F1C40F;
+}
+
 .divFlexSpaceEvenly{
 	display:flex;
 	justify-content: space-evenly;
