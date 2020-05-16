@@ -11,7 +11,7 @@ INSERT INTO usuario(id,activo,nombre_cuenta,nombre,password,roles,apellidos,edad
 	'ADMIN',
 	'Abundio Ejemplez',
 	23,
-	5,
+	4.5,
 	1
 );
 

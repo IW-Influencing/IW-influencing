@@ -1,6 +1,5 @@
 package es.ucm.fdi.iw.model;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -63,7 +62,7 @@ public class Usuario {
 	private int edad;
 	private String tags; // Se almacenan los tags
 	private int num_contrataciones;
-	private Integer score;
+	private Float score;
 
 
 
@@ -175,11 +174,11 @@ public class Usuario {
 		this.nombreCuenta = nombreCuenta;
 	}
 
-	public Integer getScore(){
+	public Float getScore(){
 		return score;
 	}
 
-	public void setScore(Integer score){
+	public void setScore(Float score){
 		this.score = score;
 	}
 
