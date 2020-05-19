@@ -17,11 +17,22 @@ function cargaModalPerfil(){
 function compruebaPerfiles(){
 		if (this.value === 'Empresa'){
 			document.getElementById("divPerfilesCreacion").style.display = "none";
+			document.getElementById("divNombreEmpresa").style.display = "block";
+			document.getElementById("divNombreInfluencer").style.display = "none";
+			document.getElementById("nombreInfluencer").required = false;
+			document.getElementById("nombreEmpresa").required = true;
+			document.getElementsByName("apellidos")[0].required = false;
+
 		}
 		else{
 			document.getElementById("divPerfilesCreacion").style.display = "block";
-
+			document.getElementById("divNombreInfluencer").style.display = "block";
+			document.getElementById("divNombreEmpresa").style.display = "none";
+			document.getElementById("nombreInfluencer").required = true;
+			document.getElementById("nombreEmpresa").required = false;
+			document.getElementsByName("apellidos")[0].required = true;
 		}
+		
 }
 
 function asignaFuncionBotonRegistro(){

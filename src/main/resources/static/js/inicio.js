@@ -1,10 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
-	document.getElementById("botonCrearPropuesta").onclick = b => cargaPropuestaModal();
+	lanzaAlert();
+	let botonCrearPropuesta = document.getElementById("botonCrearPropuesta");
+	if (botonCrearPropuesta !== null){
+		botonCrearPropuesta.onclick = b => cargaPropuestaModal();
+	}
 	document.getElementById("verTodasPropuestas").onclick = b => location.href= config.rootUrl + "busquedaPropuesta";
 	for (let p of document.getElementsByClassName("btnVerPropuesta")){
 		p.onclick = c => {cargaPropuestaEspecifica(p.dataset.id);}
 	}
-	lanzaAlert();
 })
 
 function cargaPropuestaModal(){

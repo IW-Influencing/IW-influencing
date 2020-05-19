@@ -69,6 +69,8 @@ public class PerfilController {
         model.addAttribute("usuario", u);
         return "modals/perfil";
     }
+    
+    
 
     @GetMapping("/creacion")
     public String creacion(Model model, HttpSession session) {
@@ -77,6 +79,84 @@ public class PerfilController {
         return "modals/perfil";
     }
     
+    @PostMapping("/edicion")
+    @Transactional
+    public void edicionPerfil(HttpServletResponse response, Model model, HttpSession session, 
+    		@RequestParam String nombre, @RequestParam String apellidos,
+    		@RequestParam String pass1, @RequestParam String pass2,
+    		@RequestParam MultipartFile imagenPerfil, @RequestParam String tags) {
+    	
+        Usuario u = entityManager.find(Usuario.class, ((Usuario) session.getAttribute("u")).getId());
+    	String mensaje = "";
+    	boolean cambios = false;
+    	String[] prueba = tags.split(",");
+        if (tags.split(",").length > 0) {
+	        if (pass1.isEmpty() && pass2.isEmpty()) {
+	        	if (!imagenPerfil.isEmpty()) {
+	        		insertaImagenUsuario(imagenPerfil,u.getId());
+        			cambios = true;
+	        	}
+	        	if (!u.getNombre().equals(nombre)) {
+	        		u.setNombre(nombre);
+	        		cambios = true;
+	        	}
+	        	if (u.hasRole(Usuario.Rol.INFLUENCER)) {
+		        	if (!u.getApellidos().equals(apellidos)) {
+		        		u.setApellidos(apellidos);
+		        		cambios = true;
+		        	}
+	        	}
+	        	if (!u.getTags().equalsIgnoreCase(tags)) {
+	        		u.setTags(tags.toUpperCase());
+	        		cambios = true;
+	        	}
+	        	if (cambios) {
+	        		entityManager.persist(u);
+	        		mensaje = "Cambios realizados correctamente.";
+	        	}
+	        }
+	        else {
+	        	if (pass1.equals(pass2)) {
+	        		if (!imagenPerfil.isEmpty()) 
+		        		insertaImagenUsuario(imagenPerfil,u.getId());	
+	        		if (!u.getNombre().equals(nombre)) 
+		        		u.setNombre(nombre);
+		        	if (u.hasRole(Usuario.Rol.INFLUENCER)) {
+			        	if (!u.getApellidos().equals(apellidos)) {
+			        		u.setApellidos(apellidos);
+			        	}
+		        	}   	
+		        	if (!u.getTags().equalsIgnoreCase(tags)) 
+		        		u.setTags(tags.toUpperCase());
+	        		u.setPassword(u.encodePassword(pass1));
+	        		entityManager.persist(u);
+	        		mensaje = "Cambios realizados correctamente.";
+	        	}
+	        	else {
+	        		mensaje="Error. Las contraseñas no coinciden.";
+	        	}
+	        }
+        }
+        else {
+        	mensaje = "Error. Debes incluir al menos 1 tag.";
+        }
+       session.setAttribute("mensajeInfo", mensaje);
+	   	try {
+	   		if (u.hasRole(Usuario.Rol.ADMIN)) {
+	   			response.sendRedirect("/administracion");
+
+	   		}
+	   		else {
+	   			response.sendRedirect("/inicio");
+	   		}
+	   	} catch (IOException e) {
+			// TODO Auto-generated catch block
+			log.info("Error al redireccionar");
+		}
+        
+    }
+    
+    
     @PostMapping("/registra")
     @Transactional
 	public void registraUsuario(HttpSession session, HttpServletResponse response, Model model, 
@@ -84,8 +164,8 @@ public class PerfilController {
 			@RequestParam String apellidos,
     		@RequestParam String pass1,@RequestParam String pass2, 
     		@RequestParam MultipartFile imagenPerfil, @RequestParam String tipoCuenta,
-    		@RequestParam String tags,
-    		@RequestParam String edad,	@RequestParam String nombreTwitter, @RequestParam String seguidoresTwitter,
+    		@RequestParam String tags, @RequestParam String edad,
+    		@RequestParam String nombreTwitter, @RequestParam String seguidoresTwitter,
     		@RequestParam String nombreFacebook, @RequestParam String seguidoresFacebook,
     		@RequestParam String nombreInstagram, @RequestParam String seguidoresInstagram,
     		@RequestParam String nombreYoutube, @RequestParam String seguidoresYoutube){
@@ -110,7 +190,10 @@ public class PerfilController {
 		    	        	u.setApellidos(apellidos);
 		    	        	u.setEdad(Integer.valueOf(edad));
 		    	        	u.setPassword(Usuario.encodePassword(pass1));
-		    	        	u.setRoles("Usuario,Influencer");
+							u.setRoles(String.join(",", new String[]{ 
+									Rol.USER.toString(), 
+									Rol.INFLUENCER.toString() 
+								}));
 		    	        	u.setActivo(Byte.MAX_VALUE);
 		    	        	u.setTags(tags.toUpperCase());
 		    	        	u.setNum_contrataciones(0);
@@ -136,9 +219,10 @@ public class PerfilController {
         			Usuario u = new Usuario();
     	        	u.setNombreCuenta(nombreCuenta);
     	        	u.setNombre(nombre);
-    	        	u.setApellidos(apellidos);
     	        	u.setCandidaturas(new ArrayList<>());
     	        	u.setActivo(Byte.valueOf("1"));
+    	        	u.setTags(tags.toUpperCase());
+
 					u.setRoles(String.join(",", new String[]{ 
 						Rol.USER.toString(), 
 						Rol.EMPRESA.toString() 

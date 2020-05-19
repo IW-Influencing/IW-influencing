@@ -1,14 +1,9 @@
 -----------------------------------------------------------------------------
 
-
+Modal perfil arreglar CSS
 EDICION PERFIL 
- - Manejador controlador
- 
-Registro
-  * Empresa no deberian salir apellidos
+ - Validacion en cliente
 
-Busqueda perfil no salgan administradores
-  
 Perfil
   - ¿Boton mandar mensaje privado?
   - Boton denunciar
@@ -23,3 +18,4 @@ ADMINISTRACION
 
 Mostrar ultimatum chat
 Mensaje de valoracion, buscarle sentido
+

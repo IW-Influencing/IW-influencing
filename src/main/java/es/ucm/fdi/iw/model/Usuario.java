@@ -33,14 +33,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 		
 	@NamedQuery(name="Usuario.searchByNombre",
 	query="SELECT u FROM Usuario u "
-			+ "WHERE u.nombre LIKE :nombre"),
+			+ "WHERE u.nombre LIKE :nombre AND u.roles NOT LIKE '%ADMIN%' "),
 	
 	@NamedQuery(name="Usuario.getAllUsers",
-	query="SELECT u FROM Usuario u"),
+	query="SELECT u FROM Usuario u WHERE u.roles NOT LIKE '%ADMIN%' "),
 	
 	@NamedQuery(name="Usuario.searchByTag",
 	query="SELECT u FROM Usuario u "
-			+ "WHERE u.tags LIKE :tag")
+			+ "WHERE u.tags LIKE :tag  AND u.roles NOT LIKE '%ADMIN%' ")
+
 })
 
 @Table(uniqueConstraints={@UniqueConstraint(columnNames={"nombreCuenta"})})

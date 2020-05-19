@@ -27,15 +27,24 @@
     </div>
 
 
-    <!-- Nombre Perfil -->
-<div class="divCentrado">
-    <h2 class="w3-padding-24">Nombre y apellidos</h2>
-    <span th:if="${modo} eq 'VISTA'" th:text="${usuario.nombre} + ' ' + ${usuario.apellidos}"></span>
-    <input th:if="${modo} eq 'EDICION'" class="w3-input" type="text" name="nombre" th:value="${usuario.nombre}" required ></input>
-    <input th:if="${modo} eq 'EDICION'" class="w3-margin-top w3-input" type="text" name="apellidos" th:value="${usuario.apellidos}" required ></input>
-    <input th:if="${modo} eq 'CREACION'" type="text"  class="w3-input" name="nombre" placeholder="Introduzca su nombre" required></input>
-    <input th:if="${modo} eq 'CREACION'" type="text"  class="w3-margin-top w3-input"  name="apellidos" placeholder="Introduzca sus apellidos"required></input>
-</div>
+
+	<!-- Nombre y apellidos (EDICION, VISTA) -->
+	<div  th:unless="${modo} eq 'CREACION'">
+		<div th:if="${usuario.hasRole('EMPRESA')}" class="divCentrado">
+			<h2>Nombre de la empresa</h2>
+	    	<span th:if="${modo} eq 'VISTA'" th:text="${usuario.nombre}"></span>
+			<input th:if="${modo} eq 'EDICION'" class="w3-input" type="text" name="nombre" th:value="${usuario.nombre}"  placeholder="Introduzca el nombre de la empresa"  required ></input>
+			<input th:if="${modo} eq 'EDICION'" class="w3-margin-top w3-input" type="text" name="apellidos" style="display:none" ></input>
+
+		</div>
+
+		<div th:unless="${usuario.hasRole('EMPRESA')}" class="divCentrado">
+			<h2>Nombre y apellidos</h2>
+			<span th:if="${modo} eq 'VISTA'" th:text="${usuario.nombre} + ' ' + ${usuario.apellidos}"></span>
+		    <input th:if="${modo} eq 'EDICION'" class="w3-input" type="text" name="nombre" th:value="${usuario.nombre}" required ></input>
+			<input th:if="${modo} eq 'EDICION'" class="w3-margin-top w3-input" type="text" name="apellidos" th:value="${usuario.apellidos}" required ></input>
+		</div>
+	</div>
 
     <!-- Contraseña (CREACION, EDICION) -->
     <div class="divCentrado" th:if="${modo} eq 'CREACION' or ${modo} eq 'EDICION'">
@@ -43,13 +52,16 @@
       <input th:if="${modo} eq 'CREACION'" type="password" name="pass1" placeholder="Introduzca su contraseña"
         required class="w3-input"></input>
       <input th:if="${modo} eq 'EDICION'" type="password" name="pass1"  placeholder="Introduzca su  nueva contraseña"
-        required class="w3-input" size=30></input>
+         class="w3-input" size=30></input>
       <br>
       <input th:if="${modo} eq 'CREACION'" type="password" name="pass2" class="w3-margin-top w3-input" placeholder="Repita la contraseña"
         required ></input>
       <input th:if="${modo} eq 'EDICION'" type="password" name="pass2" class="w3-margin-top w3-input" placeholder="Repita la nueva contraseña"
-        required ></input>
+         ></input>
     </div>
+
+
+
 
 
     <!-- Imagen -->
@@ -61,39 +73,12 @@
       <img id="imagen-perfil" th:src="@{/perfil/{id}/photo(id=${usuario.id})}">
       <!-- ¿Boton para borrar la foto? -->
     </div>
-    <div th:if="${modo} eq 'CREACION'">
+    <div th:unless="${modo} eq 'VISTA'">
       <input type="file" name="imagenPerfil" class="w3-input w3-border">
     </div>
 
-	<div th:if="${modo} eq 'CREACION'">
-	<h2 class="w3-padding-24">Tipo de cuenta</h2>
-	<select class="w3-select w3-border w3-margin-bottom" id="tipoCuenta" name="tipoCuenta" required>
-    <option value="" disabled selected>Elige tu tipo de cuenta</option>
-    <option value="Influencer">Influencer</option>
-    <option value="Empresa">Empresa</option>
-	</select>
-	</div>
 
-    <!-- Valoracion (VISTA, EDICION) -->
-    <div class="divCentrado" th:if="${modo} eq 'VISTA' or ${modo} eq 'EDICION'">
-	  <h2>Valoración media</h2>
-
-
-			<div class="score" th:if="${usuario.score!=null}">
-				<th:block th:each="i: ${#numbers.sequence(1, usuario.score)}">					
-					<i class="fa fa-star w3-margin estrella"></i>
-				</th:block>
-				<i th:if="${#strings.substring(usuario.score,2) >= '5'}" class="fa fa-star-half-alt w3-margin estrella"></i>
-			</div>
-
-
-
-
-        <div class="score" th:if="${usuario.score == null}">
-          <p>No tiene valoraciones aun</p>
-        </div>
-      </div>    
-    
+  
       <!-- Tags -->
       <div id="tags" th:if="${modo} eq 'VISTA'">
         <button th:each="i : ${#strings.listSplit(usuario.tags, ',')}" class="w3-button w3-white tags" th:text="${i}" style="border-radius:12px;">Tags</li>
@@ -109,6 +94,34 @@
     </div>
 
 
+
+	<div th:if="${modo} eq 'CREACION'">
+	<h2 class="w3-padding-24">Tipo de cuenta</h2>
+	<select class="w3-select w3-border w3-margin-bottom" id="tipoCuenta" name="tipoCuenta" required>
+    <option value="" disabled selected>Elige tu tipo de cuenta</option>
+    <option value="Influencer">Influencer</option>
+    <option value="Empresa">Empresa</option>
+	</select>
+	</div>
+
+    <!-- Valoracion (VISTA, EDICION) -->
+    <div class="divCentrado" th:if="${modo} eq 'VISTA' or ${modo} eq 'EDICION'">
+	  <h2>Valoración media</h2>
+
+			<div class="score" th:if="${usuario.score!=null}">
+				<th:block th:each="i: ${#numbers.sequence(1, usuario.score)}">					
+					<i class="fa fa-star w3-margin estrella"></i>
+				</th:block>
+				<i th:if="${#strings.substring(usuario.score,2) >= '5'}" class="fa fa-star-half-alt w3-margin estrella"></i>
+			</div>
+
+        <div class="score" th:if="${usuario.score == null}">
+          <p>No tiene valoraciones aun</p>
+        </div>
+      </div>    
+  
+
+
   <!-- Historial propuestas (VISTA, EDICION) -->
       <div th:if="${modo} eq 'VISTA' or ${modo} eq 'EDICION'" class="divCentrado w3-margin-bottom">
         <h2 class="w3-padding-24">Historial de propuestas</h2>
@@ -122,11 +135,32 @@
         </div>
       </div>
     
+    <!-- Nombre Perfil -->
+	<div th:if="${modo} eq 'CREACION'" class="divCentrado" id="divNombreEmpresa" style="display:none">
+	    <h2 class="w3-padding-24" id="h2nombre">Nombre de la empresa</h2>
+	    <input type="text" id="nombreEmpresa" class="w3-input" name="nombre" placeholder="Introduzca el nombre de la empresa" required></input>
 
+	</div>
+	
+		
+
+	
+	    <!-- Nombre Perfil -->
+	<div th:if="${modo} eq 'CREACION'" class="divCentrado" id="divNombreInfluencer" style="display:none">
+	    <h2 class="w3-padding-24" id="h2nombre">Nombre y apellidos</h2>
+	    <input type="text"  id="nombreInfluencer" class="w3-input" name="nombre" placeholder="Introduzca su nombre" required></input>
+		<input type="text"  id="apellidosInfluencer" class="w3-margin-top w3-input"  name="apellidos" placeholder="Introduzca sus apellidos"required></input>
+	</div>
 
   <!-- Hacer historial de propuestas con query en el modelo -->
 	
 	<div  class="divCentrado" id="divPerfilesCreacion" style="display:none">
+	    
+      <!-- Apellidos -->
+
+
+
+	
       <!-- Edad -->
      <h2 class="w3-padding-24">Edad media de los seguidores</h2>
 	<div class="divFlexSpaceEvenly">
