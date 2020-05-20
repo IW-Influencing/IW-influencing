@@ -197,6 +197,7 @@ public class PerfilController {
 		    	        	u.setActivo(Byte.MAX_VALUE);
 		    	        	u.setTags(tags.toUpperCase());
 		    	        	u.setNum_contrataciones(0);
+							u.setVerificado(false);
 		    	        	entityManager.persist(u);
 		    	        	insertaPerfiles(nombreTwitter, seguidoresTwitter, nombreFacebook, seguidoresFacebook, 
 			        				nombreInstagram, seguidoresInstagram, nombreYoutube, seguidoresYoutube, u);
@@ -229,6 +230,7 @@ public class PerfilController {
 					}));
     	        	u.setPassword(Usuario.encodePassword(pass1));
     	        	u.setNum_contrataciones(0);
+					u.setVerificado(false);
     	        	entityManager.persist(u);
     	        	entityManager.flush();
     	        	insertaImagenUsuario(imagenPerfil, u.getId());

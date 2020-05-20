@@ -17,7 +17,7 @@
         <div class="title w3-display-container">
             
             <!-- Logo -->
-            <a class="logo w3-hover-text-white w3-display-topleft" href="/inicio">INFLUENCING</a>
+            <a class="logo w3-hover-text-white w3-display-topleft" th:href="${session.u.hasRole('ADMIN')}?@{/administracion}:@{/inicio}">INFLUENCING</a>
             
             <!-- Titulo Pagina -->
             <div class="w3-display-bottommiddle tituloPag">
@@ -41,7 +41,7 @@
         </div>
         
         <!-- Barra de Navegación -->
-        <div class="horizontalBar w3-margin-top">
+        <div th:unless="${session.u.hasRole('ADMIN')}" class="horizontalBar w3-margin-top">
             <ul class="ulFragment">
                 <li><a th:class="${nombrePagina=='BÚSQUEDA DE PERFILES'}?'active':''"
                         th:href="@{/busquedaPerfil}"><i class="fa fa-search" aria-hidden="true"></i> Búsqueda de

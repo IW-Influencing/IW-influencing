@@ -45,6 +45,7 @@ public class AdminController {
 
 		model.addAttribute("Usuarios", entityManager.createQuery(
 				"SELECT u FROM Usuario u").getResultList());
+
 		
 		return "admin";
 	}
@@ -66,5 +67,37 @@ public class AdminController {
 			target.setActivo((byte)1);
 		}
 		return index(model);
-	}	
+	}
+
+
+	@GetMapping("/influencers")
+	public String searchInfluencers(Model model){
+		model.addAttribute("modo", "INFLUENCER");
+		model.addAttribute("resultado", entityManager.createNamedQuery("Usuario.getAllInfluencers", Usuario.class).getResultList());
+		return "fragments/tablaAdmin";
+	}
+
+
+	@GetMapping("/empresas")
+	public String searchEmpresas(Model model){
+		model.addAttribute("modo", "EMPRESA");
+		model.addAttribute("resultado", entityManager.createNamedQuery("Usuario.getAllEmpresas", Usuario.class).getResultList());
+		return "fragments/tablaAdmin";
+	}
+
+
+	@GetMapping("/denuncias")
+	public String searchDenuncias(Model model){
+		model.addAttribute("modo", "DENUNCIA");
+		model.addAttribute("resultado", entityManager.createNamedQuery("Denuncia.getAllDenuncias", Usuario.class).getResultList());
+		return "fragments/tablaAdmin";
+	}
+
+
+	@GetMapping("/propuestas")	
+	public String searchPropuestas(Model model){
+		model.addAttribute("modo", 'PROPUESTA');
+		model.addAttribute("resultado", entityManager.createNamedQuery("Propuesta.getAllProposals", Usuario.class).getResultList());
+		return "fragments/tablaAdmin";
+	}
 }

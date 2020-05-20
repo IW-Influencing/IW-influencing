@@ -1,0 +1,114 @@
+<div class="w3-container">
+
+    <!-- Influencer -->
+    <table th:if="${modo} eq 'INFLUENCER'"class="w3-table-all w3-card-4 w3-margin-bottom">
+
+        <!--
+            Lista influencers
+
+        -->
+
+        <!-- Campos -->
+        <tr class="w3-cyan">
+            <th>Nombre cuenta</th>
+            <th>Nombre y apellidos</th>
+            <!-- <th>Fecha de registro</th> -->
+            <th>Número de contrataciones</th>
+            <th>Verificar</th>
+            <th>Eliminar</th>
+            <th>Ver</th>
+        </tr>
+        
+        <!-- Datos -->
+        <tr th:each="influencer : ${resultado}">
+            <td th:text="${influencer.nombreCuenta}"></td>
+            <td th:text="${influencer.nombre +' '+ influencer.apellidos}"></td>
+            <!-- <td >14-2-2019</td> -->
+            <td th:text="${influencer.numContrataciones}"></td>
+            <td><i class="far fa-check-square"></i></td>
+            <td><i class="far fa-eye"></i></i></td>
+            <td><i class="fa fa-trash"></i></td>
+        </tr>
+    </table>
+
+    <!-- Empresa -->
+    <table th:if="${modo} eq 'EMPRESA'"class="w3-table-all w3-card-4 w3-margin-bottom">
+
+        <!--
+            Lista empresas
+            
+        -->
+
+        <!-- Campos -->
+        <tr class="w3-cyan">
+            <th>Nombre cuenta</th>
+            <th>Nombre</th>
+            <th>Fecha de registro</th>
+            <th>Verificar</th>
+            <th>Eliminar</th>
+            <th>Ver</th>
+        </tr>
+        
+        <!-- Datos -->
+        <tr th:each="empresa : ${resultado}">
+            <td>Jill</td>
+            <td>Smith</td>
+            <td><i class="fa fa-trash"></i></td>
+            <td><i class="fa fa-search"></i></td>
+        </tr>
+    </table>
+
+    <!-- Propuesta-->
+    <table th:if="${modo} eq 'PROPUESTA'"class="w3-table-all w3-card-4 w3-margin-bottom">
+
+        <!--
+            Lista propuestas
+
+        -->
+
+        <!-- Campos -->
+        <tr class="w3-cyan">
+            <th>Nombre</th>
+            <th>Empresa creadora</th>
+            <th>Fecha publicación</th>
+            <th>Verificar</th>
+            <th>Eliminar</th>
+            <th>Ver</th>
+        </tr>
+        
+        <!-- Datos -->
+        <tr th:each="propuesta : ${resultado}">
+            <td>Jill</td>
+            <td>Smith</td>
+            <td><i class="fa fa-trash"></i></td>
+            <td><i class="fa fa-search"></i></td>
+        </tr>
+    </table>
+
+    <!-- Denuncia -->
+    <table th:if="${modo} eq 'DENUNCIA'"class="w3-table-all w3-card-4 w3-margin-bottom">
+
+        <!--
+            Lista denuncias
+
+        -->
+
+        <!-- Campos -->
+        <tr class="w3-cyan">
+            <th>Descripción</th>
+            <th>Denunciado</th>
+            <th>Denunciante</th>
+            <th>Fecha denuncia</th>
+            <th>Tramitar</th>
+        </tr>
+        
+        <!-- Datos -->
+        <tr th:each="denuncia : ${resultado}">
+            <td>Jill</td>
+            <td>Smith</td>
+            <td><i class="fa fa-trash"></i></td>
+            <td><i class="fa fa-search"></i></td>
+        </tr>
+    </table>
+    
+</div>

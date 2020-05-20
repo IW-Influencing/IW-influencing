@@ -46,6 +46,7 @@ public class Propuesta {
 	private LocalDateTime fechaFin;
 	private LocalDateTime fechaSubida;
 	private Boolean activa;
+	private Boolean verificado;
 	private int edadMinPublico;
 	private int edadMaxPublico;
 
@@ -165,8 +166,13 @@ public class Propuesta {
 		this.fechaSubida = fechaSubida;
 	}
 
-	
+	public Boolean getVerificado(){
+		return this.verificado;
+	}
 
-	
+	public void setVerificado(Boolean verificado){
+		this.verificado = verificado;
+	}
+
 
 }

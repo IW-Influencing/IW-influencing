@@ -111,6 +111,8 @@ public class RootController {
 	  }
 	  model.addAttribute("nombreUsuario", ((Usuario)session.getAttribute("u")).getNombre());
 	  model.addAttribute("busquedas", usuariosBuscados);
+    model.addAttribute("modo", "INFLUENCER");
+		model.addAttribute("resultado", entityManager.createNamedQuery("Usuario.getAllInfluencers", Usuario.class).getResultList());
 	  return "administracion";
   }
 

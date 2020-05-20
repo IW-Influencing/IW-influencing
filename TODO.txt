@@ -4,6 +4,9 @@ Modal perfil arreglar CSS
 EDICION PERFIL 
  - Validacion en cliente
 
+
+Chat de negociacion imagen de la propuesta
+
 Perfil
   - ¿Boton mandar mensaje privado?
   - Boton denunciar
@@ -19,3 +22,5 @@ ADMINISTRACION
 Mostrar ultimatum chat
 Mensaje de valoracion, buscarle sentido
 
+
+Fecha Registro

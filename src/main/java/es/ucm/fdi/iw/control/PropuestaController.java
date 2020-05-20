@@ -206,8 +206,8 @@ public class PropuestaController {
 			  tags = tags.toUpperCase();
 			  p.setTags(tags);
 			  Usuario usuarioLoggeado = entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId());
-
 			  p.setEmpresa(usuarioLoggeado);
+			  p.setVerificado(false);
 			  entityManager.persist(p);
 			  entityManager.flush();
 			  insertaImagenPropuesta(imagenPropuesta, p.getId());

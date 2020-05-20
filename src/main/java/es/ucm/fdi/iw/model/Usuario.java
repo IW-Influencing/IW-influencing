@@ -37,6 +37,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 	
 	@NamedQuery(name="Usuario.getAllUsers",
 	query="SELECT u FROM Usuario u WHERE u.roles NOT LIKE '%ADMIN%' "),
+
+	@NamedQuery(name="Usuario.getAllInfluencers",
+	query="SELECT u FROM Usuario u WHERE u.roles LIKE '%INFLUENCER%' AND u.activo = 1"),
+
+	@NamedQuery(name="Usuario.getAllEmpresas",
+	query="SELECT u FROM Usuario u WHERE u.roles LIKE '%EMPRESA%' AND u.activo = 1"),
 	
 	@NamedQuery(name="Usuario.searchByTag",
 	query="SELECT u FROM Usuario u "
@@ -62,9 +68,10 @@ public class Usuario {
 	private String apellidos;
 	private int edad;
 	private String tags; // Se almacenan los tags
-	private int num_contrataciones;
+	private int numContrataciones;
 	private Float score;
-
+	private Boolean verificado;
+	//fecha registro
 
 
 	@OneToMany(targetEntity=Propuesta.class)
@@ -201,12 +208,12 @@ public class Usuario {
 
 	
 	
-	public int getNum_contrataciones() {
-		return num_contrataciones;
+	public int getnumContrataciones() {
+		return numContrataciones;
 	}
 
-	public void setNum_contrataciones(int num_contrataciones) {
-		this.num_contrataciones = num_contrataciones;
+	public void setnumContrataciones(int numContrataciones) {
+		this.numContrataciones = numContrataciones;
 	}
 
 	/**
@@ -222,8 +229,16 @@ public class Usuario {
 
 	public void updatePuntuacion(int puntuacion) {
 		// TODO Auto-generated method stub
-		this.num_contrataciones+=1;
-		this.score = (this.score*(num_contrataciones-1) + puntuacion)/(num_contrataciones);
+		this.numContrataciones+=1;
+		this.score = (this.score*(numContrataciones-1) + puntuacion)/(numContrataciones);
+	}
+		
+	public Boolean getVerificado(){
+		return this.verificado;
+	}
+
+	public void setVerificado(Boolean verificado){
+		this.verificado = verificado;
 	}
 	
 

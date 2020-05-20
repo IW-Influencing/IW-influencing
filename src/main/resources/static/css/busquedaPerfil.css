@@ -75,7 +75,15 @@ li a:hover:not(.active) {
 	display: block;
 }
 
-.imgPerfilBusqueda {
+.imgPerfilBusqueda{
+  height: 20em;
   width:80%;
 }
+
+
+.imagen {
+	width: 100%;
+  text-align: center;
+}
+
 
