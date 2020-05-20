@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import es.ucm.fdi.iw.LocalData;
+import es.ucm.fdi.iw.model.Denuncia;
+import es.ucm.fdi.iw.model.Propuesta;
 import es.ucm.fdi.iw.model.Usuario;
 
 /**
@@ -89,15 +91,15 @@ public class AdminController {
 	@GetMapping("/denuncias")
 	public String searchDenuncias(Model model){
 		model.addAttribute("modo", "DENUNCIA");
-		model.addAttribute("resultado", entityManager.createNamedQuery("Denuncia.getAllDenuncias", Usuario.class).getResultList());
+		model.addAttribute("resultado", entityManager.createNamedQuery("Denuncia.getAllDenuncias", Denuncia.class).getResultList());
 		return "fragments/tablaAdmin";
 	}
 
 
 	@GetMapping("/propuestas")	
 	public String searchPropuestas(Model model){
-		model.addAttribute("modo", 'PROPUESTA');
-		model.addAttribute("resultado", entityManager.createNamedQuery("Propuesta.getAllProposals", Usuario.class).getResultList());
+		model.addAttribute("modo", "PROPUESTA");
+		model.addAttribute("resultado", entityManager.createNamedQuery("Propuesta.getAllProposals", Propuesta.class).getResultList());
 		return "fragments/tablaAdmin";
 	}
 }

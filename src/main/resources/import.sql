@@ -5,47 +5,47 @@
 
 -- Usuario de ejemplo con nombre = a y contraseña = aa  
 
-INSERT INTO usuario(id,activo,nombre_cuenta,nombre,password,roles,apellidos,edad,score,num_contrataciones) VALUES (
+INSERT INTO usuario(id,activo,nombre_cuenta,nombre,password,roles,apellidos,edad,score,num_contrataciones,verificado) VALUES (
 	1, 1, 'a','a',
 	'{bcrypt}$2a$10$xLFtBIXGtYvAbRqM95JhcOaG23fHRpDoZIJrsF2cCff9xEHTTdK1u',
 	'ADMIN',
 	'Abundio Ejemplez',
 	23,
 	4.5,
-	1
+	1,true
 );
 
 -- Otro usuario de ejemplo con username = b y contraseña = aa  
 
 
-INSERT INTO usuario(id,activo,nombre_cuenta,nombre,password,roles,apellidos,edad,tags,score,num_contrataciones) VALUES (
+INSERT INTO usuario(id,activo,nombre_cuenta,nombre,password,roles,apellidos,edad,tags,score,num_contrataciones,verificado) VALUES (
 	2, 1, 'b','InfluencerB',
 	'{bcrypt}$2a$10$xLFtBIXGtYvAbRqM95JhcOaG23fHRpDoZIJrsF2cCff9xEHTTdK1u',
 	'INFLUENCER',
 	'Berta Muestrez',
 	3,
 	'Fiesta',
-	4,1
+	4,1,false
 );
 
-INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad,tags,score,num_contrataciones) VALUES (
+INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad,tags,score,num_contrataciones,verificado) VALUES (
 	3, 1, 'InfluencerC', 'c', 
 	'{bcrypt}$2a$10$xLFtBIXGtYvAbRqM95JhcOaG23fHRpDoZIJrsF2cCff9xEHTTdK1u',
 	'INFLUENCER',
 	'Sanchez Garcia',
 	22,
 	'Videojuegos',
-	4,1
+	4,1,true
 );
 
-INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad,tags,score,num_contrataciones) VALUES (
+INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad,tags,score,num_contrataciones,verificado) VALUES (
 	4, 1, 'EmpresaD', 'd',
 	'{bcrypt}$2a$10$xLFtBIXGtYvAbRqM95JhcOaG23fHRpDoZIJrsF2cCff9xEHTTdK1u',
 	'EMPRESA',
 	'Martin Gimeno',
 	22,
 	'Bebidas,Espirituosas',
-	3,1
+	3,1,true
 );
 
 INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id,activa, edad_min_publico, edad_max_publico, fecha_inicio, fecha_fin, fecha_subida)  VALUES (

@@ -124,6 +124,12 @@ a:hover{
 	overflow:hidden;
 }
 
+input{
+	border-radius: 20px;
+	box-shadow: 0px 0px 9px 1px rgba(0,0,0,0.12), 1px 1px 2px rgba(0,0,0,0.24);
+
+}
+
 .tags {
     border: 1px solid deepskyblue !important;
     padding: 4px !important;

@@ -208,11 +208,11 @@ public class Usuario {
 
 	
 	
-	public int getnumContrataciones() {
+	public int getNumContrataciones() {
 		return numContrataciones;
 	}
 
-	public void setnumContrataciones(int numContrataciones) {
+	public void setNumContrataciones(int numContrataciones) {
 		this.numContrataciones = numContrataciones;
 	}
 

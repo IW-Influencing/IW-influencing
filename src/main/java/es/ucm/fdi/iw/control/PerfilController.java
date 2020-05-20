@@ -196,7 +196,7 @@ public class PerfilController {
 								}));
 		    	        	u.setActivo(Byte.MAX_VALUE);
 		    	        	u.setTags(tags.toUpperCase());
-		    	        	u.setNum_contrataciones(0);
+		    	        	u.setNumContrataciones(0);
 							u.setVerificado(false);
 		    	        	entityManager.persist(u);
 		    	        	insertaPerfiles(nombreTwitter, seguidoresTwitter, nombreFacebook, seguidoresFacebook, 
@@ -229,7 +229,7 @@ public class PerfilController {
 						Rol.EMPRESA.toString() 
 					}));
     	        	u.setPassword(Usuario.encodePassword(pass1));
-    	        	u.setNum_contrataciones(0);
+    	        	u.setNumContrataciones(0);
 					u.setVerificado(false);
     	        	entityManager.persist(u);
     	        	entityManager.flush();

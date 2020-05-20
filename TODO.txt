@@ -4,6 +4,7 @@ Modal perfil arreglar CSS
 EDICION PERFIL 
  - Validacion en cliente
 
+Busqueda administracion
 
 Chat de negociacion imagen de la propuesta
 

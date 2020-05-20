@@ -1,13 +1,13 @@
 <div class="w3-container">
 
     <!-- Influencer -->
-    <table th:if="${modo} eq 'INFLUENCER'"class="w3-table-all w3-card-4 w3-margin-bottom">
+    <table th:if="${modo} eq 'INFLUENCER'"class="w3-table-all w3-card-4 w3-margin-bottom w3-centered w3-round-xxlarge">
 
         <!--
             Lista influencers
 
         -->
-
+		<h2 class="w3-center">Lista de influencers</h2>
         <!-- Campos -->
         <tr class="w3-cyan">
             <th>Nombre cuenta</th>
@@ -15,8 +15,8 @@
             <!-- <th>Fecha de registro</th> -->
             <th>Número de contrataciones</th>
             <th>Verificar</th>
-            <th>Eliminar</th>
             <th>Ver</th>
+            <th>Eliminar</th>
         </tr>
         
         <!-- Datos -->
@@ -25,46 +25,57 @@
             <td th:text="${influencer.nombre +' '+ influencer.apellidos}"></td>
             <!-- <td >14-2-2019</td> -->
             <td th:text="${influencer.numContrataciones}"></td>
-            <td><i class="far fa-check-square"></i></td>
+            <td>
+				<i th:unless="${influencer.verificado}" class="far fa-check-square"></i>
+				<span th:if="${influencer.verificado}">Ya verificado</span>
+
+				</td>
             <td><i class="far fa-eye"></i></i></td>
             <td><i class="fa fa-trash"></i></td>
         </tr>
     </table>
 
     <!-- Empresa -->
-    <table th:if="${modo} eq 'EMPRESA'"class="w3-table-all w3-card-4 w3-margin-bottom">
+    <table th:if="${modo} eq 'EMPRESA'"class="w3-table-all w3-card-4 w3-margin-bottom w3-centered">
 
         <!--
             Lista empresas
             
         -->
+		<h2 class="w3-center">Lista de empresas</h2>
 
         <!-- Campos -->
         <tr class="w3-cyan">
             <th>Nombre cuenta</th>
             <th>Nombre</th>
-            <th>Fecha de registro</th>
+           <!-- <th>Fecha de registro</th>-->
             <th>Verificar</th>
-            <th>Eliminar</th>
             <th>Ver</th>
+            <th>Eliminar</th>
         </tr>
         
         <!-- Datos -->
         <tr th:each="empresa : ${resultado}">
-            <td>Jill</td>
-            <td>Smith</td>
+            <td th:text="${empresa.nombreCuenta}">Jill</td>
+            <td th:text="${empresa.nombre}">Smith</td>
+            <td>
+				<i th:unless="${empresa.verificado}" class="far fa-check-square"></i>
+				<span th:if="${empresa.verificado}">Ya verificado</span>
+
+				</td>
+            <td><i class="fa fa-eye"></i></td>
             <td><i class="fa fa-trash"></i></td>
-            <td><i class="fa fa-search"></i></td>
         </tr>
     </table>
 
     <!-- Propuesta-->
-    <table th:if="${modo} eq 'PROPUESTA'"class="w3-table-all w3-card-4 w3-margin-bottom">
+    <table th:if="${modo} eq 'PROPUESTA'"class="w3-table-all w3-card-4 w3-margin-bottom w3-centered">
 
         <!--
             Lista propuestas
 
         -->
+		<h2 class="w3-center">Lista de propuestas</h2>
 
         <!-- Campos -->
         <tr class="w3-cyan">
@@ -72,26 +83,33 @@
             <th>Empresa creadora</th>
             <th>Fecha publicación</th>
             <th>Verificar</th>
-            <th>Eliminar</th>
             <th>Ver</th>
+            <th>Eliminar</th>
         </tr>
         
         <!-- Datos -->
         <tr th:each="propuesta : ${resultado}">
-            <td>Jill</td>
-            <td>Smith</td>
+            <td th:text="${propuesta.nombre}"></td>
+            <td th:text="${propuesta.empresa.nombre}"></td>
+            <td th:text="${#temporals.format(propuesta.fechaSubida, 'dd/MM/yyyy')}"></td>
+            <td>
+				<i th:unless="${propuesta.verificado}" class="far fa-check-square"></i>
+				<span th:if="${propuesta.verificado}">Ya verificado</span>
+
+				</td>
+            <td><i class="fa fa-eye"></i></td>
             <td><i class="fa fa-trash"></i></td>
-            <td><i class="fa fa-search"></i></td>
         </tr>
     </table>
 
     <!-- Denuncia -->
-    <table th:if="${modo} eq 'DENUNCIA'"class="w3-table-all w3-card-4 w3-margin-bottom">
+    <table th:if="${modo} eq 'DENUNCIA'"class="w3-table-all w3-card-4 w3-margin-bottom w3-centered">
 
         <!--
             Lista denuncias
 
         -->
+		<h2 class="w3-center">Lista de denuncias</h2>
 
         <!-- Campos -->
         <tr class="w3-cyan">
