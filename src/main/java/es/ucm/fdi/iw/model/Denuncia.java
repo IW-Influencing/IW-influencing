@@ -21,19 +21,18 @@ public class Denuncia {
     private long id;
     private Usuario denunciante;
     private Usuario denunciado;
-    private String detalles;
+    private String titulo;
+    private String descripcion;
     private boolean tramitada;
     private LocalDateTime fecha;
 
-    public Denuncia() {
+
+    public String getTitulo() {
+        return this.titulo;
     }
 
-    public Denuncia(long id, Usuario denunciante, Usuario denunciado, String detalles, boolean tramitada) {
-        this.id = id;
-        this.denunciante = denunciante;
-        this.denunciado = denunciado;
-        this.detalles = detalles;
-        this.tramitada = tramitada;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     @Id
@@ -64,12 +63,12 @@ public class Denuncia {
         this.denunciado = denunciado;
     }
 
-    public String getDetalles() {
-        return this.detalles;
+    public String getDescripcion() {
+        return this.descripcion;
     }
 
-    public void setDetalles(String detalles) {
-        this.detalles = detalles;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public boolean isTramitada() {
@@ -80,38 +79,12 @@ public class Denuncia {
         this.tramitada = tramitada;
     }
 
-    public Denuncia denunciante(Usuario denunciante) {
-        this.denunciante = denunciante;
-        return this;
-    }
-
-    public Denuncia denunciado(Usuario denunciado) {
-        this.denunciado = denunciado;
-        return this;
-    }
-
-    public Denuncia denuncia(String detalles) {
-        this.detalles = detalles;
-        return this;
-    }
-
-    public Denuncia tramitada(boolean tramitada) {
-        this.tramitada = tramitada;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "{" + " idDenuncia='" + getId() + "'" + ", denunciante='" + getDenunciante() + "'" + ", denunciado='"
-                + getDenunciado() + "'" + ", denuncia='" + getDetalles() + "'" + ", tramitada='" + isTramitada() + "'"
-                + "}";
-    }
-
 	public LocalDateTime getFecha() {
-		return fecha;
+		return this.fecha;
 	}
 
 	public void setFecha(LocalDateTime fecha) {
 		this.fecha = fecha;
 	}
+
 }

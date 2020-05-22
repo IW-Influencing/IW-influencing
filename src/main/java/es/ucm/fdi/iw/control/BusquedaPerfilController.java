@@ -41,7 +41,7 @@ public class BusquedaPerfilController {
 	  }
 	  
 	  @GetMapping("/busca")
-		public String postSearch(Model model, HttpSession session, @RequestParam(required = true, defaultValue = "1") int indicePagina, @RequestParam String patron ) {
+		public String postSearch(Model model, HttpSession session, @RequestParam(required = true, defaultValue = "1") int indicePagina, @RequestParam String patron) {
 			String patronParaLike = "%"+patron+"%";
 			List<Usuario> usuarios = null;
 			usuarios = entityManager.createNamedQuery("Usuario.searchByNombre", Usuario.class)

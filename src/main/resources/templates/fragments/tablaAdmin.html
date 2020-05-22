@@ -12,9 +12,9 @@
         <tr class="w3-cyan">
             <th>Nombre cuenta</th>
             <th>Nombre y apellidos</th>
-            <!-- <th>Fecha de registro</th> -->
             <th>Número de contrataciones</th>
-            <th>Verificar</th>
+            <th>Fecha de registro</th>
+            <th>Verificación</th>
             <th>Ver</th>
             <th>Eliminar</th>
         </tr>
@@ -23,15 +23,14 @@
         <tr th:each="influencer : ${resultado}">
             <td th:text="${influencer.nombreCuenta}"></td>
             <td th:text="${influencer.nombre +' '+ influencer.apellidos}"></td>
-            <!-- <td >14-2-2019</td> -->
             <td th:text="${influencer.numContrataciones}"></td>
+            <td th:text="${#temporals.format(influencer.fechaRegistro, 'dd/MM/yyyy')}"></td>
             <td>
-				<i th:unless="${influencer.verificado}" class="far fa-check-square"></i>
-				<span th:if="${influencer.verificado}">Ya verificado</span>
-
-				</td>
-            <td><i class="far fa-eye"></i></i></td>
-            <td><i class="fa fa-trash"></i></td>
+				<i th:if="${influencer.verificado}" class="far fa-check-square"></i>
+				<button th:attr="data-id=${influencer.id}" th:unless="${influencer.verificado}" class="verificarInfluencer">Verificar</button>
+			</td>
+            <td><i th:attr="data-id=${influencer.id}" class="far fa-eye verInfluencer"></i></i></td>
+            <td><i th:attr="data-id=${influencer.id}" class="fa fa-trash eliminarInfluencer"></i></td>
         </tr>
     </table>
 
@@ -48,23 +47,23 @@
         <tr class="w3-cyan">
             <th>Nombre cuenta</th>
             <th>Nombre</th>
-           <!-- <th>Fecha de registro</th>-->
-            <th>Verificar</th>
+            <th>Fecha de registro</th>
+            <th>Verificación</th>
             <th>Ver</th>
             <th>Eliminar</th>
         </tr>
         
         <!-- Datos -->
         <tr th:each="empresa : ${resultado}">
-            <td th:text="${empresa.nombreCuenta}">Jill</td>
-            <td th:text="${empresa.nombre}">Smith</td>
+            <td th:text="${empresa.nombreCuenta}"></td>
+            <td th:text="${empresa.nombre}"></td>
+            <td th:text="${#temporals.format(empresa.fechaRegistro, 'dd/MM/yyyy')}"></td>
             <td>
-				<i th:unless="${empresa.verificado}" class="far fa-check-square"></i>
-				<span th:if="${empresa.verificado}">Ya verificado</span>
-
-				</td>
-            <td><i class="fa fa-eye"></i></td>
-            <td><i class="fa fa-trash"></i></td>
+				<i th:if="${empresa.verificado}" class="far fa-check-square"></i>
+				<button th:unless="${empresa.verificado}" th:attr="data-id=${empresa.id}" class="verificarEmpresa">Verificar</button>
+			</td>
+            <td><i th:attr="data-id=${empresa.id}" class="fa fa-eye verEmpresa"></i></td>
+            <td><i th:attr="data-id=${empresa.id}" class="fa fa-trash eliminarEmpresa"></i></td>
         </tr>
     </table>
 
@@ -82,6 +81,7 @@
             <th>Nombre</th>
             <th>Empresa creadora</th>
             <th>Fecha publicación</th>
+            <th>Periodo</th>
             <th>Verificar</th>
             <th>Ver</th>
             <th>Eliminar</th>
@@ -92,13 +92,16 @@
             <td th:text="${propuesta.nombre}"></td>
             <td th:text="${propuesta.empresa.nombre}"></td>
             <td th:text="${#temporals.format(propuesta.fechaSubida, 'dd/MM/yyyy')}"></td>
+            <td th:text="${#temporals.format(propuesta.fechaInicio,
+            'dd/MM/yyyy') + ' - ' + #temporals.format(propuesta.fechaFin,'dd/MM/yyyy')}"></td>
             <td>
-				<i th:unless="${propuesta.verificado}" class="far fa-check-square"></i>
-				<span th:if="${propuesta.verificado}">Ya verificado</span>
 
-				</td>
-            <td><i class="fa fa-eye"></i></td>
-            <td><i class="fa fa-trash"></i></td>
+                <i th:if="${propuesta.verificado}" class="far fa-check-square"></i>
+				<button th:unless="${propuesta.verificado}" th:attr="data-id=${propuesta.id}" class="verificarPropuesta">Verificar</button>
+            </td>
+                
+            <td><i th:attr="data-id=${propuesta.id}" class="fa fa-eye verPropuesta"></i></td>
+            <td><i th:attr="data-id=${propuesta.id}" class="fa fa-trash eliminarPropuesta"></i></td>
         </tr>
     </table>
 
@@ -113,9 +116,9 @@
 
         <!-- Campos -->
         <tr class="w3-cyan">
-            <th>Descripción</th>
-            <th>Denunciado</th>
             <th>Denunciante</th>
+            <th>Título</th>
+            <th>Denunciado</th>
             <th>Fecha denuncia</th>
             <th>Tramitar</th>
         </tr>
@@ -123,9 +126,10 @@
         <!-- Datos -->
         <tr th:each="denuncia : ${resultado}">
             <td>Jill</td>
-            <td>Smith</td>
-            <td><i class="fa fa-trash"></i></td>
-            <td><i class="fa fa-search"></i></td>
+            <td>Me ha insultado</td>
+            <td>Pepe</td>
+            <td>12/4/2017</td>
+            <td><button></button></td>
         </tr>
     </table>
     

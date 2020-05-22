@@ -5,47 +5,47 @@
 
 -- Usuario de ejemplo con nombre = a y contraseña = aa  
 
-INSERT INTO usuario(id,activo,nombre_cuenta,nombre,password,roles,apellidos,edad,score,num_contrataciones,verificado) VALUES (
-	1, 1, 'a','a',
+INSERT INTO usuario(id,activo,nombre_cuenta,nombre,password,roles,apellidos,edad,score,num_contrataciones,verificado,fecha_registro) VALUES (
+	1, true, 'a','a',
 	'{bcrypt}$2a$10$xLFtBIXGtYvAbRqM95JhcOaG23fHRpDoZIJrsF2cCff9xEHTTdK1u',
 	'ADMIN',
 	'Abundio Ejemplez',
 	23,
 	4.5,
-	1,true
+	1,true,'2015-07-23'
 );
 
 -- Otro usuario de ejemplo con username = b y contraseña = aa  
 
 
-INSERT INTO usuario(id,activo,nombre_cuenta,nombre,password,roles,apellidos,edad,tags,score,num_contrataciones,verificado) VALUES (
-	2, 1, 'b','InfluencerB',
+INSERT INTO usuario(id,activo,nombre_cuenta,nombre,password,roles,apellidos,edad,tags,score,num_contrataciones,verificado,fecha_registro) VALUES (
+	2, true, 'b','InfluencerB',
 	'{bcrypt}$2a$10$xLFtBIXGtYvAbRqM95JhcOaG23fHRpDoZIJrsF2cCff9xEHTTdK1u',
 	'INFLUENCER',
 	'Berta Muestrez',
 	3,
 	'Fiesta',
-	4,1,false
+	4,1,false,'2015-07-22'
 );
 
-INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad,tags,score,num_contrataciones,verificado) VALUES (
-	3, 1, 'InfluencerC', 'c', 
+INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad,tags,score,num_contrataciones,verificado,fecha_registro) VALUES (
+	3, true, 'InfluencerC', 'c', 
 	'{bcrypt}$2a$10$xLFtBIXGtYvAbRqM95JhcOaG23fHRpDoZIJrsF2cCff9xEHTTdK1u',
 	'INFLUENCER',
 	'Sanchez Garcia',
 	22,
 	'Videojuegos',
-	4,1,true
+	4,1,true,'2015-07-21'
 );
 
-INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad,tags,score,num_contrataciones,verificado) VALUES (
-	4, 1, 'EmpresaD', 'd',
+INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad,tags,score,num_contrataciones,verificado,fecha_registro) VALUES (
+	4, true, 'EmpresaD', 'd',
 	'{bcrypt}$2a$10$xLFtBIXGtYvAbRqM95JhcOaG23fHRpDoZIJrsF2cCff9xEHTTdK1u',
 	'EMPRESA',
 	'Martin Gimeno',
 	22,
 	'Bebidas,Espirituosas',
-	3,1,true
+	3,1,true,'2015-07-20'
 );
 
 INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id,activa, edad_min_publico, edad_max_publico, fecha_inicio, fecha_fin, fecha_subida)  VALUES (
@@ -54,7 +54,7 @@ INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id,activa, edad_
 	'Metropubli',
 	100,
 	'Ciudad',
-	4,true,1,5,'2017-07-23','2017-07-23','2017-07-23'
+	4,true,1,5,'2017-07-20','2017-07-23','2017-07-23'
 );
 
 INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id,activa, edad_min_publico, edad_max_publico, fecha_inicio, fecha_fin, fecha_subida) VALUES (
@@ -63,7 +63,7 @@ INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id,activa, edad_
 	'Taxipubli',
 	200,
 	'Ciudad,Taxi,Transporte',
-	4,true,1,5,'2019-07-23','2019-07-23','2019-07-23'
+	4,true,1,5,'2019-07-20','2019-07-23','2019-07-23'
 );
 INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id, activa, edad_min_publico, edad_max_publico, fecha_inicio, fecha_fin, fecha_subida) VALUES (
 	3,
@@ -72,7 +72,7 @@ INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id, activa, edad
 	500,
 	'Musica',
 	4,
-true,1,5,'2018-07-23','2018-07-23','2018-07-23'
+true,1,5,'2018-07-20','2018-07-23','2018-07-23'
 );
 
 

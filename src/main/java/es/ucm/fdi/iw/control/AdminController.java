@@ -56,17 +56,17 @@ public class AdminController {
 	@Transactional
 	public String delUsuario(Model model,	@RequestParam long id) {
 		Usuario target = entityManager.find(Usuario.class, id);
-		if (target.getActivo() == 1) {
+		if (target.getActivo() == true) {
 			// disable
 			File f = localData.getFile("Usuario", ""+id);
 			if (f.exists()) {
 				f.delete();
 			}
 			// disable Usuario
-			target.setActivo((byte)0); 
+			target.setActivo(false); 
 		} else {
 			// enable Usuario
-			target.setActivo((byte)1);
+			target.setActivo(true);
 		}
 		return index(model);
 	}
@@ -101,5 +101,61 @@ public class AdminController {
 		model.addAttribute("modo", "PROPUESTA");
 		model.addAttribute("resultado", entityManager.createNamedQuery("Propuesta.getAllProposals", Propuesta.class).getResultList());
 		return "fragments/tablaAdmin";
+	}
+
+	@GetMapping("/eliminaInfluencer")
+	@Transactional
+	public String eliminaInfluencer(Model model,  @RequestParam long id){
+		Usuario u = entityManager.find(Usuario.class, id);
+		u.setActivo(false);
+		entityManager.persist(u);
+		return searchInfluencers(model);
+	}
+
+
+	@GetMapping("/eliminaEmpresa")
+	@Transactional
+	public String eliminaEmpresa(Model model,  @RequestParam long id){
+		Usuario u = entityManager.find(Usuario.class, id);
+		u.setActivo(false);
+		entityManager.persist(u);
+		return searchEmpresas(model);
+	}
+
+	@GetMapping("/eliminaPropuesta")	
+	@Transactional
+	public String eliminaPropuesta(Model model,  @RequestParam long id){
+		Propuesta p = entityManager.find(Propuesta.class, id);
+		p.setActiva(false);
+		entityManager.persist(p);
+		return searchPropuestas(model);
+	}
+
+	@GetMapping("/verificaInfluencer")
+	@Transactional
+	public String verificaInfluencer(Model model,  @RequestParam long id){
+		Usuario u = entityManager.find(Usuario.class, id);
+		u.setVerificado(true);
+		entityManager.persist(u);
+		return searchInfluencers(model);
+	}
+
+
+	@GetMapping("/verificaEmpresa")
+	@Transactional
+	public String verificaEmpresa(Model model,  @RequestParam long id){
+		Usuario u = entityManager.find(Usuario.class, id);
+		u.setVerificado(true);
+		entityManager.persist(u);
+		return searchEmpresas(model);
+	}
+
+	@GetMapping("/verificaPropuesta")
+	@Transactional
+	public String verificaPropuesta(Model model,  @RequestParam long id){
+		Propuesta p = entityManager.find(Propuesta.class, id);
+		p.setVerificado(true);
+		entityManager.persist(p);
+		return searchPropuestas(model);
 	}
 }

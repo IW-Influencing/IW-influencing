@@ -185,13 +185,11 @@ public class PropuestaController {
 	    		@RequestParam MultipartFile imagenPropuesta, @RequestParam String tags){
 
 	      String mensaje = "";
-		  //Comprobar fecha inicio
-		  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		  LocalDateTime fechaIni = LocalDate.parse(fechaInicio).atTime(LocalTime.now());
 		  LocalDateTime fechaFinal = LocalDate.parse(fechaFin).atTime(LocalTime.now());
 
 		  if (fechaIni.isBefore(LocalDateTime.now())){
-			  mensaje = "Error. Las fechas deben ser como mínimo las actuales";
+			  mensaje = "Error. Las fechas deben ser como mínimo las actuales"; // Comprobar fecha inicio
 		  }
 		  else {
 			  Propuesta p = new Propuesta();
@@ -203,6 +201,8 @@ public class PropuestaController {
 			  p.setEdadMaxPublico(Integer.valueOf(edades.split("-")[1]));
 			  p.setSueldo(Integer.valueOf(sueldo));
 			  p.setFechaSubida(LocalDateTime.now());
+			  p.setFechaInicio(fechaIni);
+			  p.setFechaFin(fechaFinal);
 			  tags = tags.toUpperCase();
 			  p.setTags(tags);
 			  Usuario usuarioLoggeado = entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId());

@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -184,7 +185,8 @@ public class PerfilController {
         			if (edad.length()>0) {
 		        		if(validaPerfiles(nombreTwitter, seguidoresTwitter, nombreFacebook, seguidoresFacebook, 
 		        				nombreInstagram, seguidoresInstagram, nombreYoutube, seguidoresYoutube)) {
-		        			Usuario u = new Usuario();
+							Usuario u = new Usuario();
+							u.setFechaRegistro(LocalDateTime.now());
 		    	        	u.setNombreCuenta(nombreCuenta);
 		    	        	u.setNombre(nombre);
 		    	        	u.setApellidos(apellidos);
@@ -194,7 +196,7 @@ public class PerfilController {
 									Rol.USER.toString(), 
 									Rol.INFLUENCER.toString() 
 								}));
-		    	        	u.setActivo(Byte.MAX_VALUE);
+		    	        	u.setActivo(true);
 		    	        	u.setTags(tags.toUpperCase());
 		    	        	u.setNumContrataciones(0);
 							u.setVerificado(false);
@@ -221,7 +223,7 @@ public class PerfilController {
     	        	u.setNombreCuenta(nombreCuenta);
     	        	u.setNombre(nombre);
     	        	u.setCandidaturas(new ArrayList<>());
-    	        	u.setActivo(Byte.valueOf("1"));
+    	        	u.setActivo(true);
     	        	u.setTags(tags.toUpperCase());
 
 					u.setRoles(String.join(",", new String[]{ 

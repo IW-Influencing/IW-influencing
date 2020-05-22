@@ -1,5 +1,6 @@
 package es.ucm.fdi.iw.model;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -58,7 +59,7 @@ public class Usuario {
 	private static PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 	
 	private long id; // Id unico para cada usuario
-	private byte activo;
+	private Boolean activo;
 	@Column(name = "nombreCuenta")
 	private String nombreCuenta;
 	private String password;
@@ -71,7 +72,15 @@ public class Usuario {
 	private int numContrataciones;
 	private Float score;
 	private Boolean verificado;
-	//fecha registro
+	private LocalDateTime fechaRegistro;
+
+	public LocalDateTime getFechaRegistro() {
+		return this.fechaRegistro;
+	}
+
+	public void setFechaRegistro(LocalDateTime fechaRegistro) {
+		this.fechaRegistro = fechaRegistro;
+	}
 
 
 	@OneToMany(targetEntity=Propuesta.class)
@@ -198,11 +207,11 @@ public class Usuario {
 		this.password = contraseña;
 	}
 
-	public byte getActivo() {
+	public Boolean getActivo() {
 		return activo;
 	}
 
-	public void setActivo(byte activo) {
+	public void setActivo(Boolean activo) {
 		this.activo = activo;
 	}
 

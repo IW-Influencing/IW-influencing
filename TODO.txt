@@ -1,16 +1,30 @@
 -----------------------------------------------------------------------------
-
-Modal perfil arreglar CSS
-EDICION PERFIL 
- - Validacion en cliente
+Denuncia 
+  Controlador hacer los redirect y mensajes de alert
+  Validacion cliente y controlador
+  Boton denunciar en modal de perfil
+  Boton denunciar añadir el campo id del denunciado en el html
+  Boton denunciar añadirle el ajax para la peticion
 
 Busqueda administracion
+EDICION PERFIL 
+  - Validacion en cliente
 
 Chat de negociacion imagen de la propuesta
 
+
+------------------------------------------------------------------
+
+
+
+Modal perfil arreglar CSS
+
+
+
+
+
 Perfil
   - ¿Boton mandar mensaje privado?
-  - Boton denunciar
 
 Negociacion
   - WebSocket para notificar cuantos chat hay sin leer
@@ -22,6 +36,6 @@ ADMINISTRACION
 
 Mostrar ultimatum chat
 Mensaje de valoracion, buscarle sentido
-
-
-Fecha Registro
+PerfilesRRSS en vista
+Limpiar querys que no se utilizan
+Redirect --> Consultar el historial de la pagina en la que estas
