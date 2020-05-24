@@ -14,7 +14,7 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
 	@NamedQuery(name="Denuncia.getLastThree", query="SELECT d FROM Denuncia d ORDER BY d.fecha"),
 
-	@NamedQuery(name="Denuncia.getAllDenuncias", query="SELECT d FROM Denuncia d WHERE d.tramitada=false")
+	@NamedQuery(name="Denuncia.getAllDenuncias", query="SELECT d FROM Denuncia d")
 })
 public class Denuncia {
 

@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("botonNotificacionesNav").onclick = b => cargaNotificacionesModalNav();
-    document.getElementById("botonPerfilNav").onclick = b => cargaPerfilModalNav();
+	document.getElementById("botonPerfilNav").onclick = b => cargaPerfilModalNav();
 });
 
 function cargaPerfilModalNav(){
@@ -33,4 +33,10 @@ function abreEmpresa(evt, nombreEmpresa) {
 function lanzaAlert() {
 	if (document.getElementById("mensajeInfo").textContent !== "")
 	  alert(document.getElementById("mensajeInfo").textContent);
+}
+
+function cargaModalDenuncia(idDenunciado){
+	document.getElementById('modal').style.display='block';
+	return go2(config.rootUrl + "denuncia?idDenunciado=" + idDenunciado, 'GET')
+		.then(html => document.getElementById("contenidoModal").innerHTML=html);
 }

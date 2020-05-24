@@ -11,7 +11,10 @@
 <body>
 
     <form th:action="@{/contrataciones/valorar}" method="POST">
+
+        <!-- Valor id oculto -->
         <input type="hidden" name="idCandidatura" th:value="${idCandidatura}">
+        
         <div class="w3-container">
 
             <!-- Propuesta -->

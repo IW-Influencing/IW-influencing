@@ -2,7 +2,6 @@
 Denuncia 
   Controlador hacer los redirect y mensajes de alert
   Validacion cliente y controlador
-  Boton denunciar en modal de perfil
   Boton denunciar añadir el campo id del denunciado en el html
   Boton denunciar añadirle el ajax para la peticion
 

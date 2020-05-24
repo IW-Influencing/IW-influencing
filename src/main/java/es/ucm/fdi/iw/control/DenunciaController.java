@@ -44,13 +44,13 @@ public class DenunciaController {
         model.addAttribute("denunciante", entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId()));
         model.addAttribute("denunciado", entityManager.find(Usuario.class, idDenunciado));
         model.addAttribute("modo", "CREACION");
-        return "denuncia";
+        return "modals/denuncia";
     }
 
 	 
     @PostMapping("/registrar")
     @Transactional
-	public void registraDenuncia(Model model, HttpSession session, @RequestParam long idDenunciado, @RequestParam String descripcion, @RequestParam String titulo) {
+	public void registraDenuncia(Model model, HttpSession session,HttpServletResponse response, @RequestParam long idDenunciado, @RequestParam String descripcion, @RequestParam String titulo) {
 
 		Usuario denunciante =  entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId());
         Usuario denunciado = entityManager.find(Usuario.class, idDenunciado);
@@ -62,10 +62,19 @@ public class DenunciaController {
         d.setTramitada(false);
         d.setFecha(LocalDateTime.now());
         entityManager.persist(d);
+        entityManager.flush();
+        System.out.println(d);
+        session.setAttribute("mensajeInfo", "Denuncia enviada correctamente");
+		try {
+			response.sendRedirect("/inicio");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			log.info("Error al redireccionar");
+		}
 	}
 
-     @PostMapping("/tramitar")
-     @Transactional
+    @PostMapping("/tramitar")
+    @Transactional
 	public void tramitaDenuncia(Model model, HttpSession session, @RequestParam long idDenuncia) {
 
 		Denuncia d = entityManager.find(Denuncia.class, idDenuncia);

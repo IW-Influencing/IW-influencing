@@ -66,7 +66,10 @@ function cargaBusquedasPorTag(tag){
 function cargaModalPerfil(idPerfil){
 	document.getElementById('modal').style.display='block';
 	return go2(config.rootUrl + "perfil?idUsuario=" + idPerfil, 'GET')
-		.then(html => document.getElementById("contenidoModal").innerHTML=html);
+		.then(html => {
+			document.getElementById("contenidoModal").innerHTML=html;
+			document.getElementById("btnDenunciar").onclick = b => cargaModalDenuncia(document.getElementById("btnDenunciar").dataset.id);
+		})
 }
 
 

@@ -1,6 +1,7 @@
 package es.ucm.fdi.iw.control;
 
 import java.io.File;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
@@ -91,6 +92,10 @@ public class AdminController {
 	@GetMapping("/denuncias")
 	public String searchDenuncias(Model model){
 		model.addAttribute("modo", "DENUNCIA");
+		List<Denuncia> lista = entityManager.createNamedQuery("Denuncia.getAllDenuncias", Denuncia.class).getResultList();
+		for (Denuncia d : lista){
+			System.out.println(d.toString());
+		}
 		model.addAttribute("resultado", entityManager.createNamedQuery("Denuncia.getAllDenuncias", Denuncia.class).getResultList());
 		return "fragments/tablaAdmin";
 	}
