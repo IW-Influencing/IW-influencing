@@ -1,29 +1,27 @@
 -----------------------------------------------------------------------------
+
+URGENTE
+	WebSocket avise al admin de un registro de usuario
+	TESTING
+
+
+------------------------------------------------------------------------------
+
+
 Denuncia 
   Controlador hacer los redirect y mensajes de alert
   Validacion cliente y controlador
-  Boton denunciar añadir el campo id del denunciado en el html
-  Boton denunciar añadirle el ajax para la peticion
 
-Busqueda administracion
+
+
 EDICION PERFIL 
   - Validacion en cliente
-
-Chat de negociacion imagen de la propuesta
 
 
 ------------------------------------------------------------------
 
+Busqueda administracion
 
-
-Modal perfil arreglar CSS
-
-
-
-
-
-Perfil
-  - ¿Boton mandar mensaje privado?
 
 Negociacion
   - WebSocket para notificar cuantos chat hay sin leer
@@ -37,4 +35,6 @@ Mostrar ultimatum chat
 Mensaje de valoracion, buscarle sentido
 PerfilesRRSS en vista
 Limpiar querys que no se utilizan
-Redirect --> Consultar el historial de la pagina en la que estas
+
+DUDAS PROFESOR
+	Redirect --> Consultar el historial de la pagina en la que estas

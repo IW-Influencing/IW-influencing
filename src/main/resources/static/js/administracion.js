@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("denunciasAdmin").onclick = b => cargaResultadosDenuncias();
     document.getElementById("empresasAdmin").onclick = b => cargaResultadosEmpresas();
     prepareListeners();
-    
+    lanzaAlert();
 });
 
 
@@ -38,8 +38,14 @@ function prepareListeners(){
     }
     for (let p of document.getElementsByClassName("eliminarInfluencer")){
         p.onclick = c =>{ elimina('INFLUENCER', p.dataset.id);}
-
     }
+    for (let p of document.getElementsByClassName("tramitarDenuncia")){
+        p.onclick = c =>{ cargaContenidoModal('DENUNCIA-TRAMITAR', p.dataset.id);}
+    }
+    for (let p of document.getElementsByClassName("verDenuncia")){
+        p.onclick = c =>{ cargaContenidoModal('DENUNCIA-VER', p.dataset.id);}
+    }
+
 }
 
 function cargaResultadosInfluencer(){
@@ -120,6 +126,10 @@ function elimina(tipo, id){
     }
 }
 
+function tramita(id){
+	
+}
+
 function verifica(tipo, id){
     if (tipo === 'EMPRESA'){
         return go2(config.rootUrl + "admin/verificaEmpresa?id=" + id, 'GET')
@@ -165,4 +175,14 @@ function cargaContenidoModal(tipo, id){
         return go2(config.rootUrl + "propuesta?idPropuesta=" + id, 'GET')
             .then(html => document.getElementById("contenidoModal").innerHTML=html);
     }
+	else if (tipo ==='DENUNCIA-TRAMITAR'){
+		        document.getElementById('modal').style.display='block';
+	        return go2(config.rootUrl + "denuncia/tramitar?idDenuncia=" + id, 'GET')
+	            .then(html => document.getElementById("contenidoModal").innerHTML=html);
+	}
+	else if (tipo ==='DENUNCIA-VER'){
+		        document.getElementById('modal').style.display='block';
+	        return go2(config.rootUrl + "denuncia/ver?idDenuncia=" + id, 'GET')
+	            .then(html => document.getElementById("contenidoModal").innerHTML=html);
+	}
 }

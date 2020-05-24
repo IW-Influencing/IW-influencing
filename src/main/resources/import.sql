@@ -162,3 +162,7 @@ INSERT INTO valoracion(id, emisor_id, candidatura_id, valoracion, puntuacion) VA
 	1, 2, 1,'me ha timado', 0
 );
 
+INSERT INTO denuncia(id, denunciante_id, denunciado_id, titulo, descripcion, fecha, tramitada) VALUES(
+	1, 2,3,'Prueba','Denuncia test', '2018-07-20', false
+);
+

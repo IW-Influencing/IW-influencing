@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBo
 
 import es.ucm.fdi.iw.LocalData;
 import es.ucm.fdi.iw.model.Candidatura;
+import es.ucm.fdi.iw.model.Denuncia;
 import es.ucm.fdi.iw.model.Evento;
 import es.ucm.fdi.iw.model.Usuario;
 
@@ -111,10 +112,37 @@ public class RootController {
 	  }
 	  model.addAttribute("nombreUsuario", ((Usuario)session.getAttribute("u")).getNombre());
 	  model.addAttribute("busquedas", usuariosBuscados);
-    model.addAttribute("modo", "INFLUENCER");
-		model.addAttribute("resultado", entityManager.createNamedQuery("Usuario.getAllInfluencers", Usuario.class).getResultList());
+	  if (session.getAttribute("modo") != null) {
+		session.removeAttribute("modo");
+		model.addAttribute("modo","DENUNCIA");  
+		model.addAttribute("mensaje",session.getAttribute("mensajeInfo"));
+		model.addAttribute("resultado", entityManager.createNamedQuery("Denuncia.getAllDenuncias", Denuncia.class).getResultList());
+	  }
+	  else {
+		  model.addAttribute("modo", "INFLUENCER");
+		  model.addAttribute("resultado", entityManager.createNamedQuery("Usuario.getAllInfluencers", Usuario.class).getResultList());
+	  }
 	  return "administracion";
   }
+  /*
+  @GetMapping("/administracion")
+  public String administracion(Model model, HttpSession session, @RequestParam String modo) {
+	  long idUsuario = ((Usuario)session.getAttribute("u")).getId();
+	  List<Evento> listaNotificaciones = entityManager.createNamedQuery("Evento.adminEventsByDate").setParameter("idUsuario", idUsuario).setMaxResults(LIMITE_NOTIFICACIONES).getResultList();
+	  model.addAttribute("notificaciones", listaNotificaciones);
+	  List<Evento> ultimasBusquedas = entityManager.createNamedQuery("Evento.searchesByDate").setParameter("idUsuario", idUsuario).setMaxResults(LIMITE_NOTIFICACIONES).getResultList();
+	  List<Usuario> usuariosBuscados = new ArrayList<>();
+	  for (Evento e : ultimasBusquedas) {
+		  for (Usuario u : ((List<Usuario>)entityManager.createNamedQuery("Usuario.byNombreUsuario").setParameter("nombre", e.getDescripcion()).getResultList())) {
+			  usuariosBuscados.add(u);
+		  }
+	  }
+	  model.addAttribute("nombreUsuario", ((Usuario)session.getAttribute("u")).getNombre());
+	  model.addAttribute("busquedas", usuariosBuscados);
+      model.addAttribute("modo", "DENUNCIA");
+	  model.addAttribute("resultado", entityManager.createNamedQuery("Denuncia.getAllDenuncias", Denuncia.class).getResultList());
+	  return "administracion";
+  }*/
 
   
    

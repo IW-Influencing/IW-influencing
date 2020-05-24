@@ -120,16 +120,22 @@
             <th>Título</th>
             <th>Denunciado</th>
             <th>Fecha denuncia</th>
-            <th>Tramitar</th>
+            <th>Tramitada</th>
+            <th>Ver</th>
+
         </tr>
         
         <!-- Datos -->
         <tr th:each="denuncia : ${resultado}">
-            <td>Jill</td>
-            <td>Me ha insultado</td>
-            <td>Pepe</td>
-            <td>12/4/2017</td>
-            <td><button></button></td>
+            <td th:text="${denuncia.denunciante.nombre}"></td>
+            <td th:text="${denuncia.titulo}"></td>
+            <td th:text="${denuncia.denunciado.nombre}"></td>
+            <td th:text="${#temporals.format(denuncia.fecha, 'dd/MM/yyyy')}"></td>
+            <td>
+                <i th:if="${denuncia.tramitada}" class="far fa-check-square"></i>
+				<button th:unless="${denuncia.tramitada}" th:attr="data-id=${denuncia.id}" class="tramitarDenuncia">Tramitar</button>
+            </td>
+            <td><i th:attr="data-id=${denuncia.id}" class="fa fa-eye verDenuncia"></i></td>
         </tr>
     </table>
     

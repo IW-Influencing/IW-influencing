@@ -72,14 +72,42 @@ public class DenunciaController {
 			log.info("Error al redireccionar");
 		}
 	}
+    
+    @GetMapping("/tramitar")
+    public String devuelveModalTramitarDenuncia(Model model, HttpSession session , @RequestParam long idDenuncia){
+        Denuncia d = entityManager.find(Denuncia.class, idDenuncia);
+        model.addAttribute("denunciante", d.getDenunciante());
+        model.addAttribute("denuncia", d);
+        model.addAttribute("denunciado", d.getDenunciado());
+        model.addAttribute("modo", "TRAMITACION");
+        return "modals/denuncia";
+    }
+    
+    @GetMapping("/ver")
+    public String devuelveModalVerDenuncia(Model model, HttpSession session , @RequestParam long idDenuncia){
+        Denuncia d = entityManager.find(Denuncia.class, idDenuncia);
+        model.addAttribute("denunciante", d.getDenunciante());
+        model.addAttribute("denuncia", d);
+        model.addAttribute("denunciado", d.getDenunciado());
+        model.addAttribute("modo", "VER");
+        return "modals/denuncia";
+    }
 
     @PostMapping("/tramitar")
     @Transactional
-	public void tramitaDenuncia(Model model, HttpSession session, @RequestParam long idDenuncia) {
-
+	public void tramitaDenuncia(Model model, HttpSession session,HttpServletResponse response, @RequestParam long idDenuncia) {
 		Denuncia d = entityManager.find(Denuncia.class, idDenuncia);
         d.setTramitada(true);
         entityManager.persist(d);
+		try {
+			session.setAttribute("modo", "DENUNCIAS");
+	        session.setAttribute("mensajeInfo", "Denuncia tramitada");
+			response.sendRedirect("/administracion");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 
 	}
 	

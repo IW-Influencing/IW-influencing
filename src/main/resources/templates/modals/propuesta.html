@@ -136,7 +136,7 @@
   </form>
   
   <!-- Boton Denunciar -->
-  <button th:if="${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM' or ${modo} eq 'CONTRATACION'" class="w3-display-topright" id="btnDenunciar" th:attr="data-id=${propuesta.id}">Denunciar</button>
+  <button th:if="${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM' or ${modo} eq 'CONTRATACION'" class="w3-display-topright" id="btnDenunciar" th:attr="data-id=${propuesta.empresa.id}">Denunciar</button>
 
   </div>
   <!-- Boton de cerrar -->

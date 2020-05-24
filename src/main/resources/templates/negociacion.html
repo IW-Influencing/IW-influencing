@@ -24,7 +24,7 @@
                 data-otro-nombre=${session.u.hasRole('EMPRESA')?c.candidato.nombre:c.propuesta.empresa.nombre},
 				data-propio-id=${session.u.hasRole('INFLUENCER')?c.candidato.id:c.propuesta.empresa.id},
                 data-otro-id=${session.u.hasRole('EMPRESA')?c.candidato.id:c.propuesta.empresa.id}">
-                <a><img width="50" height="50" src="img/perfilIcon.svg"></a> <!-- ¿Insertar imagen? -->
+                <a><img width="50" height="50" th:src="@{/propuesta/{id}/photo(id=${c.propuesta.id})}"></a> <!-- ¿Insertar imagen? -->
                 <span th:text="${c.propuesta.nombre}"> Nombre de la propuesta</span>
             </div>
         </div>
