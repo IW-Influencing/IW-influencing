@@ -53,7 +53,7 @@ public class DenunciaController {
 	public void registraDenuncia(Model model, HttpSession session, @RequestParam long idDenunciado, @RequestParam String descripcion, @RequestParam String titulo) {
 
 		Usuario denunciante =  entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId());
-        Usuario denunciado = entityManager.find(Usuario.class, idDenunciado)
+        Usuario denunciado = entityManager.find(Usuario.class, idDenunciado);
 		Denuncia d = new Denuncia();
         d.setDenunciado(denunciado);
         d.setDenunciante(denunciante);
