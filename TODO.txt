@@ -1,7 +1,7 @@
 -----------------------------------------------------------------------------
 
 URGENTE
-	WebSocket avise al admin de un registro de usuario
+
 	TESTING
 
 
@@ -38,3 +38,4 @@ Limpiar querys que no se utilizan
 
 DUDAS PROFESOR
 	Redirect --> Consultar el historial de la pagina en la que estas
+	TOKEN

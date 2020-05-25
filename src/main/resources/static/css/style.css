@@ -40,7 +40,12 @@ a:hover{
 }
 
 .divFlex{
-	display:flex;
+	display:flex !important;
+}
+
+
+#btnNumeroNotificaciones{
+	width: fit-content;
 }
 
 .horizontalBar {

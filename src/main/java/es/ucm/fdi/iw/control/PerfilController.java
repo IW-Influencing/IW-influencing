@@ -20,6 +20,7 @@ import javax.transaction.Transactional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -32,7 +33,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import es.ucm.fdi.iw.LocalData;
+import es.ucm.fdi.iw.model.Evento;
 import es.ucm.fdi.iw.model.PerfilRRSS;
 import es.ucm.fdi.iw.model.Usuario;
 import es.ucm.fdi.iw.model.Usuario.Rol;
@@ -47,6 +53,9 @@ public class PerfilController {
     @Autowired
     private EntityManager entityManager;
 
+	@Autowired
+	private SimpMessagingTemplate messagingTemplate;
+    
 	private static final Logger log = LogManager.getLogger(PerfilController.class);
 
     
@@ -172,6 +181,8 @@ public class PerfilController {
     		@RequestParam String nombreYoutube, @RequestParam String seguidoresYoutube){
 
     	String mensaje = "";
+		Usuario u = new Usuario();
+
         List<Usuario>usuarios = entityManager.createNamedQuery("Usuario.byNombreCuenta", Usuario.class)
         		.setParameter("nombreCuenta",nombreCuenta).getResultList();
         
@@ -185,7 +196,6 @@ public class PerfilController {
         			if (edad.length()>0) {
 		        		if(validaPerfiles(nombreTwitter, seguidoresTwitter, nombreFacebook, seguidoresFacebook, 
 		        				nombreInstagram, seguidoresInstagram, nombreYoutube, seguidoresYoutube)) {
-							Usuario u = new Usuario();
 							u.setFechaRegistro(LocalDateTime.now());
 		    	        	u.setNombreCuenta(nombreCuenta);
 		    	        	u.setNombre(nombre);
@@ -205,8 +215,6 @@ public class PerfilController {
 			        				nombreInstagram, seguidoresInstagram, nombreYoutube, seguidoresYoutube, u);
 		    	        	entityManager.flush();
 		    	        	insertaImagenUsuario(imagenPerfil, u.getId());
-
-		    	        	
 		    	        	mensaje="Usuario registrado correctamente";
 		        		}
 		        		else {
@@ -219,7 +227,6 @@ public class PerfilController {
         			}
         		}
         		else {
-        			Usuario u = new Usuario();
     	        	u.setNombreCuenta(nombreCuenta);
     	        	u.setNombre(nombre);
     	        	u.setCandidaturas(new ArrayList<>());
@@ -246,6 +253,28 @@ public class PerfilController {
         	//Mostrar mensaje de error al usuario
         		mensaje = "Error. Las contraseñas no coinciden";
         }
+        
+        if (mensaje.equals("Usuario registrado correctamente")) {
+    		Evento e = new Evento();
+    		e.setEmisor(u);
+    		e.setDescripcion("Se ha registrado el usuario " + u.getNombreCuenta());
+    		e.setFechaEnviado(LocalDateTime.now());
+    		e.setLeido(false);
+    		e.setTipo(Evento.Tipo.ADMINISTRACION);
+			entityManager.persist(e);    		
+    		ObjectMapper mapper = new ObjectMapper();
+    		ObjectNode rootNode = mapper.createObjectNode();
+    		rootNode.put("text", "El usuario " + u.getNombreCuenta() + " se ha registrado");
+    		String json = "";
+			try {
+				json = mapper.writeValueAsString(rootNode);
+			} catch (JsonProcessingException error) {
+				// TODO Auto-generated catch block
+				error.printStackTrace();
+			}
+    		messagingTemplate.convertAndSend("/topic/admin",  json);
+        }
+        
 		session.setAttribute("mensajeInfo", mensaje);
 		try {
 			response.sendRedirect("/login");

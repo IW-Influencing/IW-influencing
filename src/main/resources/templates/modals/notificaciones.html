@@ -2,7 +2,6 @@
 
   <head>
     <th:block th:replace="fragments/head.html :: header" />
-    <link href="css/notificaciones.css" rel="stylesheet" />
   </head>
 
   <body style="width:100%" class="general">
@@ -13,21 +12,21 @@
     </header>
 
     <!-- Lista de notificaciones -->
-    <div class="w3-container" th:each="notificacion: ${notificaciones}">
+    <div id="divNotificaciones" class="w3-container" th:each="notificacion: ${notificaciones}">
 
       <div class="w3-card-4 w3-round w3-margin-top w3-margin-bottom">
 
         <!-- Boton eliminar-->
-        <div class="w3-container w3-pale-blue w3-button w3-large w3-right" onclick="this.parentElement.style.display='none'">X</div>
+        <div th:attr="data-id=${notificacion.id}" class="eliminaNotificacion w3-container w3-pale-blue w3-button w3-large w3-right" onclick="this.parentElement.style.display='none'">X</div>
         
         <!-- Descripcion -->
         <div class="w3-container w3-pale-blue w3-row w3-center">
-          <h1 th:text="${notificacion.descripcion}">Descripcion de la notificacion</h1>
+          <h1 th:text="${notificacion.descripcion}"></h1>
         </div>
 
         <!-- Fecha enviado -->
         <div class="w3-container w3-pale-blue w3-center">
-          <p th:text="${notificacion.fechaEnviado}">Aqui va la fecha</p>
+          <p th:text="${#temporals.format(notificacion.fechaEnviado,'dd-MM-yyyy')}"></p>
         </div>
 
       </div>

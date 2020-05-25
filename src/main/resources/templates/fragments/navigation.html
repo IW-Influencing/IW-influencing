@@ -30,8 +30,10 @@
                     <h4>Usuario</h4>
                 </button>
                 <div class="w3-dropdown-content w3-bar-block w3-card-4" id="desplegableUsuario">
-                    <span id="botonNotificacionesNav" class="w3-bar-item w3-button">Notificaciones</span>
-                    <span id="botonPerfilNav" class="w3-bar-item w3-button">Mi Perfil</span>
+                    <span id="botonNotificacionesNav" class="w3-bar-item w3-button divFlex">Notificaciones
+						<sup id="indiceNumNotificaciones"><button id="btnNumeroNotificaciones" class="w3-button w3-circle w3-teal" th:text=${numNotificaciones}></button><sup>
+					</span>
+					<span id="botonPerfilNav" class="w3-bar-item w3-button">Mi Perfil</span>
                     <form th:action="@{/logout}" method="post" class="w3-bar-item w3-button">
                         <button type="submit">Cerrar sesión</button>
                     </form>

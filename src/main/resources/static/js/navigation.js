@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("botonNotificacionesNav").onclick = b => cargaNotificacionesModalNav();
 	document.getElementById("botonPerfilNav").onclick = b => cargaPerfilModalNav();
+	if (document.getElementById("btnNumeroNotificaciones").innerText == "0")
+		document.getElementById("indiceNumNotificaciones").style.display = "none";
+	
 });
 
 function cargaPerfilModalNav(){
@@ -12,7 +15,32 @@ function cargaPerfilModalNav(){
 function cargaNotificacionesModalNav(){
 	document.getElementById('modal').style.display='block';
 	return go2(config.rootUrl + "notificaciones", 'GET')
-		.then(html => document.getElementById("contenidoModal").innerHTML=html);
+		.then(html => {
+			document.getElementById("contenidoModal").innerHTML=html;
+			configuraCierreNotificaciones();
+		});
+}
+
+function configuraCierreNotificaciones(){
+	 for (let p of document.getElementsByClassName("eliminaNotificacion")){
+        p.onclick =  c => { 
+			marcaNotificacionLeida(p.dataset.id);
+		}
+    }
+}
+
+function marcaNotificacionLeida(idNotificacion){
+	return go2(config.rootUrl + "notificaciones/elimina?idNotificacion="+idNotificacion, 'GET')
+	.then(numNotificaciones => {
+		if (numNotificaciones > 0){
+			numNotificaciones = numNotificaciones;
+			document.getElementById("btnNumeroNotificaciones").innerText = numNotificaciones;
+		}
+		else{
+			document.getElementById("indiceNumNotificaciones").style.display = "none";
+		}
+		cargaNotificacionesModalNav();
+	});
 }
 
 // Desplegable RRSS

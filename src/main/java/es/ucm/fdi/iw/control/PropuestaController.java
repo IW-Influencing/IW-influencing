@@ -23,6 +23,7 @@ import javax.transaction.Transactional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -34,6 +35,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import es.ucm.fdi.iw.LocalData;
 import es.ucm.fdi.iw.model.Candidatura;
@@ -51,6 +56,10 @@ public class PropuestaController {
 	
 	@Autowired
 	private LocalData localData;
+	
+
+	@Autowired
+	private SimpMessagingTemplate messagingTemplate;
 	
 	@Autowired 
 	private EntityManager entityManager;
@@ -187,12 +196,12 @@ public class PropuestaController {
 	      String mensaje = "";
 		  LocalDateTime fechaIni = LocalDate.parse(fechaInicio).atTime(LocalTime.now());
 		  LocalDateTime fechaFinal = LocalDate.parse(fechaFin).atTime(LocalTime.now());
+		  Propuesta p = new Propuesta();
 
 		  if (fechaIni.isBefore(LocalDateTime.now())){
 			  mensaje = "Error. Las fechas deben ser como mínimo las actuales"; // Comprobar fecha inicio
 		  }
 		  else {
-			  Propuesta p = new Propuesta();
 			  p.setActiva(true);
 			  p.setCandidaturas(new ArrayList<Candidatura>());
 			  p.setDescripcion(descripcion);
@@ -213,6 +222,28 @@ public class PropuestaController {
 			  insertaImagenPropuesta(imagenPropuesta, p.getId());
 			  mensaje = "Propuesta insertada correctamente";
 		  }
+		  
+	        if (mensaje.equals("Propuesta insertada correctamente")) {
+	    		Evento e = new Evento();
+	    		e.setEmisor(entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId()));
+	    		e.setDescripcion("Se ha registrado la propuesta " + p.getNombre());
+	    		e.setFechaEnviado(LocalDateTime.now());
+	    		e.setLeido(false);
+	    		e.setTipo(Evento.Tipo.ADMINISTRACION);
+				entityManager.persist(e);    		
+	    		ObjectMapper mapper = new ObjectMapper();
+	    		ObjectNode rootNode = mapper.createObjectNode();
+	    		rootNode.put("text", "La propuesta " + p.getNombre() + " se ha registrado");
+	    		String json = "";
+				try {
+					json = mapper.writeValueAsString(rootNode);
+				} catch (JsonProcessingException error) {
+					// TODO Auto-generated catch block
+					error.printStackTrace();
+				}
+	    		messagingTemplate.convertAndSend("/topic/admin",  json);
+	        }
+		  
 		session.setAttribute("mensajeInfo", mensaje);
 		try {
 			response.sendRedirect("/inicio");

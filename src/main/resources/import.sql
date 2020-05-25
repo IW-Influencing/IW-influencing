@@ -138,21 +138,21 @@ INSERT INTO evento(id, descripcion, tipo, fecha_enviado,fecha_recibido, leido, c
 );
 
 INSERT INTO evento(id, descripcion, tipo, fecha_enviado,fecha_recibido,leido, candidatura_id, emisor_id, receptor_id) VALUES(
-	5, 'Lo siento, la oferta no me interesa. Saludos.', 'PRIVADO','2017-07-23','2017-07-23', false,
+	5, 'Lo siento, la oferta no me interesa. Saludos.', 'NOTIFICACION','2017-07-23','2017-07-23', false,
 	NULL,
 	2,
 	1
 );
 
 INSERT INTO evento(id, descripcion, tipo, fecha_enviado,fecha_recibido,leido, candidatura_id, emisor_id, receptor_id) VALUES(
-	6, 'Hola, estoy interesado en participar en la propuesta', 'PRIVADO','2017-07-23','2017-07-23', false,
+	6, 'Hola, estoy interesado en participar en la propuesta', 'NOTIFICACION','2017-07-23','2017-07-23', false,
 	NULL,
 	2,
 	1
 );
 
 INSERT INTO evento(id, descripcion, tipo, fecha_enviado,fecha_recibido,leido, candidatura_id, emisor_id, receptor_id) VALUES(
-	7, 'Hola, ¿como te encuentras?', 'PRIVADO','2017-07-23','2017-07-23', false,
+	7, 'Hola, ¿como te encuentras?', 'NOTIFICACION','2017-07-23','2017-07-23', false,
 	NULL,
 	2,
 	1

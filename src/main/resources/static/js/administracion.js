@@ -5,7 +5,27 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("empresasAdmin").onclick = b => cargaResultadosEmpresas();
     prepareListeners();
     lanzaAlert();
+
+	ws.receive = json => {
+		if (document.getElementById("indiceNumNotificaciones").style.display == "none"){
+			document.getElementById("indiceNumNotificaciones").style.display = "block";
+		}
+		document.getElementById("btnNumeroNotificaciones").innerText = parseInt(document.getElementById("btnNumeroNotificaciones").innerText) + 1;
+
+
+ 		//addNotificaciones(json, document.getElementById(divNotificaciones));
+	}
+
 });
+
+function addNotificaciones(json, contenedor){
+	let html = []
+	
+		json.forEach(msg => {
+			let clase = msg.propio ? 'mensaje enviado' : 'mensaje recibido';
+			html.push("<p class='" + clase + " msg'> " + parseaFecha(msg.sent) + " - " + msg.text + "</p>");
+		})
+}
 
 
 function prepareListeners(){

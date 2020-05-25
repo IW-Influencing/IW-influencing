@@ -37,7 +37,6 @@ import es.ucm.fdi.iw.model.Usuario;
 @Controller
 public class RootController {
 
-  private final int LIMITE_NOTIFICACIONES = 5;
   private final int LIMITE_MENSAJES_INICIO = 3;
   private final int LIMITE_PROPUESTAS_INICIO = 3;
 	
@@ -64,7 +63,7 @@ public class RootController {
   @GetMapping("/inicio")
   public String inicio(HttpSession session,Model model) {
 	long idUsuario = ((Usuario)session.getAttribute("u")).getId();
-	List<Evento> eventos = entityManager.createNamedQuery("Evento.getPrivateMessagesUnread").setParameter("idUsuario", idUsuario ).setMaxResults(LIMITE_MENSAJES_INICIO).getResultList();
+	List<Evento> eventos = entityManager.createNamedQuery("Evento.getNotificacionesUnread").setParameter("idUsuario", idUsuario ).setMaxResults(LIMITE_MENSAJES_INICIO).getResultList();
 	List<Candidatura> candidaturas = entityManager.createNamedQuery("Candidatura.getByUser").setParameter("idUsuario", idUsuario ).setMaxResults(LIMITE_PROPUESTAS_INICIO).getResultList();;
 	model.addAttribute("mensajes", eventos);
 	model.addAttribute("candidaturas", candidaturas);
@@ -101,15 +100,7 @@ public class RootController {
   @GetMapping("/administracion")
   public String administracion(Model model, HttpSession session) {
 	  long idUsuario = ((Usuario)session.getAttribute("u")).getId();
-	  List<Evento> listaNotificaciones = entityManager.createNamedQuery("Evento.adminEventsByDate").setParameter("idUsuario", idUsuario).setMaxResults(LIMITE_NOTIFICACIONES).getResultList();
-	  model.addAttribute("notificaciones", listaNotificaciones);
-	  List<Evento> ultimasBusquedas = entityManager.createNamedQuery("Evento.searchesByDate").setParameter("idUsuario", idUsuario).setMaxResults(LIMITE_NOTIFICACIONES).getResultList();
 	  List<Usuario> usuariosBuscados = new ArrayList<>();
-	  for (Evento e : ultimasBusquedas) {
-		  for (Usuario u : ((List<Usuario>)entityManager.createNamedQuery("Usuario.byNombreUsuario").setParameter("nombre", e.getDescripcion()).getResultList())) {
-			  usuariosBuscados.add(u);
-		  }
-	  }
 	  model.addAttribute("nombreUsuario", ((Usuario)session.getAttribute("u")).getNombre());
 	  model.addAttribute("busquedas", usuariosBuscados);
 	  if (session.getAttribute("modo") != null) {
@@ -121,36 +112,9 @@ public class RootController {
 	  else {
 		  model.addAttribute("modo", "INFLUENCER");
 		  model.addAttribute("resultado", entityManager.createNamedQuery("Usuario.getAllInfluencers", Usuario.class).getResultList());
-	  }
+	  }	 
+	  model.addAttribute("numNotificaciones", entityManager.createNamedQuery("Evento.adminEventsByDate").getResultList().size());
 	  return "administracion";
-  }
-  /*
-  @GetMapping("/administracion")
-  public String administracion(Model model, HttpSession session, @RequestParam String modo) {
-	  long idUsuario = ((Usuario)session.getAttribute("u")).getId();
-	  List<Evento> listaNotificaciones = entityManager.createNamedQuery("Evento.adminEventsByDate").setParameter("idUsuario", idUsuario).setMaxResults(LIMITE_NOTIFICACIONES).getResultList();
-	  model.addAttribute("notificaciones", listaNotificaciones);
-	  List<Evento> ultimasBusquedas = entityManager.createNamedQuery("Evento.searchesByDate").setParameter("idUsuario", idUsuario).setMaxResults(LIMITE_NOTIFICACIONES).getResultList();
-	  List<Usuario> usuariosBuscados = new ArrayList<>();
-	  for (Evento e : ultimasBusquedas) {
-		  for (Usuario u : ((List<Usuario>)entityManager.createNamedQuery("Usuario.byNombreUsuario").setParameter("nombre", e.getDescripcion()).getResultList())) {
-			  usuariosBuscados.add(u);
-		  }
-	  }
-	  model.addAttribute("nombreUsuario", ((Usuario)session.getAttribute("u")).getNombre());
-	  model.addAttribute("busquedas", usuariosBuscados);
-      model.addAttribute("modo", "DENUNCIA");
-	  model.addAttribute("resultado", entityManager.createNamedQuery("Denuncia.getAllDenuncias", Denuncia.class).getResultList());
-	  return "administracion";
-  }*/
-
-  
-   
-  @GetMapping("/notificaciones")
-  public String notificaciones(HttpSession session, Model model) {
-    List<Evento> listaNotificaciones = entityManager.createNamedQuery("Evento.adminEventsByDate").setParameter("idUsuario", ((Usuario)session.getAttribute("u")).getId()).setMaxResults(LIMITE_NOTIFICACIONES).getResultList();
-	  model.addAttribute("notificaciones", listaNotificaciones);
-    return "modals/notificaciones";
   }
 
   @GetMapping("/error")
