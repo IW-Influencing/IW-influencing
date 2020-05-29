@@ -13,13 +13,17 @@ Denuncia
   Validacion cliente y controlador
 
 
-
 EDICION PERFIL 
   - Validacion en cliente
 
-Ultimatum: cambiar la propuesta de la candidatura por una nueva que representa al ultimatum y no se encuentre activa para que no aparezca en el buscador
+Ultimatum
+  1. Insertar un evento que tenga algun atributo que marque es ultimatum en el chat
+  2. Insertar un nuevo modo en candidatura que sea en_ultimatum
+  
 
 ------------------------------------------------------------------
+
+Numeros notificaciones cuando tienes 0 mal.
 
 Busqueda administracion
 

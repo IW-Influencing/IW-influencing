@@ -28,6 +28,7 @@
 
       <!-- Valor id oculto -->
       <input th:if="${modo}!='CREACION' " type="hidden" name="idPropuesta" th:value="${propuesta.id}">
+      <input th:if="${modo}=='ULTIMATUM' " type="hidden" name="idCandidatura" th:value="${idCandidatura}">
 
 
       <!-- Texto propuesta -->
@@ -107,9 +108,8 @@
         <span th:if="${modo} eq 'CREACION'">
           <input type="file" name="imagenPropuesta" required>
         </span>
-        <img
-          th:if="${modo} eq 'VISTA' or ${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA-ULTIMATUM' or ${modo} eq 'CONTRATACION'"
-          id="imagen-propuesta" th:src="@{/propuesta/{id}/photo(id=${propuesta.id})}">
+ 		<img th:if="${modo} eq 'VISTA' or ${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA-ULTIMATUM' or ${modo} eq 'CONTRATACION'"
+          	id="imagen-propuesta" th:src="@{/propuesta/{id}/photo(id=${propuesta.id})}">
       </div>
 
       <!-- Tags -->
@@ -127,7 +127,6 @@
     <div class="divCentrado"> 
       <button  th:if="${modo} eq 'CREACION'" class="w3-btn btnColor w3-margin" id="btnPublicarPropuesta">Publicar</button>
       <button  th:if="${modo} eq 'VISTA' and ${session.u.hasRole('INFLUENCER')}" class="w3-btn btnColor w3-margin">Apuntarse</button>
-      <button  th:if="${modo} eq 'ULTIMATUM'" class="w3-btn btnColor w3-margin">Enviar</button>
       <div class="botones-propuesta" th:if="${modo} eq 'VISTA-ULTIMATUM'"> 
         <button class="w3-btn btnColor w3-margin btnAceptar">Aceptar</button>
         <button  class="w3-btn btnColor w3-margin btnRechazar">Rechazar</button>
@@ -135,13 +134,13 @@
     </div>
 
   </form>
-  
   <!-- Boton Denunciar -->
   <button th:if="${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM' or ${modo} eq 'CONTRATACION'" class="w3-display-topright" id="btnDenunciar" th:attr="data-id=${propuesta.empresa.id}">Denunciar</button>
 
   </div>
   <!-- Boton de cerrar -->
   <div class="divCentrado"> 
+  	<button  th:if="${modo} eq 'ULTIMATUM'" id="btnEnviarUltimatum" class="w3-btn btnColor w3-margin">Enviar</button>
     <button th:if="${modo} eq 'CONTRATACION'" class="w3-btn btnColor w3-margin" onclick="document.getElementById('modal').style.display='none'">Cerrar contratación</button>
     <button th:if="${modo} eq 'VISTA' and ${session.u.hasRole('EMPRESA')}" class="w3-btn btnColor w3-margin" onclick="document.getElementById('modal').style.display='none'">Cerrar propuesta</button>
   </div>

@@ -87,7 +87,7 @@ INSERT INTO candidatura(id,aceptada,estado,candidato_id,propuesta_id) VALUES (
 INSERT INTO candidatura(id,aceptada,estado,candidato_id,propuesta_id) VALUES (
 	2,
 	false,
-	'EN_CURSO',
+	'NEGOCIANDO',
 	2,
 	3
 );
@@ -103,7 +103,7 @@ INSERT INTO candidatura(id,aceptada,estado,candidato_id,propuesta_id) VALUES (
 INSERT INTO candidatura(id,aceptada,estado,candidato_id,propuesta_id) VALUES (
 	4,
 	false,
-	'EN_CURSO',
+	'EN_ULTIMATUM',
 	3,
 	2
 );

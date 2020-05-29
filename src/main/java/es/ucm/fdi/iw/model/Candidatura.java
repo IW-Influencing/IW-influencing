@@ -10,14 +10,16 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name="Candidatura.byCandidato", 
-	query="SELECT c.propuesta FROM Candidatura c WHERE c.candidato.id = :idCandidato"),
+
 	
 	@NamedQuery(name="Candidatura.activeByCandidato", 
 	query="SELECT c FROM Candidatura c WHERE c.candidato.id = :idCandidato AND (c.estado = 'EN_CURSO' OR c.estado = 'NEGOCIANDO')"),
 
 	@NamedQuery(name="Candidatura.activeByIdUsuario", 
 			query="SELECT c FROM Candidatura c WHERE (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario) AND (c.estado = 'EN_CURSO' OR c.estado = 'NEGOCIANDO')"),
+
+	@NamedQuery(name="Candidatura.chatsByCandidato", 
+	query="SELECT c FROM Candidatura c WHERE (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario) AND (c.estado = 'EN_ULTIMATUM' OR c.estado = 'NEGOCIANDO')"),
 
 	@NamedQuery(name="Candidatura.byCandidatoAndPropuesta", 
 	query="SELECT c.propuesta FROM Candidatura c WHERE c.candidato.id = :idCandidato AND c.propuesta.id = :idPropuesta"),
@@ -51,7 +53,7 @@ public class Candidatura {
 	private Propuesta propuesta;
 	private Usuario candidato;
 	private Boolean aceptada;
-	public enum Estado {NEGOCIANDO, EN_CURSO, EN_VALORACION, FINALIZADA};
+	public enum Estado {NEGOCIANDO, EN_ULTIMATUM, EN_CURSO, EN_VALORACION, FINALIZADA};
 	private String estado;
 
 	@Id

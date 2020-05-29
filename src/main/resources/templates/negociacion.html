@@ -23,6 +23,7 @@
             <div class="propuesta" th:each="c: ${candidaturas}" th:attr="data-id=${c.id},data-prop-id=${c.propuesta.id}, data-prop-nombre=${c.propuesta.nombre}, 
                 data-otro-nombre=${session.u.hasRole('EMPRESA')?c.candidato.nombre:c.propuesta.empresa.nombre},
 				data-propio-id=${session.u.hasRole('INFLUENCER')?c.candidato.id:c.propuesta.empresa.id},
+				data-estado-candidatura=${c.estado},
                 data-otro-id=${session.u.hasRole('EMPRESA')?c.candidato.id:c.propuesta.empresa.id}">
                 <a><img width="50" height="50" th:src="@{/propuesta/{id}/photo(id=${c.propuesta.id})}"></a> <!-- ¿Insertar imagen? -->
                 <span th:text="${c.propuesta.nombre}"> Nombre de la propuesta</span>

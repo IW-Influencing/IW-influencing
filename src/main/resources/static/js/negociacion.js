@@ -2,14 +2,14 @@ document.addEventListener("DOMContentLoaded", () => {
 	for (let p of document.getElementsByClassName("propuesta")) {
 		p.onclick = c => {
 			setConfigs(p);
-			cargaChat(p.dataset.id, p.dataset.propId, p.dataset.otroNombre, p.dataset.propioId, p.dataset.otroId, p.dataset.propNombre,document.getElementById("contenidoChat"));
+			cargaChat(p.dataset.id, p.dataset.propId, p.dataset.otroNombre, p.dataset.propioId, p.dataset.otroId, p.dataset.propNombre,document.getElementById("contenidoChat"), p.dataset.estadoCandidatura);
 		}
 	}
 	asignaListenerBarraEnvio();
 	ws.receive = json => {
 		if (pertenecePropuestaSeleccionada(json[0].nombrePropuesta,document.getElementsByClassName("nombre")[0].innerHTML)){
 			let contenido = document.getElementById("contenidoChat");
-			insertaEnDiv(json, contenido, config.propId);
+			insertaEnDiv(json, contenido, config.propId, config.candidaturaId);
 		}
 	}
 })
@@ -48,7 +48,7 @@ function parseaFecha(fecha){
 	return dias[2] + "/" + dias[1] + "/" + dias[0] + "  " + minutos[0] + ":" + minutos[1];
 }
 
-function insertaEnDiv(json, contenido, idPropuesta){
+function insertaEnDiv(json, contenido, idPropuesta, idCandidatura, estadoCandidatura){
 	let html = []
 	
 	json.forEach(msg => {
@@ -57,14 +57,42 @@ function insertaEnDiv(json, contenido, idPropuesta){
 	})
 	
 	contenido.innerHTML = html.join("\n");
+	if (estadoCandidatura == "NEGOCIANDO"){
+		document.getElementById("botonUltimatum").innerText = "Enviar Ultimatum";
+		document.getElementById("botonUltimatum").onclick = b => cargaUltimatumModal(idPropuesta, idCandidatura);
+		document.getElementById("botonEnviar").style.display = "block";
 
-	document.getElementById("botonUltimatum").onclick = b => cargaUltimatumModal(idPropuesta);
+	}
+	else{
+		document.getElementById("botonUltimatum").innerText = "Visualizar Ultimatum";
+		document.getElementById("botonUltimatum").onclick = b => cargaUltimatumVisualizacionModal(idPropuesta);
+		document.getElementById("botonEnviar").style.display = "none";
+	}
+
 }
 
-function cargaUltimatumModal(idPropuesta){
+function cargaUltimatumModal(idPropuesta, idCandidatura){
 	document.getElementById('modal').style.display='block';
-	return go2(config.rootUrl + "propuesta/ultimatum?idPropuesta=" + idPropuesta, 'GET')
-		.then(html => document.getElementById("contenidoModal").innerHTML=html);
+	return go2(config.rootUrl + "propuesta/ultimatum?idPropuesta=" + idPropuesta + "&idCandidatura=" + idCandidatura, 'GET')
+		.then(html => {
+			document.getElementById("contenidoModal").innerHTML=html;
+			document.getElementById("btnEnviarUltimatum").onclick = b => enviaUltimatum();
+		});
+}
+
+function cargaUltimatumVisualizacionModal(idPropuesta){
+	document.getElementById('modal').style.display='block';
+	return go2(config.rootUrl + "propuesta/vistaUltimatum?idPropuesta=" + idPropuesta, 'GET')
+		.then(html => {
+			document.getElementById("contenidoModal").innerHTML=html;
+			document.getElementById("btnEnviarUltimatum").onclick = b => enviaUltimatum();
+		});
+}
+
+function enviaUltimatum(){
+		document.getElementById("botonUltimatum").innerText = "Visualizar Ultimatum";
+		document.getElementById("botonUltimatum").onclick = b => cargaUltimatumVisualizacionModal(idPropuesta);
+		document.getElementById("botonEnviar").style.display = "none";
 }
 
 function cargaPerfilModal(idUsuario){
@@ -86,18 +114,18 @@ function cargaPropuestaModal(idPropuesta){
 		})
 }
 
-function cargaChat(idCandidatura, idPropuesta, nombreUsuario,idEmisor, idReceptor, nombrePropuesta, contenido) {
+function cargaChat(idCandidatura, idPropuesta, nombreUsuario,idEmisor, idReceptor, nombrePropuesta, contenido, estadoCandidatura) {
 	document.getElementsByClassName("perfil")[0].innerHTML = nombreUsuario;
 	document.getElementsByClassName("perfil")[0].onclick = b => cargaPerfilModal(idReceptor);
 	document.getElementsByClassName("nombre")[0].innerHTML = nombrePropuesta;
 	document.getElementsByClassName("nombre")[0].onclick = b => cargaPropuestaModal(idPropuesta);
 	return go(config.rootUrl + "message/getChat?idCandidatura=" + idCandidatura+"&idUsuario="+idEmisor, 'GET')
-		.then(json => insertaEnDiv(json, contenido, idPropuesta));
+		.then(json => insertaEnDiv(json, contenido, idPropuesta, idCandidatura, estadoCandidatura));
 }
 
 function enviarMensajeChatNegociacion(mensaje, idCandidatura,idReceptor, idEmisor, contenido, idPropuesta){
 	return go(config.rootUrl + "message/insertaMsg?idCandidatura=" + idCandidatura + "&msg=" + mensaje +"&idEmisor="+idEmisor+"&idReceptor="+idReceptor, 'GET')
-		.then(json => insertaEnDiv(json, contenido, idPropuesta));
+		.then(json => insertaEnDiv(json, contenido, idPropuesta, idCandidatura));
 		
 }
 
