@@ -1,8 +1,12 @@
 -----------------------------------------------------------------------------
 
-URGENTE
+Ultimatum
+ - JSON devuelto es undefined y no hace el resto al mandar ultimatum
+ - Imagen del ultimatum lo hace mal
+ - Validacion ultimatum
+ - El otro debe ser el unico que pueda responder
+ - Funcionalidad al responder ultimatum -> P
 
-	TESTING
 
 
 ------------------------------------------------------------------------------
@@ -47,4 +51,5 @@ DUDAS PROFESOR
 		Lanzar las pruebas
 		Como comprobar los resultados de realizar las pruebas
 		Qué hay que testear
+		Petición POST con AJAX como pasar parametros en js
 	TOKEN

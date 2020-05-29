@@ -90,9 +90,23 @@ function cargaUltimatumVisualizacionModal(idPropuesta){
 }
 
 function enviaUltimatum(){
-		document.getElementById("botonUltimatum").innerText = "Visualizar Ultimatum";
-		document.getElementById("botonUltimatum").onclick = b => cargaUltimatumVisualizacionModal(idPropuesta);
-		document.getElementById("botonEnviar").style.display = "none";
+		let edades=document.getElementsByName("edades")[0].value;
+		let sueldo=document.getElementsByName("sueldo")[0].value;
+		let fechaInicio=document.getElementsByName("fechaInicio")[0].value;
+		let fechaFin=document.getElementsByName("fechaFin")[0].value;
+		let idPropuesta=document.getElementsByName("idPropuesta")[0].value;
+		let idCandidatura=document.getElementsByName("idCandidatura")[0].value;
+		
+	
+	return go(config.rootUrl + "propuesta/enviaUltimatum?edades="+edades+"&sueldo="+sueldo+"&fechaInicio="+fechaInicio+"&fechaFin="+fechaFin
+	+"&idPropuesta="+idPropuesta+"&idCandidatura="+idCandidatura, 'GET')
+		.then(json => {
+			document.getElementById("botonUltimatum").innerText = "Visualizar Ultimatum";
+			document.getElementById("botonUltimatum").onclick = b => cargaUltimatumVisualizacionModal(idPropuesta);
+			document.getElementById("botonEnviar").style.display = "none";
+			enviarMensajeChatNegociacion("Se ha enviado un ultimatum",config.candidaturaId,config.receptorId, config.emisorId, document.getElementById("contenidoChat"), config.propId);
+			document.getElementById('modal').style.display='none';
+		});
 }
 
 function cargaPerfilModal(idUsuario){
@@ -123,7 +137,7 @@ function cargaChat(idCandidatura, idPropuesta, nombreUsuario,idEmisor, idRecepto
 		.then(json => insertaEnDiv(json, contenido, idPropuesta, idCandidatura, estadoCandidatura));
 }
 
-function enviarMensajeChatNegociacion(mensaje, idCandidatura,idReceptor, idEmisor, contenido, idPropuesta){
+function enviarMensajeChatNegociacion(mensaje, idCandidatura, idReceptor, idEmisor, contenido, idPropuesta){
 	return go(config.rootUrl + "message/insertaMsg?idCandidatura=" + idCandidatura + "&msg=" + mensaje +"&idEmisor="+idEmisor+"&idReceptor="+idReceptor, 'GET')
 		.then(json => insertaEnDiv(json, contenido, idPropuesta, idCandidatura));
 		
