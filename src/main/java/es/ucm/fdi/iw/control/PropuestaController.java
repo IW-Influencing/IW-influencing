@@ -46,6 +46,7 @@ import es.ucm.fdi.iw.model.Evento;
 import es.ucm.fdi.iw.model.Propuesta;
 import es.ucm.fdi.iw.model.Usuario;
 import es.ucm.fdi.iw.model.Evento.Tipo;
+import es.ucm.fdi.iw.model.Propuesta.Tipo_propuesta;
 import es.ucm.fdi.iw.model.Usuario.Rol;
 
 @Controller()
@@ -129,11 +130,10 @@ public class PropuestaController {
 					entityManager.persist(e);
 					mensaje = "Te has apuntado correctamente a la propuesta";
 
-			  }
-			  
-			  
+			  }	  
 			  
 		  }
+		  
 		  else {
 			  mensaje = "Ya estabas apuntado a esta propuesta";
 		  }
@@ -171,13 +171,9 @@ public class PropuestaController {
 	  //Tiene que registrar la propuesta con los datos y añadir un mensaje para enviarle el ultimatum.
 	  @PostMapping("/enviaUltimatum")
 	    @Transactional
-		public String enviaUltimatum(RedirectAttributes redirectAttributes, Model model, @RequestParam String nombreCuenta, 
-				@RequestParam String nombre, @RequestParam String pass1,@RequestParam String pass2, 
-	    		@RequestParam MultipartFile imagenPerfil, @RequestParam String tipoCuenta, 
-	    		@RequestParam String nombreTwitter, @RequestParam String seguidoresTwitter,
-	    		@RequestParam String nombreFacebook, @RequestParam String seguidoresFacebook,
-	    		@RequestParam String nombreInstagram, @RequestParam String seguidoresInstagram,
-	    		@RequestParam String nombreYoutube, @RequestParam String seguidoresYoutube){
+		public String enviaUltimatum(RedirectAttributes redirectAttributes, Model model, @RequestParam String edades, 
+				@RequestParam String sueldo, @RequestParam String fechaInicio, @RequestParam String fechaFin, 
+	    		@RequestParam long idPropuesta){
 
 	    	String mensaje = "";
 	        
@@ -217,6 +213,7 @@ public class PropuestaController {
 			  Usuario usuarioLoggeado = entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId());
 			  p.setEmpresa(usuarioLoggeado);
 			  p.setVerificado(false);
+			  p.setTipo(Tipo_propuesta.PROPUESTA);
 			  entityManager.persist(p);
 			  entityManager.flush();
 			  insertaImagenPropuesta(imagenPropuesta, p.getId());

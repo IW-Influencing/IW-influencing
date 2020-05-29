@@ -41,8 +41,8 @@ public class Evento {
 	private Usuario emisor;
 	private Usuario receptor;
 	public enum Tipo {CHAT, ADMINISTRACION, BUSQUEDA, NOTIFICACION};
-	private Candidatura candidatura;
 	private String tipo;
+	private Candidatura candidatura;
 	private LocalDateTime fechaEnviado;
 	private LocalDateTime fechaRecibido;
 	private boolean leido;

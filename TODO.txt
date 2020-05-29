@@ -17,6 +17,7 @@ Denuncia
 EDICION PERFIL 
   - Validacion en cliente
 
+Ultimatum: cambiar la propuesta de la candidatura por una nueva que representa al ultimatum y no se encuentre activa para que no aparezca en el buscador
 
 ------------------------------------------------------------------
 
@@ -38,4 +39,9 @@ Limpiar querys que no se utilizan
 
 DUDAS PROFESOR
 	Redirect --> Consultar el historial de la pagina en la que estas
+	TESTING
+	    Feature2 está bien el match
+		Lanzar las pruebas
+		Como comprobar los resultados de realizar las pruebas
+		Qué hay que testear
 	TOKEN

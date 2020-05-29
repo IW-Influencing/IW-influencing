@@ -48,31 +48,31 @@ INSERT INTO usuario(id,activo,nombre,nombre_cuenta,password,roles,apellidos,edad
 	3,1,true,'2015-07-20'
 );
 
-INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id,activa, edad_min_publico, edad_max_publico, fecha_inicio, fecha_fin, fecha_subida)  VALUES (
+INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id,activa, edad_min_publico, edad_max_publico, fecha_inicio, fecha_fin, fecha_subida, tipo)  VALUES (
 	1,
 	'Realizar publicidad en metro',
 	'Metropubli',
 	100,
 	'Ciudad',
-	4,true,1,5,'2017-07-20','2017-07-23','2017-07-23'
+	4,true,1,5,'2017-07-20','2017-07-23','2017-07-23','PROPUESTA' 
 );
 
-INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id,activa, edad_min_publico, edad_max_publico, fecha_inicio, fecha_fin, fecha_subida) VALUES (
+INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id,activa, edad_min_publico, edad_max_publico, fecha_inicio, fecha_fin, fecha_subida, tipo) VALUES (
 	2,
 	'Realizar publicidad en taxi',
 	'Taxipubli',
 	200,
 	'Ciudad,Taxi,Transporte',
-	4,true,1,5,'2019-07-20','2019-07-23','2019-07-23'
+	4,true,1,5,'2019-07-20','2019-07-23','2019-07-23','PROPUESTA'
 );
-INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id, activa, edad_min_publico, edad_max_publico, fecha_inicio, fecha_fin, fecha_subida) VALUES (
+INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id, activa, edad_min_publico, edad_max_publico, fecha_inicio, fecha_fin, fecha_subida, tipo) VALUES (
 	3,
 	'Publicitar festival',
 	'Festipubli',
 	500,
 	'Musica',
 	4,
-true,1,5,'2018-07-20','2018-07-23','2018-07-23'
+	true,1,5,'2018-07-20','2018-07-23','2018-07-23','PROPUESTA'
 );
 
 

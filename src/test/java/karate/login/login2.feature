@@ -1,14 +1,15 @@
 Feature: csrf and log-out endpoint
 
 Background:
-* url baseUrl
+* Given url baseUrl
+* Given path '/perfil'
 * call read('login1.feature')
 * def util = Java.type('karate.KarateTests')
 
 Scenario: user page
-    Given path 'user/1'
-    When method get
+    Given param idUsuario = 1
+    When method GET
     Then status 200
     * string response = response
-    * def userName = util.selectHtml(response, "h4>span")
-    And assert userName == 'a'
+    * def userName = util.selectHtml(response, "h2>span")
+    And match response contains 'Nombre y apellidos</h2> <span>a Abundio Ejemplez'

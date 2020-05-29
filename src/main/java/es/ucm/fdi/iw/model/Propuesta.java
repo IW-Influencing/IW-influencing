@@ -23,7 +23,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @NamedQueries({
 	
 	@NamedQuery(name="Propuesta.getAllProposals",
-	query="SELECT p FROM Propuesta p WHERE p.activa = true"),
+	query="SELECT p FROM Propuesta p WHERE p.activa = true AND p.tipo = 'PROPUESTA'"),
 	
 	@NamedQuery(name="Propuesta.searchByNombre",
 	query="SELECT p FROM Propuesta p "
@@ -41,6 +41,8 @@ public class Propuesta {
 	private String nombre;
 	private String tags;
 	private String descripcion;
+	public enum Tipo_propuesta {PROPUESTA, ULTIMATUM};
+	private String tipo;
 	private int sueldo;
 	private LocalDateTime fechaInicio;
 	private LocalDateTime fechaFin;
@@ -69,6 +71,19 @@ public class Propuesta {
 		this.id = id;
 	}
 	
+	
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Tipo_propuesta tipo) {
+		this.tipo = tipo.toString();
+	}
+	
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
 	public LocalDateTime getFechaInicio() {
 		return fechaInicio;
 	}
