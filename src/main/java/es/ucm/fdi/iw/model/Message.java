@@ -29,8 +29,6 @@ import org.apache.logging.log4j.Logger;
 	query="SELECT COUNT(m) FROM Message m "
 			+ "WHERE m.recipient.id = :idUsuario AND m.dateRead = null"),
 
-	@NamedQuery(name="Message.getAll",
-			query="SELECT m FROM Message m WHERE m.recipient.id = :idUsuario")
 })
 	
 

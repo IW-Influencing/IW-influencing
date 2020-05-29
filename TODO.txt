@@ -39,7 +39,6 @@ ADMINISTRACION
 Mostrar ultimatum chat
 Mensaje de valoracion, buscarle sentido
 PerfilesRRSS en vista
-Limpiar querys que no se utilizan
 
 DUDAS PROFESOR
 	Redirect --> Consultar el historial de la pagina en la que estas

@@ -11,12 +11,6 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries({
 
-	
-	@NamedQuery(name="Candidatura.activeByCandidato", 
-	query="SELECT c FROM Candidatura c WHERE c.candidato.id = :idCandidato AND (c.estado = 'EN_CURSO' OR c.estado = 'NEGOCIANDO')"),
-
-	@NamedQuery(name="Candidatura.activeByIdUsuario", 
-			query="SELECT c FROM Candidatura c WHERE (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario) AND (c.estado = 'EN_CURSO' OR c.estado = 'NEGOCIANDO')"),
 
 	@NamedQuery(name="Candidatura.chatsByCandidato", 
 	query="SELECT c FROM Candidatura c WHERE (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario) AND (c.estado = 'EN_ULTIMATUM' OR c.estado = 'NEGOCIANDO')"),
@@ -26,18 +20,6 @@ import javax.persistence.NamedQuery;
 	
 	@NamedQuery(name="Candidatura.searchByName",
 	query="SELECT c FROM Candidatura c WHERE (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario) AND c.propuesta.nombre LIKE :patron"),
-	
-	@NamedQuery(name="Candidatura.getAllActive",
-	query="SELECT c FROM Candidatura c WHERE c.aceptada = true AND (c.estado = 'EN_CURSO' OR c.estado = 'NEGOCIANDO')"),
-
-	@NamedQuery(name="Candidatura.getPendingCandidatures",
-	query="SELECT c FROM Candidatura c WHERE c.aceptada = false AND (c.estado = 'EN_CURSO' OR c.estado = 'NEGOCIANDO')"),
-	
-	@NamedQuery(name="Candidatura.getAllActiveById",
-	query="SELECT c FROM Candidatura c WHERE c.aceptada = true AND (c.estado = 'EN_CURSO' OR c.estado = 'NEGOCIANDO') AND (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario)"),
-
-	@NamedQuery(name="Candidatura.getPendingCandidaturesById",
-	query="SELECT c FROM Candidatura c WHERE c.aceptada = false AND (c.estado = 'EN_CURSO' OR c.estado = 'NEGOCIANDO') AND (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario)"),
 	
 	@NamedQuery(name="Candidatura.searchByEstado",
 	query="SELECT c FROM Candidatura c WHERE c.estado LIKE :estado AND (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario) ORDER BY c.propuesta.fechaInicio"),

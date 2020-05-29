@@ -26,11 +26,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 	@NamedQuery(name="Usuario.byNombreCuenta",
 	query="SELECT u FROM Usuario u "
 			+ "WHERE u.nombreCuenta = :nombreCuenta AND u.activo = true"),
-	
-	@NamedQuery(name="Usuario.hasNombre",
-	query="SELECT COUNT(u) "
-			+ "FROM Usuario u "
-			+ "WHERE u.nombre = :nombre"),
 		
 	@NamedQuery(name="Usuario.searchByNombre",
 	query="SELECT u FROM Usuario u "
@@ -44,10 +39,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 	@NamedQuery(name="Usuario.getAllEmpresas",
 	query="SELECT u FROM Usuario u WHERE u.roles LIKE '%EMPRESA%' AND u.activo = true"),
-	
-
-	@NamedQuery(name="Usuario.getAllAdmins",
-	query="SELECT u FROM Usuario u WHERE u.roles LIKE '%ADMIN%' AND u.activo = true"),
 	
 	@NamedQuery(name="Usuario.searchByTag",
 	query="SELECT u FROM Usuario u "

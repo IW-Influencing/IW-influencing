@@ -19,15 +19,9 @@ import es.ucm.fdi.iw.model.Usuario.Rol;
 @NamedQueries({
 	@NamedQuery(name="Evento.adminEventsByDate", 
 			query="SELECT e FROM Evento e WHERE leido = false AND e.tipo = 'ADMINISTRACION' ORDER BY e.fechaEnviado"),
-
-	@NamedQuery(name="Evento.searchesByDate",
-		query="SELECT e FROM Evento e WHERE e.receptor.id = :idUsuario AND e.tipo = 'BUSQUEDA' ORDER BY e.fechaEnviado"),
 	
 	@NamedQuery(name="Evento.getChat",
 		query="SELECT e FROM Evento e WHERE e.tipo = 'CHAT' AND e.candidatura.id = :idCandidatura ORDER BY e.fechaEnviado"),
-	
-	@NamedQuery(name="Evento.getNotificaciones",
-		query="SELECT e FROM Evento e WHERE e.tipo = 'NOTIFICACION' AND e.receptor = :idUsuario"),
 	
 	@NamedQuery(name="Evento.getNotificacionesUnread",
 	query="SELECT e FROM Evento e WHERE e.tipo = 'NOTIFICACION' AND e.receptor.id = :idUsuario AND e.leido = false"),
