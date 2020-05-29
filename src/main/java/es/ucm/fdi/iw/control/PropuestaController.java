@@ -125,7 +125,7 @@ public class PropuestaController {
 				entityManager.persist(c);
 				// Enviar mensaje de usuario se ha apuntado a la propuesta como emisor el
 				// usuario y receptor la empresa
-
+				
 				Evento e = new Evento();
 				e.setDescripcion("El usuario " + usuarioLoggeado.getNombre() + " se ha apuntado a la propuesta");
 				e.setCandidatura(c);
@@ -174,10 +174,10 @@ public class PropuestaController {
 	// Manejador para cuando se manda un ultimatum al otro usuario
 	// Tiene que registrar la propuesta con los datos y añadir un mensaje para
 	// enviarle el ultimatum.
-	@PostMapping("/enviaUltimatum")
+	@GetMapping("/enviaUltimatum")
 	@Transactional
 	@ResponseBody
-	public void enviaUltimatum(HttpSession session, RedirectAttributes redirectAttributes, Model model,
+	public String enviaUltimatum(HttpSession session, RedirectAttributes redirectAttributes, Model model,
 			@RequestParam String edades, @RequestParam String sueldo, @RequestParam String fechaInicio,
 			@RequestParam String fechaFin, @RequestParam long idPropuesta, @RequestParam long idCandidatura) {
 
@@ -201,8 +201,7 @@ public class PropuestaController {
 			ultimatum.setFechaInicio(fechaIni);
 			ultimatum.setFechaFin(fechaFinal);
 			ultimatum.setTags(original.getTags());
-			Usuario usuarioLoggeado = entityManager.find(Usuario.class, ((Usuario) session.getAttribute("u")).getId());
-			ultimatum.setEmpresa(usuarioLoggeado);
+			ultimatum.setEmpresa(original.getEmpresa());
 			ultimatum.setVerificado(false);
 			ultimatum.setTipo(Tipo_propuesta.ULTIMATUM);
 			entityManager.persist(ultimatum);
@@ -212,7 +211,7 @@ public class PropuestaController {
 			entityManager.persist(candidatura);
 			entityManager.flush();
 		}
-
+		return "a";
 	}
 
 	// Manejador para cuando se crea una propuesta
