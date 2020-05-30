@@ -58,7 +58,13 @@ public class MessageController {
 		List<Evento> mensajes = entityManager.createNamedQuery("Evento.getChat").setParameter("idCandidatura", idCandidatura).getResultList();
 		Usuario u = entityManager.find(Usuario.class, idUsuario);
 		return Evento.asTransferObjects(mensajes, u);	
-	}	
+	}
+	
+	
+	private Evento.TransferChat devuelveTransferMensaje(Evento mensaje, long idUsuario) {
+		
+		return Evento.asTransferObject(mensaje, entityManager.find(Usuario.class, idUsuario));	
+	}
 	
 	
 	
@@ -66,7 +72,7 @@ public class MessageController {
 	@Transactional // para no recibir resultados inconsistentes
 	@ResponseBody // para indicar que no devuelve vista, sino un objeto (jsonizado)
 	
-	public List<Evento.TransferChat> enviaMensaje(HttpSession session, @RequestParam long idCandidatura, @RequestParam long idEmisor, @RequestParam String msg, @RequestParam long idReceptor) {
+	public Evento.TransferChat enviaMensaje(HttpSession session, @RequestParam long idCandidatura, @RequestParam long idEmisor, @RequestParam String msg, @RequestParam long idReceptor) {
 		
 		Evento e = new Evento();
 		e.setDescripcion(msg);
@@ -78,18 +84,18 @@ public class MessageController {
 		e.setReceptor(entityManager.find(Usuario.class, idReceptor));
 		entityManager.persist(e);
 
-		List<Evento.TransferChat> chatPropio = devuelveChat(session, idCandidatura, idEmisor);
-		List<Evento.TransferChat> chatOtro = devuelveChat(session, idCandidatura, idReceptor);
+		Evento.TransferChat mensajePropio = devuelveTransferMensaje(e, idEmisor);
+		Evento.TransferChat mensajeOtro = devuelveTransferMensaje(e, idReceptor);
 		// y ahora, también lo enviamos por WS
 		messagingTemplate.convertAndSend(
 			"/user/a/queue/updates", 
-			chatOtro);
+			mensajeOtro);
 		messagingTemplate.convertAndSend(
 			"/user/"+e.getReceptor().getNombreCuenta()+"/queue/updates", 
-			chatOtro);
+			mensajeOtro);
 		log.info("Enviado mensaje via WS a {}", e.getReceptor().getNombreCuenta());
 		
-		return chatPropio;
+		return mensajePropio;
 	}	
 	
 

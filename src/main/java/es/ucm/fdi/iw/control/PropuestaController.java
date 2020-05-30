@@ -178,7 +178,7 @@ public class PropuestaController {
 	@GetMapping("/enviaUltimatum")
 	@Transactional
 	@ResponseBody
-	public TransferChat enviaUltimatum(HttpSession session, RedirectAttributes redirectAttributes, Model model,
+	public Evento.TransferChat enviaUltimatum(HttpSession session, RedirectAttributes redirectAttributes, Model model,
 			@RequestParam String edades, @RequestParam String sueldo, @RequestParam String fechaInicio,
 			@RequestParam String fechaFin, @RequestParam long idPropuesta, @RequestParam long idCandidatura) {
 
@@ -190,7 +190,8 @@ public class PropuestaController {
 		LocalDateTime fechaFinal = LocalDate.parse(fechaFin).atTime(LocalTime.now());
 		if (fechaIni.isBefore(LocalDateTime.now())) {
 			mensaje = "Error. Las fechas deben ser como mínimo las actuales"; // Comprobar fecha inicio
-		} else {
+		} 
+		else {
 			ultimatum.setActiva(true);
 			ultimatum.setCandidaturas(new ArrayList<Candidatura>());
 			ultimatum.setDescripcion(original.getDescripcion());
@@ -210,25 +211,36 @@ public class PropuestaController {
 			candidatura.setEstado(Estado.EN_ULTIMATUM.toString());
 			candidatura.setPropuesta(ultimatum);
 			entityManager.persist(candidatura);
-			Evento e = new Evento();
-			e.setDescripcion("Se ha enviado un ultimátum");
-			e.setCandidatura(candidatura);
-			Usuario emisor = entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId());
-			e.setEmisor(emisor);
-			e.setFechaEnviado(LocalDateTime.now());
-			e.setLeido(false);
-			e.setTipo(Tipo.CHAT);
-			if (emisor.hasRole(Rol.EMPRESA)) {
-				candidatura.getCandidato();
-			}
-			else{
-				e.setReceptor(ultimatum.getEmpresa());
-			}
-			entityManager.persist(e);
-			entityManager.flush();
-			return Evento.asTransferObject(e, emisor);
+			return creaEventoUltimatum(candidatura, entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId()), ultimatum);
 		}
 		return null;
+	}
+	
+	
+	@Transactional
+	private TransferChat creaEventoUltimatum(Candidatura candidatura, Usuario emisor, Propuesta ultimatum) {
+		// TODO Auto-generated method stub
+		Evento e = new Evento();
+		e.setDescripcion("Se ha enviado un ultimátum");
+		e.setCandidatura(candidatura);
+		e.setEmisor(emisor);
+		e.setFechaEnviado(LocalDateTime.now());
+		e.setLeido(false);
+		e.setTipo(Tipo.CHAT);
+		if (emisor.hasRole(Rol.EMPRESA)) {
+			e.setReceptor(candidatura.getCandidato());
+		}
+		else{
+			e.setReceptor(ultimatum.getEmpresa());
+		}
+		entityManager.persist(e);
+		entityManager.flush();
+		Evento.TransferChat transfer = Evento.asTransferObject(e, emisor);
+		messagingTemplate.convertAndSend(
+				"/user/"+e.getReceptor().getNombreCuenta()+"/queue/updates", 
+				Evento.asTransferObject(e, e.getReceptor()));
+		log.info("Enviado mensaje via WS a {}", e.getReceptor().getNombreCuenta());
+		return transfer;
 	}
 
 	// Manejador para cuando se crea una propuesta
@@ -305,6 +317,7 @@ public class PropuestaController {
 		File in = localData.getFile("propuesta", "" + idPropuesta);
 		File out = localData.getFile("propuesta", String.valueOf(idUltimatum));
 		if (in.exists()) {
+			System.out.println("El fichero existía" + in.getAbsolutePath());
 			try {
 				FileCopyUtils.copy(in, out);
 			} catch (IOException e) {

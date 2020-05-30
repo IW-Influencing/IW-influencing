@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
+import es.ucm.fdi.iw.model.Candidatura.Estado;
 import es.ucm.fdi.iw.model.Usuario.Rol;
 
 @NamedQueries({
@@ -90,6 +91,7 @@ public class Evento {
 		private String nombrePropuesta;
 		private String nombreUsuario;
 		private boolean propio;
+		private boolean ultimatum;
 		long id;
 		public TransferChat(Evento e) {
 			this.from = e.getEmisor().getNombre();
@@ -100,6 +102,7 @@ public class Evento {
 			this.text = e.getDescripcion();
 			this.nombrePropuesta = e.getCandidatura().getPropuesta().getNombre();
 			this.id = e.getId();
+			this.setUltimatum(e.getCandidatura().getEstado().equals(Estado.EN_ULTIMATUM.toString()));
 		}
 		public String getFrom() {
 			return from;
@@ -154,6 +157,12 @@ public class Evento {
 		}
 		public void setNombreUsuario(String nombreUsuario) {
 			this.nombreUsuario = nombreUsuario;
+		}
+		public boolean isUltimatum() {
+			return ultimatum;
+		}
+		public void setUltimatum(boolean ultimatum) {
+			this.ultimatum = ultimatum;
 		}		
 		
 		
