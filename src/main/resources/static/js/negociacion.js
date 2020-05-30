@@ -111,9 +111,10 @@ function enviaUltimatum(){
 }
 
 function insertaMensaje(json){
-	let clase = json[0].propio ? 'mensaje enviado' : 'mensaje recibido';
-	document.getElementById("contenidoChat").innerHTML.push("\n <p class='" + clase + " msg'> " + parseaFecha(msg.sent) + " - " + msg.text + "</p>")
-	
+	let clase = json.propio ? 'mensaje enviado' : 'mensaje recibido';
+	let chatAnterior = document.getElementById("contenidoChat").innerHTML;
+	chatAnterior.push("\n <p class='" + clase + " msg'> " + parseaFecha(json.sent) + " - " + json.text + "</p>")
+	document.getElementById("contenidoChat").innerHTML = chatAnterior;
 }
 
 function cargaPerfilModal(idUsuario){
