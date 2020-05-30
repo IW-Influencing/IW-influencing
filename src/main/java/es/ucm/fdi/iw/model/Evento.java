@@ -64,6 +64,18 @@ public class Evento {
 		return all;
 	}
 	
+	public static TransferChat asTransferObject(Evento e, Usuario u) {
+		TransferChat transfer = new TransferChat(e);
+		transfer.setPropio(transfer.from.equals(u.getNombre()));
+		if (u.hasRole(Rol.INFLUENCER)) {
+			transfer.setNombreUsuario(e.getCandidatura().getPropuesta().getEmpresa().getNombre());
+		}
+		else {
+			transfer.setNombreUsuario(e.getCandidatura().getCandidato().getNombre());
+		}
+		return transfer;
+	}
+	
 	/**
 	 * Objeto para persistir a/de JSON
 	 * @author mfreire

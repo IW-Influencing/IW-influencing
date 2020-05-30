@@ -101,12 +101,19 @@ function enviaUltimatum(){
 	return go(config.rootUrl + "propuesta/enviaUltimatum?edades="+edades+"&sueldo="+sueldo+"&fechaInicio="+fechaInicio+"&fechaFin="+fechaFin
 	+"&idPropuesta="+idPropuesta+"&idCandidatura="+idCandidatura, 'GET')
 		.then(json => {
+			insertaMensaje(json);
 			document.getElementById("botonUltimatum").innerText = "Visualizar Ultimatum";
 			document.getElementById("botonUltimatum").onclick = b => cargaUltimatumVisualizacionModal(idPropuesta);
 			document.getElementById("botonEnviar").style.display = "none";
 			enviarMensajeChatNegociacion("Se ha enviado un ultimatum",config.candidaturaId,config.receptorId, config.emisorId, document.getElementById("contenidoChat"), config.propId);
 			document.getElementById('modal').style.display='none';
 		});
+}
+
+function insertaMensaje(json){
+	let clase = json[0].propio ? 'mensaje enviado' : 'mensaje recibido';
+	document.getElementById("contenidoChat").innerHTML.push("\n <p class='" + clase + " msg'> " + parseaFecha(msg.sent) + " - " + msg.text + "</p>")
+	
 }
 
 function cargaPerfilModal(idUsuario){

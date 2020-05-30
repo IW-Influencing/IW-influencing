@@ -48,6 +48,7 @@ import es.ucm.fdi.iw.model.Evento;
 import es.ucm.fdi.iw.model.Propuesta;
 import es.ucm.fdi.iw.model.Usuario;
 import es.ucm.fdi.iw.model.Evento.Tipo;
+import es.ucm.fdi.iw.model.Evento.TransferChat;
 import es.ucm.fdi.iw.model.Propuesta.Tipo_propuesta;
 import es.ucm.fdi.iw.model.Usuario.Rol;
 
@@ -177,7 +178,7 @@ public class PropuestaController {
 	@GetMapping("/enviaUltimatum")
 	@Transactional
 	@ResponseBody
-	public String enviaUltimatum(HttpSession session, RedirectAttributes redirectAttributes, Model model,
+	public TransferChat enviaUltimatum(HttpSession session, RedirectAttributes redirectAttributes, Model model,
 			@RequestParam String edades, @RequestParam String sueldo, @RequestParam String fechaInicio,
 			@RequestParam String fechaFin, @RequestParam long idPropuesta, @RequestParam long idCandidatura) {
 
@@ -209,9 +210,25 @@ public class PropuestaController {
 			candidatura.setEstado(Estado.EN_ULTIMATUM.toString());
 			candidatura.setPropuesta(ultimatum);
 			entityManager.persist(candidatura);
+			Evento e = new Evento();
+			e.setDescripcion("Se ha enviado un ultimátum");
+			e.setCandidatura(candidatura);
+			Usuario emisor = entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId());
+			e.setEmisor(emisor);
+			e.setFechaEnviado(LocalDateTime.now());
+			e.setLeido(false);
+			e.setTipo(Tipo.CHAT);
+			if (emisor.hasRole(Rol.EMPRESA)) {
+				candidatura.getCandidato();
+			}
+			else{
+				e.setReceptor(ultimatum.getEmpresa());
+			}
+			entityManager.persist(e);
 			entityManager.flush();
+			return Evento.asTransferObject(e, emisor);
 		}
-		return "a";
+		return null;
 	}
 
 	// Manejador para cuando se crea una propuesta

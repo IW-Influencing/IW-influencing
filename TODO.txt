@@ -24,6 +24,12 @@ Ultimatum
   1. Insertar un evento que tenga algun atributo que marque es ultimatum en el chat
   2. Insertar un nuevo modo en candidatura que sea en_ultimatum
   
+  
+Nacho
+
+  
+Carlos
+
 
 ------------------------------------------------------------------
 
