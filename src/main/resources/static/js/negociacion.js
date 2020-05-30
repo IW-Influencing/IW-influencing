@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			insertaEnDiv(json, contenido, config.propId, config.candidaturaId);
 		}
 	}
-})
+});
 
 function pertenecePropuestaSeleccionada(propuestaMensajes, propuestaSeleccionada){
 	return propuestaMensajes === propuestaSeleccionada;

@@ -68,6 +68,12 @@
 			<version>20180219.1</version>
 		</dependency>
 
+
+		<!-- 
+			principal librería de pruebas unitarias en entorno Java
+			https://mvnrepository.com/artifact/junit/junit 			
+		-->
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -75,6 +81,12 @@
 			<scope>test</scope>
 		</dependency>
 		
+		
+	<!-- 
+			para generar mockups (falsos objetos que simulan ser objetos reales)
+			en tus pruebas unitarias
+			https://mvnrepository.com/artifact/org.mockito/mockito-core 
+		-->	
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
@@ -82,6 +94,11 @@
 			<scope>test</scope>
 		</dependency>
 		
+		
+		<!-- 
+			para usar karate sobre servidores apache-tomcat
+			https://mvnrepository.com/artifact/com.intuit.karate/karate-apache 
+		-->
 		<dependency>
 			<groupId>com.intuit.karate</groupId>
 			<artifactId>karate-apache</artifactId>
@@ -99,12 +116,25 @@
 			<version>0.9.5</version>
 			<scope>test</scope>
 		</dependency>
+		
+			<!-- 
+			karate usa chrome u otro navegador para automatizar pruebas
+			https://mvnrepository.com/artifact/com.intuit.karate/karate-core 
+		-->
 		<dependency>
 			<groupId>com.intuit.karate</groupId>
 			<artifactId>karate-core</artifactId>
 			<version>0.9.5</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- 
+			karate sólo quiere parsear xml válido, pero lo normal es escribir
+			html que no es xhtml válido. JSoup permite convertir lo uno a lo otro
+			https://mvnrepository.com/artifact/org.jsoup/jsoup
+			(solo hace falta cuando usas Karate para probar APIs; 
+			si automatizas navegador, no es necesario)
+		-->		
 		<dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
@@ -115,6 +145,12 @@
 	</dependencies>
 
 	<build>
+	
+			<!--
+			para poder tener todos los recursos de prueba
+			mezclados con las pruebas en sí en src/test/java
+			(esto dice "los recursos están ahí, pero no incluyen los .java")
+		-->
 	<testResources>
 			<testResource>
 				<directory>src/test/java</directory>
