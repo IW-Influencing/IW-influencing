@@ -103,20 +103,24 @@ function cargaUltimatumVisualizacionModal(idPropuesta){
 }
 
 function enviaUltimatum(){
-		let edades=document.getElementsByName("edades")[0].value;
-		let sueldo=document.getElementsByName("sueldo")[0].value;
-		let fechaInicio=document.getElementsByName("fechaInicio")[0].value;
-		let fechaFin=document.getElementsByName("fechaFin")[0].value;
-		let idPropuesta=document.getElementsByName("idPropuesta")[0].value;
-		let idCandidatura=document.getElementsByName("idCandidatura")[0].value;
-		
+
 	
-	return go(config.rootUrl + "propuesta/enviaUltimatum?edades="+edades+"&sueldo="+sueldo+"&fechaInicio="+fechaInicio+"&fechaFin="+fechaFin
-	+"&idPropuesta="+idPropuesta+"&idCandidatura="+idCandidatura, 'GET')
+		let data = {
+		 edades: document.getElementsByName("edades")[0].value,
+		 sueldo: document.getElementsByName("sueldo")[0].value,
+		 fechaInicio: document.getElementsByName("fechaInicio")[0].value,
+		 fechaFin: document.getElementsByName("fechaFin")[0].value,
+		 idPropuesta: document.getElementsByName("idPropuesta")[0].value,
+		 idCandidatura: document.getElementsByName("idCandidatura")[0].value
+		};
+		
+		return go(config.rootUrl + "propuesta/enviaUltimatum", 'POST', data)
 		.then(json => {
 			insertaMensaje(json);
 			document.getElementById('modal').style.display='none';
 		});
+	
+
 }
 
 function insertaMensaje(json){

@@ -64,7 +64,8 @@ function lanzaAlert() {
 }
 
 function cargaModalDenuncia(idDenunciado){
+	let url = window.location.href.toString().split(window.location.host)[1];
 	document.getElementById('modal').style.display='block';
-	return go2(config.rootUrl + "denuncia?idDenunciado=" + idDenunciado, 'GET')
+	return go2(config.rootUrl + "denuncia?idDenunciado=" + idDenunciado+"&ruta="+url, 'GET')
 		.then(html => document.getElementById("contenidoModal").innerHTML=html);
 }

@@ -26,7 +26,6 @@ import es.ucm.fdi.iw.model.Evento;
 import es.ucm.fdi.iw.model.Propuesta;
 import es.ucm.fdi.iw.model.Usuario;
 import es.ucm.fdi.iw.model.Valoracion;
-import jdk.internal.jline.internal.Log;
 
 @Controller()
 @RequestMapping("contrataciones")
@@ -191,7 +190,7 @@ public class ContratacionesController {
 			response.sendRedirect("/contrataciones");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			Log.info("Error al redireccionar");
+			log.info("Error al redireccionar");
 		}
 	  }
 	

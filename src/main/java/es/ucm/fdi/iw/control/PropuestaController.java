@@ -30,6 +30,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -215,6 +216,59 @@ public class PropuestaController {
 		}
 		return null;
 	}
+	
+	
+	private static class UltimatumTransfer {
+		public String edades;
+		public String sueldo;
+		public String fechaInicio;
+		public String fechaFin; 
+		public long idPropuesta;
+		public long idCandidatura;
+	}
+
+	// Manejador para cuando se manda un ultimatum al otro usuario
+		// Tiene que registrar la propuesta con los datos y añadir un mensaje para
+		// enviarle el ultimatum.
+		@PostMapping("/enviaUltimatum")
+		@Transactional
+		@ResponseBody
+		public Evento.TransferChat enviaUltimatum2(HttpSession session, RedirectAttributes redirectAttributes, Model model, @RequestBody UltimatumTransfer ut) {
+
+			
+			String mensaje = "";
+			Candidatura candidatura = entityManager.find(Candidatura.class, ut.idCandidatura);
+			Propuesta ultimatum = new Propuesta();
+			Propuesta original = entityManager.find(Propuesta.class, ut.idPropuesta);
+			LocalDateTime fechaIni = LocalDate.parse(ut.fechaInicio).atTime(LocalTime.now());
+			LocalDateTime fechaFinal = LocalDate.parse(ut.fechaFin).atTime(LocalTime.now());
+			if (fechaIni.isBefore(LocalDateTime.now())) {
+				mensaje = "Error. Las fechas deben ser como mínimo las actuales"; // Comprobar fecha inicio
+			} 
+			else {
+				ultimatum.setActiva(true);
+				ultimatum.setCandidaturas(new ArrayList<Candidatura>());
+				ultimatum.setDescripcion(original.getDescripcion());
+				ultimatum.setNombre(original.getNombre());
+				ultimatum.setEdadMinPublico(Integer.valueOf(ut.edades.split("-")[0]));
+				ultimatum.setEdadMaxPublico(Integer.valueOf(ut.edades.split("-")[1]));
+				ultimatum.setSueldo(Integer.valueOf(ut.sueldo));
+				ultimatum.setFechaSubida(LocalDateTime.now());
+				ultimatum.setFechaInicio(fechaIni);
+				ultimatum.setFechaFin(fechaFinal);
+				ultimatum.setTags(original.getTags());
+				ultimatum.setEmpresa(original.getEmpresa());
+				ultimatum.setVerificado(false);
+				ultimatum.setTipo(Tipo_propuesta.ULTIMATUM);
+				entityManager.persist(ultimatum);
+				insertaImagenUltimatum(ut.idPropuesta, ultimatum.getId());
+				candidatura.setEstado(Estado.EN_ULTIMATUM.toString());
+				candidatura.setPropuesta(ultimatum);
+				entityManager.persist(candidatura);
+				return creaEventoUltimatum(candidatura, entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId()), ultimatum);
+			}
+			return null;
+		}
 	
 	
 	@Transactional

@@ -28,7 +28,6 @@ import es.ucm.fdi.iw.model.Evento;
 import es.ucm.fdi.iw.model.Propuesta;
 import es.ucm.fdi.iw.model.Usuario;
 import es.ucm.fdi.iw.model.Valoracion;
-import jdk.internal.jline.internal.Log;
 
 @Controller()
 @RequestMapping("denuncia")
