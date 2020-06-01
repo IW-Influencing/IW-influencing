@@ -48,7 +48,7 @@ public class BusquedaPropuestaController {
 		String patronParaLike = "%"+patron+"%";
 		List<Propuesta> propuestas = null;
 		propuestas = entityManager.createNamedQuery("Propuesta.searchByNombre", Propuesta.class)
-				.setParameter("nombre", patronParaLike).getResultList();		
+				.setParameter("nombre", patronParaLike.toUpperCase()).getResultList();		
 		model.addAttribute("numeroPaginas", Math.ceil((double)propuestas.size()/NUM_ELEMENTOS_PAGINA));
 		if (indicePagina*NUM_ELEMENTOS_PAGINA <= propuestas.size())
 			propuestas=propuestas.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, indicePagina*NUM_ELEMENTOS_PAGINA);
@@ -73,7 +73,7 @@ public class BusquedaPropuestaController {
 			propuestas = entityManager.createQuery("select p from Propuesta p", Propuesta.class).getResultList();
 		} else {
 			propuestas = entityManager.createNamedQuery("Propuesta.searchByTag", Propuesta.class)
-					.setParameter("tag", tagsLike).getResultList();			
+					.setParameter("tag", tagsLike.toUpperCase()).getResultList();			
 		}
 		model.addAttribute("numeroPaginas", Math.ceil((double)propuestas.size()/NUM_ELEMENTOS_PAGINA));
 		if (indicePagina*NUM_ELEMENTOS_PAGINA <= propuestas.size())

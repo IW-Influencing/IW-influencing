@@ -105,7 +105,10 @@
                     <i class="fa fa-check-double w3-margin-right"></i>Finalizadas</button>
 	            
 			</div>
-            <input type="text" placeholder="Buscar..." id="cuadroBusquedaTagBar">
+			    <input th:unless="${nombrePagina} eq 'CONTRATACIONES'" type="text" placeholder="Búsqueda por nombre" id="cuadroBusquedaTagBar">
+
+			    <input th:if="${nombrePagina} eq 'CONTRATACIONES'" type="text" placeholder="Búsqueda por nombre de propuesta" id="cuadroBusquedaTagBar">
+			</div>
         </div>
     </div>	
 

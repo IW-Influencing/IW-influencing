@@ -196,13 +196,17 @@ function cargaContenidoModal(tipo, id){
             .then(html => document.getElementById("contenidoModal").innerHTML=html);
     }
 	else if (tipo ==='DENUNCIA-TRAMITAR'){
+			let url = window.location.href.toString().split(window.location.host)[1];
+
 		        document.getElementById('modal').style.display='block';
-	        return go2(config.rootUrl + "denuncia/tramitar?idDenuncia=" + id, 'GET')
+	        return go2(config.rootUrl + "denuncia/tramitar?idDenuncia=" + id+"&ruta="+url, 'GET')
 	            .then(html => document.getElementById("contenidoModal").innerHTML=html);
 	}
 	else if (tipo ==='DENUNCIA-VER'){
+			let url = window.location.href.toString().split(window.location.host)[1];
+
 		        document.getElementById('modal').style.display='block';
-	        return go2(config.rootUrl + "denuncia/ver?idDenuncia=" + id, 'GET')
+	        return go2(config.rootUrl + "denuncia/ver?idDenuncia=" + id+"&ruta="+url, 'GET')
 	            .then(html => document.getElementById("contenidoModal").innerHTML=html);
 	}
 }

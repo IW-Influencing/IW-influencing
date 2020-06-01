@@ -1,52 +1,63 @@
------------------------------------------------------------------------------
-
-Ultimatum
- - Validacion ultimatum
- - El otro debe ser el unico que pueda responder
- - Funcionalidad al responder ultimatum
+Pagina de inicio - Carlos
+ - Busquedas -> que te mande a las busquedas perfiles/propuestas con el texto como input para busqueda por nombre. Meterlas en un form.
+ - Propuestas -> Empresa -- Nombre propuesta. Como botón uno solo para visualizarla que cargue el modal.
+ - Mensajes -> notificaciones (para el final)
 
 
-
-------------------------------------------------------------------------------
-
-
-Denuncia 
-  Controlador hacer los redirect y mensajes de alert
-  Validacion cliente y controlador
-
-
-EDICION PERFIL 
-  - Validacion en cliente
-
-Ultimatum
-  1. Insertar un evento que tenga algun atributo que marque es ultimatum en el chat
-  2. Insertar un nuevo modo en candidatura que sea en_ultimatum
-  
-  
-Nacho
-
-  
-Carlos
-
-
-------------------------------------------------------------------
-
-Numeros notificaciones cuando tienes 0 mal.
-
-Busqueda administracion
-
+Administracion
+	Denuncia - Carlos
+	  Controlador hacer los redirect y mensajes de alert
+	  Validacion cliente y controlador
+	  Al tramitar mandar notificacion a los usuarios de que se ha tramitado su denuncia
+	  
+	Propuestas - Nacho
+	  Borrar y verificarlas hay que notificar a la empresa
+	  Borrar notificar a los usuarios que esten relacionados
+	  
+	Usuarios y empresas - Nacho
+	  Verificarlos notificar al usuario	
+	
 
 Negociacion
-  - WebSocket para notificar cuantos chat hay sin leer
 
-Propuesta
-  - Funcionalidad apuntarse a una propuesta
+	Ultimatum - Nacho
+	 - Validacion ultimatum
+	 - Cambiar de color el boton de visualizar
+	 - El otro debe ser el unico que pueda responder
+	 - Funcionalidad al responder ultimatum
+	 - Enviar una notificacion de que te han mandado un ultimatum
+	 
+	 
+PERFIL - Carlos
+  Edicion 
+	  - Validacion en cliente
+	  - Al ser admin  no deberia salir tags, historial de propuestas ni score
+  Vista
+      - PerfilesRRSS
+      - Historial de propuestas
+      
 
-ADMINISTRACION
+Navbar - Nacho
+	- Numeros notificaciones cuando tienes 0 mal.
+	- Muestra siempre notificaciones de admin
 
-Mostrar ultimatum chat
-Mensaje de valoracion, buscarle sentido
-PerfilesRRSS en vista
+
+Propuesta - Carlos
+  - Funcionalidad apuntarse notificar a la empresa que se ha apuntado un usuario.
+
+Contrataciones - Nacho
+  - Valoracion no funciona bien cuando se puntua con decimales 
+  - Notificar al usuario que se ha valorado, pudiendo ver la valoracion en un modal.
+  - Borrar el mensaje de alert
+  - Mostrar la valoracion que se ha enviado mediante un modal.
+  
+Inputs de busqueda de la navbar meterlos en un form. - Carlos
+sendRedirects -> cambiarlos a la ruta en la que se estaba actualmente - Nacho
+
+
+
+Busqueda  de administracion https://www.w3schools.com/w3css/w3css_filters.asp PENDIENTE
+
 
 DUDAS PROFESOR
 	Redirect --> Consultar el historial de la pagina en la que estas

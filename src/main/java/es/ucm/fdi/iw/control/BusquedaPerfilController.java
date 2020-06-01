@@ -45,7 +45,7 @@ public class BusquedaPerfilController {
 			String patronParaLike = "%"+patron+"%";
 			List<Usuario> usuarios = null;
 			usuarios = entityManager.createNamedQuery("Usuario.searchByNombre", Usuario.class)
-					.setParameter("nombre", patronParaLike).getResultList();			
+					.setParameter("nombre", patronParaLike.toUpperCase()).getResultList();			
 			model.addAttribute("numeroPaginas", Math.ceil((double)usuarios.size()/NUM_ELEMENTOS_PAGINA));
 			if (indicePagina*NUM_ELEMENTOS_PAGINA <= usuarios.size())
 				usuarios=usuarios.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, indicePagina*NUM_ELEMENTOS_PAGINA);
@@ -70,7 +70,7 @@ public class BusquedaPerfilController {
 				usuarios = entityManager.createQuery("select u from Usuario u", Usuario.class).getResultList();
 			} else {
 				usuarios = entityManager.createNamedQuery("Usuario.searchByTag", Usuario.class)
-						.setParameter("tag", tagsLike).getResultList();			
+						.setParameter("tag", tagsLike.toUpperCase()).getResultList();			
 			}
 			model.addAttribute("numeroPaginas", Math.ceil((double)usuarios.size()/NUM_ELEMENTOS_PAGINA));
 			if (indicePagina*NUM_ELEMENTOS_PAGINA <= usuarios.size())

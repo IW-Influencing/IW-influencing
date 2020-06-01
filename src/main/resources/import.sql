@@ -70,7 +70,7 @@ INSERT INTO propuesta(id,descripcion,nombre,sueldo,tags,empresa_id, activa, edad
 	'Publicitar festival',
 	'Festipubli',
 	500,
-	'Musica',
+	'Música',
 	4,
 	true,1,5,'2018-07-20','2018-07-23','2018-07-23','PROPUESTA'
 );

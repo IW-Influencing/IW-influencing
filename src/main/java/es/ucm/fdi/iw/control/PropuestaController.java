@@ -173,51 +173,6 @@ public class PropuestaController {
 		return "redirect:login";
 	}
 
-	// Manejador para cuando se manda un ultimatum al otro usuario
-	// Tiene que registrar la propuesta con los datos y añadir un mensaje para
-	// enviarle el ultimatum.
-	@GetMapping("/enviaUltimatum")
-	@Transactional
-	@ResponseBody
-	public Evento.TransferChat enviaUltimatum(HttpSession session, RedirectAttributes redirectAttributes, Model model,
-			@RequestParam String edades, @RequestParam String sueldo, @RequestParam String fechaInicio,
-			@RequestParam String fechaFin, @RequestParam long idPropuesta, @RequestParam long idCandidatura) {
-
-		String mensaje = "";
-		Candidatura candidatura = entityManager.find(Candidatura.class, idCandidatura);
-		Propuesta ultimatum = new Propuesta();
-		Propuesta original = entityManager.find(Propuesta.class, idPropuesta);
-		LocalDateTime fechaIni = LocalDate.parse(fechaInicio).atTime(LocalTime.now());
-		LocalDateTime fechaFinal = LocalDate.parse(fechaFin).atTime(LocalTime.now());
-		if (fechaIni.isBefore(LocalDateTime.now())) {
-			mensaje = "Error. Las fechas deben ser como mínimo las actuales"; // Comprobar fecha inicio
-		} 
-		else {
-			ultimatum.setActiva(true);
-			ultimatum.setCandidaturas(new ArrayList<Candidatura>());
-			ultimatum.setDescripcion(original.getDescripcion());
-			ultimatum.setNombre(original.getNombre());
-			ultimatum.setEdadMinPublico(Integer.valueOf(edades.split("-")[0]));
-			ultimatum.setEdadMaxPublico(Integer.valueOf(edades.split("-")[1]));
-			ultimatum.setSueldo(Integer.valueOf(sueldo));
-			ultimatum.setFechaSubida(LocalDateTime.now());
-			ultimatum.setFechaInicio(fechaIni);
-			ultimatum.setFechaFin(fechaFinal);
-			ultimatum.setTags(original.getTags());
-			ultimatum.setEmpresa(original.getEmpresa());
-			ultimatum.setVerificado(false);
-			ultimatum.setTipo(Tipo_propuesta.ULTIMATUM);
-			entityManager.persist(ultimatum);
-			insertaImagenUltimatum(idPropuesta, ultimatum.getId());
-			candidatura.setEstado(Estado.EN_ULTIMATUM.toString());
-			candidatura.setPropuesta(ultimatum);
-			entityManager.persist(candidatura);
-			return creaEventoUltimatum(candidatura, entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId()), ultimatum);
-		}
-		return null;
-	}
-	
-	
 	private static class UltimatumTransfer {
 		public String edades;
 		public String sueldo;

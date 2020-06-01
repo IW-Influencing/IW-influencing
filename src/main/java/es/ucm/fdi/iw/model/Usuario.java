@@ -29,10 +29,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 		
 	@NamedQuery(name="Usuario.searchByNombre",
 	query="SELECT u FROM Usuario u "
-			+ "WHERE u.nombre LIKE :nombre AND u.roles NOT LIKE '%ADMIN%' "),
+			+ "WHERE upper(u.nombre) LIKE :nombre AND u.roles NOT LIKE '%ADMIN%' AND u.activo = true"),
 	
 	@NamedQuery(name="Usuario.getAllUsers",
-	query="SELECT u FROM Usuario u WHERE u.roles NOT LIKE '%ADMIN%' "),
+	query="SELECT u FROM Usuario u WHERE u.roles NOT LIKE '%ADMIN%' AND u.activo = true"),
 
 	@NamedQuery(name="Usuario.getAllInfluencers",
 	query="SELECT u FROM Usuario u WHERE u.roles LIKE '%INFLUENCER%' AND u.activo = true"),
@@ -42,7 +42,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 	
 	@NamedQuery(name="Usuario.searchByTag",
 	query="SELECT u FROM Usuario u "
-			+ "WHERE u.tags LIKE :tag  AND u.roles NOT LIKE '%ADMIN%' ")
+			+ "WHERE upper(u.tags) LIKE :tag  AND u.roles NOT LIKE '%ADMIN%' AND u.activo = true")
 
 })
 

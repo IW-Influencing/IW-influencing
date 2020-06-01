@@ -42,9 +42,10 @@ public class ContratacionesController {
 	public String getContrataciones(Model model, HttpSession session) {
 		Usuario u = (Usuario)session.getAttribute("u");
 		List<Candidatura> candidaturas;
-		candidaturas = entityManager.createNamedQuery("Candidatura.getByUser", Candidatura.class)					
+		candidaturas = entityManager.createNamedQuery("Candidatura.getContrataciones", Candidatura.class)					
 				.setParameter("idUsuario",((Usuario)session.getAttribute("u")).getId()).getResultList();
 		model.addAttribute("mensaje",session.getAttribute("mensajeInfo"));
+		session.removeAttribute("mensajeInfo");
 		model.addAttribute("numeroPaginas", Math.ceil((double)candidaturas.size()/NUM_ELEMENTOS_PAGINA));
 		if (NUM_ELEMENTOS_PAGINA <= candidaturas.size())
 			candidaturas=candidaturas.subList(0,NUM_ELEMENTOS_PAGINA);
@@ -72,7 +73,7 @@ public class ContratacionesController {
 		    String patronParaLike = "%"+patron+"%";
 			List<Candidatura> candidaturas = null;
 			candidaturas = entityManager.createNamedQuery("Candidatura.searchByName", Candidatura.class)
-					.setParameter("patron", patronParaLike).setParameter("idUsuario",((Usuario)session.getAttribute("u")).getId())
+					.setParameter("patron", patronParaLike.toUpperCase()).setParameter("idUsuario",((Usuario)session.getAttribute("u")).getId())
 					.getResultList();		
 			model.addAttribute("numeroPaginas", Math.ceil((double)candidaturas.size()/NUM_ELEMENTOS_PAGINA));
 			if (indicePagina*NUM_ELEMENTOS_PAGINA <= candidaturas.size())
@@ -90,17 +91,20 @@ public class ContratacionesController {
 	    @GetMapping("/estado")
 		public String postSearchByTag(Model model, HttpSession session, @RequestParam(required = true, defaultValue = "1") int indicePagina, @RequestParam String estado ) {
 			String estadoLike;
-			if (estado.equals(" ALL"))
-				estadoLike = "%%";
-			else
-				estadoLike = "%"+estado+"%";
 			List<Candidatura> candidaturas = null;
-			if (estado.isEmpty()) { 
-				candidaturas = entityManager.createQuery("select c from Candidatura c", Candidatura.class).getResultList();
-			} else {
-				candidaturas = entityManager.createNamedQuery("Candidatura.searchByEstado", Candidatura.class)
-						.setParameter("estado", estadoLike).setParameter("idUsuario",((Usuario)session.getAttribute("u")).getId()).getResultList();			
+
+			if (estado.equals(" ALL")) {
+				candidaturas = entityManager.createNamedQuery("Candidatura.getContrataciones", Candidatura.class)					
+						.setParameter("idUsuario",((Usuario)session.getAttribute("u")).getId()).getResultList();
 			}
+			else {
+				estadoLike = "%"+estado+"%";
+				candidaturas = entityManager.createNamedQuery("Candidatura.searchByEstado", Candidatura.class)
+					.setParameter("estado", estadoLike).setParameter("idUsuario",((Usuario)session.getAttribute("u")).getId()).getResultList();
+			}
+
+			
+			
 			model.addAttribute("numeroPaginas", Math.ceil((double)candidaturas.size()/NUM_ELEMENTOS_PAGINA));
 			if (indicePagina*NUM_ELEMENTOS_PAGINA <= candidaturas.size())
 				candidaturas=candidaturas.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, indicePagina*NUM_ELEMENTOS_PAGINA);

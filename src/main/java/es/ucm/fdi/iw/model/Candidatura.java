@@ -19,13 +19,20 @@ import javax.persistence.NamedQuery;
 	query="SELECT c.propuesta FROM Candidatura c WHERE c.candidato.id = :idCandidato AND c.propuesta.id = :idPropuesta"),
 	
 	@NamedQuery(name="Candidatura.searchByName",
-	query="SELECT c FROM Candidatura c WHERE (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario) AND c.propuesta.nombre LIKE :patron"),
+	query="SELECT c FROM Candidatura c WHERE (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario) "
+			+ "AND (c.estado = 'EN_CURSO' OR c.estado = 'EN_VALORACION' OR c.estado = 'FINALIZADA') AND upper(c.propuesta.nombre) LIKE :patron"),
 	
 	@NamedQuery(name="Candidatura.searchByEstado",
-	query="SELECT c FROM Candidatura c WHERE c.estado LIKE :estado AND (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario) ORDER BY c.propuesta.fechaInicio"),
+	query="SELECT c FROM Candidatura c WHERE c.estado LIKE :estado AND (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario)"
+			+ " ORDER BY c.propuesta.fechaInicio"),
 	
 	@NamedQuery(name="Candidatura.getByUser",
-		query="SELECT c FROM Candidatura c WHERE (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario) ORDER BY c.propuesta.fechaInicio")
+		query="SELECT c FROM Candidatura c WHERE (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario) ORDER BY c.propuesta.fechaInicio"),
+	
+	@NamedQuery(name="Candidatura.getContrataciones",
+	query="SELECT c FROM Candidatura c WHERE (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario) "
+			+ "AND (c.estado = 'EN_CURSO' OR c.estado = 'EN_VALORACION' OR c.estado = 'FINALIZADA') ORDER BY c.propuesta.fechaInicio")
+
 })
 
 

@@ -39,8 +39,8 @@
 		
 		<div id="messages" class="messages_panel w3-third w3-container">
 				<div class="content">
-					<h2> Mensajes recientes</h2>
-					<button class="w3-btn btnColor w3-margin">Ver todos los mensajes</button>
+					<h2> Notificaciones recientes</h2>
+					<button class="w3-btn btnColor w3-margin">Ver todas las notificaciones</button>
 					<div th:each="mensaje : ${mensajes}" id="message1" class="dark_block">
 						<div class="content">	
 							<p th:text="${mensaje.getEmisor().getNombre() +': '+ mensaje.getDescripcion()}">Emisor + Mensaje</p>

@@ -38,10 +38,10 @@ public class DenunciaController {
 
 
     @GetMapping("")
-    public String devuelveModalDenuncia(Model model, HttpSession session , @RequestParam long idDenunciado){
-        Usuario denunciado = entityManager.find(Usuario.class, idDenunciado);
+    public String devuelveModalDenuncia(Model model, HttpSession session , @RequestParam long idDenunciado, @RequestParam String ruta){
         model.addAttribute("denunciante", entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId()));
         model.addAttribute("denunciado", entityManager.find(Usuario.class, idDenunciado));
+        model.addAttribute("ruta", ruta);
         model.addAttribute("modo", "CREACION");
         return "modals/denuncia";
     }
@@ -49,7 +49,8 @@ public class DenunciaController {
 	 
     @PostMapping("/registrar")
     @Transactional
-	public void registraDenuncia(Model model, HttpSession session,HttpServletResponse response, @RequestParam long idDenunciado, @RequestParam String descripcion, @RequestParam String titulo) {
+	public void registraDenuncia(Model model, HttpSession session,HttpServletResponse response, 
+			@RequestParam long idDenunciado, @RequestParam String descripcion, @RequestParam String titulo, @RequestParam String ruta) {
 
 		Usuario denunciante =  entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId());
         Usuario denunciado = entityManager.find(Usuario.class, idDenunciado);
@@ -65,7 +66,7 @@ public class DenunciaController {
         System.out.println(d);
         session.setAttribute("mensajeInfo", "Denuncia enviada correctamente");
 		try {
-			response.sendRedirect("/inicio");
+			response.sendRedirect(ruta);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			log.info("Error al redireccionar");
@@ -73,7 +74,7 @@ public class DenunciaController {
 	}
     
     @GetMapping("/tramitar")
-    public String devuelveModalTramitarDenuncia(Model model, HttpSession session , @RequestParam long idDenuncia){
+    public String devuelveModalTramitarDenuncia(Model model, HttpSession session , @RequestParam long idDenuncia, @RequestParam String ruta){
         Denuncia d = entityManager.find(Denuncia.class, idDenuncia);
         model.addAttribute("denunciante", d.getDenunciante());
         model.addAttribute("denuncia", d);
@@ -94,14 +95,14 @@ public class DenunciaController {
 
     @PostMapping("/tramitar")
     @Transactional
-	public void tramitaDenuncia(Model model, HttpSession session,HttpServletResponse response, @RequestParam long idDenuncia) {
+	public void tramitaDenuncia(Model model, HttpSession session,HttpServletResponse response, @RequestParam long idDenuncia, @RequestParam String ruta) {
 		Denuncia d = entityManager.find(Denuncia.class, idDenuncia);
         d.setTramitada(true);
         entityManager.persist(d);
 		try {
 			session.setAttribute("modo", "DENUNCIAS");
 	        session.setAttribute("mensajeInfo", "Denuncia tramitada");
-			response.sendRedirect("/administracion");
+			response.sendRedirect(ruta);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
