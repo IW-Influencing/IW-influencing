@@ -37,6 +37,9 @@ public class BusquedaPerfilController {
 		if (NUM_ELEMENTOS_PAGINA <= usuarios.size())
 			usuarios=usuarios.subList(0,NUM_ELEMENTOS_PAGINA);
 		model.addAttribute("usuarios", usuarios);
+		model.addAttribute("numNotificaciones", entityManager.createNamedQuery("Evento.getNotificacionesUnread")
+				  .setParameter("idUsuario", ((Usuario)session.getAttribute("u")).getId()).getResultList().size());
+
 		return "busquedaPerfil";
 	  }
 	  

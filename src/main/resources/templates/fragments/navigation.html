@@ -33,7 +33,7 @@
                 </button>
                 <div class="w3-dropdown-content w3-bar-block w3-card-4" id="desplegableUsuario">
                     <span id="botonNotificacionesNav" class="w3-bar-item w3-button divFlex">Notificaciones
-						<sup id="indiceNumNotificaciones"><button id="btnNumeroNotificaciones" class="w3-button w3-circle w3-teal" th:text=${numNotificaciones}></button><sup>
+						<sup id="indiceNumNotificaciones"><button id="btnNumeroNotificaciones" class="w3-button w3-circle w3-teal" th:text=${numNotificaciones}>0</button><sup>
 					</span>
 					<span id="botonPerfilNav" class="w3-bar-item w3-button">Mi Perfil</span>
                     <form th:action="@{/logout}" method="post" class="w3-bar-item w3-button">

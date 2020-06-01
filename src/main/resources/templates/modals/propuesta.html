@@ -127,7 +127,7 @@
     <div class="divCentrado"> 
       <button  th:if="${modo} eq 'CREACION'" class="w3-btn btnColor w3-margin" id="btnPublicarPropuesta">Publicar</button>
       <button  th:if="${modo} eq 'VISTA' and ${session.u.hasRole('INFLUENCER')}" class="w3-btn btnColor w3-margin">Apuntarse</button>
-      <div class="botones-propuesta" th:if="${modo} eq 'VISTA-ULTIMATUM'"> 
+      <div class="botones-propuesta" th:if="${modo} eq 'VISTA-ULTIMATUM' and not ${propio}"> 
         <button class="w3-btn btnColor w3-margin btnAceptar">Aceptar</button>
         <button  class="w3-btn btnColor w3-margin btnRechazar">Rechazar</button>
       </div>

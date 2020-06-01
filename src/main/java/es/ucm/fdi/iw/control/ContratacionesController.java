@@ -52,6 +52,9 @@ public class ContratacionesController {
 		model.addAttribute("valoradas",  devuelveContratacionesValoradas(((Usuario)session.getAttribute("u")).getId()));
 		model.addAttribute("modo", "Contrataciones");
 	    model.addAttribute("resultadoBusqueda", candidaturas);
+	    model.addAttribute("numNotificaciones", entityManager.createNamedQuery("Evento.getNotificacionesUnread")
+				  .setParameter("idUsuario", ((Usuario)session.getAttribute("u")).getId()).getResultList().size());
+
 		return "contrataciones";
 	}
 	
@@ -148,7 +151,7 @@ public class ContratacionesController {
 	  @PostMapping("/valorar")
    	  @Transactional
 	  public void valoraContratacion(Model model, HttpServletResponse response, HttpSession session, @RequestParam long idCandidatura, 
-			  @RequestParam String valoracion,  @RequestParam int puntuacion) {
+			  @RequestParam String valoracion,  @RequestParam float puntuacion) {
 				  
 		  String mensaje = "";
 		  if (!(entityManager.createNamedQuery("Valoraciones.getByEmisorAndCandidatura", Valoracion.class)

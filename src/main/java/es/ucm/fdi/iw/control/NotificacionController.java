@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import es.ucm.fdi.iw.model.Evento;
+import es.ucm.fdi.iw.model.Usuario;
+import es.ucm.fdi.iw.model.Usuario.Rol;
 
 
 @Controller()
@@ -26,7 +28,15 @@ public class NotificacionController {
 	 
 	  @GetMapping("")
 	  public String notificaciones(HttpSession session, Model model) {
-	    List<Evento> listaNotificaciones = entityManager.createNamedQuery("Evento.adminEventsByDate").getResultList();
+		  List<Evento> listaNotificaciones  = null;
+		if (((Usuario)session.getAttribute("u")).hasRole(Rol.ADMIN)) {
+			listaNotificaciones = entityManager.createNamedQuery("Evento.adminEventsByDate").getResultList();
+		}
+		else {
+			listaNotificaciones  = entityManager.createNamedQuery("Evento.getNotificacionesUnread")
+					  .setParameter("idUsuario", ((Usuario)session.getAttribute("u")).getId()).getResultList();
+
+		}
 		model.addAttribute("notificaciones", listaNotificaciones);
 	    return "modals/notificaciones";
 	  

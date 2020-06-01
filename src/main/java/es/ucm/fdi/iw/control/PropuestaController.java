@@ -83,21 +83,22 @@ public class PropuestaController {
 	}
 
 	@GetMapping("/vistaUltimatum")
-	public String vistaUltimatum(Model model, HttpSession session, @RequestParam long idPropuesta) {
-		Propuesta p = entityManager.find(Propuesta.class, idPropuesta);
+	public String vistaUltimatum(Model model, HttpSession session, @RequestParam long idCandidatura) {
+		Candidatura c = entityManager.find(Candidatura.class, idCandidatura);
+		List<Evento> chat = entityManager.createNamedQuery("Evento.getChat").setParameter("idCandidatura", idCandidatura).getResultList();
+		boolean emisorUltimatum = chat.get(chat.size()-1).getEmisor().getId() == ((Usuario)session.getAttribute("u")).getId();
+		model.addAttribute("propuesta", c.getPropuesta());
 		model.addAttribute("modo", "VISTA-ULTIMATUM");
-		model.addAttribute("propuesta", p);
+		model.addAttribute("propio", emisorUltimatum);
 		return "modals/propuesta";
 	}
 
 	@GetMapping("/ultimatum")
-	public String ultimatum(Model model, HttpSession session, @RequestParam long idPropuesta,
-			@RequestParam long idCandidatura) {
-		Propuesta p = entityManager.find(Propuesta.class, idPropuesta);
+	public String ultimatum(Model model, HttpSession session, @RequestParam long idCandidatura) {
+		Candidatura c = entityManager.find(Candidatura.class, idCandidatura);
 		model.addAttribute("modo", "ULTIMATUM");
-		model.addAttribute("propuesta", p);
+		model.addAttribute("propuesta", c.getPropuesta());
 		model.addAttribute("idCandidatura", idCandidatura);
-
 		return "modals/propuesta";
 	}
 

@@ -22,11 +22,11 @@ Negociacion
 
 	Ultimatum - Nacho
 	 - Validacion ultimatum
-	 - Cambiar de color el boton de visualizar
-	 - El otro debe ser el unico que pueda responder
+	 - Cambiar de color el boton de visualizar HECHO
+	 - El otro debe ser el unico que pueda responder HECHO
 	 - Funcionalidad al responder ultimatum
 	 - Enviar una notificacion de que te han mandado un ultimatum
-	 
+	 - Enviar mensaje tiene que ser tipo POST con ajax convirtiendo a objeto
 	 
 PERFIL - Carlos
   Edicion 
@@ -38,17 +38,17 @@ PERFIL - Carlos
       
 
 Navbar - Nacho
-	- Numeros notificaciones cuando tienes 0 mal.
-	- Muestra siempre notificaciones de admin
+	- Numeros notificaciones cuando tienes 0 mal. HECHO
+	- Muestra siempre notificaciones de admin HECHO
 
 
 Propuesta - Carlos
   - Funcionalidad apuntarse notificar a la empresa que se ha apuntado un usuario.
 
 Contrataciones - Nacho
-  - Valoracion no funciona bien cuando se puntua con decimales 
+  - Valoracion no funciona bien cuando se puntua con decimales  HECHO
   - Notificar al usuario que se ha valorado, pudiendo ver la valoracion en un modal.
-  - Borrar el mensaje de alert
+  - Borrar el mensaje de alert HECHO
   - Mostrar la valoracion que se ha enviado mediante un modal.
   
 Inputs de busqueda de la navbar meterlos en un form. - Carlos

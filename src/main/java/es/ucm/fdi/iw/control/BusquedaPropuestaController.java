@@ -39,6 +39,9 @@ public class BusquedaPropuestaController {
 			propuestas=propuestas.subList(0,NUM_ELEMENTOS_PAGINA);
 		
 	    model.addAttribute("propuestas", propuestas);
+	    model.addAttribute("numNotificaciones", entityManager.createNamedQuery("Evento.getNotificacionesUnread")
+				  .setParameter("idUsuario", ((Usuario)session.getAttribute("u")).getId()).getResultList().size());
+
         return "busquedaPropuesta";
     }
     

@@ -69,6 +69,9 @@ public class RootController {
 	model.addAttribute("candidaturas", candidaturas);
 	model.addAttribute("mensaje",session.getAttribute("mensajeInfo"));
 	session.removeAttribute("mensajeInfo");
+	model.addAttribute("numNotificaciones", entityManager.createNamedQuery("Evento.getNotificacionesUnread")
+			  .setParameter("idUsuario", ((Usuario)session.getAttribute("u")).getId()).getResultList().size());
+
     return "inicio";
   }
   
@@ -90,9 +93,10 @@ public class RootController {
     List<Candidatura> listaCandidatura = entityManager
       .createNamedQuery("Candidatura.chatsByCandidato")
       .setParameter("idUsuario", idUsuario).getResultList();
-
 	  model.addAttribute("candidaturas", listaCandidatura);
-    
+	  model.addAttribute("numNotificaciones", entityManager.createNamedQuery("Evento.getNotificacionesUnread")
+			  .setParameter("idUsuario", ((Usuario)session.getAttribute("u")).getId()).getResultList().size());
+
     return "negociacion";
     
   }

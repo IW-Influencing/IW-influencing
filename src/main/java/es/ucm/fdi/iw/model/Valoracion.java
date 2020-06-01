@@ -19,7 +19,7 @@ public class Valoracion {
 	private Usuario emisor;
 	private Candidatura candidatura;
 	private String valoracion;
-	private int puntuacion;
+	private float puntuacion;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,11 +57,11 @@ public class Valoracion {
 		this.valoracion = valoracion;
 	}
 
-	public int getPuntuacion() {
+	public float getPuntuacion() {
 		return puntuacion;
 	}
 
-	public void setPuntuacion(int puntuacion) {
+	public void setPuntuacion(float puntuacion) {
 		this.puntuacion = puntuacion;
 	}
 }

@@ -33,6 +33,18 @@
 
     </div>
 
+
+    <div id="divNotificaciones" class="w3-container" th:if="${#lists.isEmpty(notificaciones)}">
+
+      <div class="w3-card-4 w3-round w3-margin-top w3-margin-bottom">
+
+       <h3 class="w3-center w3-padding">No hay notificaciones</h3>
+
+      </div>
+
+    </div>
+	
+
   </body>
   
 </div>

@@ -231,7 +231,7 @@ public class Usuario {
 				.anyMatch(r -> r.equals(roleName));
 	}
 
-	public void updatePuntuacion(int puntuacion) {
+	public void updatePuntuacion(float puntuacion) {
 		// TODO Auto-generated method stub
 		this.numContrataciones+=1;
 		this.score = (this.score*(numContrataciones-1) + puntuacion)/(numContrataciones);
