@@ -31,6 +31,8 @@ import es.ucm.fdi.iw.model.Usuario.Rol;
 @Entity
 public class Evento {
 
+
+
 	private long id;
 	private String descripcion;
 	private Usuario emisor;

@@ -1,9 +1,11 @@
 package es.ucm.fdi.iw.control;
 
 import java.io.File;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import org.apache.logging.log4j.LogManager;
@@ -18,7 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import es.ucm.fdi.iw.LocalData;
+import es.ucm.fdi.iw.model.Candidatura;
 import es.ucm.fdi.iw.model.Denuncia;
+import es.ucm.fdi.iw.model.Evento;
+import es.ucm.fdi.iw.model.Evento.Tipo;
 import es.ucm.fdi.iw.model.Propuesta;
 import es.ucm.fdi.iw.model.Usuario;
 
@@ -106,7 +111,7 @@ public class AdminController {
 
 	@GetMapping("/eliminaInfluencer")
 	@Transactional
-	public String eliminaInfluencer(Model model,  @RequestParam long id){
+	public String eliminaInfluencer(Model model, @RequestParam long id){
 		Usuario u = entityManager.find(Usuario.class, id);
 		u.setActivo(false);
 		entityManager.persist(u);
@@ -116,7 +121,7 @@ public class AdminController {
 
 	@GetMapping("/eliminaEmpresa")
 	@Transactional
-	public String eliminaEmpresa(Model model,  @RequestParam long id){
+	public String eliminaEmpresa(Model model, @RequestParam long id){
 		Usuario u = entityManager.find(Usuario.class, id);
 		u.setActivo(false);
 		entityManager.persist(u);
@@ -125,38 +130,59 @@ public class AdminController {
 
 	@GetMapping("/eliminaPropuesta")	
 	@Transactional
-	public String eliminaPropuesta(Model model,  @RequestParam long id){
+	public String eliminaPropuesta(Model model,  HttpSession session, @RequestParam long id){
 		Propuesta p = entityManager.find(Propuesta.class, id);
 		p.setActiva(false);
 		entityManager.persist(p);
+		insertaNotificacion("Se ha eliminado la propuesta" + p.getNombre(), p.getEmpresa(), entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId()));
+		for (Candidatura c : p.getCandidaturas()) {
+			insertaNotificacion("Se ha eliminado la propuesta" + p.getNombre(), c.getCandidato(), entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId()));
+		}
+		
 		return searchPropuestas(model);
 	}
 
 	@GetMapping("/verificaInfluencer")
 	@Transactional
-	public String verificaInfluencer(Model model,  @RequestParam long id){
+	public String verificaInfluencer(Model model,  HttpSession session, @RequestParam long id){
 		Usuario u = entityManager.find(Usuario.class, id);
 		u.setVerificado(true);
 		entityManager.persist(u);
+		insertaNotificacion("Se ha verificado tu perfil" , u ,entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId()));
 		return searchInfluencers(model);
 	}
 
 
 	@GetMapping("/verificaEmpresa")
 	@Transactional
-	public String verificaEmpresa(Model model,  @RequestParam long id){
+	public String verificaEmpresa(Model model,  HttpSession session, @RequestParam long id){
 		Usuario u = entityManager.find(Usuario.class, id);
 		u.setVerificado(true);
 		entityManager.persist(u);
+		insertaNotificacion("Se ha verificado tu perfil" , u ,entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId()));
+
 		return searchEmpresas(model);
 	}
 
 	@GetMapping("/verificaPropuesta")
 	@Transactional
-	public String verificaPropuesta(Model model,  @RequestParam long id){
+	public String verificaPropuesta(Model model,  HttpSession session, @RequestParam long id){
 		Propuesta p = entityManager.find(Propuesta.class, id);
 		p.setVerificado(true);
 		entityManager.persist(p);
+		insertaNotificacion("Se ha verificado la propuesta " + p.getNombre(), p.getEmpresa(),entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId()));
 		return searchPropuestas(model);
+	}
+	
+	@Transactional
+	public void insertaNotificacion(String mensaje, Usuario receptor, Usuario emisor) {
+		Evento e = new Evento();
+		e.setTipo(Tipo.NOTIFICACION);
+		e.setEmisor(emisor);
+		e.setReceptor(receptor);
+		e.setDescripcion(mensaje);
+		e.setFechaEnviado(LocalDateTime.now());
+		e.setLeido(false);
+		entityManager.persist(e);
 	}
 }

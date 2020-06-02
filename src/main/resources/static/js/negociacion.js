@@ -141,7 +141,7 @@ function cargaPerfilModal(idUsuario) {
 }
 
 
-function cargaPropuestaModal(idPropuesta) 
+function cargaPropuestaModal(idPropuesta){ 
 	document.getElementById('modal').style.display = 'block';
 	return go2(config.rootUrl + "propuesta?idPropuesta=" + idPropuesta, 'GET')
 		.then(html => {

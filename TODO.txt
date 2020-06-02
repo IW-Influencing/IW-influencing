@@ -10,12 +10,12 @@ Administracion
 	  Validacion cliente y controlador
 	  Al tramitar mandar notificacion a los usuarios de que se ha tramitado su denuncia
 	  
-	Propuestas - Nacho
-	  Borrar y verificarlas hay que notificar a la empresa
-	  Borrar notificar a los usuarios que esten relacionados
+	Propuestas - Nacho (solo notificacion, no websocket)
+	  Borrar y verificarlas hay que notificar a la empresa - HECHO
+	  Borrar notificar a los usuarios que esten relacionados - HECHO
 	  
 	Usuarios y empresas - Nacho
-	  Verificarlos notificar al usuario	
+	  Verificarlos notificar al usuario	- HECHO
 	
 
 Negociacion
