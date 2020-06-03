@@ -1,7 +1,7 @@
 Pagina de inicio - Carlos
  - Busquedas -> que te mande a las busquedas perfiles/propuestas con el texto como input para busqueda por nombre. Meterlas en un form.
  - Propuestas -> Empresa -- Nombre propuesta. Como botón uno solo para visualizarla que cargue el modal.
- - Mensajes -> notificaciones (para el final)
+ - Mensajes -> notificaciones (para el final). Solo deberían tener el botón de eliminar notificación.
 
 
 Administracion
@@ -24,8 +24,8 @@ Negociacion
 	 - Validacion ultimatum
 	 - Cambiar de color el boton de visualizar HECHO
 	 - El otro debe ser el unico que pueda responder HECHO
-	 - Funcionalidad al responder ultimatum
-	 - Enviar una notificacion de que te han mandado un ultimatum
+	 - Funcionalidad al responder ultimatum HECHO
+	 - Enviar una notificacion de que te han mandado un ultimatum HECHO
 	 - Enviar mensaje tiene que ser tipo POST con ajax convirtiendo a objeto
 	 
 PERFIL - Carlos

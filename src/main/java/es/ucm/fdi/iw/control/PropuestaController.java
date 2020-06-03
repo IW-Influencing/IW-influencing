@@ -161,17 +161,49 @@ public class PropuestaController {
 	// aceptar/rechazar candidatura
 	@PostMapping("/decideUltimatum")
 	@Transactional
-	public String decideUltimatum(RedirectAttributes redirectAttributes, Model model, @RequestParam String nombreCuenta,
-			@RequestParam String nombre, @RequestParam String pass1, @RequestParam String pass2,
-			@RequestParam MultipartFile imagenPerfil, @RequestParam String tipoCuenta,
-			@RequestParam String nombreTwitter, @RequestParam String seguidoresTwitter,
-			@RequestParam String nombreFacebook, @RequestParam String seguidoresFacebook,
-			@RequestParam String nombreInstagram, @RequestParam String seguidoresInstagram,
-			@RequestParam String nombreYoutube, @RequestParam String seguidoresYoutube) {
+	public void decideUltimatum(RedirectAttributes redirectAttributes, HttpSession session, HttpServletResponse response, Model model, @RequestParam long idPropuesta, @RequestParam boolean decision) {
 
 		String mensaje = "";
+		Candidatura candidatura = entityManager.createNamedQuery("Candidatura.getByPropuesta", Candidatura.class).setParameter("idPropuesta",idPropuesta).getSingleResult();
+		Usuario emisor = entityManager.find(Usuario.class, ((Usuario) session.getAttribute("u")).getId());
+		Usuario receptor;
+		if (emisor.hasRole(Rol.EMPRESA)) {
+			receptor = candidatura.getCandidato();
+		}
+		else {
+			receptor = candidatura.getPropuesta().getEmpresa();
+		}
+		Evento e = new Evento();
+		e.setTipo(Tipo.NOTIFICACION);
+		e.setEmisor(emisor);
+		e.setReceptor(receptor);
+		e.setFechaEnviado(LocalDateTime.now());
+		e.setLeido(false);
+		if (decision) {
+			candidatura.setAceptada(true);
+			candidatura.setEstado(Estado.EN_CURSO.toString());
+			e.setDescripcion(emisor.getNombre() + " "+ emisor.getApellidos()+ " ha aceptado el ultimátum que enviaste "
+					+ "sobre la propuesta " + candidatura.getPropuesta().getNombre() + ".\n La candidatura ha pasado a la sección de contrataciones");
+			mensaje = "Has aceptado el ultimátum. Se ha completado la negociación. Puedes ver la propuesta en la sección de contrataciones";
 
-		return "redirect:login";
+		}
+		else {
+			candidatura.setEstado(Estado.RECHAZADA.toString());
+			e.setDescripcion(emisor.getNombre() + " "+ emisor.getApellidos()+ " ha rechazado el ultimátum que enviaste sobre la propuesta " + 
+			candidatura.getPropuesta().getNombre()+ ".\n La negociación ha finalizado.");
+			mensaje = "Has rechazado el ultimátum. Se ha eliminado la negociación.";
+		}
+		
+		entityManager.persist(e);
+		entityManager.persist(candidatura);
+		try {
+			session.setAttribute("mensajeInfo", mensaje);
+			response.sendRedirect("/negociacion");
+		} catch (IOException error) {
+			// TODO Auto-generated catch block
+			error.printStackTrace();
+		}
+
 	}
 
 	private static class UltimatumTransfer {
@@ -221,15 +253,15 @@ public class PropuestaController {
 				candidatura.setEstado(Estado.EN_ULTIMATUM.toString());
 				candidatura.setPropuesta(ultimatum);
 				entityManager.persist(candidatura);
-				return creaEventoUltimatum(candidatura, entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId()), ultimatum);
+				return creaEventosUltimatum(candidatura, entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId()), ultimatum);
 			}
 			return null;
 		}
 	
 	
 	@Transactional
-	private TransferChat creaEventoUltimatum(Candidatura candidatura, Usuario emisor, Propuesta ultimatum) {
-		// TODO Auto-generated method stub
+	private TransferChat creaEventosUltimatum(Candidatura candidatura, Usuario emisor, Propuesta ultimatum) {
+		//Se crea el evento para el chat de la negociación
 		Evento e = new Evento();
 		e.setDescripcion("Se ha enviado un ultimátum");
 		e.setCandidatura(candidatura);
@@ -237,19 +269,32 @@ public class PropuestaController {
 		e.setFechaEnviado(LocalDateTime.now());
 		e.setLeido(false);
 		e.setTipo(Tipo.CHAT);
+		Usuario receptor;
 		if (emisor.hasRole(Rol.EMPRESA)) {
-			e.setReceptor(candidatura.getCandidato());
+			receptor = candidatura.getCandidato();
 		}
 		else{
-			e.setReceptor(ultimatum.getEmpresa());
+			receptor = ultimatum.getEmpresa();
 		}
+		e.setReceptor(receptor);
 		entityManager.persist(e);
-		entityManager.flush();
 		Evento.TransferChat transfer = Evento.asTransferObject(e, emisor);
 		messagingTemplate.convertAndSend(
 				"/user/"+e.getReceptor().getNombreCuenta()+"/queue/updates", 
 				Evento.asTransferObject(e, e.getReceptor()));
 		log.info("Enviado mensaje via WS a {}", e.getReceptor().getNombreCuenta());
+		
+		//Se crea el evento de notificación para el usuario que recibe el ultimátum
+		e = new Evento();
+		e.setTipo(Tipo.NOTIFICACION);
+		e.setEmisor(emisor);
+		e.setReceptor(receptor);
+		e.setFechaEnviado(LocalDateTime.now());
+		e.setLeido(false);
+		e.setDescripcion("El usuario " + emisor.getNombre() + " " + emisor.getApellidos() + " te ha enviado un ultimátum relativo "
+				+ "a la negociación de la propuesta " + candidatura.getPropuesta().getNombre());
+		entityManager.persist(e);
+		
 		return transfer;
 	}
 

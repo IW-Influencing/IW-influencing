@@ -16,7 +16,7 @@ import javax.persistence.NamedQuery;
 	query="SELECT c FROM Candidatura c WHERE (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario) AND (c.estado = 'EN_ULTIMATUM' OR c.estado = 'NEGOCIANDO')"),
 
 	@NamedQuery(name="Candidatura.byCandidatoAndPropuesta", 
-	query="SELECT c.propuesta FROM Candidatura c WHERE c.candidato.id = :idCandidato AND c.propuesta.id = :idPropuesta"),
+	query="SELECT c.propuesta FROM Candidatura c WHERE c.candidato.id = :idCandidato AND c.propuesta.id = :idPropuesta AND c.estado != 'RECHAZADA'"),
 	
 	@NamedQuery(name="Candidatura.searchByName",
 	query="SELECT c FROM Candidatura c WHERE (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario) "
@@ -27,12 +27,15 @@ import javax.persistence.NamedQuery;
 			+ " ORDER BY c.propuesta.fechaInicio"),
 	
 	@NamedQuery(name="Candidatura.getByUser",
-		query="SELECT c FROM Candidatura c WHERE (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario) ORDER BY c.propuesta.fechaInicio"),
+		query="SELECT c FROM Candidatura c WHERE (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario) AND c.estado != 'RECHAZADA' ORDER BY c.propuesta.fechaInicio"),
 	
 	@NamedQuery(name="Candidatura.getContrataciones",
 	query="SELECT c FROM Candidatura c WHERE (c.candidato.id = :idUsuario OR c.propuesta.empresa.id = :idUsuario) "
-			+ "AND (c.estado = 'EN_CURSO' OR c.estado = 'EN_VALORACION' OR c.estado = 'FINALIZADA') ORDER BY c.propuesta.fechaInicio")
-
+			+ "AND (c.estado = 'EN_CURSO' OR c.estado = 'EN_VALORACION' OR c.estado = 'FINALIZADA') ORDER BY c.propuesta.fechaInicio"),
+	
+	@NamedQuery(name="Candidatura.getByPropuesta",
+		query="SELECT c FROM Candidatura c WHERE c.propuesta.id = :idPropuesta AND c.estado != 'RECHAZADA'")
+	
 })
 
 
@@ -41,8 +44,8 @@ public class Candidatura {
 	private long id;
 	private Propuesta propuesta;
 	private Usuario candidato;
-	private Boolean aceptada;
-	public enum Estado {NEGOCIANDO, EN_ULTIMATUM, EN_CURSO, EN_VALORACION, FINALIZADA};
+	private boolean aceptada;
+	public enum Estado {NEGOCIANDO, EN_ULTIMATUM, EN_CURSO, EN_VALORACION, FINALIZADA, RECHAZADA};
 	private String estado;
 
 	@Id

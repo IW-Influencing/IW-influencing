@@ -87,7 +87,8 @@ public class RootController {
 
   @GetMapping("/negociacion")
   public String negociacion(Model model, HttpSession session) {
-	  
+		model.addAttribute("mensaje",session.getAttribute("mensajeInfo"));
+		session.removeAttribute("mensajeInfo");
 	  //Obtener la lista de propuestas
 	  long idUsuario = ((Usuario)session.getAttribute("u")).getId();
     List<Candidatura> listaCandidatura = entityManager

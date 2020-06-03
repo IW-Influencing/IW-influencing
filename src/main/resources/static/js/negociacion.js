@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			insertaMensaje(json);
 		}
 	}
+	lanzaAlert();
 });
 
 function pertenecePropuestaSeleccionada(propuestaMensajes, propuestaSeleccionada) {
