@@ -1,7 +1,6 @@
 Pagina de inicio - Carlos
  - Busquedas -> que te mande a las busquedas perfiles/propuestas con el texto como input para busqueda por nombre. Meterlas en un form.
  - Propuestas -> Empresa -- Nombre propuesta. Como botón uno solo para visualizarla que cargue el modal.
- - Mensajes -> notificaciones (para el final). Solo deberían tener el botón de eliminar notificación.
 
 
 Administracion
@@ -50,6 +49,10 @@ Contrataciones - Nacho
   - Notificar al usuario que se ha valorado, pudiendo ver la valoracion en un modal. HECHO (falta lo del modal en inicio).
   - Borrar el mensaje de alert HECHO
   - Mostrar la valoracion que se ha enviado mediante un modal. HECHO
+  
+ INICIO - Nacho
+ - Notificaciones/valoraciones (para el final). Notificaciones solo deberían tener el botón de eliminar notificación. Valoracion tambien permitir ver modal.
+ 
   
 Inputs de busqueda de la navbar meterlos en un form. - Carlos
 sendRedirects -> cambiarlos a la ruta en la que se estaba actualmente - Nacho
