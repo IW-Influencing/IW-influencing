@@ -1,6 +1,7 @@
 package es.ucm.fdi.iw.control;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import es.ucm.fdi.iw.model.Candidatura;
 import es.ucm.fdi.iw.model.Evento;
+import es.ucm.fdi.iw.model.Evento.Tipo;
 import es.ucm.fdi.iw.model.Propuesta;
 import es.ucm.fdi.iw.model.Usuario;
 import es.ucm.fdi.iw.model.Valoracion;
@@ -63,10 +65,6 @@ public class ContratacionesController {
 		   List<Long> retorno = new ArrayList<>();
 		   retorno = entityManager.createNamedQuery("Valoraciones.getByUser", Long.class)
 					.setParameter("idUsuario",idUsuario).getResultList();
-		/*	for (Valoracion v : valoraciones) {
-				retorno.add((int) v.getCandidatura().getId());
-			}*/
-		// TODO Auto-generated method stub
 			return retorno;
 	}
 
@@ -146,6 +144,19 @@ public class ContratacionesController {
 		  model.addAttribute("idUsuario", ((Usuario)session.getAttribute("u")).getId());
 		  return "modals/valoracion";
 	  }
+	  
+	  @GetMapping("/verValoracion")
+	  public String verValoracion(Model model, HttpSession session, @RequestParam long idCandidatura, @RequestParam long idPropuesta) {
+		  Propuesta p = entityManager.find(Propuesta.class, idPropuesta);		  
+		  model.addAttribute("modo", "VISTA");
+		  Valoracion v = entityManager.createNamedQuery("Valoraciones.getByEmisorAndCandidatura", Valoracion.class)
+				  .setParameter("idUsuario", ((Usuario)session.getAttribute("u")).getId()).setParameter("idCandidatura", idCandidatura).getSingleResult();
+		  model.addAttribute("valoracion", v);
+		  model.addAttribute("propuesta", p);
+		  model.addAttribute("idCandidatura",idCandidatura);
+		  model.addAttribute("idUsuario", ((Usuario)session.getAttribute("u")).getId());
+		  return "modals/valoracion";
+	  }
 	
 	
 	  @PostMapping("/valorar")
@@ -189,7 +200,9 @@ public class ContratacionesController {
 				  c.setEstado(Candidatura.Estado.FINALIZADA.toString());
 				  entityManager.persist(c);
 			  }
-			  
+			  enviaValoracionUsuario(valorado, v.getEmisor(), "El usuario " + 
+			  v.getEmisor().getNombre() + " ha valorado tu contratación en la propuesta " + 
+					  v.getCandidatura().getPropuesta().getNombre() + " con " + v.getPuntuacion() + " puntos.", v.getValoracion());
 	      	  mensaje="Valoración insertada correctamente";
 		  }
 		session.setAttribute("mensajeInfo", mensaje);
@@ -201,7 +214,23 @@ public class ContratacionesController {
 		}
 	  }
 	
-	  @GetMapping("/vista")
+	  @Transactional
+	  private void enviaValoracionUsuario(Usuario valorado, Usuario emisor, String mensaje, String valoracion) {
+		// TODO Auto-generated method stub
+		  Evento e = new Evento();
+		  e.setEmisor(emisor);
+		  e.setReceptor(valorado);
+		  e.setValoracion(valoracion);
+		  e.setDescripcion(mensaje);
+		  e.setFechaEnviado(LocalDateTime.now());
+		  e.setLeido(false);
+		  e.setTipo(Tipo.VALORACION);
+		  entityManager.persist(e);
+		
+	}
+
+
+	@GetMapping("/vista")
 	  public String vistaContratacion(Model model, HttpSession session, @RequestParam long idPropuesta) {
 		  Propuesta p = entityManager.find(Propuesta.class, idPropuesta);
 		  model.addAttribute("modo", "CONTRATACION");

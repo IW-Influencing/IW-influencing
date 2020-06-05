@@ -25,7 +25,7 @@ import es.ucm.fdi.iw.model.Usuario.Rol;
 		query="SELECT e FROM Evento e WHERE e.tipo = 'CHAT' AND e.candidatura.id = :idCandidatura ORDER BY e.fechaEnviado"),
 	
 	@NamedQuery(name="Evento.getNotificacionesUnread",
-	query="SELECT e FROM Evento e WHERE e.tipo = 'NOTIFICACION' AND e.receptor.id = :idUsuario AND e.leido = false"),
+	query="SELECT e FROM Evento e WHERE (e.tipo = 'NOTIFICACION' OR e.tipo = 'VALORACION') AND e.receptor.id = :idUsuario AND e.leido = false"),
 })
 
 @Entity
@@ -37,12 +37,13 @@ public class Evento {
 	private String descripcion;
 	private Usuario emisor;
 	private Usuario receptor;
-	public enum Tipo {CHAT, ADMINISTRACION, BUSQUEDA, NOTIFICACION};
+	public enum Tipo {CHAT, ADMINISTRACION, BUSQUEDA, NOTIFICACION, VALORACION};
 	private String tipo;
 	private Candidatura candidatura;
 	private LocalDateTime fechaEnviado;
 	private LocalDateTime fechaRecibido;
 	private boolean leido;
+	private String valoracion;
 	
 
 	/**
@@ -261,6 +262,15 @@ public class Evento {
 	public void setCandidatura(Candidatura candidatura) {
 		this.candidatura = candidatura;
 	}
+
+	public String getValoracion() {
+		return valoracion;
+	}
+
+	public void setValoracion(String valoracion) {
+		this.valoracion = valoracion;
+	}
+	
 	
 	
 	

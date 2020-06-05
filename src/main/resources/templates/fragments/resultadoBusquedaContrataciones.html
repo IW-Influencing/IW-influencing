@@ -49,9 +49,13 @@
 						<div class="divFlexSpaceEvenly">
 							<button class="w3-btn btnColor w3-margin btnDetalles"
 								th:attr="data-id=${c.propuesta.id}">Detalles</button>
-							<div th:if="${c.estado} eq 'EN_VALORACION'" th:unless="${#lists.contains(valoradas,c.id)}">
-							<button class="w3-btn btnColor w3-margin btnValorar"
+								<button th:if="${c.estado} eq 'FINALIZADA'" class="w3-btn btnColor w3-margin btnMostrarValoracion"
+								th:attr="data-id-propuesta=${c.propuesta.id}, data-id=${c.id}">Ver tu valoración</button>
+							<div th:if="${c.estado} eq 'EN_VALORACION'" >
+							<button th:unless="${#lists.contains(valoradas,c.id)}" class="w3-btn btnColor w3-margin btnValorar"
 								th:attr="data-id-propuesta=${c.propuesta.id}, data-id=${c.id}">Valorar</button>
+							<button th:if="${#lists.contains(valoradas,c.id)}" class="w3-btn btnColor w3-margin btnMostrarValoracion"
+								th:attr="data-id-propuesta=${c.propuesta.id}, data-id=${c.id}">Ver tu valoración</button>
 							</div>
 						</div>
 

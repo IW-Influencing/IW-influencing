@@ -35,8 +35,9 @@
 
                     <!-- Imagen perfil -->
                     <img class="imgValoracion" th:src="@{/perfil/{id}/photo(id=${idUsuario})}" />
-                    <input type="number" name="puntuacion" min="0" max="5" step="0.5" required
+                    <input th:if="${modo} eq 'CREACION'" type="number" name="puntuacion" min="0" max="5" step="0.5" required
                         class="w3-input w3-border w3-center w3-margin-bottom">
+					<p th:if="${modo} eq 'VISTA'" name="puntuacion" th:value="${valoracion.puntuacion}" th:text="${'Puntuacion: ' + valoracion.puntuacion}"></p>
 
                     <!-- Estrellas -->
                     <div class="ec-stars-wrapper">

@@ -26,7 +26,7 @@ Negociacion
 	 - El otro debe ser el unico que pueda responder HECHO
 	 - Funcionalidad al responder ultimatum HECHO
 	 - Enviar una notificacion de que te han mandado un ultimatum HECHO
-	 - Enviar mensaje tiene que ser tipo POST con ajax convirtiendo a objeto
+	 - Enviar mensaje tiene que ser tipo POST con ajax convirtiendo a objeto HECHO
 	 
 PERFIL - Carlos
   Edicion 
@@ -47,9 +47,9 @@ Propuesta - Carlos
 
 Contrataciones - Nacho
   - Valoracion no funciona bien cuando se puntua con decimales  HECHO
-  - Notificar al usuario que se ha valorado, pudiendo ver la valoracion en un modal.
+  - Notificar al usuario que se ha valorado, pudiendo ver la valoracion en un modal. HECHO (falta lo del modal en inicio).
   - Borrar el mensaje de alert HECHO
-  - Mostrar la valoracion que se ha enviado mediante un modal.
+  - Mostrar la valoracion que se ha enviado mediante un modal. HECHO
   
 Inputs de busqueda de la navbar meterlos en un form. - Carlos
 sendRedirects -> cambiarlos a la ruta en la que se estaba actualmente - Nacho

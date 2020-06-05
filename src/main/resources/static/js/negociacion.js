@@ -162,7 +162,15 @@ function cargaChat(idCandidatura, idPropuesta, nombreUsuario, idEmisor, idRecept
 
 
 function enviarMensajeChatNegociacion(mensaje, idCandidatura, idReceptor, idEmisor) {
-	return go(config.rootUrl + "message/insertaMsg?idCandidatura=" + idCandidatura + "&msg=" + mensaje + "&idEmisor=" + idEmisor + "&idReceptor=" + idReceptor, 'GET')
+	let data = {
+		idCandidatura: idCandidatura,
+		mensaje: mensaje,
+		idEmisor: idEmisor,
+		idReceptor: idReceptor
+	};
+
+	
+	return go(config.rootUrl + "message/insertaMsg", 'POST', data)
 		.then(json => insertaMensaje(json));
 
 }

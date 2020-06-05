@@ -21,7 +21,11 @@ function prepareListeners(tipo) {
 	for (let p of document.getElementsByClassName("btnValorar")) {
 		p.onclick = c => cargaModalValorar(p.dataset.id, p.dataset.idPropuesta);
 	}
-
+	
+	for (let p of document.getElementsByClassName("btnMostrarValoracion")) {
+		p.onclick = c => cargaModalValorarVista(p.dataset.id, p.dataset.idPropuesta);
+	}
+	
 	for (let p of document.getElementsByClassName("btnDetalles")) {
 		p.onclick = c => cargaModalPropuesta(p.dataset.id)
 	}
@@ -45,13 +49,26 @@ function cargaModalValorar(idCandidatura, idPropuesta) {
 	return go2(config.rootUrl + "contrataciones/valorar?idCandidatura=" + idCandidatura + "&idPropuesta=" + idPropuesta, 'GET')
 		.then(html => {
 			document.getElementById("contenidoModal").innerHTML = html;
-			document.getElementsByName("puntuacion")[0].addEventListener('change', pintaEstrellasValoracion);
+			document.getElementsByName("puntuacion")[0].addEventListener('change', parseaEstrellasValoracion);
 		});
 }
 
+function cargaModalValorarVista(idCandidatura, idPropuesta) {
+	document.getElementById('modal').style.display = 'block';
+	return go2(config.rootUrl + "contrataciones/verValoracion?idCandidatura=" + idCandidatura + "&idPropuesta=" + idPropuesta, 'GET')
+		.then(html => {
+			document.getElementById("contenidoModal").innerHTML = html;
+			pintaEstrellasValoracion(document.getElementsByName("puntuacion")[0].innerText.slice(12));
+		});
+}
+
+function parseaEstrellasValoracion(inputPuntuacion){
+	pintaEstrellasValoracion(inputPuntuacion.target.value);
+}
+
 function pintaEstrellasValoracion(puntuacion) {
-	let parteEntera = puntuacion.target.value[0];
-	let parteDecimal = puntuacion.target.value[2];
+	let parteEntera = puntuacion[0];
+	let parteDecimal = puntuacion[2];
 
 	tablinks = document.getElementsByClassName("estrella");
 	for (i = 0; i < parteEntera; i++) {
@@ -69,6 +86,8 @@ function pintaEstrellasValoracion(puntuacion) {
 		}
 	}
 }
+
+
 
 function cargaModalPropuesta(idPropuesta) {
 	document.getElementById('modal').style.display = 'block';

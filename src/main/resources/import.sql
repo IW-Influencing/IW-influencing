@@ -159,7 +159,7 @@ INSERT INTO evento(id, descripcion, tipo, fecha_enviado,fecha_recibido,leido, ca
 );
 
 INSERT INTO valoracion(id, emisor_id, candidatura_id, valoracion, puntuacion) VALUES(
-	1, 2, 1,'me ha timado', 0
+	1, 2, 1,'me ha timado', 3
 );
 
 INSERT INTO denuncia(id, denunciante_id, denunciado_id, titulo, descripcion, fecha, tramitada) VALUES(
