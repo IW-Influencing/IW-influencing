@@ -33,7 +33,7 @@ PERFIL - Carlos
 	  - Validacion en cliente []
 	  - Al ser admin  no deberia salir tags, historial de propuestas ni score [HECHO]
   Vista
-      - PerfilesRRSS [A MEDIAS]
+      - PerfilesRRSS [HECHO]
       - Historial de propuestas []
       
 
@@ -43,7 +43,7 @@ Navbar - Nacho
 
 
 Propuesta - Carlos
-  - Funcionalidad apuntarse notificar a la empresa que se ha apuntado un usuario.
+  - Funcionalidad apuntarse notificar a la empresa que se ha apuntado un usuario. HECHO
 
 Contrataciones - Nacho
   - Valoracion no funciona bien cuando se puntua con decimales  [HECHO]

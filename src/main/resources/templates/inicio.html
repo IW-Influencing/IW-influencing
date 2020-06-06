@@ -72,7 +72,7 @@
 			<div th:each="candidatura : ${candidaturas}" class="w3-container w3-grey w3-round-large w3-margin">
 				<h3><b th:text="${candidatura.getPropuesta().getEmpresa().getNombre()}"></b></h3>
 				<p th:text="${candidatura.getPropuesta().getDescripcion()}"></p>
-				<button class="w3-btn w3-dark-grey" th:attr="data-id=${candidatura.propuesta.id}">Ver la propuesta</button>
+				<button class="w3-btn w3-dark-grey btnVerPropuesta" th:attr="data-id=${candidatura.propuesta.id}">Ver la propuesta</button>
 			</div>
 
 		</div>

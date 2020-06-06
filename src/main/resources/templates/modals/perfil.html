@@ -86,23 +86,22 @@
 
 
       <!-- Tags [ADMIN no tiene] -->
-      <div id="tags" th:if="${modo} eq 'VISTA'">
-        <div th:unless="${usuario.hasRole('ADMIN')}">
+      <div class="w3-center" th:if="${modo eq 'VISTA' and !usuario.hasRole('ADMIN')}">
+			<h2>Tags relacionados con el perfil</h2>
           <button th:each="i : ${#strings.listSplit(usuario.tags, ',')}" class="w3-button w3-white tags" th:text="${i}" style="border-radius:12px;">Tags</li>
-        </div>
       </div>
 
-      <div class="tags-perfil" th:unless="${modo} eq 'VISTA'">
-        <div th:unless="${usuario.hasRole('ADMIN')}"></div>
+      <div class="tags-perfil" th:unless="${modo eq 'VISTA'  or (modo eq 'EDICION' and usuario.hasRole('ADMIN'))}">
           <h2>Tags relacionados con el perfil</h2>
+
+		<!-- MODO CREACION PERFIL-->
           <textarea th:if="${modo} eq 'CREACION'" name="tags" rows="2" cols="50" required
             placeholder="Introduzca los tags separados por comas" class="w3-input w3-border"></textarea>
-          <textarea th:if="${modo} eq 'EDICION'" name="tags" rows="2" cols="50" required
+
+		<!-- MODO EDICION PERFIL-->
+          <textarea th:if="${modo} eq 'EDICION'" th:unless="${usuario.hasRole('ADMIN')}" name="tags" rows="2" cols="50" required
             placeholder="Introduzca los tags separados por comas" th:text="${usuario.tags}" class="w3-input w3-border"></textarea>
-        </div>
-      </div>
-
-
+	</div>
       <!-- Selector de Rol (CREACION)-->
       <div th:if="${modo} eq 'CREACION'">
         <h2 class="w3-padding-24">Tipo de cuenta</h2>
@@ -114,8 +113,7 @@
       </div>
 
       <!-- Valoracion (VISTA, EDICION) [ADMIN no tiene] -->
-      <div class="divCentrado" th:if="${modo} eq 'VISTA' or ${modo} eq 'EDICION'">
-        <div th:unless="${usuario.hasRole('ADMIN')}" class="divCentrado"></div>
+      <div class="divCentrado" th:if="${(modo eq 'VISTA' or modo eq 'EDICION') and !usuario.hasRole('ADMIN')}">
           <h2>Valoración media</h2>
           <div class="score" th:if="${usuario.score!=null}">
             <th:block th:each="i: ${#numbers.sequence(1, usuario.score)}">					
@@ -126,13 +124,11 @@
           <div class="score" th:if="${usuario.score == null}">
             <p>No tiene valoraciones aun</p>
           </div>
-        </div>
       </div>
 
 
       <!-- Historial propuestas (VISTA, EDICION) [ADMIN no tiene] -->
-      <div th:if="${modo} eq 'VISTA' or ${modo} eq 'EDICION'">
-        <div th:unless="${usuario.hasRole('ADMIN')}" class="divCentrado w3-margin-bottom"></div>
+      <div class="w3-center" th:if="${(modo eq 'VISTA' or modo eq 'EDICION') and !usuario.hasRole('ADMIN')}">
           <h2 class="w3-padding-24">Historial de propuestas</h2>
           <div id="propuestas">
             <ul>
@@ -143,7 +139,6 @@
             </ul>
           </div>
         </div> <!-- Hacer historial de propuestas con query en el modelo -->
-      </div>
     
 
       <!-- Nombre Perfil [EMPRESA] -->
@@ -162,8 +157,8 @@
   
 
       <!-- Perfiles RRSS (EDICION, VISTA) [INFLUENCER] -->
-      <div class="divCentrado" th:if="${modo} eq 'EDICION' or ${modo} eq 'VISTA'}">
-        <div th:if="${usuario.hasRole('INFLUENCER')">
+      <div class="divCentrado" th:if="${(modo eq 'EDICION' or modo eq 'VISTA') and usuario.hasRole('INFLUENCER')}">
+        <div th:if="${usuario.hasRole('INFLUENCER')}">
 
           <!-- Edad -->
           <h2 class="w3-padding-24">Edad media de los seguidores</h2>

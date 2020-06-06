@@ -75,8 +75,13 @@ public class PerfilController {
     @GetMapping("/edicion")
     public String edicionPerfil(Model model, HttpSession session) {
         Usuario u = entityManager.find(Usuario.class, ((Usuario) session.getAttribute("u")).getId());
+        List<PerfilRRSS>perfiles = entityManager.createNamedQuery("PerfilRRSS.byInfluencer", PerfilRRSS.class)
+        		.setParameter("idUsuario",u.getId()).getResultList();
+        
         model.addAttribute("modo", "EDICION");
         model.addAttribute("usuario", u);
+        model.addAttribute("perfilesRRSS",perfiles); 		
+
         return "modals/perfil";
     }
     
@@ -212,6 +217,7 @@ public class PerfilController {
 		    	        	u.setActivo(true);
 		    	        	u.setTags(tags.toUpperCase());
 		    	        	u.setNumContrataciones(0);
+		    	        	u.setScore((float) 0);
 							u.setVerificado(false);
 		    	        	entityManager.persist(u);
 		    	        	insertaPerfiles(nombreTwitter, seguidoresTwitter, nombreFacebook, seguidoresFacebook, 
@@ -243,6 +249,7 @@ public class PerfilController {
     	        	u.setPassword(Usuario.encodePassword(pass1));
     	        	u.setNumContrataciones(0);
 					u.setVerificado(false);
+    	        	u.setScore((float) 0);
     	        	entityManager.persist(u);
     	        	entityManager.flush();
     	        	insertaImagenUsuario(imagenPerfil, u.getId());

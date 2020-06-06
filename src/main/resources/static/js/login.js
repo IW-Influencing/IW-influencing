@@ -38,6 +38,15 @@ function compruebaPerfiles(){
 function asignaFuncionBotonRegistro(){
 	let b = document.getElementById("botonRegistrarseUsuario");
 			b.onclick = c => {
+				if (document.getElementsByName("tipoCuenta")[0].value == 'Influencer') {
+					var element = document.getElementById("nombreEmpresa");
+					    element.parentNode.removeChild(element);
+				}
+				else{
+					var element = document.getElementById("nombreInfluencer");
+					    element.parentNode.removeChild(element);
+
+				}
 				validaPassword(document.getElementsByName("pass1")[0], document.getElementsByName("pass2")[0]);
 				validaTexto(document.getElementsByName("nombre")[0]);
 				validaTexto(document.getElementsByName("apellidos")[0]);
