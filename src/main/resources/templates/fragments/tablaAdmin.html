@@ -1,7 +1,7 @@
 <div class="w3-container">
 
     <!-- Influencer -->
-    <table th:if="${modo} eq 'INFLUENCER'"class="w3-table-all w3-card-4 w3-margin-bottom w3-centered w3-round-xxlarge">
+    <table th:if="${modo} eq 'INFLUENCER'" class="w3-table-all w3-card-4 w3-margin-bottom w3-centered" id="tabla">
 
         <!--
             Lista influencers
@@ -35,7 +35,7 @@
     </table>
 
     <!-- Empresa -->
-    <table th:if="${modo} eq 'EMPRESA'"class="w3-table-all w3-card-4 w3-margin-bottom w3-centered">
+    <table th:if="${modo} eq 'EMPRESA'"class="w3-table-all w3-card-4 w3-margin-bottom w3-centered" id="tabla">
 
         <!--
             Lista empresas
@@ -68,7 +68,7 @@
     </table>
 
     <!-- Propuesta-->
-    <table th:if="${modo} eq 'PROPUESTA'"class="w3-table-all w3-card-4 w3-margin-bottom w3-centered">
+    <table th:if="${modo} eq 'PROPUESTA'"class="w3-table-all w3-card-4 w3-margin-bottom w3-centered" id="tabla">
 
         <!--
             Lista propuestas
@@ -106,7 +106,7 @@
     </table>
 
     <!-- Denuncia -->
-    <table th:if="${modo} eq 'DENUNCIA'"class="w3-table-all w3-card-4 w3-margin-bottom w3-centered">
+    <table th:if="${modo} eq 'DENUNCIA'"class="w3-table-all w3-card-4 w3-margin-bottom w3-centered" id="tabla">
 
         <!--
             Lista denuncias
@@ -137,6 +137,7 @@
             </td>
             <td><i th:attr="data-id=${denuncia.id}" class="fa fa-eye verDenuncia"></i></td>
         </tr>
+
     </table>
-    
+
 </div>

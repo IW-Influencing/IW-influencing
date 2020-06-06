@@ -1,9 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("botonNotificacionesNav").onclick = b => cargaNotificacionesModalNav();
+	document.getElementById("botonNotificacionesNav").onclick = b => cargaNotificacionesModalNav();
 	document.getElementById("botonPerfilNav").onclick = b => cargaPerfilModalNav();
-	if (document.getElementById("btnNumeroNotificaciones").innerText == "0")
+	if (document.getElementById("btnNumeroNotificaciones").innerText == "0"){
 		document.getElementById("indiceNumNotificaciones").style.display = "none";
-	
+	}
+		
+	// Boton notificaciones inicio
+	let botonNotificacionesIni = document.getElementById("botonNotificacionesIni");
+	if (botonNotificacionesIni !== null){
+		botonNotificacionesIni.onclick = b => cargaNotificacionesModalNav();
+	}
 });
 
 function cargaPerfilModalNav(){

@@ -17,7 +17,7 @@
     </header>
     <main>
 
-
+        <!-- Barra de Navegacion de Administracion -->
         <div class="principal">
             <div class="subheader">
                 <div class="enlaces">
@@ -28,26 +28,28 @@
                 </div>
                 <div class="busqueda">
                     <form id="adminForm">
-                        <input type="text" class="textoBusqueda w3-center" placeholder="  Inserte un nombre">
-                        <input type="submit" value="Buscar" class="btnEnviar">
+                        <input type="text" class="w3-input w3-center" placeholder="Inserte un nombre para filtrar..." 
+                        id="barraFiltro" onkeyup="filtraNombre()">
                     </form>
                 </div>
             </div>
-
         </div>
 
     
-    <!-- Lista Admin -->
-<div id="tablaAdministracion">
-    <div  th:replace="fragments/tablaAdmin.html"></div></div>
-</main>
+        <!-- Resultado tabla Admin -->
+        <div id="tablaAdministracion">
+            <div  th:replace="fragments/tablaAdmin.html"></div>
+        </div>
 
+    </main>
 
-	  <p th:text="${mensaje}" id="mensajeInfo" hidden></p>
+    <!-- Mensaje -->
+    <p th:text="${mensaje}" id="mensajeInfo" hidden></p>
 
     <!-- Footer -->
     <footer th:replace="fragments/navigation.html :: footer"></footer>
 
+    <!-- Modal -->
 	<div th:replace="fragments/modal.html"></div>
 
 </body>

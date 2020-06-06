@@ -99,7 +99,7 @@ public class PerfilController {
         Usuario u = entityManager.find(Usuario.class, ((Usuario) session.getAttribute("u")).getId());
     	String mensaje = "";
     	boolean cambios = false;
-    	String[] prueba = tags.split(",");
+
         if (tags.split(",").length > 0) {
 	        if (pass1.isEmpty() && pass2.isEmpty()) {
 	        	if (!imagenPerfil.isEmpty()) {
@@ -149,12 +149,15 @@ public class PerfilController {
         }
         else {
         	mensaje = "Error. Debes incluir al menos 1 tag.";
-        }
-       session.setAttribute("mensajeInfo", mensaje);
+		}
+		
+		// Mensaje de info
+		session.setAttribute("mensajeInfo", mensaje);
+		
+		// Redireccion
 	   	try {
 	   		if (u.hasRole(Usuario.Rol.ADMIN)) {
 	   			response.sendRedirect("/administracion");
-
 	   		}
 	   		else {
 	   			response.sendRedirect("/inicio");
