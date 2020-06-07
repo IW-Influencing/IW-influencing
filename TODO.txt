@@ -14,3 +14,5 @@ Carlos
    busquedapropuesta busquedaperfil y contrataciones.
 
 
+Chat de negociacion
+ - Hay un input nada mas abrirlo y el boton enviar ultimatum (No mostrar eso hasta que pulse en un chat o cargar uno por defecto)...

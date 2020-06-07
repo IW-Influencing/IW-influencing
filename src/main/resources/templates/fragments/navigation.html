@@ -27,7 +27,7 @@
             </div>
 
             <!-- Dropdown Usuario -->
-            <div class="w3-dropdown-hover w3-right w3-margin-right w3-display-right">
+            <div class="w3-dropdown-hover w3-right w3-margin-right w3-border-left w3-border-white w3-margin">
                 <button class="w3-button w3-text-white">
                     <h3 th:text="${session.u.nombre}"></h3>
                     <i class="fas fa-caret-down"></i>
@@ -36,7 +36,7 @@
                     <span id="botonNotificacionesNav" class="w3-bar-item w3-button divFlex">Notificaciones
 						<sup id="indiceNumNotificaciones"><button id="btnNumeroNotificaciones" class="w3-button w3-circle w3-teal" th:text=${numNotificaciones}>0</button><sup>
 					</span>
-					<span id="botonPerfilNav" class="w3-bar-item w3-button">Mi Perfil</span>
+                    <span id="botonPerfilNav" class="w3-bar-item w3-button">Mi Perfil</span>
                     <form th:action="@{/logout}" method="post" class="w3-bar-item w3-button">
                         <button type="submit">Cerrar sesión</button>
                     </form>
