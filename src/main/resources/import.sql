@@ -6,7 +6,7 @@
 -- Usuario de ejemplo con nombre = a y contraseña = aa  
 
 INSERT INTO usuario(id,activo,nombre_cuenta,nombre,password,roles,apellidos,edad,score,num_contrataciones,verificado,fecha_registro) VALUES (
-	1, true, 'a','a',
+	1, true, 'a','Administrador A',
 	'{bcrypt}$2a$10$xLFtBIXGtYvAbRqM95JhcOaG23fHRpDoZIJrsF2cCff9xEHTTdK1u',
 	'ADMIN',
 	'Abundio Ejemplez',
@@ -165,4 +165,13 @@ INSERT INTO valoracion(id, emisor_id, candidatura_id, valoracion, puntuacion) VA
 INSERT INTO denuncia(id, denunciante_id, denunciado_id, titulo, descripcion, fecha, tramitada) VALUES(
 	1, 2,3,'Prueba','Denuncia test', '2018-07-20', false
 );
+
+INSERT INTO perfilrrss(id, influencer_id, nombre, num_seguidores, rrss) VALUES (
+	1, 2, 'CuentaTwitter', 10, 'Twitter'
+);
+
+INSERT INTO perfilrrss(id, influencer_id, nombre, num_seguidores, rrss) VALUES (
+	2, 2, 'CuentaFacebook', 10, 'Facebook'
+);
+
 

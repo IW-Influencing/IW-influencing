@@ -1,72 +1,16 @@
-Pagina de inicio - Carlos
- - Busquedas -> que te mande a las busquedas perfiles/propuestas con el texto como input para busqueda por nombre. Meterlas en un form. [HECHO]
- - Propuestas -> Empresa -- Nombre propuesta. Como botón uno solo para visualizarla que cargue el modal. [HECHO]
-
-b
-Administracion
-	Darle sentido a la barra de búsqueda (filtros) [HECHO]
-	Denuncia - Carlos
-	  Controlador hacer los redirect y mensajes de alert []
-	  Validacion cliente y controlador [HECHO]
-	  Al tramitar mandar notificacion a los usuarios de que se ha tramitado su denuncia [HECHO]
-	  
-	Propuestas - Nacho (solo notificacion, no websocket)
-	  Borrar y verificarlas hay que notificar a la empresa - [HECHO]
-	  Borrar notificar a los usuarios que esten relacionados - [HECHO]
-	  
-	Usuarios y empresas - Nacho
-	  Verificarlos notificar al usuario	- [HECHO]
-	
-
-Negociacion
-
-	Ultimatum - Nacho
-	 - Validacion ultimatum
-	 - Cambiar de color el boton de visualizar [HECHO]
-	 - El otro debe ser el unico que pueda responder [HECHO]
-	 - Funcionalidad al responder ultimatum [HECHO]
-	 - Enviar una notificacion de que te han mandado un ultimatum [HECHO]
-	 - Enviar mensaje tiene que ser tipo POST con ajax convirtiendo a objeto [HECHO]
-	 
-PERFIL - Carlos
-  Edicion 
-	  - Validacion en cliente [HECHO]
-	  - Al ser admin  no deberia salir tags, historial de propuestas ni score [HECHO]
-  Vista
-      - PerfilesRRSS [HECHO]
-      - Historial de propuestas [HECHO]
-      
-
-Navbar - Nacho
-	- Numeros notificaciones cuando tienes 0 mal. [HECHO]
-	- Muestra siempre notificaciones de admin [HECHO]
-
-
-Propuesta - Carlos
-  - Funcionalidad apuntarse notificar a la empresa que se ha apuntado un usuario. [HECHO]
-
-Contrataciones - Nacho
-  - Valoracion no funciona bien cuando se puntua con decimales  [HECHO]
-  - Notificar al usuario que se ha valorado, pudiendo ver la valoracion en un modal. [HECHO] (falta lo del modal en inicio).
-  - Borrar el mensaje de alert [HECHO]
-  - Mostrar la valoracion que se ha enviado mediante un modal. [HECHO]
-  
- INICIO - Nacho
- - Notificaciones/valoraciones (para el final). Notificaciones solo deberían tener el botón de eliminar notificación. Valoracion tambien permitir ver modal.
+Nacho
+Pagina de inicio
+ - Borrar las notificaciones no funciona del todo
+ - Diferencia notificacionces con valoraciones
+ - Revisar sendRedirects
+ - Esquema BBDD
  
-  
-Inputs de busqueda de la navbar meterlos en un form. - Carlos []
-sendRedirects -> cambiarlos a la ruta en la que se estaba actualmente - Nacho []
+ 
+Carlos
+ - Leeme
+ - Validacion cliente espacios en blanco en denuncia.
+ - PerfilesRRSS arreglar vista y cuando no haya ninguno que salga no hay perfiles (mirar como esta historial de propuestas). En vista de perfil
+ - Inputs de busqueda de la navbar meterlos en un form. cambiar de peticion get a tipo post todas las busquedas por nombre de paginas
+   busquedapropuesta busquedaperfil y contrataciones.
 
 
-
-
-DUDAS PROFESOR
-	Redirect --> Consultar el historial de la pagina en la que estas
-	TESTING
-	    Feature2 está bien el match
-		Lanzar las pruebas
-		Como comprobar los resultados de realizar las pruebas
-		Qué hay que testear
-		Petición POST con AJAX como pasar parametros en js
-	TOKEN

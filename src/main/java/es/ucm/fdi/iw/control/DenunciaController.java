@@ -59,6 +59,10 @@ public class DenunciaController {
 
 		Usuario denunciante =  entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId());
         Usuario denunciado = entityManager.find(Usuario.class, idDenunciado);
+        if (denunciante.getId() == denunciado.getId()) {
+            session.setAttribute("mensajeInfo", "No puedes denunciarte a ti mismo");
+        }
+        else {
 		Denuncia d = new Denuncia();
         d.setDenunciado(denunciado);
         d.setDenunciante(denunciante);
@@ -71,7 +75,8 @@ public class DenunciaController {
         System.out.println(d);
         notificaDenunciaAdministradores(d.getDenunciante(), "Se ha registrado una denuncia por parte del usuario " + d.getDenunciante().getNombre() + "al usuario " + d.getDenunciado().getNombre());
         session.setAttribute("mensajeInfo", "Denuncia enviada correctamente");
-		try {
+        }
+        try {
 			response.sendRedirect(ruta);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
