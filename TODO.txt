@@ -59,7 +59,6 @@ Inputs de busqueda de la navbar meterlos en un form. - Carlos []
 sendRedirects -> cambiarlos a la ruta en la que se estaba actualmente - Nacho []
 
 
-*ERROR AL TRAMITAR UNA DENUNCIA AUNQUE PARECE HACERLO BIEN TRAS EL ERROR
 
 
 DUDAS PROFESOR
