@@ -32,7 +32,8 @@ public class BusquedaPerfilController {
 	  //Metodos nuevos
 	  @GetMapping("")
 	  public String busquedaPerfil(HttpSession session,Model model) {
-		  
+			model.addAttribute("mensaje",session.getAttribute("mensajeInfo"));
+		    session.removeAttribute("mensajeInfo");
 	    List<Usuario> usuarios = entityManager.createNamedQuery("Usuario.getAllUsers", Usuario.class).getResultList();
 		model.addAttribute("numeroPaginas", Math.ceil((double)usuarios.size()/NUM_ELEMENTOS_PAGINA));
 		if (NUM_ELEMENTOS_PAGINA <= usuarios.size())

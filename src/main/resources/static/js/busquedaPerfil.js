@@ -37,6 +37,7 @@ function prepareListeners(tipo) {
 
 
 document.addEventListener("DOMContentLoaded", () => {
+	lanzaAlert();
 	prepareListeners();
 })
 

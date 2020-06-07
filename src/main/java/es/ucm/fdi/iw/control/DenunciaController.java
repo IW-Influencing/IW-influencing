@@ -22,6 +22,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import es.ucm.fdi.iw.model.Candidatura;
 import es.ucm.fdi.iw.model.Denuncia;
 import es.ucm.fdi.iw.model.Evento;
@@ -65,6 +69,7 @@ public class DenunciaController {
         entityManager.persist(d);
         entityManager.flush();
         System.out.println(d);
+        notificaDenunciaAdministradores(d.getDenunciante(), "Se ha registrado una denuncia por parte del usuario " + d.getDenunciante().getNombre() + "al usuario " + d.getDenunciado().getNombre());
         session.setAttribute("mensajeInfo", "Denuncia enviada correctamente");
 		try {
 			response.sendRedirect(ruta);
@@ -74,13 +79,27 @@ public class DenunciaController {
 		}
 	}
     
-    @GetMapping("/tramitar")
+    @Transactional
+    private void notificaDenunciaAdministradores(Usuario denunciante, String mensaje) {
+		// TODO Auto-generated method stub
+    	Evento e = new Evento();
+		e.setEmisor(denunciante);
+		e.setDescripcion(mensaje);
+		e.setFechaEnviado(LocalDateTime.now());
+		e.setLeido(false);
+		e.setTipo(Evento.Tipo.ADMINISTRACION);
+		entityManager.persist(e);    		
+	}
+
+
+	@GetMapping("/tramitar")
     public String devuelveModalTramitarDenuncia(Model model, HttpSession session , @RequestParam long idDenuncia, @RequestParam String ruta){
         Denuncia d = entityManager.find(Denuncia.class, idDenuncia);
         model.addAttribute("denunciante", d.getDenunciante());
         model.addAttribute("denuncia", d);
         model.addAttribute("denunciado", d.getDenunciado());
         model.addAttribute("modo", "TRAMITACION");
+        model.addAttribute("ruta", ruta);
         return "modals/denuncia";
     }
     

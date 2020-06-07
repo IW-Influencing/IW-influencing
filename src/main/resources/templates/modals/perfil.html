@@ -149,7 +149,7 @@
 
 	
       <!-- Nombre Perfil [INFLUENCER] -->
-      <div th:if="${modo} eq 'CREACION'" class="divCentrado" id="divNombreInfluencer" style="display:none">
+      <div th:if="${modo eq 'CREACION'}" class="divCentrado" id="divNombreInfluencer" style="display:none">
         <h2 class="w3-padding-24" id="h2nombre">Nombre y apellidos</h2>
         <input type="text"  id="nombreInfluencer" class="w3-input" name="nombre" placeholder="Introduzca su nombre" required></input>
         <input type="text"  id="apellidosInfluencer" class="w3-margin-top w3-input"  name="apellidos" placeholder="Introduzca sus apellidos"required></input>

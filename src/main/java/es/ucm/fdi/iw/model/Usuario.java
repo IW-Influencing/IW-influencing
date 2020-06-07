@@ -27,6 +27,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 	query="SELECT u FROM Usuario u "
 			+ "WHERE u.nombreCuenta = :nombreCuenta AND u.activo = true"),
 		
+	@NamedQuery(name="Usuario.getAllAdmins",
+	query="SELECT u FROM Usuario u WHERE u.roles LIKE '%ADMIN%' AND u.activo = true"),
+	
+	
 	@NamedQuery(name="Usuario.searchByNombre",
 	query="SELECT u FROM Usuario u "
 			+ "WHERE upper(u.nombre) LIKE :nombre AND u.roles NOT LIKE '%ADMIN%' AND u.activo = true"),

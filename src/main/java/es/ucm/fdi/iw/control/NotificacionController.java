@@ -43,11 +43,10 @@ public class NotificacionController {
 	@GetMapping("/elimina")
 	@Transactional
 	@ResponseBody
-	public String eliminaNotificacion(@RequestParam long idNotificacion) {
+	public String eliminaNotificacion(HttpSession session, @RequestParam long idNotificacion) {
 		Evento notificacion = entityManager.find(Evento.class, idNotificacion);
 		notificacion.setLeido(true);
 		entityManager.persist(notificacion);
-		List<Evento> eventos = entityManager.createNamedQuery("Evento.adminEventsByDate").getResultList();
 		return String.valueOf(entityManager.createNamedQuery("Evento.adminEventsByDate").getResultList().size());
 	}
 
