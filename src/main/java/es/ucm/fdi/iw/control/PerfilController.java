@@ -38,8 +38,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import es.ucm.fdi.iw.LocalData;
+import es.ucm.fdi.iw.model.Candidatura;
 import es.ucm.fdi.iw.model.Evento;
 import es.ucm.fdi.iw.model.PerfilRRSS;
+import es.ucm.fdi.iw.model.Propuesta;
 import es.ucm.fdi.iw.model.Usuario;
 import es.ucm.fdi.iw.model.Usuario.Rol;
 
@@ -57,6 +59,8 @@ public class PerfilController {
 	private SimpMessagingTemplate messagingTemplate;
     
 	private static final Logger log = LogManager.getLogger(PerfilController.class);
+	
+	private final int LIMITE_PROPUESTAS_PERFIL = 4;
 
     
     @GetMapping("")
@@ -64,7 +68,13 @@ public class PerfilController {
         Usuario u = entityManager.find(Usuario.class, idUsuario);
         List<PerfilRRSS>perfiles = entityManager.createNamedQuery("PerfilRRSS.byInfluencer", PerfilRRSS.class)
         		.setParameter("idUsuario",idUsuario).getResultList();
-        
+        List<Candidatura> candidaturas = entityManager.createNamedQuery("Candidatura.searchByEstado").setParameter("estado", "%FINALIZADA%")
+        		.setParameter("idUsuario", idUsuario).setMaxResults(LIMITE_PROPUESTAS_PERFIL).getResultList();
+        List<Propuesta> ultPropuestas = new ArrayList<>();
+        for (Candidatura c : candidaturas) {
+        	ultPropuestas.add(c.getPropuesta());
+        }
+        model.addAttribute("propuestas", ultPropuestas);
         model.addAttribute("modo", "VISTA");
         model.addAttribute("usuario", u);
         model.addAttribute("perfilesRRSS",perfiles); 		

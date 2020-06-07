@@ -186,18 +186,13 @@ function verifica(tipo, id){
 
 function cargaContenidoModal(tipo, id){
     if (tipo === 'USUARIO'){
-        document.getElementById('modal').style.display='block';
-        return go2(config.rootUrl + "perfil?idUsuario=" + id, 'GET')
-            .then(html => document.getElementById("contenidoModal").innerHTML=html);
-    }
+		cargaModalPerfil(id);
+}
     else if (tipo === 'PROPUESTA'){
-        document.getElementById('modal').style.display='block';
-        return go2(config.rootUrl + "propuesta?idPropuesta=" + id, 'GET')
-            .then(html => document.getElementById("contenidoModal").innerHTML=html);
+        cargaModalPropuesta(id);
     }
 	else if (tipo ==='DENUNCIA-TRAMITAR'){
 			let url = window.location.href.toString().split(window.location.host)[1];
-
 		        document.getElementById('modal').style.display='block';
 	        return go2(config.rootUrl + "denuncia/tramitar?idDenuncia=" + id+"&ruta="+url, 'GET')
 	            .then(html => document.getElementById("contenidoModal").innerHTML=html);

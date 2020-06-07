@@ -2,15 +2,15 @@ document.addEventListener("DOMContentLoaded", () => {
 	lanzaAlert();
 	let botonCrearPropuesta = document.getElementById("botonCrearPropuesta");
 	if (botonCrearPropuesta !== null){
-		botonCrearPropuesta.onclick = b => cargaPropuestaModal();
+		botonCrearPropuesta.onclick = b => cargaModalPropuestaCreacion();
 	}
 	document.getElementById("verTodasPropuestas").onclick = b => location.href= config.rootUrl + "busquedaPropuesta";
 	for (let p of document.getElementsByClassName("btnVerPropuesta")){
-		p.onclick = c => {cargaPropuestaEspecifica(p.dataset.id);}
+		p.onclick = c => {cargaModalPropuesta(p.dataset.id);}
 	}
 })
 
-function cargaPropuestaModal(){
+function cargaModalPropuestaCreacion(){
 	document.getElementById('modal').style.display='block';
 	return go2(config.rootUrl + "propuesta/creacion", 'GET')
 		.then(html => {
@@ -19,11 +19,6 @@ function cargaPropuestaModal(){
 		});
 }
 
-function cargaPropuestaEspecifica(idPropuesta){
-		document.getElementById('modal').style.display='block';
-	return go2(config.rootUrl + "propuesta?idPropuesta=" + idPropuesta, 'GET')
-		.then(html => document.getElementById("contenidoModal").innerHTML=html);
-}
 
 function validaCamposRegistroPropuesta(){
 	let b = document.getElementById("btnPublicarPropuesta");

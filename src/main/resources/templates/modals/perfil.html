@@ -128,14 +128,12 @@
 
 
       <!-- Historial propuestas (VISTA, EDICION) [ADMIN no tiene] -->
-      <div class="w3-center" th:if="${(modo eq 'VISTA' or modo eq 'EDICION') and !usuario.hasRole('ADMIN')}">
+      <div class="w3-center" th:if="${(modo eq 'VISTA' or modo eq 'EDICION') and !usuario.hasRole('ADMIN') }">
           <h2 class="w3-padding-24">Historial de propuestas</h2>
           <div id="propuestas">
+			<p th:if="${ #lists.isEmpty(propuestas)}"> No hay propuestas </p>
             <ul>
-              <li>Propuesta1</li>
-              <li>Propuesta2</li>
-              <li>Propuesta3</li>
-              <li>Propuesta4</li>
+              <li th:each="propuesta : ${propuestas}" th:text="${propuesta.nombre}" class="propuestaAntigua" th:attr="data-id=${propuesta.id}"></li>
             </ul>
           </div>
         </div> <!-- Hacer historial de propuestas con query en el modelo -->

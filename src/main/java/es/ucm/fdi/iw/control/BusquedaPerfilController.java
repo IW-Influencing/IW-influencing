@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -42,6 +43,25 @@ public class BusquedaPerfilController {
 
 		return "busquedaPerfil";
 	  }
+	  
+	  @PostMapping("")
+	  public String busquedaInicio(HttpSession session, Model model, @RequestParam String nombrePerfilBusqueda) {
+		  String patronParaLike = "%"+nombrePerfilBusqueda+"%";
+			List<Usuario> usuarios = null;
+			usuarios = entityManager.createNamedQuery("Usuario.searchByNombre", Usuario.class)
+					.setParameter("nombre", patronParaLike.toUpperCase()).getResultList();	
+			model.addAttribute("numeroPaginas", Math.ceil((double)usuarios.size()/NUM_ELEMENTOS_PAGINA));
+			if (NUM_ELEMENTOS_PAGINA <= usuarios.size())
+				usuarios=usuarios.subList(0,NUM_ELEMENTOS_PAGINA);
+			model.addAttribute("usuarios", usuarios);
+			model.addAttribute("numNotificaciones", entityManager.createNamedQuery("Evento.getNotificacionesUnread")
+					  .setParameter("idUsuario", ((Usuario)session.getAttribute("u")).getId()).getResultList().size());
+			return "busquedaPerfil";
+
+	  
+	  }
+	  
+	  
 	  
 	  @GetMapping("/busca")
 		public String postSearch(Model model, HttpSession session, @RequestParam(required = true, defaultValue = "1") int indicePagina, @RequestParam String patron) {

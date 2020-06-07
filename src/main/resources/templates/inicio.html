@@ -24,14 +24,14 @@
 			<h1><b>Panel de búsqueda</b></h1>
 
 			<h3>Buscar usuario</h3>
-			<form class="w3-container w3-margin">
-				<input class="w3-input" type="text" placeholder="Introduzca el nombre del usuario..." required></input>
+			<form class="w3-container w3-margin" method="POST" th:action="@{/busquedaPerfil}">
+				<input class="w3-input" name="nombrePerfilBusqueda" type="text" placeholder="Introduzca el nombre del usuario..." required></input>
 				<input class="w3-btn" type="submit" value="Buscar">
 			</form>
 
 			<h3>Buscar propuesta</h3>
-			<form class="w3-container w3-margin">
-				<input class="w3-input" type="text" placeholder="Introduzca el nombre de la propuesta..." required></input>
+			<form class="w3-container w3-margin" method="POST" th:action="@{/busquedaPropuesta}">
+				<input class="w3-input" name = "nombrePropuestaBusqueda" type="text" placeholder="Introduzca el nombre de la propuesta..." required></input>
 				<input class="w3-btn" type="submit" value="Buscar">
 			</form>
 

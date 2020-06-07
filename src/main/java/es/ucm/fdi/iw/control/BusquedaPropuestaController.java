@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -45,6 +46,28 @@ public class BusquedaPropuestaController {
         return "busquedaPropuesta";
     }
     
+    
+	  @PostMapping("")
+	  public String busquedaInicio(HttpSession session, Model model, @RequestParam String nombrePropuestaBusqueda, @RequestParam(required = true, defaultValue = "1") int indicePagina) {
+		  String patronParaLike = "%"+nombrePropuestaBusqueda+"%";
+			List<Propuesta> propuestas = null;
+			propuestas = entityManager.createNamedQuery("Propuesta.searchByNombre", Propuesta.class)
+					.setParameter("nombre", patronParaLike.toUpperCase()).getResultList();	
+			model.addAttribute("numeroPaginas", Math.ceil((double)propuestas.size()/NUM_ELEMENTOS_PAGINA));
+			if (indicePagina*NUM_ELEMENTOS_PAGINA <= propuestas.size())
+				propuestas=propuestas.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, indicePagina*NUM_ELEMENTOS_PAGINA);
+			else 
+				propuestas=propuestas.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, propuestas.size());
+
+		    model.addAttribute("propuestas", propuestas);
+			model.addAttribute("numNotificaciones", entityManager.createNamedQuery("Evento.getNotificacionesUnread")
+					  .setParameter("idUsuario", ((Usuario)session.getAttribute("u")).getId()).getResultList().size());
+			model.addAttribute("patron", nombrePropuestaBusqueda);
+
+			return "busquedaPropuesta";
+
+	  
+	  }
     
     @GetMapping("/busca")
 	public String postSearch(Model model, HttpSession session,@RequestParam(required = true, defaultValue = "1") int indicePagina, @RequestParam String patron) {

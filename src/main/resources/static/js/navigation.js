@@ -69,6 +69,27 @@ function lanzaAlert() {
 	  alert(document.getElementById("mensajeInfo").textContent);
 }
 
+function cargaModalPerfil(idPerfil){
+	document.getElementById('modal').style.display='block';
+	return go2(config.rootUrl + "perfil?idUsuario=" + idPerfil, 'GET')
+		.then(html => {
+			document.getElementById("contenidoModal").innerHTML=html;
+			document.getElementById("btnDenunciar").onclick = b => cargaModalDenuncia(document.getElementById("btnDenunciar").dataset.id);
+			for (let p of document.getElementsByClassName("propuestaAntigua")){
+				p.onclick = c => cargaModalPropuesta(p.dataset.id);
+			}
+		})
+}
+
+function cargaModalPropuesta(idPropuesta){
+	document.getElementById('modal').style.display='block';
+	return go2(config.rootUrl + "propuesta?idPropuesta=" + idPropuesta, 'GET')
+	.then(html => {
+		document.getElementById("contenidoModal").innerHTML=html;
+		document.getElementById("btnDenunciar").onclick = b => cargaModalDenuncia(document.getElementById("btnDenunciar").dataset.id);
+	})
+}
+
 function cargaModalDenuncia(idDenunciado){
 	let url = window.location.href.toString().split(window.location.host)[1];
 	document.getElementById('modal').style.display='block';

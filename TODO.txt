@@ -1,5 +1,5 @@
 Pagina de inicio - Carlos
- - Busquedas -> que te mande a las busquedas perfiles/propuestas con el texto como input para busqueda por nombre. Meterlas en un form. 
+ - Busquedas -> que te mande a las busquedas perfiles/propuestas con el texto como input para busqueda por nombre. Meterlas en un form. HECHO
  - Propuestas -> Empresa -- Nombre propuesta. Como botón uno solo para visualizarla que cargue el modal. [HECHO]
 
 b
@@ -34,7 +34,7 @@ PERFIL - Carlos
 	  - Al ser admin  no deberia salir tags, historial de propuestas ni score [HECHO]
   Vista
       - PerfilesRRSS [HECHO]
-      - Historial de propuestas []
+      - Historial de propuestas [HECHO]
       
 
 Navbar - Nacho

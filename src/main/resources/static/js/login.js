@@ -1,11 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
-	document.getElementById("registroLogin").onclick = c => cargaModalPerfil();
+	document.getElementById("registroLogin").onclick = c => cargaModalPerfilRegistro();
 	lanzaAlert();
 
 })
 
 
-function cargaModalPerfil(){
+function cargaModalPerfilRegistro(){
 	document.getElementById('modal').style.display='block';
 	return go2(config.rootUrl + "perfil/creacion", 'GET')
 		.then(html => {document.getElementById("contenidoModal").innerHTML=html;
