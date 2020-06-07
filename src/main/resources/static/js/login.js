@@ -1,16 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
 	document.getElementById("registroLogin").onclick = c => cargaModalPerfilRegistro();
 	lanzaAlert();
-
 })
 
 
 function cargaModalPerfilRegistro(){
 	document.getElementById('modal').style.display='block';
 	return go2(config.rootUrl + "perfil/creacion", 'GET')
-		.then(html => {document.getElementById("contenidoModal").innerHTML=html;
-			asignaFuncionBotonRegistro()
-			document.getElementById("tipoCuenta").addEventListener('change', compruebaPerfiles);});		
+		.then(html => {
+			document.getElementById("contenidoModal").innerHTML=html;
+			asignaFuncionBotonRegistro();
+			document.getElementById("tipoCuenta").addEventListener('change', compruebaPerfiles);
+		});		
 }
 
 

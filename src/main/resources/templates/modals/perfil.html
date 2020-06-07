@@ -34,7 +34,7 @@
       <!-- Nombre y apellidos (EDICION, VISTA) -->
       <div th:unless="${modo} eq 'CREACION'">
 
-        <!-- Empresa -->
+        <!-- [EMPRESA] -->
         <div th:if="${usuario.hasRole('EMPRESA')}" class="divCentrado">
           <h2>Nombre de la empresa</h2>
           <span th:if="${modo} eq 'VISTA'" th:text="${usuario.nombre}"></span>
@@ -45,7 +45,7 @@
             style="display:none"></input>
         </div>
 
-        <!-- No es empresa -->
+        <!-- [No es EMPRESA] -->
         <div th:unless="${usuario.hasRole('EMPRESA')}" class="divCentrado">
           <h2>Nombre y apellidos</h2>
           <span th:if="${modo} eq 'VISTA'" th:text="${usuario.nombre} + ' ' + ${usuario.apellidos}"></span>
@@ -94,14 +94,16 @@
       <div class="tags-perfil" th:unless="${modo eq 'VISTA'  or (modo eq 'EDICION' and usuario.hasRole('ADMIN'))}">
           <h2>Tags relacionados con el perfil</h2>
 
-		<!-- MODO CREACION PERFIL-->
+		      <!-- MODO CREACION PERFIL-->
           <textarea th:if="${modo} eq 'CREACION'" name="tags" rows="2" cols="50" required
             placeholder="Introduzca los tags separados por comas" class="w3-input w3-border"></textarea>
 
-		<!-- MODO EDICION PERFIL-->
+		      <!-- MODO EDICION PERFIL-->
           <textarea th:if="${modo} eq 'EDICION'" th:unless="${usuario.hasRole('ADMIN')}" name="tags" rows="2" cols="50" required
             placeholder="Introduzca los tags separados por comas" th:text="${usuario.tags}" class="w3-input w3-border"></textarea>
-	</div>
+      </div>
+      
+
       <!-- Selector de Rol (CREACION)-->
       <div th:if="${modo} eq 'CREACION'">
         <h2 class="w3-padding-24">Tipo de cuenta</h2>
@@ -129,14 +131,14 @@
 
       <!-- Historial propuestas (VISTA, EDICION) [ADMIN no tiene] -->
       <div class="w3-center" th:if="${(modo eq 'VISTA' or modo eq 'EDICION') and !usuario.hasRole('ADMIN') }">
-          <h2 class="w3-padding-24">Historial de propuestas</h2>
-          <div id="propuestas">
-			<p th:if="${ #lists.isEmpty(propuestas)}"> No hay propuestas </p>
-            <ul>
-              <li th:each="propuesta : ${propuestas}" th:text="${propuesta.nombre}" class="propuestaAntigua" th:attr="data-id=${propuesta.id}"></li>
-            </ul>
-          </div>
-        </div> <!-- Hacer historial de propuestas con query en el modelo -->
+        <h2 class="w3-padding-24">Historial de propuestas</h2>
+        <div id="propuestas">
+          <p th:if="${ #lists.isEmpty(propuestas)}"> No hay propuestas </p>
+          <ul>
+            <li th:each="propuesta : ${propuestas}" th:text="${propuesta.nombre}" class="propuestaAntigua" th:attr="data-id=${propuesta.id}"></li>
+          </ul>
+        </div>
+      </div> <!-- Hacer historial de propuestas con query en el modelo -->
     
 
       <!-- Nombre Perfil [EMPRESA] -->
@@ -246,7 +248,7 @@
 
       <!-- Botones interactivos -->
       <div class="divCentrado">
-        <button th:if="${modo} eq 'EDICION'" class="w3-btn btnColor w3-margin" type="submit">Guardar cambios</button>
+        <button th:if="${modo} eq 'EDICION'" class="w3-btn btnColor w3-margin" id="botonGuardarCambios" type="submit">Guardar cambios</button>
         <button th:if="${modo} eq 'CREACION'" class="w3-btn btnColor w3-margin" id="botonRegistrarseUsuario" type="submit">Registrar usuario</button>
       </div>
 

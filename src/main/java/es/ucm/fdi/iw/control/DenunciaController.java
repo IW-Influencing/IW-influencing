@@ -28,6 +28,7 @@ import es.ucm.fdi.iw.model.Evento;
 import es.ucm.fdi.iw.model.Propuesta;
 import es.ucm.fdi.iw.model.Usuario;
 import es.ucm.fdi.iw.model.Valoracion;
+import es.ucm.fdi.iw.model.Evento.Tipo;
 
 @Controller()
 @RequestMapping("denuncia")
@@ -101,14 +102,25 @@ public class DenunciaController {
         entityManager.persist(d);
 		try {
 			session.setAttribute("modo", "DENUNCIAS");
-	        session.setAttribute("mensajeInfo", "Denuncia tramitada");
-			response.sendRedirect(ruta);
+            session.setAttribute("mensajeInfo", "Denuncia tramitada");
+
+            Usuario admin = entityManager.find(Usuario.class, ((Usuario) session.getAttribute("u")).getId());
+            Evento notiDenunciante = new Evento();
+            
+            notiDenunciante.setDescripcion("Ya ha sido tramitada su denuncia sobre " + d.getDenunciado().getNombre());
+            notiDenunciante.setEmisor(admin);
+            notiDenunciante.setFechaEnviado(LocalDateTime.now());
+            notiDenunciante.setLeido(false);
+            notiDenunciante.setTipo(Tipo.NOTIFICACION);
+            notiDenunciante.setReceptor(d.getDenunciante());
+            entityManager.persist(notiDenunciante);
+            
+            response.sendRedirect(ruta);
+            
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-
 	}
 	
 

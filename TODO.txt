@@ -1,14 +1,14 @@
 Pagina de inicio - Carlos
- - Busquedas -> que te mande a las busquedas perfiles/propuestas con el texto como input para busqueda por nombre. Meterlas en un form. HECHO
+ - Busquedas -> que te mande a las busquedas perfiles/propuestas con el texto como input para busqueda por nombre. Meterlas en un form. [HECHO]
  - Propuestas -> Empresa -- Nombre propuesta. Como botón uno solo para visualizarla que cargue el modal. [HECHO]
 
 b
 Administracion
+	Darle sentido a la barra de búsqueda (filtros) [HECHO]
 	Denuncia - Carlos
-	  Darle sentido a la barra de búsqueda (filtros) [HECHO]
 	  Controlador hacer los redirect y mensajes de alert
 	  Validacion cliente y controlador
-	  Al tramitar mandar notificacion a los usuarios de que se ha tramitado su denuncia
+	  Al tramitar mandar notificacion a los usuarios de que se ha tramitado su denuncia []
 	  
 	Propuestas - Nacho (solo notificacion, no websocket)
 	  Borrar y verificarlas hay que notificar a la empresa - [HECHO]
@@ -24,13 +24,13 @@ Negociacion
 	 - Validacion ultimatum
 	 - Cambiar de color el boton de visualizar [HECHO]
 	 - El otro debe ser el unico que pueda responder [HECHO]
-	 - Funcionalidad al responder ultimatum HECHO
+	 - Funcionalidad al responder ultimatum [HECHO]
 	 - Enviar una notificacion de que te han mandado un ultimatum [HECHO]
 	 - Enviar mensaje tiene que ser tipo POST con ajax convirtiendo a objeto [HECHO]
 	 
 PERFIL - Carlos
   Edicion 
-	  - Validacion en cliente []
+	  - Validacion en cliente [HECHO]
 	  - Al ser admin  no deberia salir tags, historial de propuestas ni score [HECHO]
   Vista
       - PerfilesRRSS [HECHO]
@@ -43,7 +43,7 @@ Navbar - Nacho
 
 
 Propuesta - Carlos
-  - Funcionalidad apuntarse notificar a la empresa que se ha apuntado un usuario. HECHO
+  - Funcionalidad apuntarse notificar a la empresa que se ha apuntado un usuario. [HECHO]
 
 Contrataciones - Nacho
   - Valoracion no funciona bien cuando se puntua con decimales  [HECHO]
@@ -56,11 +56,8 @@ Contrataciones - Nacho
  
   
 Inputs de busqueda de la navbar meterlos en un form. - Carlos []
-sendRedirects -> cambiarlos a la ruta en la que se estaba actualmente - Nacho
+sendRedirects -> cambiarlos a la ruta en la que se estaba actualmente - Nacho []
 
-
-
-Busqueda  de administracion https://www.w3schools.com/w3css/w3css_filters.asp PENDIENTE
 
 *ERROR AL TRAMITAR UNA DENUNCIA AUNQUE PARECE HACERLO BIEN TRAS EL ERROR
 

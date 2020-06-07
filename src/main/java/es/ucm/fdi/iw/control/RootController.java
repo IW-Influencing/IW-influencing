@@ -64,7 +64,7 @@ public class RootController {
   public String inicio(HttpSession session,Model model) {
 	long idUsuario = ((Usuario)session.getAttribute("u")).getId();
 	List<Evento> eventos = entityManager.createNamedQuery("Evento.getNotificacionesUnread").setParameter("idUsuario", idUsuario ).setMaxResults(LIMITE_MENSAJES_INICIO).getResultList();
-	List<Candidatura> candidaturas = entityManager.createNamedQuery("Candidatura.getByUser").setParameter("idUsuario", idUsuario ).setMaxResults(LIMITE_PROPUESTAS_INICIO).getResultList();;
+	List<Candidatura> candidaturas = entityManager.createNamedQuery("Candidatura.getByUser").setParameter("idUsuario", idUsuario ).setMaxResults(LIMITE_PROPUESTAS_INICIO).getResultList();
 	model.addAttribute("mensajes", eventos);
 	model.addAttribute("candidaturas", candidaturas);
 	model.addAttribute("mensaje",session.getAttribute("mensajeInfo"));
@@ -80,10 +80,6 @@ public class RootController {
     return "modals/valoracion";
   }
   
-  @GetMapping("/finCampanna")
-  public String finCampanna(HttpSession session) {
-    return "finCampanna";
-  }
 
   @GetMapping("/negociacion")
   public String negociacion(Model model, HttpSession session) {

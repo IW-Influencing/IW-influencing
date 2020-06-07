@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 	lanzaAlert();
+
+	// Boton crear propuesta
 	let botonCrearPropuesta = document.getElementById("botonCrearPropuesta");
 	if (botonCrearPropuesta !== null){
 		botonCrearPropuesta.onclick = b => cargaModalPropuestaCreacion();

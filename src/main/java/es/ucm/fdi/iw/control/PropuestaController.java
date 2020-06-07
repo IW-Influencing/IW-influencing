@@ -138,6 +138,7 @@ public class PropuestaController {
 				e.setTipo(Tipo.CHAT);
 				e.setReceptor(p.getEmpresa());
 				entityManager.persist(e);
+				
 				e = new Evento();
 				e.setDescripcion("El usuario " + usuarioLoggeado.getNombre() + " se ha apuntado a la propuesta " + p.getNombre());
 				e.setEmisor(usuarioLoggeado);
