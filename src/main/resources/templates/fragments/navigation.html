@@ -28,8 +28,9 @@
 
             <!-- Dropdown Usuario -->
             <div class="w3-dropdown-hover w3-right w3-margin-right w3-display-right">
-                <button class="w3-button userButton" th:text="${session.u.nombre}">
-                    <h4>Usuario</h4>
+                <button class="w3-button w3-text-white">
+                    <h3 th:text="${session.u.nombre}"></h3>
+                    <i class="fas fa-caret-down"></i>
                 </button>
                 <div class="w3-dropdown-content w3-bar-block w3-card-4" id="desplegableUsuario">
                     <span id="botonNotificacionesNav" class="w3-bar-item w3-button divFlex">Notificaciones
@@ -126,7 +127,7 @@
 
         <div class="w3-bar">
         <th:block th:each="i: ${#numbers.sequence(0,numeroPaginas-1)}">
-            <a class="w3-bar-item w3-button w3-hover-blue botonPaginacion" th:text="${i+1}" th:attr="data-prop-indice=${i+1},data-prop-patron=${patron}">No funciona</a>
+            <a class="w3-bar-item w3-button w3-hover-blue botonPaginacion" th:text="${i+1}" th:attr="data-prop-indice=${i+1},data-prop-patron=${patron}"></a>
         </th:block>	
         </div>
     </div> <!-- ${numeroPaginas} -->

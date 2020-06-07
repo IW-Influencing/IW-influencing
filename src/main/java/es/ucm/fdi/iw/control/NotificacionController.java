@@ -18,39 +18,37 @@ import es.ucm.fdi.iw.model.Evento;
 import es.ucm.fdi.iw.model.Usuario;
 import es.ucm.fdi.iw.model.Usuario.Rol;
 
-
 @Controller()
 @RequestMapping("notificaciones")
 public class NotificacionController {
 
-	 @Autowired
-	 private EntityManager entityManager;
-	 
-	  @GetMapping("")
-	  public String notificaciones(HttpSession session, Model model) {
-		  List<Evento> listaNotificaciones  = null;
-		if (((Usuario)session.getAttribute("u")).hasRole(Rol.ADMIN)) {
+	@Autowired
+	private EntityManager entityManager;
+
+	@GetMapping("")
+	public String notificaciones(HttpSession session, Model model) {
+		List<Evento> listaNotificaciones = null;
+		if (((Usuario) session.getAttribute("u")).hasRole(Rol.ADMIN)) {
 			listaNotificaciones = entityManager.createNamedQuery("Evento.adminEventsByDate").getResultList();
-		}
-		else {
-			listaNotificaciones  = entityManager.createNamedQuery("Evento.getNotificacionesUnread")
-					  .setParameter("idUsuario", ((Usuario)session.getAttribute("u")).getId()).getResultList();
+		} else {
+			listaNotificaciones = entityManager.createNamedQuery("Evento.getNotificacionesUnread")
+					.setParameter("idUsuario", ((Usuario) session.getAttribute("u")).getId()).getResultList();
 
 		}
 		model.addAttribute("notificaciones", listaNotificaciones);
-	    return "modals/notificaciones";
-	  
-	  }
-	  
-	  @GetMapping("/elimina")
-	  @Transactional
-	 @ResponseBody
-	  public String eliminaNotificacion(@RequestParam long idNotificacion) {
-	    Evento notificacion = entityManager.find(Evento.class, idNotificacion);
-	    notificacion.setLeido(true);
-	    entityManager.persist(notificacion);
-	    List<Evento> eventos = entityManager.createNamedQuery("Evento.adminEventsByDate").getResultList();
-	    return String.valueOf(entityManager.createNamedQuery("Evento.adminEventsByDate").getResultList().size());
-	  }
-	  
+		return "modals/notificaciones";
+
+	}
+
+	@GetMapping("/elimina")
+	@Transactional
+	@ResponseBody
+	public String eliminaNotificacion(@RequestParam long idNotificacion) {
+		Evento notificacion = entityManager.find(Evento.class, idNotificacion);
+		notificacion.setLeido(true);
+		entityManager.persist(notificacion);
+		List<Evento> eventos = entityManager.createNamedQuery("Evento.adminEventsByDate").getResultList();
+		return String.valueOf(entityManager.createNamedQuery("Evento.adminEventsByDate").getResultList().size());
+	}
+
 }

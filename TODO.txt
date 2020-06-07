@@ -6,9 +6,9 @@ b
 Administracion
 	Darle sentido a la barra de búsqueda (filtros) [HECHO]
 	Denuncia - Carlos
-	  Controlador hacer los redirect y mensajes de alert
-	  Validacion cliente y controlador
-	  Al tramitar mandar notificacion a los usuarios de que se ha tramitado su denuncia []
+	  Controlador hacer los redirect y mensajes de alert []
+	  Validacion cliente y controlador [HECHO]
+	  Al tramitar mandar notificacion a los usuarios de que se ha tramitado su denuncia [HECHO]
 	  
 	Propuestas - Nacho (solo notificacion, no websocket)
 	  Borrar y verificarlas hay que notificar a la empresa - [HECHO]

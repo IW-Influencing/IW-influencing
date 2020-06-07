@@ -49,13 +49,14 @@
 			<button class="w3-btn btnColor w3-margin" id="botonNotificacionesIni">Ver todas las notificaciones</button>
 
 			<!-- Lista de mensajes -->
-			<div th:each="mensaje : ${mensajes}" id="message1" class="w3-container w3-grey w3-round-large w3-margin">
-				<p th:text="${mensaje.getEmisor().getNombre() +': '+ mensaje.getDescripcion()}"></p>
-				<div class="w3-margin-top">
-					<button class="w3-btn w3-dark-grey w3-third">Marcar como leído</button>
-					<button class="w3-btn w3-dark-grey w3-third">Eliminar mensaje</button>
-					<button class="w3-btn w3-dark-grey w3-third">Ir a la conversación</button>
+			<div th:each="mensaje : ${mensajes}" id="message1" class="w3-container w3-blue-grey w3-round-large w3-margin">
+				<h3><b th:text="${mensaje.getEmisor().getNombre()}"></b></h3>
+				<p th:text="${#temporals.format(mensaje.getFechaEnviado(), 'dd/MM/yyyy')}"></p>
+				<div class="w3-container w3-pale-blue">
+					<p th:text="${mensaje.getDescripcion()}"></p>
 				</div>
+				<input class="w3-btn w3-dark-grey w3-margin eliminaNotificacion" type="submit" value="Eliminar mensaje" 
+					onclick="this.parentElement.style.display='none'"></input>
 			</div>
 
 		</div>
@@ -69,10 +70,13 @@
 			<button class="w3-btn btnColor w3-margin" id="verTodasPropuestas" th:href="@{/busquedaPropuesta}">Ver todas las propuestas</button>
 
 			<!-- Lista de propuestas -->
-			<div th:each="candidatura : ${candidaturas}" class="w3-container w3-grey w3-round-large w3-margin">
+			<div th:each="candidatura : ${candidaturas}" class="w3-container w3-blue-grey w3-round-large w3-margin">
 				<h3><b th:text="${candidatura.getPropuesta().getEmpresa().getNombre()}"></b></h3>
-				<p th:text="${candidatura.getPropuesta().getDescripcion()}"></p>
-				<button class="w3-btn w3-dark-grey btnVerPropuesta" th:attr="data-id=${candidatura.propuesta.id}">Ver la propuesta</button>
+				<p th:text="${#temporals.format(candidatura.getPropuesta().getFechaSubida(), 'dd/MM/yyyy')}"></p>
+				<div class="w3-container w3-pale-blue">
+					<p th:text="${candidatura.getPropuesta().getDescripcion()}"></p>
+				</div>
+				<input class="w3-btn w3-dark-grey w3-margin btnVerPropuesta" type="submit" th:attr="data-id=${candidatura.propuesta.id}" value="Ver la propuesta"></input>
 			</div>
 
 		</div>
