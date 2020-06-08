@@ -25,7 +25,7 @@ import javax.persistence.OneToMany;
 	query="SELECT p FROM Propuesta p "
 		+ "WHERE upper(p.nombre) LIKE :nombre AND p.activa = true"),
 	
-	@NamedQuery(name="Propuesta.searchByTag",
+	@NamedQuery(name="Propuesta.serarchByTag",
 	query="SELECT p FROM Propuesta p "
 			+ "WHERE upper(p.tags) LIKE :tag AND p.activa = true")
 })

@@ -39,7 +39,6 @@ public class Evento {
 	private String tipo;
 	private Candidatura candidatura;
 	private LocalDateTime fechaEnviado;
-	private LocalDateTime fechaRecibido;
 	private boolean leido;
 	private String valoracion;
 	
@@ -98,8 +97,6 @@ public class Evento {
 			this.from = e.getEmisor().getNombre();
 			this.to = e.getReceptor().getNombre();
 			this.sent = DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(e.getFechaEnviado());
-			this.received = e.getFechaRecibido() == null ?
-					null : DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(e.getFechaRecibido());
 			this.text = e.getDescripcion();
 			this.nombrePropuesta = e.getCandidatura().getPropuesta().getNombre();
 			this.id = e.getId();
@@ -234,14 +231,6 @@ public class Evento {
 
 	public void setFechaEnviado(LocalDateTime fechaEnviado) {
 		this.fechaEnviado = fechaEnviado;
-	}
-
-	public LocalDateTime getFechaRecibido() {
-		return fechaRecibido;
-	}
-
-	public void setFechaRecibido(LocalDateTime fechaRecibido) {
-		this.fechaRecibido = fechaRecibido;
 	}
 
 	public boolean isLeido() {
