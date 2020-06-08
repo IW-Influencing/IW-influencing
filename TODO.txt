@@ -4,7 +4,8 @@ Pagina de inicio
 
 Carlos
  - Inputs de busqueda de la navbar meterlos en un form. cambiar de peticion get a tipo post todas las busquedas por nombre de paginas
-   busquedapropuesta busquedaperfil y contrataciones. []
+   busquedapropuesta busquedaperfil y contrataciones.
 
 
 - Validacion Login meterla en Navigation ¿?
+- Arreglar 2 warning ¿?

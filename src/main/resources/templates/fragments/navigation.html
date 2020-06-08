@@ -18,8 +18,7 @@
             
             <!-- Logo -->
             <a class="logo w3-hover-text-white w3-display-topleft" th:href="${session.u.hasRole('ADMIN')}?@{/administracion}:@{/inicio}"><img
-                src="https://cdn2.iconfinder.com/data/icons/life-skills-color/64/influence-without-authority-team-teamwork-512.png"
-                width=70 height=70/>INFLUENCING</a>
+                src="img/icon.png" width=70 height=70/> INFLUENCING</a>
             
             <!-- Titulo Pagina -->
             <div class="w3-display-bottommiddle tituloPag">
@@ -71,10 +70,10 @@
     <div th:fragment="modalBar(nombrePagina)" id="modalBar" class="title w3-display-container">
         <div id="volver" class="w3-button w3-display-topleft"
             onclick="document.getElementById('modal').style.display='none'">
-            <div class="w3-padding w3 w3-text-white"><img src="img/atras.png" width="20"/> VOLVER</div>
+            <div class="w3-padding w3 w3-text-white"><i class="fas fa-arrow-left"></i> VOLVER</div>
         </div>
         <div id="nombrePagina" class="w3-display-middle nombrePagina">
-            <b><span class="w3-text-white" th:text="${nombrePagina}">nombrePagina</span></b>
+            <b><span class="w3-text-white" th:text="${nombrePagina}"></span></b>
         </div>
     </div>
 
@@ -132,7 +131,7 @@
             <a class="w3-bar-item w3-button w3-hover-blue botonPaginacion" th:text="${i+1}" th:attr="data-prop-indice=${i+1},data-prop-patron=${patron}"></a>
         </th:block>	
         </div>
-    </div> <!-- ${numeroPaginas} -->
+    </div>
 
 </body>
 
