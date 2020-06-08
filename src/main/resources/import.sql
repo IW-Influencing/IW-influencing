@@ -173,5 +173,7 @@ INSERT INTO perfilrrss(id, influencer_id, nombre, num_seguidores, rrss) VALUES (
 INSERT INTO perfilrrss(id, influencer_id, nombre, num_seguidores, rrss) VALUES (
 	2, 2, 'CuentaFacebook', 10, 'Facebook'
 );
-
+INSERT INTO perfilrrss(id, influencer_id, nombre, num_seguidores, rrss) VALUES (
+	3, 2, 'CuentaInstagram', 10, 'Instagram'
+);
 

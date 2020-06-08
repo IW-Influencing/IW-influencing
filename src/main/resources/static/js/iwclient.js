@@ -94,8 +94,12 @@ function go2(url, method, data = {}) {
 		// GET requests cannot have body
 		delete params.body;
 	}
+	else {
+      params.headers["X-CSRF-TOKEN"] = config.csrf.value; 
+    }
 	console.log("sending", url, params)
-	return fetch(url, params).then(response => {
+	return fetch(url, params)
+	.then(response => {
 		if (response.ok) {
 			return data = response.text();
 		} else {

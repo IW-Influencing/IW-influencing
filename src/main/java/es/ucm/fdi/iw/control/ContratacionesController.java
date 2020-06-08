@@ -156,6 +156,18 @@ public class ContratacionesController {
 		model.addAttribute("idUsuario", ((Usuario) session.getAttribute("u")).getId());
 		return "modals/valoracion";
 	}
+	
+	
+	@GetMapping("/verValoracionInicio")
+	public String verValoracionInicio(Model model, HttpSession session, @RequestParam long idValoracion) {
+		model.addAttribute("modo", "VISTA");
+		Valoracion v = entityManager.find(Valoracion.class, idValoracion);
+		model.addAttribute("valoracion", v);
+		model.addAttribute("propuesta", v.getCandidatura().getPropuesta());
+		model.addAttribute("idCandidatura", v.getCandidatura().getId());
+		model.addAttribute("idUsuario", ((Usuario) session.getAttribute("u")).getId());
+		return "modals/valoracion";
+	}
 
 	@PostMapping("/valorar")
 	@Transactional

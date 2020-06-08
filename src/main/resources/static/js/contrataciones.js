@@ -62,41 +62,8 @@ function cargaModalValorarVista(idCandidatura, idPropuesta) {
 		});
 }
 
-function parseaEstrellasValoracion(inputPuntuacion){
-	pintaEstrellasValoracion(inputPuntuacion.target.value);
-}
-
-function pintaEstrellasValoracion(puntuacion) {
-	let parteEntera = puntuacion[0];
-	let parteDecimal = puntuacion[2];
-
-	tablinks = document.getElementsByClassName("estrella");
-	for (i = 0; i < parteEntera; i++) {
-		tablinks[i].className = "estrella fa fa-star";
-	}
-	if (parteDecimal >= 5) {
-		tablinks[parteEntera].className = "estrella fa fa-star-half-alt";
-		for (i = parseInt(parteEntera) + 1; i < 5; i++) {
-			tablinks[i].className = "estrella far fa-star";
-		}
-	}
-	else {
-		for (i = parteEntera; i < 5; i++) {
-			tablinks[i].className = "estrella far fa-star";
-		}
-	}
-}
 
 
-
-function cargaModalPropuesta(idPropuesta) {
-	document.getElementById('modal').style.display = 'block';
-	return go2(config.rootUrl + "contrataciones/vista?idPropuesta=" + idPropuesta, 'GET')
-		.then(html => {
-			document.getElementById("contenidoModal").innerHTML=html;
-			document.getElementById("btnDenunciar").onclick = b => cargaModalDenuncia(document.getElementById("btnDenunciar").dataset.id);
-		})
-}
 
 function cargaBusquedas(patron) {
 	return go2(config.rootUrl + "contrataciones/busca?patron=" + patron, 'GET')

@@ -42,7 +42,11 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 function cargaBusquedas(patron){
-	return go2(config.rootUrl + "busquedaPerfil/busca?patron=" + patron, 'GET')
+	let param = {
+		patron:patron
+	}
+	
+	return go2(config.rootUrl + "busquedaPerfil/busca", 'POST', param)
 		.then(html => { 
 			var  div = document.getElementById("divPerfiles");
 			div.innerHTML = html;

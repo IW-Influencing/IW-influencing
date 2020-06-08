@@ -172,6 +172,7 @@
           <h2 class="w3-padding-24">Perfiles en redes sociales</h2>
 
           <ul class="w3-ul w3-card-4 divCentrado w3-center">
+			<p th:if="${ #lists.isEmpty(perfilesRRSS)}"> No hay perifles </p>
             <li th:each="perfil: ${perfilesRRSS}">
 
               <!-- Icono RRSS -->
@@ -181,15 +182,11 @@
               <img th:if="${perfil.rrss} eq 'Youtube'" src="img/youtube.png" width="20" />
 
               <!-- Nombre RRSS -->
-              <p th:if="${modo eq 'VISTA'}" th:text="${perfil.nombre}"></p>
-              <input th:if="${modo eq 'EDICION'}" type="text" th:value="${perfil.nombre}" th:name="${'nombre' + perfil.rrss}" placeholder="Nombre de la cuenta" 
-                min="1" max="20" class="w3-input w3-center">
-
+              <p th:text="${perfil.nombre}"></p>
+              
               <!-- Numero de seguidores-->
-              <span th:if="${modo eq 'VISTA'}" class="numeroseguidores" th:text="${perfil.numSeguidores}"></span>
-              <input th:if="${modo eq 'EDICION'}" type="number" th:value="${perfil.numSeguidores}" name="${'seguidores' + perfil.rrss}" placeholder="Nº de seguidores"  
-                min="0" class="w3-input w3-center">
-
+              <span class="numeroseguidores" th:text="${perfil.numSeguidores}"></span>
+             
             </li>
           </ul>
 

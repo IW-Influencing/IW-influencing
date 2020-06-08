@@ -55,7 +55,8 @@ function cargaBusquedasPorTag(tag){
 }
 
 function cargaBusquedas(patron){
-	return go2(config.rootUrl + "busquedaPropuesta/busca?patron=" + patron, 'GET')
+	let busqueda = { patron : patron};
+	return go2(config.rootUrl + "busquedaPropuesta/busca", 'POST', busqueda)
 	.then(html => { 
 	var  div = document.getElementById("divPropuestas");
 	div.innerHTML = html;
@@ -67,7 +68,6 @@ function cargaBusquedas(patron){
 }
 
 function botonListaBusqueda(patron="", indice){
-	console.log("botonLista", patron, indice);
 	return go2(config.rootUrl + "busquedaPropuesta/busca?patron=" + patron+"&indicePagina="+indice, 'GET')
 		.then(html => { 
 			var  div = document.getElementById("divPropuestas");

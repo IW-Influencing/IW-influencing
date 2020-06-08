@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -64,9 +65,14 @@ public class BusquedaPropuestaController {
 	  
 	  }
     
-    @GetMapping("/busca")
-	public String postSearch(Model model, HttpSession session,@RequestParam(required = true, defaultValue = "1") int indicePagina, @RequestParam String patron) {
-		String patronParaLike = "%"+patron+"%";
+	  
+	 private static class TransferBusqueda{
+		 public String patron;
+	 }
+	  
+    @PostMapping("/busca")
+	public String postSearch(Model model, HttpSession session,@RequestParam(required = true, defaultValue = "1") int indicePagina, @RequestBody TransferBusqueda tb) {
+		String patronParaLike = "%"+tb.patron+"%";
 		List<Propuesta> propuestas = null;
 		propuestas = entityManager.createNamedQuery("Propuesta.searchByNombre", Propuesta.class)
 				.setParameter("nombre", patronParaLike.toUpperCase()).getResultList();		
@@ -77,7 +83,7 @@ public class BusquedaPropuestaController {
 			propuestas=propuestas.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, propuestas.size());
 
 		
-		model.addAttribute("patron", patron);
+		model.addAttribute("patron", tb.patron);
 		model.addAttribute("resultadoBusqueda", propuestas);
 		return "fragments/resultadoBusquedaPropuestas";
 	}

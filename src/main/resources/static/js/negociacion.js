@@ -156,6 +156,9 @@ function cargaChat(idCandidatura, idPropuesta, nombreUsuario, idEmisor, idRecept
 	document.getElementsByClassName("perfil")[0].onclick = b => cargaPerfilModal(idReceptor);
 	document.getElementsByClassName("nombre")[0].innerHTML = nombrePropuesta;
 	document.getElementsByClassName("nombre")[0].onclick = b => cargaPropuestaModal(idPropuesta);
+	document.getElementById("botonUltimatum").style.display = "block";
+	document.getElementById("botonEnviar").style.display = "block";
+
 	return go(config.rootUrl + "message/getChat?idCandidatura=" + idCandidatura + "&idUsuario=" + idEmisor, 'GET')
 		.then(json => insertaEnDiv(json, contenido));
 }

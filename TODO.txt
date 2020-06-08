@@ -1,16 +1,8 @@
 Nacho
 Pagina de inicio
- - Borrar las notificaciones no funciona del todo
- - Diferencia notificacionces con valoraciones
  - Revisar sendRedirects
- - Esquema BBDD
- Chat de negociacion
- - Hay un input nada mas abrirlo y el boton enviar ultimatum (No mostrar eso hasta que pulse en un chat o cargar uno por defecto)...
- 
+
 Carlos
- - Leeme []
- - Validacion cliente espacios en blanco en denuncia. [HECHO]
- - PerfilesRRSS arreglar vista y cuando no haya ninguno que salga no hay perfiles (mirar como esta historial de propuestas). En vista de perfil [HECHO]
  - Inputs de busqueda de la navbar meterlos en un form. cambiar de peticion get a tipo post todas las busquedas por nombre de paginas
    busquedapropuesta busquedaperfil y contrataciones. []
 

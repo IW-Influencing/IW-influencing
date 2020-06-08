@@ -21,6 +21,10 @@
 	margin: 1%
 }
 
+#botonUltimatum{
+	display: none;
+}
+
 .seleccionada{
     background-color: gray;
 }
