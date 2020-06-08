@@ -19,13 +19,16 @@
 
             <!-- Propuesta -->
             <div class="w3-container w3-margin-bottom box divFlexSpaceEvenly divCentrado">
+                
                 <div class="texto-propuesta">
                     <h2 th:text="${propuesta.nombre}"></h2>
                     <p th:text="${propuesta.descripcion}"></p>
                 </div>
+
                 <div>
                     <img class="imgValoracion" th:src="@{/propuesta/{id}/photo(id=${propuesta.id})}" />
                 </div>
+
             </div>
 
             <!-- Valoracion -->
@@ -35,6 +38,8 @@
 
                     <!-- Imagen perfil -->
                     <img class="imgValoracion" th:src="@{/perfil/{id}/photo(id=${idUsuario})}" />
+
+                    <!-- Estrellas input -->
                     <input th:if="${modo} eq 'CREACION'" type="number" name="puntuacion" min="0" max="5" step="0.5" required
                         class="w3-input w3-border w3-center w3-margin-bottom">
 					<p th:if="${modo} eq 'VISTA'" name="puntuacion" th:value="${valoracion.puntuacion}" th:text="${'Puntuacion: ' + valoracion.puntuacion}"></p>
@@ -61,6 +66,7 @@
             <div class="divCentrado">
                 <button th:if="${modo} eq 'CREACION'" class="w3-btn btnColor w3-margin" type="submit">Enviar valoración</button>
             </div>
+
         </div>
     </form>
 

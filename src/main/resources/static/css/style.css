@@ -147,3 +147,38 @@ input{
     min-width: 50px;
     border-radius:12px;
 }
+
+ul {
+    margin: auto !important;
+    list-style-type: none;
+    padding: 0;
+    overflow: hidden;
+    background-color: #77d4df;
+    border-radius: 8px;
+    width: fit-content;
+  }
+  
+li {
+    float: left;
+    border-right:1px solid #bbb;
+}
+
+li:last-child {
+    border-right: none;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #1695a5;
+}
+
+.active {
+    background-color: #1695a5;
+}

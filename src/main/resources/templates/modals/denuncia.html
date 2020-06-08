@@ -11,7 +11,7 @@
 <body>
     <form th:action="${modo=='CREACION'}?@{/denuncia/registrar}:@{/denuncia/tramitar}" method="POST">
 
-        <!-- Denunciante-->
+        <!-- Denunciante -->
         <div class="w3-container w3-margin-bottom boxDenuncia divFlexSpaceEvenly divCentrado">
             <div class="divPerfilUsuario">
 
@@ -71,6 +71,7 @@
         <!-- Denuncia -->
         <div class="w3-container w3-margin-bottom boxDenuncia divFlexSpaceEvenly divCentrado">
             <div id="cabecera">
+                
                 <div th:if="${modo} eq 'CREACION'">
 
                     <!-- Valor id denunciado oculto-->
@@ -85,6 +86,7 @@
                     <textarea name="descripcion" rows = "8" cols = "70" maxlength="500" placeholder="Introduzca la descripción de la denuncia" required></textarea>
 
                 </div>
+
                 <div th:unless="${modo} eq 'CREACION'">
 
                     <!-- Valor id denuncia oculto-->
@@ -107,7 +109,7 @@
 
         <!-- Botones interactivos -->
         <div class="divCentrado">
-            <button th:if="${modo} eq 'CREACION'" class="w3-btn btnColor w3-margin" type="submit">Enviar denuncia</button>
+            <button th:if="${modo} eq 'CREACION'" id="dasda" class="w3-btn btnColor w3-margin" type="submit">Enviar denuncia</button>
             <button th:if="${modo} eq 'TRAMITACION'" class="w3-btn btnColor w3-margin" type="submit">Marcar como tramitada</button>
         </div>
 

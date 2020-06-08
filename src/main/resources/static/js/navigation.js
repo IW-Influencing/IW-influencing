@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		document.getElementById("indiceNumNotificaciones").style.display = "none";
 	}
 
-	// Boton notificaciones
+	// Boton notificaciones INICIO	
 	let botonNotificacionesIni = document.getElementById("botonNotificacionesIni");
 	if (botonNotificacionesIni !== null) {
 		botonNotificacionesIni.onclick = b => cargaModalNotificacionesNav();
@@ -24,6 +24,14 @@ function asignaFuncionBotonGuardarCambios() {
 		validaDatosPerfil("Youtube");
 		validaTexto(document.getElementsByName("tags")[0]);
 		validaTags(document.getElementsByName("tags")[0]);
+	}
+}
+
+// Boton enviar denuncia
+function asignaFuncionBotonEnviarDenuncia() {
+	document.getElementById("botonGuardarCambios").onclick = b => {
+		validaTexto(document.getElementsByName("titulo")[0]);
+		validaTexto(document.getElementsByName("descripcion")[0]);
 	}
 }
 
@@ -149,5 +157,8 @@ function cargaModalDenuncia(idDenunciado){
 	let url = window.location.href.toString().split(window.location.host)[1];
 	document.getElementById('modal').style.display='block';
 	return go2(config.rootUrl + "denuncia?idDenunciado=" + idDenunciado+"&ruta="+url, 'GET')
-		.then(html => document.getElementById("contenidoModal").innerHTML=html);
+		.then(html => {
+			document.getElementById("contenidoModal").innerHTML=html
+			asignaFuncionBotonEnviarDenuncia();
+		});
 }

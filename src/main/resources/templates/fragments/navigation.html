@@ -23,7 +23,7 @@
             
             <!-- Titulo Pagina -->
             <div class="w3-display-bottommiddle tituloPag">
-                <h4><b><span th:text="${nombrePagina}">nombrePagina</span></b></h4>
+                <h4><b><span th:text="${nombrePagina}"></span></b></h4>
             </div>
 
             <!-- Dropdown Usuario -->
@@ -48,6 +48,8 @@
         <!-- Barra de Navegación -->
         <div th:unless="${session.u.hasRole('ADMIN')}" class="horizontalBar w3-margin-top">
             <ul class="ulFragment">
+                <li><a th:class="${nombrePagina=='INICIO'}?'active':''"
+                        th:href="@{/inicio}"><i class="fas fa-home" aria-hidden="true"></i> Inicio</a></li>
                 <li><a th:class="${nombrePagina=='BÚSQUEDA DE PERFILES'}?'active':''"
                         th:href="@{/busquedaPerfil}"><i class="fa fa-search" aria-hidden="true"></i> Búsqueda de
                         Perfiles</a></li>

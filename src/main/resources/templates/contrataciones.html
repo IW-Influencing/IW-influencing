@@ -14,25 +14,21 @@
 	<header>
 		<div th:replace="fragments/navigation.html :: navBar(nombrePagina='CONTRATACIONES')"></div>
 		<div th:replace="fragments/navigation.html :: tagBar(nombrePagina='CONTRATACIONES')"></div>
-
-		
-	</header>
-
-	<!-- Busqueda -->
-		
+	</header>	
 
 	<!-- Contrataciones -->
 	<div id ="divContrataciones">
 		<div th:replace="fragments/resultadoBusquedaContrataciones.html"> </div>
 	</div>
-	
-	<!-- Mensaje de informacion -->
-	  <p th:text="${mensaje}" id="mensajeInfo" hidden></p>
+
 	<!-- Footer -->
     <footer th:replace="fragments/navigation.html :: footer"></footer>
     
     <!-- Modal -->
-    <div th:replace="fragments/modal.html"></div>
+	<div th:replace="fragments/modal.html"></div>
+	
+	<!-- Mensaje de informacion -->
+	<p th:text="${mensaje}" id="mensajeInfo" hidden></p>
 
 </body>
 

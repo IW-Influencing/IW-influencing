@@ -24,7 +24,7 @@
     <form class="contenido-propuesta"
       th:action="${modo=='VISTA'}?@{/propuesta/solicitaPropuesta}
 	      :(${modo=='VISTA-ULTIMATUM'}?@{/propuesta/decideUltimatum}:(${modo=='ULTIMATUM'}?@{/propuesta/enviaUltimatum}:@{/propuesta/registraPropuesta}))"
-        method="POST" enctype="multipart/form-data">
+      method="POST" enctype="multipart/form-data">
 
       <!-- Valor id oculto -->
       <input th:if="${modo}!='CREACION' " type="hidden" name="idPropuesta" th:value="${propuesta.id}">
@@ -108,8 +108,9 @@
         <span th:if="${modo} eq 'CREACION'">
           <input type="file" name="imagenPropuesta" required>
         </span>
- 		<img th:if="${modo} eq 'VISTA' or ${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA-ULTIMATUM' or ${modo} eq 'CONTRATACION'"
-          	id="imagen-propuesta" th:src="@{/propuesta/{id}/photo(id=${propuesta.id})}">
+        <img
+          th:if="${modo} eq 'VISTA' or ${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA-ULTIMATUM' or ${modo} eq 'CONTRATACION'"
+          id="imagen-propuesta" th:src="@{/propuesta/{id}/photo(id=${propuesta.id})}">
       </div>
 
       <!-- Tags -->
@@ -120,25 +121,27 @@
         <div
           th:if="${modo} eq 'VISTA' or ${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA-ULTIMATUM' or ${modo} eq 'CONTRATACION'">
           <button th:each="tag:${#strings.listSplit(propuesta.tags, ',')}" class="w3-button w3-white tags" th:text="${tag}"></button>
+        </div>
       </div>
-    </div>
 
-    <!-- Botones interactivos -->
-    <div class="divCentrado"> 
-      <button  th:if="${modo} eq 'CREACION'" class="w3-btn btnColor w3-margin" id="btnPublicarPropuesta">Publicar</button>
-      <button  th:if="${modo} eq 'VISTA' and ${session.u.hasRole('INFLUENCER')}" class="w3-btn btnColor w3-margin">Apuntarse</button>
-      <div class="botones-propuesta" th:if="${modo} eq 'VISTA-ULTIMATUM' and not ${propio}"> 
-        <button class="w3-btn btnColor w3-margin btnAceptar" name="decision" value="true">Aceptar</button>
-        <button  class="w3-btn btnColor w3-margin btnRechazar" name="decision" value="false">Rechazar</button>
+      <!-- Botones interactivos -->
+      <div class="divCentrado"> 
+        <button  th:if="${modo} eq 'CREACION'" class="w3-btn btnColor w3-margin" id="btnPublicarPropuesta">Publicar</button>
+        <button  th:if="${modo} eq 'VISTA' and ${session.u.hasRole('INFLUENCER')}" class="w3-btn btnColor w3-margin">Apuntarse</button>
+        <div class="botones-propuesta" th:if="${modo} eq 'VISTA-ULTIMATUM' and not ${propio}"> 
+          <button class="w3-btn btnColor w3-margin btnAceptar" name="decision" value="true">Aceptar</button>
+          <button  class="w3-btn btnColor w3-margin btnRechazar" name="decision" value="false">Rechazar</button>
+        </div>
       </div>
-    </div>
 
-  </form>
-  <!-- Boton Denunciar -->
-  <button th:if="${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM' or ${modo} eq 'CONTRATACION'" 
-   class="w3-display-topright" id="btnDenunciar" th:attr="data-id=${propuesta.empresa.id}">Denunciar</button>
+    </form>
+
+    <!-- Boton Denunciar -->
+    <button th:if="${modo} eq 'VISTA' or ${modo} eq 'VISTA-ULTIMATUM' or ${modo} eq 'CONTRATACION'" 
+    class="w3-display-topright" id="btnDenunciar" th:attr="data-id=${propuesta.empresa.id}">Denunciar</button>
 
   </div>
+  
   <!-- Boton de cerrar -->
   <div class="divCentrado"> 
   	<button  th:if="${modo} eq 'ULTIMATUM'" id="btnEnviarUltimatum" class="w3-btn btnColor w3-margin">Enviar</button>
