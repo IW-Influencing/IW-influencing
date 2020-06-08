@@ -23,7 +23,7 @@
         Los usuarios de la aplicación serán las <b>empresas</b> y los <b>influencers</b>. Una vez registrados en la
         aplicación, las empresas pueden filtrar sus búsquedas de perfiles a través de distintos tags que
         referencien a su marca/producto. A su vez, los influencers deben incluir en su perfil sus
-        canales de comunicación para que se pueda confirmar su capacidad de difusión. También se
+        canales de comunicación para que se pueda confirmar su capacidad de difusión (RRSS). También se
         permite que las empresas realicen ofertas públicas para que los influencers se ofrezcan como
         posibles patrocinadores.
 
@@ -31,32 +31,43 @@
         un rating de referencias para ambos tipos de usuarios.
         También existirá el rol de <b>administrador</b> para moderar el tipo de propuestas y perfiles que se
         registran en la aplicación. El administrador recibe una notificación de cada registro y podrá
-        eliminar las que no considere adecuadas.
+        eliminar las que no considere adecuadas, ademas de tramitar denuncias de los usuarios.
     </p>
 
 
     <h2>Vistas</h2>
+    <p>
+        Las diferentes paginas en las que se puede navegar a traves de la navbar.
+    </p>
     <ul>
-        <li><a href="http://localhost:8080/inicio">inicio</a> - vista inicial. Ofrece un resumen general de la actividad
-            del perfil.
-        <li><a href="http://localhost:8080/negociacion">chat de negociación</a> - vista de empresa y usuario.
-            Permite negociar una propuesta de patrocinio y aceptarla/declinarla.
-        <li><a href="http://localhost:8080/admin">administración</a> - vista de administrador. Permite administrar empresas, influencers y propuestas.
-        <li><a href="http://localhost:8080/search_perfil">búsqueda perfiles</a> - vista de empresa y usuario. Permite
+        <li><a href="http://localhost:8080/login">LOGIN</a> - vista para entrar en la pagina o registrarse.
+        <li><a href="http://localhost:8080/inicio">INICIO</a> - vista inicial. Ofrece un resumen general de la actividad
+            de la pagina, con atajos rapidos de panel de control (crear propuestas en el caso de las empresas).
+        <li><a href="http://localhost:8080/admin">ADMINISTRACIÓN</a> - vista de administrador. Permite administrar empresas,
+            influencers, propuestas y denuncias.
+        <li><a href="http://localhost:8080/busquedaPerfil">BÚSQUEDA DE PERFILES</a> - vista de empresa y usuario. Permite
             buscar perfiles por distintos criterios y muestra un resumen de la información básica del perfil.
-        <li><a href="http://localhost:8080/search_propuesta">búsqueda propuestas</a> - vista de empresa y usuario. Permite
+        <li><a href="http://localhost:8080/busquedaPropuesta">BÚSQUEDA DE PROPUESTAS</a> - vista de empresa y usuario. Permite
             buscar propuestas por distintos criterios y muestra un resumen de la información básica de la propuesta.
+        <li><a href="http://localhost:8080/negociacion">CHAT DE NEGOCIACIÓN</a> - vista de empresa y usuario.
+            Permite negociar una propuesta de patrocinio a traves de un chat en tiepo real y aceptarla/declinarla a traves de un ultimatum.
+        <li><a href="http://localhost:8080/contrataciones">CONTRATACIONES</a> - vista de empresa y usuario.
+            Permite ver el estado y detalles de las contrataciones realizadas con los usuarios y permite valorarlos.
     </ul>
 
-    <h2>Subvistas (sin ruta propia)</h2>
+    <h2>Modals (sin ruta propia)</h2>
+    <p>
+        Las diferentes paginas que se superponen a la vista para editar, ver o crear nuevas entidades en la pagina.
+    </p>
     <ul>
-        <li><a href="">perfil</a> - vista de empresa y usuario. Permite ver la información del perfil y editarla en caso
+        <li><a href="">PERFIL</a> - vista de empresa y usuario. Permite ver la información del perfil y editarla en caso
             de ser la del usuario logueado.
-        <li><a href="">notificaciones</a> - vista de empresa y usuario. Permite ver las notificaciones relacionadase con
+        <li><a href="">PROPUESTA</a> - vista de empresa. Permite publicar/editar una propuesta.+
+        <li><a href="">DENUNCIA</a> - vista de empresa. Permite publicar/editar una propuesta.
+        <li><a href="">NOTIFICACIONES</a> - vista de empresa y usuario. Permite ver las notificaciones relacionadase con
             el perfil logueado, marcarlas como leídas o borrarlas.
-        <li><a href="">edicion de propuestas</a> - vista de empresa. Permite publicar/editar una propuesta.
-        <li><a href="">final de campaña</a> - vista de empresa y usuario. Permite subir una valoración al finalizar el
-            patrocinio de una propuesta.
+        <li><a href="">VALORACIÓN</a> - vista de empresa y usuario. Permite subir una valoración al finalizar la contratacion 
+            de una propuesta.
     </ul>
 
 	<h2>Modelo del dominio</h2>
@@ -64,11 +75,10 @@
 
     <h2>Recursos</h2>
     <ul>
-<li><a href="src/main/resources/static/img/perfilIcon.svg"> Icono de imagen de perfil </a>, obtenido de la  <a href="https://www.flaticon.com/free-icon/user-avatar_16363"> página </a> con licencia <a href="https://profile.flaticon.com/license/free">Flaticon</a>
-<li><a href="src/main/resources/static/img/rechazar.png"> Imagen de aceptar propuesta </a>, obtenido de la  <a href="https://pixabay.com/es/illustrations/confirmar-aceptar-web-icono-1174801/"> página </a> con licencia <a href="https://pixabay.com/es/service/license/">Pixabay</a>
-<li><a href="src/main/resources/static/img/rechazar.png"> Imagen de rechazar propuesta </a>, obtenido de la  <a href="https://pixabay.com/es/vectors/cancelar-denegado-eliminar-148744/"> página </a> con licencia <a href="https://pixabay.com/es/service/license/">Pixabay</a>
+        <li><a href="src/main/resources/static/img/perfilIcon.svg"> Icono de imagen de perfil </a>, obtenido de la  
+            <a href="https://www.flaticon.com/free-icon/user-avatar_16363"> página </a>con licencia <a href="https://profile.flaticon.com/license/free">Flaticon</a>
 
-           <li>Logotipos de las vistas busquedaPropuestas y profileSearch no incluidos a espera de ver qué se hace con el tema de licencias 
+        <li>Logotipos de las vistas busquedaPropuestas y profileSearch no incluidos a espera de ver qué se hace con el tema de licencias 
             al tratarse de imágenes de marcas. A pesar de esto se han añadido dichos recursos a la carpeta static/img.
     </ul>
     
