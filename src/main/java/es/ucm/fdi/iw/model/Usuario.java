@@ -16,8 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -53,8 +51,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Table(uniqueConstraints={@UniqueConstraint(columnNames={"nombreCuenta"})})
 public class Usuario {
 
-	
-	private static Logger log = LogManager.getLogger(Usuario.class);	
 	private static PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 	
 	private long id; // Id unico para cada usuario

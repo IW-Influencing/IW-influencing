@@ -16,14 +16,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpSession;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 @Controller()
 @RequestMapping("busquedaPropuesta")
 public class BusquedaPropuestaController {
-    
-    private static final Logger log = LogManager.getLogger(BusquedaPropuestaController.class);
     
     @Autowired 
     private EntityManager entityManager;

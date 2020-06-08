@@ -29,9 +29,9 @@ public class NotificacionController {
 	public String notificaciones(HttpSession session, Model model) {
 		List<Evento> listaNotificaciones = null;
 		if (((Usuario) session.getAttribute("u")).hasRole(Rol.ADMIN)) {
-			listaNotificaciones = entityManager.createNamedQuery("Evento.adminEventsByDate").getResultList();
+			listaNotificaciones = entityManager.createNamedQuery("Evento.adminEventsByDate", Evento.class).getResultList();
 		} else {
-			listaNotificaciones = entityManager.createNamedQuery("Evento.getNotificacionesUnread")
+			listaNotificaciones = entityManager.createNamedQuery("Evento.getNotificacionesUnread", Evento.class)
 					.setParameter("idUsuario", ((Usuario) session.getAttribute("u")).getId()).getResultList();
 
 		}

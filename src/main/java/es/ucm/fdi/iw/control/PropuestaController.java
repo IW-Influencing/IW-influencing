@@ -11,7 +11,6 @@ import java.io.OutputStream;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,7 +84,7 @@ public class PropuestaController {
 	@GetMapping("/vistaUltimatum")
 	public String vistaUltimatum(Model model, HttpSession session, @RequestParam long idCandidatura) {
 		Candidatura c = entityManager.find(Candidatura.class, idCandidatura);
-		List<Evento> chat = entityManager.createNamedQuery("Evento.getChat").setParameter("idCandidatura", idCandidatura).getResultList();
+		List<Evento> chat = entityManager.createNamedQuery("Evento.getChat", Evento.class).setParameter("idCandidatura", idCandidatura).getResultList();
 		boolean emisorUltimatum = chat.get(chat.size()-1).getEmisor().getId() == ((Usuario)session.getAttribute("u")).getId();
 		model.addAttribute("propuesta", c.getPropuesta());
 		model.addAttribute("modo", "VISTA-ULTIMATUM");
@@ -233,7 +232,7 @@ public class PropuestaController {
 		public Evento.TransferChat enviaUltimatum2(HttpSession session, RedirectAttributes redirectAttributes, Model model, @RequestBody UltimatumTransfer ut) {
 
 			
-			String mensaje = "";
+			String mensaje = ""; // Este mensaje que es???
 			Candidatura candidatura = entityManager.find(Candidatura.class, ut.idCandidatura);
 			Propuesta ultimatum = new Propuesta();
 			Propuesta original = entityManager.find(Propuesta.class, ut.idPropuesta);

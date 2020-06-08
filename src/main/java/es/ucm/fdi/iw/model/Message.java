@@ -14,9 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 
 /**
  * A message that Usuarios can send each other.
@@ -34,7 +31,6 @@ import org.apache.logging.log4j.Logger;
 
 public class Message {
 	
-	private static Logger log = LogManager.getLogger(Message.class);	
 	private long id;
 	private Usuario sender;
 	private Usuario recipient;
