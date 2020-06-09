@@ -163,7 +163,7 @@ public class ContratacionesController {
 		model.addAttribute("modo", "VISTA");
 		Valoracion v = entityManager.find(Valoracion.class, idValoracion);
 		model.addAttribute("valoracion", v);
-		model.addAttribute("propuesta", v.getCandidatura().getPropuesta());
+ 		model.addAttribute("propuesta", v.getCandidatura().getPropuesta());
 		model.addAttribute("idCandidatura", v.getCandidatura().getId());
 		model.addAttribute("idUsuario", ((Usuario) session.getAttribute("u")).getId());
 		return "modals/valoracion";
@@ -210,7 +210,7 @@ public class ContratacionesController {
 			enviaValoracionUsuario(valorado, v.getEmisor(),
 					"El usuario " + v.getEmisor().getNombre() + " ha valorado tu contratación en la propuesta "
 							+ v.getCandidatura().getPropuesta().getNombre() + " con " + v.getPuntuacion() + " puntos.",
-					v.getValoracion());
+					v);
 			mensaje = "Valoración insertada correctamente";
 		}
 		session.setAttribute("mensajeInfo", mensaje);
@@ -223,7 +223,7 @@ public class ContratacionesController {
 	}
 
 	@Transactional
-	private void enviaValoracionUsuario(Usuario valorado, Usuario emisor, String mensaje, String valoracion) {
+	private void enviaValoracionUsuario(Usuario valorado, Usuario emisor, String mensaje, Valoracion valoracion) {
 		// TODO Auto-generated method stub
 		Evento e = new Evento();
 		e.setEmisor(emisor);

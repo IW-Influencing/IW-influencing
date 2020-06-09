@@ -57,7 +57,7 @@
 				<div class="w3-container w3-pale-blue">
 					<p th:text="${mensaje.getDescripcion()}"></p>
 				</div>
-				<input th:if="${mensaje.tipo eq 'VALORACION'}" class="w3-btn w3-dark-grey w3-margin muestraValoracion" th:attr="data-id=${mensaje.id}" type="submit" value="Ver valoración"></input>
+				<input th:if="${mensaje.tipo eq 'VALORACION'}" class="w3-btn w3-dark-grey w3-margin muestraValoracion" th:attr="data-id=${mensaje.valoracion.id}" type="submit" value="Ver valoración"></input>
 				<input class="w3-btn w3-dark-grey w3-margin eliminaNotificacionInicio" th:attr="data-id=${mensaje.id}" type="submit" value="Eliminar mensaje"></input>
 			</div>
 

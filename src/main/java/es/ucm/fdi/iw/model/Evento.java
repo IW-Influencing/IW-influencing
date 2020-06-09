@@ -40,7 +40,7 @@ public class Evento {
 	private Candidatura candidatura;
 	private LocalDateTime fechaEnviado;
 	private boolean leido;
-	private String valoracion;
+	private Valoracion valoracion;
 	
 
 	/**
@@ -249,12 +249,13 @@ public class Evento {
 	public void setCandidatura(Candidatura candidatura) {
 		this.candidatura = candidatura;
 	}
-
-	public String getValoracion() {
+	
+	@ManyToOne(targetEntity = Valoracion.class)
+	public Valoracion getValoracion() {
 		return valoracion;
 	}
 
-	public void setValoracion(String valoracion) {
+	public void setValoracion(Valoracion valoracion) {
 		this.valoracion = valoracion;
 	}
 	
