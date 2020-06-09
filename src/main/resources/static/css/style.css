@@ -1,5 +1,10 @@
 body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway" , sans-serif !important;}
 
+body{
+	position: relative;
+	min-height: 100vh;
+}
+
 .header-config{
     background-color: #6ed1dd;                             /*Color que está en los moqups*/
 }
@@ -181,4 +186,8 @@ li a:hover:not(.active) {
 
 .active {
     background-color: #1695a5;
+}
+
+.content{
+	padding-bottom: 91px;
 }

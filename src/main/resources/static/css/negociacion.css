@@ -115,3 +115,7 @@ input{
 .nombre{
 	font-size: 1.2em;
 }
+
+.size{
+	min-height: 80%;
+}

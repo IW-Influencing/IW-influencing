@@ -51,7 +51,10 @@
 }
 
 .footer{
-	height: 91px;
+	height: 91px; 
+	position: absolute;
+	bottom: 0;
+  	width: 100%;
 }
 
 .links{
