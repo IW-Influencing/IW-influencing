@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import es.ucm.fdi.iw.LocalData;
 import es.ucm.fdi.iw.model.Candidatura;
 import es.ucm.fdi.iw.model.Denuncia;
 import es.ucm.fdi.iw.model.Evento;
 import es.ucm.fdi.iw.model.Evento.Tipo;
+import es.ucm.fdi.iw.model.Usuario.Rol;
 import es.ucm.fdi.iw.model.Propuesta;
 import es.ucm.fdi.iw.model.Usuario;
 
@@ -54,21 +56,24 @@ public class AdminController {
 
 	@PostMapping("/toggleUsuario")
 	@Transactional
-	public String delUsuario(Model model, @RequestParam long id) {
+	public String delUsuario(Model model, HttpSession session, @RequestParam long id) {
 		Usuario target = entityManager.find(Usuario.class, id);
-		if (target.getActivo() == true) {
-			// disable
-			File f = localData.getFile("Usuario", "" + id);
-			if (f.exists()) {
-				f.delete();
+		if (((Usuario) session.getAttribute("u")).hasRole(Rol.ADMIN)) {
+			if (target.getActivo() == true) {
+				// disable
+				File f = localData.getFile("Usuario", "" + id);
+				if (f.exists()) {
+					f.delete();
+				}
+				// disable Usuario
+				target.setActivo(false);
+			} else {
+				// enable Usuario
+				target.setActivo(true);
 			}
-			// disable Usuario
-			target.setActivo(false);
-		} else {
-			// enable Usuario
-			target.setActivo(true);
+			return index(model);
 		}
-		return index(model);
+		return null;
 	}
 
 	@GetMapping("/influencers")
@@ -105,70 +110,93 @@ public class AdminController {
 
 	@GetMapping("/eliminaInfluencer")
 	@Transactional
-	public String eliminaInfluencer(Model model, @RequestParam long id) {
-		Usuario u = entityManager.find(Usuario.class, id);
-		u.setActivo(false);
-		entityManager.persist(u);
-		return searchInfluencers(model);
+	public String eliminaInfluencer(Model model, HttpSession session, @RequestParam long id) {
+		if (((Usuario) session.getAttribute("u")).hasRole(Rol.ADMIN)) {
+			Usuario u = entityManager.find(Usuario.class, id);
+			u.setActivo(false);
+			entityManager.persist(u);
+			return searchInfluencers(model);
+		}
+
+		return null;
 	}
 
 	@GetMapping("/eliminaEmpresa")
 	@Transactional
-	public String eliminaEmpresa(Model model, @RequestParam long id) {
-		Usuario u = entityManager.find(Usuario.class, id);
-		u.setActivo(false);
-		entityManager.persist(u);
-		return searchEmpresas(model);
+	public String eliminaEmpresa(Model model, HttpSession session, @RequestParam long id) {
+		if (((Usuario) session.getAttribute("u")).hasRole(Rol.ADMIN)) {
+
+			Usuario u = entityManager.find(Usuario.class, id);
+			u.setActivo(false);
+			entityManager.persist(u);
+			return searchEmpresas(model);
+		}
+		return null;
 	}
 
 	@GetMapping("/eliminaPropuesta")
 	@Transactional
 	public String eliminaPropuesta(Model model, HttpSession session, @RequestParam long id) {
-		Propuesta p = entityManager.find(Propuesta.class, id);
-		p.setActiva(false);
-		entityManager.persist(p);
-		insertaNotificacion("Se ha eliminado la propuesta" + p.getNombre(), p.getEmpresa(),
-				entityManager.find(Usuario.class, ((Usuario) session.getAttribute("u")).getId()));
-		for (Candidatura c : p.getCandidaturas()) {
-			insertaNotificacion("Se ha eliminado la propuesta" + p.getNombre(), c.getCandidato(),
+		Usuario admin = entityManager.find(Usuario.class, ((Usuario) session.getAttribute("u")).getId());
+		if (admin.hasRole(Rol.ADMIN)) {
+			Propuesta p = entityManager.find(Propuesta.class, id);
+			p.setActiva(false);
+			entityManager.persist(p);
+			insertaNotificacion("Se ha eliminado la propuesta" + p.getNombre(), p.getEmpresa(),
 					entityManager.find(Usuario.class, ((Usuario) session.getAttribute("u")).getId()));
+			for (Candidatura c : p.getCandidaturas()) {
+				insertaNotificacion("Se ha eliminado la propuesta" + p.getNombre(), c.getCandidato(), admin);
+			}
+
+			return searchPropuestas(model);
 		}
 
-		return searchPropuestas(model);
+		return null;
 	}
 
 	@GetMapping("/verificaInfluencer")
 	@Transactional
 	public String verificaInfluencer(Model model, HttpSession session, @RequestParam long id) {
-		Usuario u = entityManager.find(Usuario.class, id);
-		u.setVerificado(true);
-		entityManager.persist(u);
-		insertaNotificacion("Se ha verificado tu perfil", u,
-				entityManager.find(Usuario.class, ((Usuario) session.getAttribute("u")).getId()));
-		return searchInfluencers(model);
+		Usuario admin = entityManager.find(Usuario.class, ((Usuario) session.getAttribute("u")).getId());
+		if (admin.hasRole(Rol.ADMIN)) {
+			Usuario u = entityManager.find(Usuario.class, id);
+			u.setVerificado(true);
+			entityManager.persist(u);
+			insertaNotificacion("Se ha verificado tu perfil", u, admin);
+			return searchInfluencers(model);
+		}
+		return null;
 	}
 
 	@GetMapping("/verificaEmpresa")
 	@Transactional
 	public String verificaEmpresa(Model model, HttpSession session, @RequestParam long id) {
-		Usuario u = entityManager.find(Usuario.class, id);
-		u.setVerificado(true);
-		entityManager.persist(u);
-		insertaNotificacion("Se ha verificado tu perfil", u,
-				entityManager.find(Usuario.class, ((Usuario) session.getAttribute("u")).getId()));
+		Usuario admin = entityManager.find(Usuario.class, ((Usuario) session.getAttribute("u")).getId());
+		if (admin.hasRole(Rol.ADMIN)) {
+			Usuario u = entityManager.find(Usuario.class, id);
+			u.setVerificado(true);
+			entityManager.persist(u);
+			insertaNotificacion("Se ha verificado tu perfil", u, admin);
 
-		return searchEmpresas(model);
+			return searchEmpresas(model);
+		}
+
+		return null;
 	}
 
 	@GetMapping("/verificaPropuesta")
 	@Transactional
 	public String verificaPropuesta(Model model, HttpSession session, @RequestParam long id) {
-		Propuesta p = entityManager.find(Propuesta.class, id);
-		p.setVerificado(true);
-		entityManager.persist(p);
-		insertaNotificacion("Se ha verificado la propuesta " + p.getNombre(), p.getEmpresa(),
-				entityManager.find(Usuario.class, ((Usuario) session.getAttribute("u")).getId()));
-		return searchPropuestas(model);
+		Usuario admin = entityManager.find(Usuario.class, ((Usuario) session.getAttribute("u")).getId());
+		if (admin.hasRole(Rol.ADMIN)) {
+
+			Propuesta p = entityManager.find(Propuesta.class, id);
+			p.setVerificado(true);
+			entityManager.persist(p);
+			insertaNotificacion("Se ha verificado la propuesta " + p.getNombre(), p.getEmpresa(), admin);
+			return searchPropuestas(model);
+		}
+		return null;
 	}
 
 	@Transactional

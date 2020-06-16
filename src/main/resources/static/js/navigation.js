@@ -134,8 +134,11 @@ function abreEmpresa(evt, nombreEmpresa) {
 
 // Lanza Alert
 function lanzaAlert() {
-	if (document.getElementById("mensajeInfo").textContent !== "")
-	  alert(document.getElementById("mensajeInfo").textContent);
+	if (document.getElementById("mensajeInfo").textContent !== ""){
+		document.getElementById("contenidoModal").innerHTML= "<h2 class='divCentrado w3-padding-64'>" + document.getElementById("mensajeInfo").textContent + "</h2>";
+		document.getElementById('modal').style.display='block';
+		document.getElementById('modal').onclick = c=> { document.getElementById('modal').style.display = "none"};
+	}
 }
 
 

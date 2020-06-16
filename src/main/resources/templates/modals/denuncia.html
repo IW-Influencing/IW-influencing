@@ -110,7 +110,9 @@
         <!-- Botones interactivos -->
         <div class="divCentrado">
             <button th:if="${modo} eq 'CREACION'" id="dasda" class="w3-btn btnColor w3-margin" type="submit">Enviar denuncia</button>
-            <button th:if="${modo} eq 'TRAMITACION'" class="w3-btn btnColor w3-margin" type="submit">Marcar como tramitada</button>
+			<button th:if="${modo} eq 'TRAMITACION'" class="w3-btn btnColor w3-margin" id="eliminarDenunciado"
+			 type="submit" name="borra" value="true">Eliminar al denunciado</button>
+            <button th:if="${modo} eq 'TRAMITACION'" class="w3-btn btnColor w3-margin" type="submit" name="borra" value="true">Ignorar y marcar como tramitada</button>
         </div>
 
     </form>

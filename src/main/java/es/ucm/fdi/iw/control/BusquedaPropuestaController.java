@@ -68,19 +68,20 @@ public class BusquedaPropuestaController {
 	  
 	 private static class TransferBusqueda{
 		 public String patron;
+		 public int indice;
 	 }
 	  
     @PostMapping("/busca")
-	public String postSearch(Model model, HttpSession session,@RequestParam(required = true, defaultValue = "1") int indicePagina, @RequestBody TransferBusqueda tb) {
+	public String postSearch(Model model, HttpSession session, @RequestBody TransferBusqueda tb) {
 		String patronParaLike = "%"+tb.patron+"%";
 		List<Propuesta> propuestas = null;
 		propuestas = entityManager.createNamedQuery("Propuesta.searchByNombre", Propuesta.class)
 				.setParameter("nombre", patronParaLike.toUpperCase()).getResultList();		
 		model.addAttribute("numeroPaginas", Math.ceil((double)propuestas.size()/NUM_ELEMENTOS_PAGINA));
-		if (indicePagina*NUM_ELEMENTOS_PAGINA <= propuestas.size())
-			propuestas=propuestas.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, indicePagina*NUM_ELEMENTOS_PAGINA);
+		if (tb.indice*NUM_ELEMENTOS_PAGINA <= propuestas.size())
+			propuestas=propuestas.subList((tb.indice-1)*NUM_ELEMENTOS_PAGINA, tb.indice*NUM_ELEMENTOS_PAGINA);
 		else 
-			propuestas=propuestas.subList((indicePagina-1)*NUM_ELEMENTOS_PAGINA, propuestas.size());
+			propuestas=propuestas.subList((tb.indice-1)*NUM_ELEMENTOS_PAGINA, propuestas.size());
 
 		
 		model.addAttribute("patron", tb.patron);

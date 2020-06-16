@@ -16,6 +16,7 @@ import es.ucm.fdi.iw.model.Candidatura;
 import es.ucm.fdi.iw.model.Denuncia;
 import es.ucm.fdi.iw.model.Evento;
 import es.ucm.fdi.iw.model.Usuario;
+import es.ucm.fdi.iw.model.Usuario.Rol;
 
 /**
  * Landing-page controller
@@ -71,7 +72,8 @@ public class RootController {
 		session.removeAttribute("mensajeInfo");
 		// Obtener la lista de propuestas
 		long idUsuario = ((Usuario) session.getAttribute("u")).getId();
-		List<Candidatura> listaCandidatura = entityManager.createNamedQuery("Candidatura.chatsByCandidato", Candidatura.class)
+		List<Candidatura> listaCandidatura = entityManager
+				.createNamedQuery("Candidatura.chatsByCandidato", Candidatura.class)
 				.setParameter("idUsuario", idUsuario).getResultList();
 		model.addAttribute("candidaturas", listaCandidatura);
 		model.addAttribute("numNotificaciones", entityManager.createNamedQuery("Evento.getNotificacionesUnread")
@@ -83,24 +85,26 @@ public class RootController {
 
 	@GetMapping("/administracion")
 	public String administracion(Model model, HttpSession session) {
-
-		List<Usuario> usuariosBuscados = new ArrayList<>();
-		model.addAttribute("nombreUsuario", ((Usuario) session.getAttribute("u")).getNombre());
-		model.addAttribute("busquedas", usuariosBuscados);
-		if (session.getAttribute("modo") != null) {
-			session.removeAttribute("modo");
-			model.addAttribute("modo", "DENUNCIA");
-			model.addAttribute("mensaje", session.getAttribute("mensajeInfo"));
-			model.addAttribute("resultado",
-					entityManager.createNamedQuery("Denuncia.getAllDenuncias", Denuncia.class).getResultList());
-		} else {
-			model.addAttribute("modo", "INFLUENCER");
-			model.addAttribute("resultado",
-					entityManager.createNamedQuery("Usuario.getAllInfluencers", Usuario.class).getResultList());
+		if (((Usuario) session.getAttribute("u")).hasRole(Rol.ADMIN)) {
+			List<Usuario> usuariosBuscados = new ArrayList<>();
+			model.addAttribute("nombreUsuario", ((Usuario) session.getAttribute("u")).getNombre());
+			model.addAttribute("busquedas", usuariosBuscados);
+			if (session.getAttribute("modo") != null) {
+				session.removeAttribute("modo");
+				model.addAttribute("modo", "DENUNCIA");
+				model.addAttribute("mensaje", session.getAttribute("mensajeInfo"));
+				model.addAttribute("resultado",
+						entityManager.createNamedQuery("Denuncia.getAllDenuncias", Denuncia.class).getResultList());
+			} else {
+				model.addAttribute("modo", "INFLUENCER");
+				model.addAttribute("resultado",
+						entityManager.createNamedQuery("Usuario.getAllInfluencers", Usuario.class).getResultList());
+			}
+			model.addAttribute("numNotificaciones",
+					entityManager.createNamedQuery("Evento.adminEventsByDate").getResultList().size());
+			return "administracion";
 		}
-		model.addAttribute("numNotificaciones",
-				entityManager.createNamedQuery("Evento.adminEventsByDate").getResultList().size());
-		return "administracion";
+		return "error";
 	}
 
 	@GetMapping("/error")

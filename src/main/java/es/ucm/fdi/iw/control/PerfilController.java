@@ -105,13 +105,14 @@ public class PerfilController {
 	@Transactional
 	public void edicionPerfil(HttpServletResponse response, Model model, HttpSession session,
 			@RequestParam String nombre, @RequestParam String apellidos, @RequestParam String pass1,
-			@RequestParam String pass2, @RequestParam MultipartFile imagenPerfil, @RequestParam String tags) {
+			@RequestParam String pass2, @RequestParam MultipartFile imagenPerfil,
+			@RequestParam(required=false, defaultValue = "-1") int edad, @RequestParam(required = false) String tags) {
 
 		Usuario u = entityManager.find(Usuario.class, ((Usuario) session.getAttribute("u")).getId());
 		String mensaje = "";
 		boolean cambios = false;
 
-		if (tags.split(",").length > 0) {
+		if (tags == null || tags.split(",").length > 0) {
 			if (pass1.isEmpty() && pass2.isEmpty()) {
 				if (!imagenPerfil.isEmpty()) {
 					insertaImagenUsuario(imagenPerfil, u.getId());
@@ -126,6 +127,10 @@ public class PerfilController {
 						u.setApellidos(apellidos);
 						cambios = true;
 					}
+				}
+				if (u.getEdad() != edad) {
+					u.setEdad(edad);
+					cambios = true;
 				}
 				if (!u.getTags().equalsIgnoreCase(tags)) {
 					u.setTags(tags.toUpperCase());
@@ -146,7 +151,7 @@ public class PerfilController {
 							u.setApellidos(apellidos);
 						}
 					}
-					if (!u.getTags().equalsIgnoreCase(tags))
+					if (tags != null && !u.getTags().equalsIgnoreCase(tags))
 						u.setTags(tags.toUpperCase());
 					u.setPassword(u.encodePassword(pass1));
 					entityManager.persist(u);

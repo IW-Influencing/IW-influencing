@@ -43,7 +43,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function cargaBusquedas(patron){
 	let param = {
-		patron:patron
+		patron:patron,
+		indice:1
 	}
 	
 	return go2(config.rootUrl + "busquedaPerfil/busca", 'POST', param)
@@ -70,7 +71,11 @@ function cargaBusquedasPorTag(tag){
 
 
 function botonLista(patron="", indice){
-	return go2(config.rootUrl + "busquedaPerfil/busca?patron=" + patron+"&indicePagina="+indice, 'GET')
+	let param = {
+		patron:patron,
+		indice:indice
+	}
+	return go2(config.rootUrl + "busquedaPerfil/busca", 'POST', param)
 		.then(html => { 
 			var  div = document.getElementById("divPerfiles");
 			div.innerHTML = html;

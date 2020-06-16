@@ -146,10 +146,6 @@ function elimina(tipo, id){
     }
 }
 
-function tramita(id){
-	
-}
-
 function verifica(tipo, id){
     if (tipo === 'EMPRESA'){
         return go2(config.rootUrl + "admin/verificaEmpresa?id=" + id, 'GET')
@@ -187,7 +183,7 @@ function verifica(tipo, id){
 function cargaContenidoModal(tipo, id){
     if (tipo === 'USUARIO'){
 		cargaModalPerfil(id);
-}
+	}
     else if (tipo === 'PROPUESTA'){
         cargaModalPropuesta(id);
     }

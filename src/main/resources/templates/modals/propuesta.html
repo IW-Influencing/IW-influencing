@@ -120,14 +120,14 @@
           placeholder="Introduzca los tags separados por comas"></textarea>
         <div
           th:if="${modo} eq 'VISTA' or ${modo} eq 'ULTIMATUM' or ${modo} eq 'VISTA-ULTIMATUM' or ${modo} eq 'CONTRATACION'">
-          <button th:each="tag:${#strings.listSplit(propuesta.tags, ',')}" class="w3-button w3-white tags" th:text="${tag}"></button>
+          <p th:each="tag:${#strings.listSplit(propuesta.tags, ',')}" class="w3-button w3-white tags" th:text="${tag}"></p>
         </div>
       </div>
 
       <!-- Botones interactivos -->
       <div class="divCentrado"> 
         <button  th:if="${modo} eq 'CREACION'" class="w3-btn btnColor w3-margin" id="btnPublicarPropuesta">Publicar</button>
-        <button  th:if="${modo} eq 'VISTA' and ${session.u.hasRole('INFLUENCER')}" class="w3-btn btnColor w3-margin">Apuntarse</button>
+        <button  th:if="${modo} eq 'VISTA' and ${session.u.hasRole('INFLUENCER') and !apuntadoPreviamente}" class="w3-btn btnColor w3-margin">Apuntarse</button>
         <div class="botones-propuesta" th:if="${modo} eq 'VISTA-ULTIMATUM' and not ${propio}"> 
           <button class="w3-btn btnColor w3-margin btnAceptar" name="decision" value="true">Aceptar</button>
           <button  class="w3-btn btnColor w3-margin btnRechazar" name="decision" value="false">Rechazar</button>

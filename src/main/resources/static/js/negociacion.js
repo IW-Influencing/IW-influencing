@@ -58,6 +58,9 @@ function insertaEnDiv(json, contenido) {
 	})
 
 	contenido.innerHTML = html.join("\n");
+	document.getElementById("eliminaNegociacion").style.display="block";
+	document.getElementById("eliminaNegociacion").value = config.candidaturaId;
+
 	if (config.estadoCandidatura == "EN_ULTIMATUM" || (json.length > 0 && json[0].ultimatum)) {
 		document.getElementById("botonUltimatum").innerText = "Visualizar Ultimatum";
 		document.getElementById("botonUltimatum").onclick = b => cargaUltimatumVisualizacionModal(config.candidaturaId);
@@ -73,6 +76,8 @@ function insertaEnDiv(json, contenido) {
 		document.getElementById("botonUltimatum").classList.add("w3-black");
 	}
 }
+
+
 
 function cargaUltimatumModal(idCandidatura) {
 	document.getElementById('modal').style.display = 'block';

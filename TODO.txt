@@ -1,11 +1,7 @@
-Nacho
-Pagina de inicio
- - Revisar sendRedirects
+fuentes del leeme
 
-Carlos
- - Inputs de busqueda de la navbar meterlos en un form. cambiar de peticion get a tipo post todas las busquedas por nombre de paginas
-   busquedapropuesta busquedaperfil y contrataciones.
+Validacion de tags en registro rota si peta alguna vez.
 
 
-- Validacion Login meterla en Navigation ¿?
-- Arreglar 2 warning ¿?
+
+Si tu publico no tiene la edad que avise antes de apuntarse ???

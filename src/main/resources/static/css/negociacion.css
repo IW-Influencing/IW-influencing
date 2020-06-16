@@ -21,6 +21,10 @@
 	margin: 1%
 }
 
+#eliminaNegociacion{
+	display:none;
+}
+
 #botonUltimatum{
 	display: none;
 }

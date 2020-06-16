@@ -108,21 +108,21 @@ public class ContratacionesController {
 
 		String tipoBusqueda = "";
 		switch (estado) {
-			case " ALL":
-				model.addAttribute("valoradas",
-						devuelveContratacionesValoradas(((Usuario) session.getAttribute("u")).getId()));
-				break;
-			case "EN_CURSO":
-				tipoBusqueda = "en curso";
-				break;
-			case "EN_VALORACION":
-				tipoBusqueda = "en valoración";
-				model.addAttribute("valoradas",
-						devuelveContratacionesValoradas(((Usuario) session.getAttribute("u")).getId()));
-				break;
-			case "FINALIZADA":
-				tipoBusqueda = "finalizadas";
-				break;
+		case " ALL":
+			model.addAttribute("valoradas",
+					devuelveContratacionesValoradas(((Usuario) session.getAttribute("u")).getId()));
+			break;
+		case "EN_CURSO":
+			tipoBusqueda = "en curso";
+			break;
+		case "EN_VALORACION":
+			tipoBusqueda = "en valoración";
+			model.addAttribute("valoradas",
+					devuelveContratacionesValoradas(((Usuario) session.getAttribute("u")).getId()));
+			break;
+		case "FINALIZADA":
+			tipoBusqueda = "finalizadas";
+			break;
 		}
 
 		model.addAttribute("modo", "Contrataciones " + tipoBusqueda);
@@ -156,14 +156,13 @@ public class ContratacionesController {
 		model.addAttribute("idUsuario", ((Usuario) session.getAttribute("u")).getId());
 		return "modals/valoracion";
 	}
-	
-	
+
 	@GetMapping("/verValoracionInicio")
 	public String verValoracionInicio(Model model, HttpSession session, @RequestParam long idValoracion) {
 		model.addAttribute("modo", "VISTA");
 		Valoracion v = entityManager.find(Valoracion.class, idValoracion);
 		model.addAttribute("valoracion", v);
- 		model.addAttribute("propuesta", v.getCandidatura().getPropuesta());
+		model.addAttribute("propuesta", v.getCandidatura().getPropuesta());
 		model.addAttribute("idCandidatura", v.getCandidatura().getId());
 		model.addAttribute("idUsuario", ((Usuario) session.getAttribute("u")).getId());
 		return "modals/valoracion";
@@ -183,42 +182,47 @@ public class ContratacionesController {
 			mensaje = "Puntuación introducida no válida (debe situarse entre 0 y 5)";
 		} else {
 			Candidatura c = entityManager.find(Candidatura.class, idCandidatura);
-			Valoracion v = new Valoracion();
-			v.setCandidatura(c);
-			v.setEmisor(entityManager.find(Usuario.class, ((Usuario) session.getAttribute("u")).getId()));
-			v.setPuntuacion(puntuacion);
-			v.setValoracion(valoracion);
-			entityManager.persist(v);
-			entityManager.flush();
-			Usuario valorado;
-			if (((Usuario) session.getAttribute("u")).hasRole(Usuario.Rol.EMPRESA)) {
-				valorado = entityManager.find(Usuario.class, c.getCandidato().getId());
-				valorado.updatePuntuacion(puntuacion);
-				entityManager.persist(valorado);
+			if (c.getCandidato().getId() == ((Usuario) session.getAttribute("u")).getId()
+					|| c.getPropuesta().getEmpresa().getId() == ((Usuario) session.getAttribute("u")).getId()) {
 
-			} else {
-				valorado = entityManager.find(Usuario.class, c.getPropuesta().getEmpresa().getId());
-				valorado.updatePuntuacion(puntuacion);
-				entityManager.persist(valorado);
-			}
+				Valoracion v = new Valoracion();
+				v.setCandidatura(c);
+				v.setEmisor(entityManager.find(Usuario.class, ((Usuario) session.getAttribute("u")).getId()));
+				v.setPuntuacion(puntuacion);
+				v.setValoracion(valoracion);
+				entityManager.persist(v);
+				entityManager.flush();
+				Usuario valorado;
+				if (((Usuario) session.getAttribute("u")).hasRole(Usuario.Rol.EMPRESA)) {
+					valorado = entityManager.find(Usuario.class, c.getCandidato().getId());
+					valorado.updatePuntuacion(puntuacion);
+					entityManager.persist(valorado);
 
-			if (entityManager.createNamedQuery("Valoraciones.getByCandidatura", Valoracion.class)
-					.setParameter("idCandidatura", idCandidatura).getResultList().size() == 2) {
-				c.setEstado(Candidatura.Estado.FINALIZADA.toString());
-				entityManager.persist(c);
+				} else {
+					valorado = entityManager.find(Usuario.class, c.getPropuesta().getEmpresa().getId());
+					valorado.updatePuntuacion(puntuacion);
+					entityManager.persist(valorado);
+				}
+
+				if (entityManager.createNamedQuery("Valoraciones.getByCandidatura", Valoracion.class)
+						.setParameter("idCandidatura", idCandidatura).getResultList().size() == 2) {
+					c.setEstado(Candidatura.Estado.FINALIZADA.toString());
+					entityManager.persist(c);
+				}
+				enviaValoracionUsuario(valorado, v.getEmisor(),
+						"El usuario " + v.getEmisor().getNombre() + " ha valorado tu contratación en la propuesta "
+								+ v.getCandidatura().getPropuesta().getNombre() + " con " + v.getPuntuacion()
+								+ " puntos.",
+						v);
+				mensaje = "Valoración insertada correctamente";
 			}
-			enviaValoracionUsuario(valorado, v.getEmisor(),
-					"El usuario " + v.getEmisor().getNombre() + " ha valorado tu contratación en la propuesta "
-							+ v.getCandidatura().getPropuesta().getNombre() + " con " + v.getPuntuacion() + " puntos.",
-					v);
-			mensaje = "Valoración insertada correctamente";
-		}
-		session.setAttribute("mensajeInfo", mensaje);
-		try {
-			response.sendRedirect("/contrataciones");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			log.info("Error al redireccionar");
+			session.setAttribute("mensajeInfo", mensaje);
+			try {
+				response.sendRedirect("/contrataciones");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				log.info("Error al redireccionar");
+			}
 		}
 	}
 

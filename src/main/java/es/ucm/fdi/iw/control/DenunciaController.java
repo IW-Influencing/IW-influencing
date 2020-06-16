@@ -107,10 +107,16 @@ public class DenunciaController {
         return "modals/denuncia";
     }
 
+    
     @PostMapping("/tramitar")
     @Transactional
-	public void tramitaDenuncia(Model model, HttpSession session,HttpServletResponse response, @RequestParam long idDenuncia, @RequestParam String ruta) {
-		Denuncia d = entityManager.find(Denuncia.class, idDenuncia);
+	public void tramitaDenuncia(Model model, HttpSession session,HttpServletResponse response, @RequestParam long idDenuncia, @RequestParam String ruta, @RequestParam boolean borra) {
+    	Denuncia d = entityManager.find(Denuncia.class, idDenuncia);
+		if (borra) {
+			Usuario denunciado = d.getDenunciado();
+			denunciado.setActivo(false);
+			entityManager.persist(denunciado);
+		}
         d.setTramitada(true);
         entityManager.persist(d);
 		try {

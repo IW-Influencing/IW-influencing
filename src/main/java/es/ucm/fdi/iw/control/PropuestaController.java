@@ -72,6 +72,10 @@ public class PropuestaController {
 		Propuesta p = entityManager.find(Propuesta.class, idPropuesta);
 		model.addAttribute("propuesta", p);
 		model.addAttribute("modo", "VISTA");
+		model.addAttribute("apuntadoPreviamente", !entityManager.createNamedQuery("Candidatura.byCandidatoAndPropuesta")
+		.setParameter("idCandidato", ((Usuario) session.getAttribute("u")).getId())
+		.setParameter("idPropuesta", idPropuesta).getResultList().isEmpty());
+		
 		return "modals/propuesta";
 	}
 
@@ -92,6 +96,42 @@ public class PropuestaController {
 		return "modals/propuesta";
 	}
 
+	
+	@GetMapping("/eliminaCandidatura")
+	@Transactional
+	public void eliminaCandidaturaChat(HttpServletResponse response, Model model, HttpSession session, @RequestParam long idCandidatura) {
+		Candidatura c = entityManager.find(Candidatura.class, idCandidatura);
+		c.setEstado(Estado.RECHAZADA.toString());
+		entityManager.persist(c);
+		
+		//Se crea el evento de notificación para el otro usuario
+		Usuario emisor = entityManager.find(Usuario.class, ((Usuario)session.getAttribute("u")).getId());
+		Usuario receptor = null;
+		if(emisor.hasRole(Rol.EMPRESA)) {
+			receptor = c.getCandidato();
+		}
+		else {
+			receptor = c.getPropuesta().getEmpresa();
+		}
+		Evento e = new Evento();
+		e.setTipo(Tipo.NOTIFICACION);
+		e.setEmisor(emisor);
+		e.setReceptor(receptor);
+		e.setFechaEnviado(LocalDateTime.now());
+		e.setLeido(false);
+		e.setDescripcion("El usuario " + emisor.getNombre() + " " + emisor.getApellidos() + " ha terminado la negociación de la propuesta "
+				+ c.getPropuesta().getNombre());
+		entityManager.persist(e);
+		
+		try {
+			response.sendRedirect("/negociacion");
+		} catch (IOException error) {
+			// TODO Auto-generated catch block
+			error.printStackTrace();
+		}
+
+	}
+	
 	@GetMapping("/ultimatum")
 	public String ultimatum(Model model, HttpSession session, @RequestParam long idCandidatura) {
 		Candidatura c = entityManager.find(Candidatura.class, idCandidatura);
