@@ -118,7 +118,7 @@ public class AdminController {
 			return searchInfluencers(model);
 		}
 
-		return null;
+		return "error";
 	}
 
 	@GetMapping("/eliminaEmpresa")
@@ -131,7 +131,7 @@ public class AdminController {
 			entityManager.persist(u);
 			return searchEmpresas(model);
 		}
-		return null;
+		return "error";
 	}
 
 	@GetMapping("/eliminaPropuesta")
@@ -151,7 +151,7 @@ public class AdminController {
 			return searchPropuestas(model);
 		}
 
-		return null;
+		return "error";
 	}
 
 	@GetMapping("/verificaInfluencer")
@@ -181,7 +181,7 @@ public class AdminController {
 			return searchEmpresas(model);
 		}
 
-		return null;
+		return "error";
 	}
 
 	@GetMapping("/verificaPropuesta")
@@ -196,7 +196,7 @@ public class AdminController {
 			insertaNotificacion("Se ha verificado la propuesta " + p.getNombre(), p.getEmpresa(), admin);
 			return searchPropuestas(model);
 		}
-		return null;
+		return "error";
 	}
 
 	@Transactional
