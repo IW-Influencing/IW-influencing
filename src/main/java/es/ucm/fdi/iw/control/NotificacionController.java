@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,14 +42,21 @@ public class NotificacionController {
 
 	}
 
-	@GetMapping("/elimina")
+	private static class TransferNotificacion {
+		public long idNotificacion;
+	}
+	
+	@PostMapping("/elimina")
 	@Transactional
 	@ResponseBody
-	public String eliminaNotificacion(HttpSession session, @RequestParam long idNotificacion) {
-		Evento notificacion = entityManager.find(Evento.class, idNotificacion);
-		notificacion.setLeido(true);
-		entityManager.persist(notificacion);
-		return String.valueOf(entityManager.createNamedQuery("Evento.adminEventsByDate").getResultList().size());
+	public String eliminaNotificacion(HttpSession session, @RequestBody TransferNotificacion tn) {
+		Evento notificacion = entityManager.find(Evento.class, tn.idNotificacion);
+		if (((Usuario)session.getAttribute("u")).getId() == notificacion.getReceptor().getId()) {
+			notificacion.setLeido(true);
+			entityManager.persist(notificacion);
+			return String.valueOf(entityManager.createNamedQuery("Evento.adminEventsByDate").getResultList().size()); 
+		}
+		else return "error";
 	}
 
 }

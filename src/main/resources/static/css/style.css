@@ -14,6 +14,10 @@ body{
     color: #FFFFFF; 
 }
 
+.inactivo{
+	font-style: italic;
+}
+
 .negrita{
 	font-weight: bold;
 }

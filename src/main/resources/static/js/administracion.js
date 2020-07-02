@@ -12,8 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 		document.getElementById("btnNumeroNotificaciones").innerText = parseInt(document.getElementById("btnNumeroNotificaciones").innerText) + 1;
 
-
- 		//addNotificaciones(json, document.getElementById(divNotificaciones));
 	}
 
 });
@@ -59,6 +57,14 @@ function prepareListeners(){
     for (let p of document.getElementsByClassName("eliminarInfluencer")){
         p.onclick = c =>{ elimina('INFLUENCER', p.dataset.id);}
     }
+ 	for (let p of document.getElementsByClassName("reactivarInfluencer")){
+        p.onclick = c =>{ reactiva('INFLUENCER', p.dataset.id);}
+    }
+
+ 	for (let p of document.getElementsByClassName("reactivarEmpresa")){
+        p.onclick = c =>{ reactiva('EMPRESA', p.dataset.id);}
+    }
+
     for (let p of document.getElementsByClassName("tramitarDenuncia")){
         p.onclick = c =>{ cargaContenidoModal('DENUNCIA-TRAMITAR', p.dataset.id);}
     }
@@ -145,6 +151,30 @@ function elimina(tipo, id){
             .catch(e => console.log(e))
     }
 }
+
+function reactiva(tipo, id){
+    if (tipo === 'EMPRESA'){
+        return go2(config.rootUrl + "admin/reactivaEmpresa?id=" + id, 'GET')
+        .then(html => { 
+            var  div = document.getElementById("tablaAdministracion");
+            div.innerHTML = html;
+            prepareListeners();
+
+        })
+            .catch(e => console.log(e))
+    }
+    else if (tipo === 'INFLUENCER'){
+        return go2(config.rootUrl + "admin/reactivaInfluencer?id=" + id, 'GET')
+        .then(html => { 
+            var  div = document.getElementById("tablaAdministracion");
+            div.innerHTML = html;
+            prepareListeners();
+
+        })
+            .catch(e => console.log(e))
+    }
+}
+
 
 function verifica(tipo, id){
     if (tipo === 'EMPRESA'){

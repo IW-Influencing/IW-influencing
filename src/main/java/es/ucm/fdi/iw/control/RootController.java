@@ -98,7 +98,7 @@ public class RootController {
 			} else {
 				model.addAttribute("modo", "INFLUENCER");
 				model.addAttribute("resultado",
-						entityManager.createNamedQuery("Usuario.getAllInfluencers", Usuario.class).getResultList());
+						entityManager.createNamedQuery("Usuario.getAllInfluencersForAdmin", Usuario.class).getResultList());
 			}
 			model.addAttribute("numNotificaciones",
 					entityManager.createNamedQuery("Evento.adminEventsByDate").getResultList().size());

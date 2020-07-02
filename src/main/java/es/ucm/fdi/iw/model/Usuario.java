@@ -42,6 +42,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 	@NamedQuery(name="Usuario.getAllEmpresas",
 	query="SELECT u FROM Usuario u WHERE u.roles LIKE '%EMPRESA%' AND u.activo = true"),
 	
+	@NamedQuery(name="Usuario.getAllInfluencersForAdmin",
+	query="SELECT u FROM Usuario u WHERE u.roles LIKE '%INFLUENCER%'"),
+
+	@NamedQuery(name="Usuario.getAllEmpresasForAdmin",
+	query="SELECT u FROM Usuario u WHERE u.roles LIKE '%EMPRESA%'"),
+	
 	@NamedQuery(name="Usuario.searchByTag",
 	query="SELECT u FROM Usuario u "
 			+ "WHERE upper(u.tags) LIKE :tag  AND u.roles NOT LIKE '%ADMIN%' AND u.activo = true")

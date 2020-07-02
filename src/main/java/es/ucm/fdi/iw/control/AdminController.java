@@ -80,7 +80,7 @@ public class AdminController {
 	public String searchInfluencers(Model model) {
 		model.addAttribute("modo", "INFLUENCER");
 		model.addAttribute("resultado",
-				entityManager.createNamedQuery("Usuario.getAllInfluencers", Usuario.class).getResultList());
+				entityManager.createNamedQuery("Usuario.getAllInfluencersForAdmin", Usuario.class).getResultList());
 		return "fragments/tablaAdmin";
 	}
 
@@ -88,7 +88,7 @@ public class AdminController {
 	public String searchEmpresas(Model model) {
 		model.addAttribute("modo", "EMPRESA");
 		model.addAttribute("resultado",
-				entityManager.createNamedQuery("Usuario.getAllEmpresas", Usuario.class).getResultList());
+				entityManager.createNamedQuery("Usuario.getAllEmpresasForAdmin", Usuario.class).getResultList());
 		return "fragments/tablaAdmin";
 	}
 
@@ -133,6 +133,32 @@ public class AdminController {
 		}
 		return "error";
 	}
+	
+	@GetMapping("/reactivaInfluencer")
+	@Transactional
+	public String reactivaInfluencer(Model model, HttpSession session, @RequestParam long id) {
+		if (((Usuario) session.getAttribute("u")).hasRole(Rol.ADMIN)) {
+			Usuario u = entityManager.find(Usuario.class, id);
+			u.setActivo(true);
+			entityManager.persist(u);
+			return searchInfluencers(model);
+		}
+
+		return "error";
+	}
+
+	@GetMapping("/reactivaEmpresa")
+	@Transactional
+	public String reactivaEmpresa(Model model, HttpSession session, @RequestParam long id) {
+		if (((Usuario) session.getAttribute("u")).hasRole(Rol.ADMIN)) {
+			Usuario u = entityManager.find(Usuario.class, id);
+			u.setActivo(true);
+			entityManager.persist(u);
+			return searchEmpresas(model);
+		}
+		return "error";
+	}
+	
 
 	@GetMapping("/eliminaPropuesta")
 	@Transactional

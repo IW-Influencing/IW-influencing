@@ -16,11 +16,11 @@
             <th>Fecha de registro</th>
             <th>Verificación</th>
             <th>Ver</th>
-            <th>Eliminar</th>
+            <th>Eliminar/Reactivar</th>
         </tr>
         
         <!-- Datos -->
-        <tr th:each="influencer : ${resultado}">
+        <tr th:each="influencer : ${resultado}" th:class="${influencer.activo}? activo : inactivo">
             <td th:text="${influencer.nombreCuenta}"></td>
             <td th:text="${influencer.nombre +' '+ influencer.apellidos}"></td>
             <td th:text="${influencer.numContrataciones}"></td>
@@ -30,7 +30,7 @@
 				<button th:attr="data-id=${influencer.id}" th:unless="${influencer.verificado}" class="verificarInfluencer">Verificar</button>
 			</td>
             <td><i th:attr="data-id=${influencer.id}" class="far fa-eye verInfluencer"></i></i></td>
-            <td><i th:attr="data-id=${influencer.id}" class="fa fa-trash eliminarInfluencer"></i></td>
+            <td><i th:attr="data-id=${influencer.id}" th:class="${influencer.activo}? 'fa fa-trash eliminarInfluencer' : 'fa fa-history reactivarInfluencer'"></i></td>
         </tr>
     </table>
 
@@ -50,11 +50,11 @@
             <th>Fecha de registro</th>
             <th>Verificación</th>
             <th>Ver</th>
-            <th>Eliminar</th>
+            <th>Eliminar/Reactivar</th>
         </tr>
         
         <!-- Datos -->
-        <tr th:each="empresa : ${resultado}">
+        <tr th:each="empresa : ${resultado}" th:class="${empresa.activo}? activo : inactivo">
             <td th:text="${empresa.nombreCuenta}"></td>
             <td th:text="${empresa.nombre}"></td>
             <td th:text="${#temporals.format(empresa.fechaRegistro, 'dd/MM/yyyy')}"></td>
@@ -63,7 +63,7 @@
 				<button th:unless="${empresa.verificado}" th:attr="data-id=${empresa.id}" class="verificarEmpresa">Verificar</button>
 			</td>
             <td><i th:attr="data-id=${empresa.id}" class="fa fa-eye verEmpresa"></i></td>
-            <td><i th:attr="data-id=${empresa.id}" class="fa fa-trash eliminarEmpresa"></i></td>
+            <td><i th:attr="data-id=${empresa.id}" th:class="${empresa.activo}? 'fa fa-trash eliminarEmpresa' : 'fa fa-history reactivarEmpresa'"></i></td>
         </tr>
     </table>
 
