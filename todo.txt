@@ -1,0 +1,9 @@
+Carlos
+	Denunciar al buscar tu propio perfil que aparezca editar
+	Comprobar crear propuesta eres empresa
+	Carpeta data
+
+
+Nacho
+	Comprobar que todo lo del admin lo esta haciendo un admin
+	Chat de negociacion - > comprobar botones las acciones las realiza empresa o influencer de esa candidatura
