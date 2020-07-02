@@ -50,11 +50,11 @@
             <th>Fecha de registro</th>
             <th>Verificación</th>
             <th>Ver</th>
-            <th>Eliminar/Reactivar</th>
+            <th>Eliminar</th>
         </tr>
         
         <!-- Datos -->
-        <tr th:each="empresa : ${resultado}" th:class="${empresa.activo}? activo : inactivo">
+        <tr th:each="empresa : ${resultado}" th:class="${influencer.activo}? activo : inactivo">
             <td th:text="${empresa.nombreCuenta}"></td>
             <td th:text="${empresa.nombre}"></td>
             <td th:text="${#temporals.format(empresa.fechaRegistro, 'dd/MM/yyyy')}"></td>
