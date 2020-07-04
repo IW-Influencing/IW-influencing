@@ -45,7 +45,10 @@ public class AdminController {
 	private Environment env;
 
 	@GetMapping("/")
-	public String index(Model model) {
+	public String index(HttpSession session, Model model) {
+		if (!((Usuario) session.getAttribute("u")).hasRole(Rol.ADMIN)) 
+			return "error";
+		
 		model.addAttribute("activeProfiles", env.getActiveProfiles());
 		model.addAttribute("basePath", env.getProperty("es.ucm.fdi.base-path"));
 
@@ -71,9 +74,9 @@ public class AdminController {
 				// enable Usuario
 				target.setActivo(true);
 			}
-			return index(model);
+			return index(session, model);
 		}
-		return null;
+		return "error";
 	}
 
 	@GetMapping("/influencers")
@@ -191,7 +194,7 @@ public class AdminController {
 			insertaNotificacion("Se ha verificado tu perfil", u, admin);
 			return searchInfluencers(model);
 		}
-		return null;
+		return "error";
 	}
 
 	@GetMapping("/verificaEmpresa")

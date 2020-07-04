@@ -83,8 +83,11 @@ public class PropuestaController {
 
 	@GetMapping("/creacion")
 	public String creacion(Model model, HttpSession session) {
-		model.addAttribute("modo", "CREACION");
-		return "modals/propuesta";
+		if (((Usuario) session.getAttribute("u")).hasRole(Rol.EMPRESA)) {
+			model.addAttribute("modo", "CREACION");
+			return "modals/propuesta";
+		}
+		return "error";
 	}
 
 	@GetMapping("/vistaUltimatum")
@@ -105,6 +108,16 @@ public class PropuestaController {
 	public void eliminaCandidaturaChat(HttpServletResponse response, Model model, HttpSession session,
 			@RequestParam long idCandidatura) {
 		Candidatura c = entityManager.find(Candidatura.class, idCandidatura);
+		if (c.getCandidato().getId() != ((Usuario) session.getAttribute("u")).getId()
+				&& c.getPropuesta().getEmpresa().getId() != ((Usuario) session.getAttribute("u")).getId()) {
+			try {
+				response.sendRedirect("/error");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				log.info("Error al redireccionar");
+			}
+		}
+
 		c.setEstado(Estado.RECHAZADA.toString());
 		entityManager.persist(c);
 
@@ -139,6 +152,8 @@ public class PropuestaController {
 	public String modifica(Model model, HttpSession session, @RequestParam long idPropuesta) {
 		model.addAttribute("modo", "EDICION");
 		Propuesta propuesta = entityManager.find(Propuesta.class, idPropuesta);
+		if (propuesta.getEmpresa().getId() != ((Usuario) session.getAttribute("u")).getId())
+			return "error";
 		model.addAttribute("propuesta", propuesta);
 		model.addAttribute("fechaInicio", DateTimeFormatter.ofPattern("yyyy-MM-dd").format(propuesta.getFechaInicio()));
 		model.addAttribute("fechaFin", DateTimeFormatter.ofPattern("yyyy-MM-dd").format(propuesta.getFechaFin()));
@@ -152,76 +167,77 @@ public class PropuestaController {
 			RedirectAttributes redirectAttributes, Model model, @RequestParam String nombre,
 			@RequestParam String descripcion, @RequestParam String sueldo, @RequestParam String edades,
 			@RequestParam String fechaInicio, @RequestParam String fechaFin,
-			@RequestParam MultipartFile imagenPropuesta, @RequestParam String tags, 
-			@RequestParam long idPropuesta) {
+			@RequestParam MultipartFile imagenPropuesta, @RequestParam String tags, @RequestParam long idPropuesta) {
 
 		String mensaje = "";
 		Propuesta p = entityManager.find(Propuesta.class, idPropuesta);
-		if (p.getEmpresa().getId() != ((Usuario)session.getAttribute("u")).getId()) {
+		if (p.getEmpresa().getId() != ((Usuario) session.getAttribute("u")).getId()) {
 			try {
 				response.sendRedirect("/error");
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				log.info("Error al redireccionar");
 			}
-		}
-		else {
-		LocalDateTime fechaIni = LocalDate.parse(fechaInicio).atTime(LocalTime.now());
-		LocalDateTime fechaFinal = LocalDate.parse(fechaFin).atTime(LocalTime.now());
-		if (fechaIni.isBefore(LocalDateTime.now())) {
-			mensaje = "Error. Las fechas deben ser como mínimo las actuales"; // Comprobar fecha inicio
 		} else {
-			p.setActiva(true);
-			p.setDescripcion(descripcion);
-			p.setNombre(nombre);
-			p.setEdadMinPublico(Integer.valueOf(edades.split("-")[0]));
-			p.setEdadMaxPublico(Integer.valueOf(edades.split("-")[1]));
-			p.setSueldo(Integer.valueOf(sueldo));
-			p.setFechaSubida(LocalDateTime.now());
-			p.setFechaInicio(fechaIni);
-			p.setFechaFin(fechaFinal);
-			p.setTags(tags.toUpperCase());
-			p.setVerificado(false);
-			entityManager.persist(p);
-			entityManager.flush();
-			insertaImagenPropuesta(imagenPropuesta, p.getId());
-			mensaje = "Propuesta editada correctamente";
-		}
-
-		if (mensaje.equals("Propuesta editada correctamente")) {
-			Evento e = new Evento();
-			e.setEmisor(entityManager.find(Usuario.class, ((Usuario) session.getAttribute("u")).getId()));
-			e.setDescripcion("Se ha editado la propuesta " + p.getNombre());
-			e.setFechaEnviado(LocalDateTime.now());
-			e.setLeido(false);
-			e.setTipo(Evento.Tipo.ADMINISTRACION);
-			entityManager.persist(e);
-			ObjectMapper mapper = new ObjectMapper();
-			ObjectNode rootNode = mapper.createObjectNode();
-			rootNode.put("text", "La propuesta " + p.getNombre() + " se ha editado");
-			String json = "";
-			try {
-				json = mapper.writeValueAsString(rootNode);
-			} catch (JsonProcessingException error) {
-				// TODO Auto-generated catch block
-				error.printStackTrace();
+			LocalDateTime fechaIni = LocalDate.parse(fechaInicio).atTime(LocalTime.now());
+			LocalDateTime fechaFinal = LocalDate.parse(fechaFin).atTime(LocalTime.now());
+			if (fechaIni.isBefore(LocalDateTime.now())) {
+				mensaje = "Error. Las fechas deben ser como mínimo las actuales"; // Comprobar fecha inicio
+			} else {
+				p.setActiva(true);
+				p.setDescripcion(descripcion);
+				p.setNombre(nombre);
+				p.setEdadMinPublico(Integer.valueOf(edades.split("-")[0]));
+				p.setEdadMaxPublico(Integer.valueOf(edades.split("-")[1]));
+				p.setSueldo(Integer.valueOf(sueldo));
+				p.setFechaSubida(LocalDateTime.now());
+				p.setFechaInicio(fechaIni);
+				p.setFechaFin(fechaFinal);
+				p.setTags(tags.toUpperCase());
+				p.setVerificado(false);
+				entityManager.persist(p);
+				entityManager.flush();
+				insertaImagenPropuesta(imagenPropuesta, p.getId());
+				mensaje = "Propuesta editada correctamente";
 			}
-			messagingTemplate.convertAndSend("/topic/admin", json);
-		}
 
-		session.setAttribute("mensajeInfo", mensaje);
-		try {
-			response.sendRedirect("/busquedaPropuesta");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			log.info("Error al redireccionar");
-		}
+			if (mensaje.equals("Propuesta editada correctamente")) {
+				Evento e = new Evento();
+				e.setEmisor(entityManager.find(Usuario.class, ((Usuario) session.getAttribute("u")).getId()));
+				e.setDescripcion("Se ha editado la propuesta " + p.getNombre());
+				e.setFechaEnviado(LocalDateTime.now());
+				e.setLeido(false);
+				e.setTipo(Evento.Tipo.ADMINISTRACION);
+				entityManager.persist(e);
+				ObjectMapper mapper = new ObjectMapper();
+				ObjectNode rootNode = mapper.createObjectNode();
+				rootNode.put("text", "La propuesta " + p.getNombre() + " se ha editado");
+				String json = "";
+				try {
+					json = mapper.writeValueAsString(rootNode);
+				} catch (JsonProcessingException error) {
+					// TODO Auto-generated catch block
+					error.printStackTrace();
+				}
+				messagingTemplate.convertAndSend("/topic/admin", json);
+			}
+
+			session.setAttribute("mensajeInfo", mensaje);
+			try {
+				response.sendRedirect("/busquedaPropuesta");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				log.info("Error al redireccionar");
+			}
 		}
 	}
 
 	@GetMapping("/ultimatum")
 	public String ultimatum(Model model, HttpSession session, @RequestParam long idCandidatura) {
 		Candidatura c = entityManager.find(Candidatura.class, idCandidatura);
+		if (c.getCandidato().getId() != ((Usuario) session.getAttribute("u")).getId()
+				&& c.getPropuesta().getEmpresa().getId() != ((Usuario) session.getAttribute("u")).getId())
+			return "error";
 		model.addAttribute("modo", "ULTIMATUM");
 		model.addAttribute("propuesta", c.getPropuesta());
 		model.addAttribute("idCandidatura", idCandidatura);
@@ -236,6 +252,14 @@ public class PropuestaController {
 			@RequestParam long idPropuesta) {
 
 		String mensaje = "";
+		if (((Usuario) session.getAttribute("u")).hasRole(Rol.INFLUENCER)) {
+			try {
+				response.sendRedirect("/error");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				log.info("Error al redireccionar");
+			}
+		}
 		// Comprobar que el usuario no esté apuntado previamente
 		if (entityManager.createNamedQuery("Candidatura.byCandidatoAndPropuesta")
 				.setParameter("idCandidato", ((Usuario) session.getAttribute("u")).getId())
@@ -303,6 +327,16 @@ public class PropuestaController {
 		String mensaje = "";
 		Candidatura candidatura = entityManager.createNamedQuery("Candidatura.getByPropuesta", Candidatura.class)
 				.setParameter("idPropuesta", idPropuesta).getSingleResult();
+		if (candidatura.getCandidato().getId() != ((Usuario) session.getAttribute("u")).getId()
+				&& candidatura.getPropuesta().getEmpresa().getId() != ((Usuario) session.getAttribute("u")).getId()) {
+			try {
+				response.sendRedirect("/error");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				log.info("Error al redireccionar");
+			}
+		}
+
 		Usuario emisor = entityManager.find(Usuario.class, ((Usuario) session.getAttribute("u")).getId());
 		Usuario receptor;
 		if (emisor.hasRole(Rol.EMPRESA)) {
@@ -450,6 +484,14 @@ public class PropuestaController {
 		LocalDateTime fechaFinal = LocalDate.parse(fechaFin).atTime(LocalTime.now());
 		Propuesta p = new Propuesta();
 
+		if (!((Usuario) session.getAttribute("u")).hasRole(Rol.EMPRESA)) {
+			try {
+				response.sendRedirect("/error");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				log.info("Error al redireccionar");
+			}
+		}
 		if (fechaIni.isBefore(LocalDateTime.now())) {
 			mensaje = "Error. Las fechas deben ser como mínimo las actuales"; // Comprobar fecha inicio
 		} else {
