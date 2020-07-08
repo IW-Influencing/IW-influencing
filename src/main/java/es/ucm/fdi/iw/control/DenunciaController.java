@@ -119,26 +119,27 @@ public class DenunciaController {
 		}
         d.setTramitada(true);
         entityManager.persist(d);
-		try {
-			session.setAttribute("modo", "DENUNCIAS");
-            session.setAttribute("mensajeInfo", "Denuncia tramitada");
+		
+        session.setAttribute("modo", "DENUNCIAS");
+        session.setAttribute("mensajeInfo", "Denuncia tramitada");
 
-            Usuario admin = entityManager.find(Usuario.class, ((Usuario) session.getAttribute("u")).getId());
-            Evento notiDenunciante = new Evento();
-            
-            notiDenunciante.setDescripcion("Ya ha sido tramitada su denuncia sobre " + d.getDenunciado().getNombre());
-            notiDenunciante.setEmisor(admin);
-            notiDenunciante.setFechaEnviado(LocalDateTime.now());
-            notiDenunciante.setLeido(false);
-            notiDenunciante.setTipo(Tipo.NOTIFICACION);
-            notiDenunciante.setReceptor(d.getDenunciante());
-            entityManager.persist(notiDenunciante);
-            
+        Usuario admin = entityManager.find(Usuario.class, ((Usuario) session.getAttribute("u")).getId());
+        Evento notiDenunciante = new Evento();
+
+        notiDenunciante.setDescripcion("Ya ha sido tramitada su denuncia sobre " + d.getDenunciado().getNombre());
+        notiDenunciante.setEmisor(admin);
+        notiDenunciante.setFechaEnviado(LocalDateTime.now());
+        notiDenunciante.setLeido(false);
+        notiDenunciante.setTipo(Tipo.NOTIFICACION);
+        notiDenunciante.setReceptor(d.getDenunciante());
+        entityManager.persist(notiDenunciante);
+
+        try {
             response.sendRedirect(ruta);
             
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.info("Error al redireccionar");
 		}
 	}
 	

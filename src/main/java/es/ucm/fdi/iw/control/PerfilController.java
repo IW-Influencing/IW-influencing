@@ -138,6 +138,7 @@ public class PerfilController {
 				}
 				if (cambios) {
 					entityManager.persist(u);
+					session.setAttribute("u", u);
 					mensaje = "Cambios realizados correctamente.";
 				}
 			} else {
@@ -155,6 +156,7 @@ public class PerfilController {
 						u.setTags(tags.toUpperCase());
 					u.setPassword(u.encodePassword(pass1));
 					entityManager.persist(u);
+					session.setAttribute("u", u);
 					mensaje = "Cambios realizados correctamente.";
 				} else {
 					mensaje = "Error. Las contraseñas no coinciden.";
