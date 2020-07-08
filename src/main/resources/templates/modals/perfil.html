@@ -264,6 +264,7 @@
 
     <!-- Boton Denunciar -->
     <button th:if="${modo eq 'VISTA' and !session.u.hasRole('ADMIN') and !(session.u.getId() == usuario.id)}" class="w3-display-topright" id="btnDenunciar" th:attr="data-id=${usuario.id}">Denunciar</button>
+    <button th:if="${modo eq 'VISTA' and session.u.getId() == usuario.id}" class="w3-display-topright" id="btnEditarPerfil">Editar</button>
 
   </div>
 

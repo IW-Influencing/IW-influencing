@@ -170,7 +170,15 @@ function cargaModalPerfil(idPerfil){
 	return go2(config.rootUrl + "perfil?idUsuario=" + idPerfil, 'GET')
 		.then(html => {
 			document.getElementById("contenidoModal").innerHTML=html;
-			document.getElementById("btnDenunciar").onclick = b => cargaModalDenuncia(document.getElementById("btnDenunciar").dataset.id);
+
+			let botonDenuncia = document.getElementById("btnDenunciar");
+			let botonEditar = document.getElementById("btnEditarPerfil");
+			
+			if(botonDenuncia !== null)
+				botonDenuncia.onclick = b => cargaModalDenuncia(document.getElementById("btnDenunciar").dataset.id);
+			else if(botonEditar !== null)
+				botonEditar.onclick = b => cargaModalPerfilNav();
+
 			for (let p of document.getElementsByClassName("propuestaAntigua")){
 				p.onclick = c => cargaModalPropuesta(p.dataset.id);
 			}
@@ -181,13 +189,15 @@ function cargaModalPropuesta(idPropuesta){
 	document.getElementById('modal').style.display='block';
 	return go2(config.rootUrl + "propuesta?idPropuesta=" + idPropuesta, 'GET')
 	.then(html => {
-
 		document.getElementById("contenidoModal").innerHTML=html;
-		let botonModal = document.getElementById("btnDenunciar");
-		if (botonModal !== null) 
-			document.getElementById("btnDenunciar").onclick = b => cargaModalDenuncia(document.getElementById("btnDenunciar").dataset.id);
+
+		let botonDenuncia = document.getElementById("btnDenunciar");
+		let botonEditarPropuesta = document.getElementById("btnEditarPropuestaPropia");
+
+		if (botonDenuncia !== null) 
+			botonDenuncia.onclick = b => cargaModalDenuncia(botonDenuncia.dataset.id);
 		else
-			document.getElementById("btnEditarPropuestaPropia").onclick = b => cargaModalEdicionPropuesta(document.getElementById("btnEditarPropuestaPropia").dataset.id);
+			botonEditarPropuesta.onclick = b => cargaModalEdicionPropuesta(botonEditarPropuesta.dataset.id);
 
 	})
 }
